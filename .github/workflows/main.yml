@@ -1,12 +1,11 @@
 import os
 import requests
 
-# Estos datos se leen automáticamente de los Secrets de tu GitHub
+# Datos desde los Secrets de GitHub
 ACCESS_TOKEN = os.getenv('IG_ACCESS_TOKEN')
 INSTAGRAM_ACCOUNT_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 
-# CONTENIDO DEL POST (Imagen y Caption)
-# Usando la imagen educativa que generamos sobre el baño
+# CONTENIDO (Última imagen generada)
 IMAGE_URL = 'https://raw.githubusercontent.com/google-gemini/petcolinas/main/image_baño.jpg' 
 CAPTION = (
     "¡Papá y mamá de peludos! 🐾 ¿Sabían que no todos los perros se bañan con la misma frecuencia? "
@@ -14,41 +13,27 @@ CAPTION = (
     "Aquí en PetColinas cuidamos cada detalle para que tu mejor amigo salga oliendo a gloria y con el pelo impecable. "
     "¡Agenda su cita hoy mismo!\n\n"
     "📱 809-752-6806 | 📍 Plaza Las Colinas\n\n"
-    "#PetColinas #GroomingRD #VeterinariaRD #MascotasRD #SantoDomingoOeste #PeluqueriaCanina"
+    "#PetColinas #GroomingRD #VeterinariaRD #MascotasRD #SantoDomingoOeste"
 )
 
-def publicar_en_instagram():
+def publicar():
     if not ACCESS_TOKEN or not INSTAGRAM_ACCOUNT_ID:
-        print("Error: No se encontraron los Secrets en GitHub.")
+        print("Error: Faltan Secrets.")
         return
 
-    # 1. Subir la imagen al servidor de Meta
-    url_media = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media"
-    payload = {
-        'image_url': IMAGE_URL,
-        'caption': CAPTION,
-        'access_token': ACCESS_TOKEN
-    }
+    # Paso 1: Subir media
+    url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media"
+    payload = {'image_url': IMAGE_URL, 'caption': CAPTION, 'access_token': ACCESS_TOKEN}
+    res = requests.post(url, data=payload).json()
     
-    response = requests.post(url_media, data=payload)
-    result = response.json()
-    
-    if 'id' in result:
-        creation_id = result['id']
-        # 2. Publicar la imagen que acabamos de subir
-        url_publish = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media_publish"
-        publish_payload = {
-            'creation_id': creation_id,
-            'access_token': ACCESS_TOKEN
-        }
-        
-        publish_response = requests.post(url_publish, data=publish_payload)
-        if publish_response.status_code == 200:
-            print("¡Post publicado con éxito en @petcolinas! 🐾")
-        else:
-            print("Error al publicar:", publish_response.json())
+    if 'id' in res:
+        # Paso 2: Publicar
+        creation_id = res['id']
+        url_pub = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media_publish"
+        res_pub = requests.post(url_pub, data={'creation_id': creation_id, 'access_token': ACCESS_TOKEN})
+        print("¡Publicado en Instagram! 🐾")
     else:
-        print("Error al subir media:", result)
+        print("Error:", res)
 
 if __name__ == "__main__":
-    publicar_en_instagram()
+    publicar()

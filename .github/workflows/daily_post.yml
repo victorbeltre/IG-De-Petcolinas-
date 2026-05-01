@@ -1,21 +1,21 @@
 name: Bot de PetColinas
 on:
-  workflow_dispatch: # Esto activa el botón azul de "Run workflow"
+  workflow_dispatch:
   schedule:
-    - cron: '15 13 * * *' # Publica a las 9:15 AM hora RD
+    - cron: '15 13 * * *'
 
 jobs:
   publicar_post:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Configurar Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Instalar librerias
+      - name: Install Dependencies
         run: pip install requests
-      - name: Ejecutar bot
+      - name: Run Script
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}

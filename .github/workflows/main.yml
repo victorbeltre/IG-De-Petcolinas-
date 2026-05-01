@@ -1,35 +1,22 @@
-import requests
-import json
+name: Publicacion Diaria PetColinas
+on:
+  workflow_dispatch: # Esto nos permite darle al botón de "Play" manualmente
+  schedule:
+    - cron: '15 13 * * *' # 9:15 AM AST (UTC-4)
 
-# Datos de configuración de PetColinas
-ACCESS_TOKEN = 'TU_TOKEN_DE_ACCESO_AQUÍ'
-INSTAGRAM_ACCOUNT_ID = 'TU_ID_DE_INSTAGRAM_AQUÍ'
-IMAGE_URL = 'URL_DE_LA_IMAGEN_GENERADA'
-CAPTION = '¡Cuidado premium en PetColinas! 🐾 Reserva al 809-752-6806'
-
-def publicar_en_instagram():
-    # 1. Crear el contenedor del post
-    post_url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media"
-    payload = {
-        'image_url': IMAGE_URL,
-        'caption': CAPTION,
-        'access_token': ACCESS_TOKEN
-    }
-    r = requests.post(post_url, data=payload)
-    result = r.json()
-    
-    if 'id' in result:
-        creation_id = result['id']
-        # 2. Publicar el contenedor
-        publish_url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media_publish"
-        publish_payload = {
-            'creation_id': creation_id,
-            'access_token': ACCESS_TOKEN
-        }
-        r_publish = requests.post(publish_url, data=publish_payload)
-        print("¡Publicación exitosa en @petcolinas!")
-    else:
-        print("Error al crear el post:", result)
-
-if __name__ == "__main__":
-    publicar_en_instagram()
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Instalar dependencias
+        run: pip install requests
+      - name: Ejecutar script
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+        run: python main.py

@@ -1,7 +1,8 @@
-name: Publicador desde Gemini
+name: Bot PetColinas Automatico
 on:
-  repository_dispatch:
-    types: [publicar_post_gemini]
+  schedule:
+    - cron: '0 13 * * *' # Esto es exactamente las 9:00 AM hora RD (13:00 UTC)
+  workflow_dispatch: # Esto te deja probarlo manualmente con un boton
 
 jobs:
   publicar:
@@ -16,33 +17,40 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar Dependencias
-        run: pip install requests
+        run: pip install requests google-generativeai
 
-      - name: Publicar en Instagram
+      - name: Ejecutar Publicacion
         env:
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-          # Recibimos los datos que Gemini envia
-          CAPTION: ${{ github.event.client_payload.caption }}
-          IMAGE_URL: ${{ github.event.client_payload.image_url }}
         run: |
           python -c "
-          import os, requests
+          import os, requests, random, google.generativeai as genai
           
-          caption = os.getenv('CAPTION')
-          image_url = os.getenv('IMAGE_URL')
+          # Configuración
+          genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
+          model = genai.GenerativeModel('gemini-1.5-flash')
+          
+          # Generar contenido
+          prompt = 'Eres PetColinas (Veterinaria en SDO). WhatsApp 809-752-6806. Crea un post de IG dominicano sobre grooming o salud. Solo el caption.'
+          caption = model.generate_content(prompt).text
+          
+          # Imagen aleatoria profesional
+          temas = ['dog-grooming', 'puppy', 'veterinary']
+          image_url = f'https://loremflickr.com/1080/1080/{random.choice(temas)}/all'
+          
+          # Publicar en Instagram
           token = os.getenv('IG_ACCESS_TOKEN')
           ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
           
-          # 1. Crear contenedor
-          r1 = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
+          r = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
               data={'image_url': image_url, 'caption': caption, 'access_token': token}).json()
           
-          if 'id' in r1:
-              # 2. Publicar
+          if 'id' in r:
               requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media_publish', 
-                  data={'creation_id': r1['id'], 'access_token': token})
+                  data={'creation_id': r['id'], 'access_token': token})
               print('¡Post de PetColinas publicado con éxito! 🐾')
           else:
-              print(f'Error: {r1}')
+              print(f'Error: {r}')
           "

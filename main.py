@@ -1,10 +1,23 @@
 import os
+import subprocess
+import sys
+
+# FORZAR INSTALACIÓN DE LIBRERÍAS SI FALTAN
+def instalar_dependencias():
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        print("Instalando librerías de Google...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai"])
+        import google.generativeai as genai
+    return genai
+
+# Ejecutar instalación y obtener el módulo
+genai = instalar_dependencias()
 import requests
-import google.generativeai as genai
 import random
 
 # CONFIGURACIÓN DE LLAVES
-# Google prefiere GOOGLE_API_KEY por defecto
 api_key = os.getenv('GOOGLE_API_KEY')
 IG_TOKEN = os.getenv('IG_ACCESS_TOKEN')
 IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
@@ -12,10 +25,9 @@ IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 # CONFIGURAR GEMINI
 if api_key:
     genai.configure(api_key=api_key)
+    model = genai.GenerativeModel('gemini-1.5-flash')
 else:
-    print("Error: No se encontró la API Key en los secretos de GitHub")
-
-model = genai.GenerativeModel('gemini-1.5-flash')
+    print("Error: No se encontró la GOOGLE_API_KEY")
 
 PROMPT_SISTEMA = """
 Eres el Creador de Contenido Oficial de PetColinas, una veterinaria y peluquería canina en Santo Domingo Oeste.
@@ -28,11 +40,8 @@ def generar_contenido():
     try:
         response = model.generate_content(PROMPT_SISTEMA)
         caption = response.text
-        
-        # Imagen aleatoria de mascotas
         temas = ["dog", "puppy", "veterinarian", "grooming"]
         image_url = f"https://loremflickr.com/1080/1080/{random.choice(temas)}/all"
-        
         return caption, image_url
     except Exception as e:
         print(f"Error en Gemini: {e}")

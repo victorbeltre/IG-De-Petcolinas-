@@ -1,42 +1,32 @@
-run: |
+name: Receptor PetColinas
+on:
+  repository_dispatch:
+    types: [publicar_post_gemini]
+  workflow_dispatch: # Para que el botón aparezca sí o sí
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publicar en Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          CAPTION: ${{ github.event.client_payload.caption }}
+          IMAGE_URL: ${{ github.event.client_payload.image_url }}
+        run: |
+          pip install requests
           python -c "
-          import os, requests, random
-          from google import genai
-          
-          try:
-              # 1. Configurar Cliente
-              client = genai.Client(
-                  api_key=os.getenv('GEMINI_API_KEY'),
-                  http_options={'api_version': 'v1'}
-              )
-              
-              # 2. Usar el nombre técnico completo 'gemini-1.5-flash-latest'
-              prompt = 'Eres PetColinas (Veterinaria en SDO). WhatsApp 809-752-6806. Crea un post de IG dominicano sobre grooming o salud. Solo el texto del caption.'
-              
-              response = client.models.generate_content(
-                  model='gemini-1.5-flash-latest', 
-                  contents=prompt
-              )
-              caption = response.text
-              
-              # 3. Imagen aleatoria
-              temas = ['dog-grooming', 'puppy', 'veterinary']
-              image_url = f'https://loremflickr.com/1080/1080/{random.choice(temas)}/all'
-              
-              # 4. Publicar
-              token = os.getenv('IG_ACCESS_TOKEN')
-              ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
-              
-              r = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
-                  data={'image_url': image_url, 'caption': caption, 'access_token': token}).json()
-              
-              if 'id' in r:
-                  requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media_publish', 
-                      data={'creation_id': r['id'], 'access_token': token})
-                  print('¡LOGRADO! Post de PetColinas en Instagram. 🐾')
-              else:
-                  print(f'Error de Meta: {r}')
-          except Exception as e:
-              print(f'Error critico: {e}')
-              exit(1)
+          import os, requests
+          r = requests.post(f'https://graph.facebook.com/v18.0/{os.getenv(\"INSTAGRAM_ACCOUNT_ID\")}/media', 
+              data={'image_url': os.getenv(\"IMAGE_URL\"), 'caption': os.getenv(\"CAPTION\"), 'access_token': os.getenv(\"IG_ACCESS_TOKEN\")}).json()
+          if 'id' in r:
+              requests.post(f'https://graph.facebook.com/v18.0/{os.getenv(\"INSTAGRAM_ACCOUNT_ID\")}/media_publish', 
+                  data={'creation_id': r['id'], 'access_token': os.getenv(\"IG_ACCESS_TOKEN\")})
+              print('¡PUBLICADO!')
+          else:
+              print(r)
           "

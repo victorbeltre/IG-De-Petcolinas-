@@ -1,38 +1,33 @@
 import os
 import requests
-import google.generativeai as genai
 
-# Configuración de llaves
-GEMINI_KEY = os.getenv('GEMINI_API_KEY')
-IG_TOKEN = os.getenv('IG_ACCESS_TOKEN')
-IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
+ACCESS_TOKEN = os.getenv('IG_ACCESS_TOKEN')
+INSTAGRAM_ACCOUNT_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 
-genai.configure(api_key=GEMINI_KEY)
-model = genai.GenerativeModel('gemini-pro')
+# Imagen real de perritos bañándose para la prueba
+IMAGE_URL = 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=1080&auto=format&fit=crop'
+CAPTION = (
+    "¡Día de mimos en PetColinas! 🐾 ¿Sabías que un buen baño no solo los pone bellos, "
+    "sino que cuida su salud? 🐶✨ ¡Trae a tu mejor amigo hoy! \n\n"
+    "📱 809-752-6806 | 📍 Plaza Las Colinas #PetColinas #GroomingRD"
+)
 
-def generar_contenido():
-    prompt = (
-        "Eres el community manager de PetColinas, una veterinaria y grooming en RD. "
-        "Escribe un caption de Instagram humano, cálido y profesional sobre un tip de salud canina. "
-        "No menciones que eres una IA. Solo dame el texto y al final una URL de imagen de Unsplash "
-        "relacionada con perros (puedes usar https://source.unsplash.com/1080x1080/?dog,salud)."
-    )
-    respuesta = model.generate_content(prompt)
-    # Aquí el script separa el texto de la imagen (simplificado)
-    return respuesta.text
+def publicar():
+    if not ACCESS_TOKEN or not INSTAGRAM_ACCOUNT_ID:
+        print("Error: Revisa tus Secrets en GitHub.")
+        return
 
-def publicar(texto, imagen):
-    url = f"https://graph.facebook.com/v18.0/{IG_ID}/media"
-    payload = {'image_url': imagen, 'caption': texto, 'access_token': IG_TOKEN}
+    url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media"
+    payload = {'image_url': IMAGE_URL, 'caption': CAPTION, 'access_token': ACCESS_TOKEN}
     res = requests.post(url, data=payload).json()
+    
     if 'id' in res:
         creation_id = res['id']
-        url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
-        requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡Contenido generado por IA publicado!")
+        url_pub = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ACCOUNT_ID}/media_publish"
+        requests.post(url_pub, data={'creation_id': creation_id, 'access_token': ACCESS_TOKEN})
+        print("¡LOGRADO! Revisa el Instagram de PetColinas 🚀")
+    else:
+        print("Error de Meta:", res)
 
 if __name__ == "__main__":
-    # Este flujo ahora es inteligente
-    contenido = generar_contenido()
-    # (Lógica para separar URL y texto)
-    # publicar(texto, url)
+    publicar()

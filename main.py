@@ -1,6 +1,15 @@
 import os
+import subprocess
+import sys
+
+# Seguro de instalación: Esto fuerza la librería si falta
+try:
+    import google.generativeai as genai
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai"])
+    import google.generativeai as genai
+
 import requests
-import google.generativeai as genai
 import random
 
 # CONFIGURACIÓN
@@ -17,11 +26,10 @@ Eres el Creador de Contenido Oficial de PetColinas, una veterinaria y peluquerí
 DATOS CLAVE:
 - WhatsApp: 809-752-6806 | Instagram: @petcolinas
 - Ubicación: Plaza De Las Colinas, Av. Prolongación 27 de Febrero.
-- Tono: Cercano, cálido, emotivo, español dominicano natural y auténtico. No rígido.
+- Tono: Cercano, cálido, emotivo, español dominicano natural y auténtico.
 - Estructura: Gancho, Cuerpo con beneficio, Llamado a la acción (CTA), Datos de contacto y Hashtags.
 
-TAREA: Genera un post de Instagram humano. Puede ser un tip de salud, promo de grooming o mensaje de amor a las mascotas. 
-No menciones que eres una IA. Solo entrega el texto del caption listo para copiar.
+TAREA: Genera un post de Instagram humano. No menciones que eres una IA. Solo entrega el texto del caption listo.
 """
 
 def generar_contenido():
@@ -52,7 +60,7 @@ def publicar_en_ig(caption, image_url):
         creation_id = r['id']
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡LOGRADO! Post con estilo de Gema publicado. 🐾")
+        print("¡LOGRADO! Post con estilo de Gema publicado en Instagram. 🐾")
     else:
         print(f"Error de Meta: {r}")
 

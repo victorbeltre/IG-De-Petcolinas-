@@ -16,15 +16,15 @@ def generar_contenido():
     try:
         genai.configure(api_key=api_key)
         
-        # Ajustamos el nombre del modelo a la versión estable actual
-        model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
+        # Probamos con el nombre de modelo directo
+        model = genai.GenerativeModel('gemini-1.5-flash')
 
         prompt = """
         Eres el Creador de Contenido Oficial de PetColinas en Santo Domingo Oeste. 
         Datos: WhatsApp 809-752-6806, Instagram @petcolinas.
         Tono: Dominicano, cálido, profesional y auténtico. 
-        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (tip de grooming o veterinaria). 
-        Solo devuelve el texto del caption. No incluyas notas ni introducciones.
+        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (un tip útil). 
+        Solo devuelve el texto del caption. Sin notas.
         """
         
         response = model.generate_content(prompt)
@@ -40,7 +40,6 @@ def generar_contenido():
         return None, None
 
 def publicar_en_ig(caption, image_url):
-    # Paso 1: Crear el contenedor de la imagen
     url_media = f"https://graph.facebook.com/v18.0/{IG_ID}/media"
     payload = {
         'image_url': image_url,
@@ -51,12 +50,11 @@ def publicar_en_ig(caption, image_url):
     
     if 'id' in res:
         creation_id = res['id']
-        # Paso 2: Publicar el contenedor creado
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
         print("¡LOGRADO! El post de PetColinas ya está en Instagram. 🐾")
     else:
-        print(f"Error de Meta al crear contenedor: {res}")
+        print(f"Error de Meta: {res}")
 
 if __name__ == "__main__":
     if all([api_key, IG_TOKEN, IG_ID]):
@@ -64,4 +62,4 @@ if __name__ == "__main__":
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print(f"Faltan variables: API:{bool(api_key)} TOKEN:{bool(IG_TOKEN)} ID:{bool(IG_ID)}")
+        print("Faltan variables de entorno.")

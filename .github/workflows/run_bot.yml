@@ -1,11 +1,10 @@
-name: Bot de PetColinas con IA
+name: Publicador desde Gemini
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '15 13 * * *' # 9:15 AM hora RD
+  repository_dispatch:
+    types: [publicar_post_gemini]
 
 jobs:
-  publicar_diario:
+  publicar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del codigo
@@ -16,11 +15,34 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Instalar y Ejecutar
+      - name: Instalar Dependencias
+        run: pip install requests
+
+      - name: Publicar en Instagram
         env:
-          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          # Recibimos los datos que Gemini envia
+          CAPTION: ${{ github.event.client_payload.caption }}
+          IMAGE_URL: ${{ github.event.client_payload.image_url }}
         run: |
-          python -m pip install requests google-generativeai
-          python main.py
+          python -c "
+          import os, requests
+          
+          caption = os.getenv('CAPTION')
+          image_url = os.getenv('IMAGE_URL')
+          token = os.getenv('IG_ACCESS_TOKEN')
+          ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
+          
+          # 1. Crear contenedor
+          r1 = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
+              data={'image_url': image_url, 'caption': caption, 'access_token': token}).json()
+          
+          if 'id' in r1:
+              # 2. Publicar
+              requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media_publish', 
+                  data={'creation_id': r1['id'], 'access_token': token})
+              print('¡Post de PetColinas publicado con éxito! 🐾')
+          else:
+              print(f'Error: {r1}')
+          "

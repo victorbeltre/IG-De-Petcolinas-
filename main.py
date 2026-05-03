@@ -16,21 +16,21 @@ def generar_contenido():
     try:
         genai.configure(api_key=api_key)
         
-        # Probamos con el nombre de modelo directo
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # EL CAMBIO CLAVE: Usamos el nombre de modelo completo y oficial
+        model = genai.GenerativeModel('models/gemini-1.5-flash')
 
         prompt = """
         Eres el Creador de Contenido Oficial de PetColinas en Santo Domingo Oeste. 
         Datos: WhatsApp 809-752-6806, Instagram @petcolinas.
         Tono: Dominicano, cálido, profesional y auténtico. 
-        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (un tip útil). 
-        Solo devuelve el texto del caption. Sin notas.
+        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (un tip de grooming o veterinaria). 
+        Solo devuelve el texto del caption listo para publicar. Sin introducciones ni notas.
         """
         
         response = model.generate_content(prompt)
         caption = response.text
         
-        # Imagen aleatoria de mascotas de alta calidad
+        # Imagen aleatoria de mascotas de alta calidad para acompañar el post
         temas = ["dog", "puppy", "veterinarian", "grooming"]
         image_url = f"https://loremflickr.com/1080/1080/{random.choice(temas)}/all"
         
@@ -40,6 +40,7 @@ def generar_contenido():
         return None, None
 
 def publicar_en_ig(caption, image_url):
+    # Paso 1: Crear el contenedor de la imagen en Meta
     url_media = f"https://graph.facebook.com/v18.0/{IG_ID}/media"
     payload = {
         'image_url': image_url,
@@ -50,9 +51,10 @@ def publicar_en_ig(caption, image_url):
     
     if 'id' in res:
         creation_id = res['id']
+        # Paso 2: Publicar el contenido oficialmente
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡LOGRADO! El post de PetColinas ya está en Instagram. 🐾")
+        print("¡LOGRADO! El post de PetColinas con identidad de Gema ya está en Instagram. 🐾")
     else:
         print(f"Error de Meta: {res}")
 
@@ -62,4 +64,4 @@ if __name__ == "__main__":
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print("Faltan variables de entorno.")
+        print("Faltan variables de entorno. Revisa tus GitHub Secrets.")

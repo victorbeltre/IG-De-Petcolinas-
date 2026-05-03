@@ -3,14 +3,14 @@ import requests
 import random
 import google.generativeai as genai
 
-# CONFIGURACIÓN DE LLAVES
+# CONFIGURACIÓN
 api_key = os.getenv('GOOGLE_API_KEY')
 IG_TOKEN = os.getenv('IG_ACCESS_TOKEN')
 IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 
 def generar_contenido():
     if not api_key:
-        print("Error: No se encontró la llave GOOGLE_API_KEY en el entorno.")
+        print("Error: No se encontró GOOGLE_API_KEY")
         return None, None
         
     try:
@@ -28,8 +28,7 @@ def generar_contenido():
         response = model.generate_content(prompt)
         caption = response.text
         
-        # Imagen aleatoria de mascotas
-        temas = ["dog", "puppy", "cat", "veterinarian", "grooming"]
+        temas = ["dog", "puppy", "veterinarian", "grooming"]
         image_url = f"https://loremflickr.com/1080/1080/{random.choice(temas)}/all"
         
         return caption, image_url
@@ -46,15 +45,14 @@ def publicar_en_ig(caption, image_url):
         creation_id = res['id']
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡LOGRADO! El post de PetColinas ya está en Instagram. 🐾")
+        print("¡LOGRADO! Post de PetColinas publicado con éxito. 🐾")
     else:
         print(f"Error de Meta: {res}")
 
 if __name__ == "__main__":
-    # Verificación de seguridad
     if all([api_key, IG_TOKEN, IG_ID]):
         texto, foto = generar_contenido()
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print(f"Variables faltantes: API:{bool(api_key)} IG_TOKEN:{bool(IG_TOKEN)} IG_ID:{bool(IG_ID)}")
+        print("Faltan variables en Secrets.")

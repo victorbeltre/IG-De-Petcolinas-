@@ -1,20 +1,6 @@
 import os
-import subprocess
-import sys
-
-# FORZAR INSTALACIÓN DE LIBRERÍAS SI FALTAN
-def instalar_dependencias():
-    try:
-        import google.generativeai as genai
-    except ImportError:
-        print("Instalando librerías de Google...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai"])
-        import google.generativeai as genai
-    return genai
-
-# Ejecutar instalación y obtener el módulo
-genai = instalar_dependencias()
 import requests
+import google.generativeai as genai
 import random
 
 # CONFIGURACIÓN DE LLAVES
@@ -22,25 +8,26 @@ api_key = os.getenv('GOOGLE_API_KEY')
 IG_TOKEN = os.getenv('IG_ACCESS_TOKEN')
 IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 
-# CONFIGURAR GEMINI
-if api_key:
+def generar_contenido():
+    if not api_key:
+        print("Error: No se encontró la llave GOOGLE_API_KEY")
+        return None, None
+        
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-1.5-flash')
-else:
-    print("Error: No se encontró la GOOGLE_API_KEY")
 
-PROMPT_SISTEMA = """
-Eres el Creador de Contenido Oficial de PetColinas, una veterinaria y peluquería canina en Santo Domingo Oeste.
-DATOS: WhatsApp 809-752-6806, Instagram @petcolinas, Ubicación: Plaza De Las Colinas.
-TONO: Cercano, cálido, emotivo, español dominicano natural.
-TAREA: Genera un post de Instagram humano sobre salud o grooming. Solo entrega el texto del caption.
-"""
-
-def generar_contenido():
+    prompt = """
+    Eres el Creador de Contenido Oficial de PetColinas, una veterinaria y peluquería canina en Santo Domingo Oeste.
+    DATOS: WhatsApp 809-752-6806, Instagram @petcolinas.
+    TONO: Cercano, cálido, emotivo, español dominicano natural.
+    TAREA: Genera un post de Instagram humano sobre salud o grooming. Solo entrega el texto del caption listo para publicar.
+    """
+    
     try:
-        response = model.generate_content(PROMPT_SISTEMA)
+        response = model.generate_content(prompt)
         caption = response.text
-        temas = ["dog", "puppy", "veterinarian", "grooming"]
+        # Seleccionamos una imagen aleatoria de perritos/gatos
+        temas = ["dog", "puppy", "cat", "veterinarian", "pet-grooming"]
         image_url = f"https://loremflickr.com/1080/1080/{random.choice(temas)}/all"
         return caption, image_url
     except Exception as e:
@@ -61,9 +48,9 @@ def publicar_en_ig(caption, image_url):
         print(f"Error de Meta: {res}")
 
 if __name__ == "__main__":
-    if api_key and IG_TOKEN and IG_ID:
+    if IG_TOKEN and IG_ID and api_key:
         texto, foto = generar_contenido()
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print("Faltan variables de entorno. Revisa tus GitHub Secrets.")
+        print("Faltan variables de entorno. Revisa GEMINI_API_KEY, IG_ACCESS_TOKEN e INSTAGRAM_ACCOUNT_ID en GitHub Secrets.")

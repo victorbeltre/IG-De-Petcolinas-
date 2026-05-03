@@ -1,7 +1,7 @@
 import os
 import requests
-import google.generativeai as genai
 import random
+import google.generativeai as genai
 
 # CONFIGURACIÓN DE LLAVES
 api_key = os.getenv('GOOGLE_API_KEY')
@@ -10,25 +10,28 @@ IG_ID = os.getenv('INSTAGRAM_ACCOUNT_ID')
 
 def generar_contenido():
     if not api_key:
-        print("Error: No se encontró la llave GOOGLE_API_KEY")
+        print("Error: No se encontró la llave GOOGLE_API_KEY en el entorno.")
         return None, None
         
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
-
-    prompt = """
-    Eres el Creador de Contenido Oficial de PetColinas, una veterinaria y peluquería canina en Santo Domingo Oeste.
-    DATOS: WhatsApp 809-752-6806, Instagram @petcolinas.
-    TONO: Cercano, cálido, emotivo, español dominicano natural.
-    TAREA: Genera un post de Instagram humano sobre salud o grooming. Solo entrega el texto del caption listo para publicar.
-    """
-    
     try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+
+        prompt = """
+        Eres el Creador de Contenido Oficial de PetColinas en Santo Domingo Oeste. 
+        Datos: WhatsApp 809-752-6806, Instagram @petcolinas.
+        Tono: Dominicano, cálido, profesional y auténtico. 
+        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas. 
+        Solo devuelve el texto del caption.
+        """
+        
         response = model.generate_content(prompt)
         caption = response.text
-        # Seleccionamos una imagen aleatoria de perritos/gatos
-        temas = ["dog", "puppy", "cat", "veterinarian", "pet-grooming"]
+        
+        # Imagen aleatoria de mascotas
+        temas = ["dog", "puppy", "cat", "veterinarian", "grooming"]
         image_url = f"https://loremflickr.com/1080/1080/{random.choice(temas)}/all"
+        
         return caption, image_url
     except Exception as e:
         print(f"Error en Gemini: {e}")
@@ -43,14 +46,15 @@ def publicar_en_ig(caption, image_url):
         creation_id = res['id']
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡LOGRADO! Post de PetColinas publicado con éxito. 🐾")
+        print("¡LOGRADO! El post de PetColinas ya está en Instagram. 🐾")
     else:
         print(f"Error de Meta: {res}")
 
 if __name__ == "__main__":
-    if IG_TOKEN and IG_ID and api_key:
+    # Verificación de seguridad
+    if all([api_key, IG_TOKEN, IG_ID]):
         texto, foto = generar_contenido()
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print("Faltan variables de entorno. Revisa GEMINI_API_KEY, IG_ACCESS_TOKEN e INSTAGRAM_ACCOUNT_ID en GitHub Secrets.")
+        print(f"Variables faltantes: API:{bool(api_key)} IG_TOKEN:{bool(IG_TOKEN)} IG_ID:{bool(IG_ID)}")

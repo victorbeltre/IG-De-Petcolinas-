@@ -16,16 +16,16 @@ def generar_contenido():
     try:
         genai.configure(api_key=api_key)
         
-        # EL AJUSTE FINAL: Usamos el nombre técnico completo
-        # Esto evita el error 404 en la versión v1beta
-        model = genai.GenerativeModel(model_name='models/gemini-1.5-flash')
+        # USANDO GEMINI 3 FLASH (NANO BANANA 2)
+        # El nombre técnico en la API es gemini-2.0-flash
+        model = genai.GenerativeModel('gemini-2.0-flash')
 
         prompt = """
         Eres el Creador de Contenido Oficial de PetColinas en Santo Domingo Oeste. 
         Datos: WhatsApp 809-752-6806, Instagram @petcolinas.
         Tono: Dominicano, cálido, profesional y auténtico. 
-        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (un tip útil). 
-        Solo devuelve el texto del caption. Sin notas, sin introducciones.
+        Tarea: Crea un post de Instagram sobre salud o higiene de mascotas (tip de grooming o veterinaria). 
+        Solo devuelve el texto del caption listo para publicar. Sin notas ni títulos.
         """
         
         response = model.generate_content(prompt)
@@ -37,7 +37,7 @@ def generar_contenido():
         
         return caption, image_url
     except Exception as e:
-        print(f"Error en Gemini: {e}")
+        print(f"Error en Gemini (Nano Banana): {e}")
         return None, None
 
 def publicar_en_ig(caption, image_url):
@@ -53,7 +53,7 @@ def publicar_en_ig(caption, image_url):
         creation_id = res['id']
         url_pub = f"https://graph.facebook.com/v18.0/{IG_ID}/media_publish"
         requests.post(url_pub, data={'creation_id': creation_id, 'access_token': IG_TOKEN})
-        print("¡LOGRADO! Post de PetColinas publicado con éxito. 🐾")
+        print("¡LOGRADO! Post generado por Nano Banana ya está en Instagram. 🐾🍌")
     else:
         print(f"Error de Meta: {res}")
 
@@ -63,4 +63,4 @@ if __name__ == "__main__":
         if texto and foto:
             publicar_en_ig(texto, foto)
     else:
-        print("Faltan variables de configuración.")
+        print("Faltan variables de entorno en Secrets.")

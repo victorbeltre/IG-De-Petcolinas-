@@ -1,8 +1,7 @@
-name: Bot PetColinas Automatico
+name: Publicador desde Gemini
 on:
-  schedule:
-    - cron: '0 13 * * *' # Esto es exactamente las 9:00 AM hora RD (13:00 UTC)
-  workflow_dispatch: # Esto te deja probarlo manualmente con un boton
+  repository_dispatch:
+    types: [publicar_post_gemini]
 
 jobs:
   publicar:
@@ -11,46 +10,33 @@ jobs:
       - name: Checkout del codigo
         uses: actions/checkout@v4
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
       - name: Instalar Dependencias
-        run: pip install requests google-generativeai
+        run: pip install requests
 
-      - name: Ejecutar Publicacion
+      - name: Publicar en Instagram
         env:
-          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          # Aqui recibimos lo que YO te genere en este chat
+          CAPTION: ${{ github.event.client_payload.caption }}
+          IMAGE_URL: ${{ github.event.client_payload.image_url }}
         run: |
           python -c "
-          import os, requests, random, google.generativeai as genai
-          
-          # Configuración
-          genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-          model = genai.GenerativeModel('gemini-1.5-flash')
-          
-          # Generar contenido
-          prompt = 'Eres PetColinas (Veterinaria en SDO). WhatsApp 809-752-6806. Crea un post de IG dominicano sobre grooming o salud. Solo el caption.'
-          caption = model.generate_content(prompt).text
-          
-          # Imagen aleatoria profesional
-          temas = ['dog-grooming', 'puppy', 'veterinary']
-          image_url = f'https://loremflickr.com/1080/1080/{random.choice(temas)}/all'
-          
-          # Publicar en Instagram
+          import os, requests
+          caption = os.getenv('CAPTION')
+          image_url = os.getenv('IMAGE_URL')
           token = os.getenv('IG_ACCESS_TOKEN')
           ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
           
-          r = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
+          # 1. Crear contenedor
+          r1 = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
               data={'image_url': image_url, 'caption': caption, 'access_token': token}).json()
           
-          if 'id' in r:
+          if 'id' in r1:
+              # 2. Publicar
               requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media_publish', 
-                  data={'creation_id': r['id'], 'access_token': token})
+                  data={'creation_id': r1['id'], 'access_token': token})
               print('¡Post de PetColinas publicado con éxito! 🐾')
           else:
-              print(f'Error: {r}')
+              print(f'Error de Meta: {r1}')
           "

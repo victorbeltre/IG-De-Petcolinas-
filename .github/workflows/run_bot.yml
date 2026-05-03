@@ -1,36 +1,27 @@
-name: Publicador Automatico PetColinas
-on:
-  schedule:
-    - cron: '0 13 * * *' # Esto es exactamente las 9:00 AM hora RD
-  workflow_dispatch: # Esto mantiene el botón de "Run workflow" para pruebas
-
-jobs:
-  publicar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Instalar Dependencias
-        run: pip install requests google-genai
-
-      - name: Generar y Publicar
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-        run: |
+run: |
           python -c "
           import os, requests, random
           from google import genai
+          from google.genai import types
           
-          # 1. Conectar con Gemini
-          client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
+          # 1. Configurar Cliente forzando la versión estable v1
+          client = genai.Client(
+              api_key=os.getenv('GEMINI_API_KEY'),
+              http_options={'api_version': 'v1'}
+          )
           
-          # 2. Instrucciones para el post (Tu identidad de marca)
+          # 2. Generar Contenido (Usando nombre simple del modelo)
           prompt = 'Eres PetColinas (Veterinaria/Grooming en SDO). WhatsApp 809-752-6806. Crea un post de IG con tono dominicano cercano sobre salud o grooming. Solo devuelve el texto del caption.'
-          response = client.models.generate_content(model='gemini-1.5-flash', contents=prompt)
-          caption = response.text
+          
+          try:
+              response = client.models.generate_content(
+                  model='gemini-1.5-flash', 
+                  contents=prompt
+              )
+              caption = response.text
+          except Exception as e:
+              print(f'Error en Gemini: {e}')
+              exit(1)
           
           # 3. Imagen profesional aleatoria
           temas = ['dog-grooming', 'puppy', 'veterinary']
@@ -40,13 +31,13 @@ jobs:
           token = os.getenv('IG_ACCESS_TOKEN')
           ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
           
-          r = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
+          media_res = requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media', 
               data={'image_url': image_url, 'caption': caption, 'access_token': token}).json()
           
-          if 'id' in r:
+          if 'id' in media_res:
               requests.post(f'https://graph.facebook.com/v18.0/{ig_id}/media_publish', 
-                  data={'creation_id': r['id'], 'access_token': token})
-              print('¡LOGRADO! Post de PetColinas publicado.')
+                  data={'creation_id': media_res['id'], 'access_token': token})
+              print('¡LOGRADO! Post de PetColinas en Instagram. 🐾')
           else:
-              print(f'Error: {r}')
+              print(f'Error de Meta: {media_res}')
           "

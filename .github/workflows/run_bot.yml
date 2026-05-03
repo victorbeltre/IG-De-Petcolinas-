@@ -17,7 +17,9 @@ jobs:
           python-version: '3.9'
 
       - name: Instalar Librerias
-        run: pip install requests google-generativeai
+        run: |
+          pip install requests
+          pip install -U google-generativeai
 
       - name: Ejecutar Bot
         env:

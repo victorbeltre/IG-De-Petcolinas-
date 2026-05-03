@@ -1,52 +1,29 @@
-name: Publicador Automatico PetColinas
-on:
-  schedule:
-    - cron: '0 13 * * *' # 9:00 AM hora RD
-  workflow_dispatch: # Esto activa el botón mágico de nuevo
-
-jobs:
-  publicar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Instalar Dependencias
-        run: pip install requests google-genai
-
-      - name: Ejecutar Publicacion
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-        run: |
+run: |
           python -c "
           import os, requests, random
           from google import genai
           
           try:
-              # Conectamos usando la versión estable v1
+              # 1. Configurar Cliente
               client = genai.Client(
                   api_key=os.getenv('GEMINI_API_KEY'),
                   http_options={'api_version': 'v1'}
               )
               
+              # 2. Usar el nombre técnico completo 'gemini-1.5-flash-latest'
               prompt = 'Eres PetColinas (Veterinaria en SDO). WhatsApp 809-752-6806. Crea un post de IG dominicano sobre grooming o salud. Solo el texto del caption.'
               
               response = client.models.generate_content(
-                  model='gemini-1.5-flash', 
+                  model='gemini-1.5-flash-latest', 
                   contents=prompt
               )
               caption = response.text
               
+              # 3. Imagen aleatoria
               temas = ['dog-grooming', 'puppy', 'veterinary']
               image_url = f'https://loremflickr.com/1080/1080/{random.choice(temas)}/all'
               
+              # 4. Publicar
               token = os.getenv('IG_ACCESS_TOKEN')
               ig_id = os.getenv('INSTAGRAM_ACCOUNT_ID')
               

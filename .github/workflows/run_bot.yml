@@ -1,22 +1,27 @@
-name: Bot de PetColinas
+name: Bot de PetColinas con IA
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 13 * * *'
+    - cron: '15 13 * * *' # 9:15 AM hora RD
 
 jobs:
-  publicar:
+  publicar_diario:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Install Requests
-        run: pip install requests
-      - name: Run Bot
+
+      - name: Instalar Librerias
+        run: pip install requests google-generativeai
+
+      - name: Ejecutar Bot
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
         run: python main.py

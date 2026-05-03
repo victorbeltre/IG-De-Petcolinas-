@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Instalar Librerias Base
+      - name: Instalar Dependencias Base
         run: pip install requests
 
       - name: Ejecutar Bot

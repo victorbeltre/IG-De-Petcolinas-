@@ -1,32 +1,28 @@
-name: Receptor PetColinas
+name: Publicador PetColinas
 on:
   repository_dispatch:
-    types: [publicar_post_gemini]
-  workflow_dispatch: # Para que el botón aparezca sí o sí
+    types: [publicar_post_gemini] # Este nombre debe ser exacto
 
 jobs:
   publicar:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Publicar en Instagram
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar Dependencias
+        run: pip install requests
+
+      - name: Ejecutar Script de Publicación
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-          CAPTION: ${{ github.event.client_payload.caption }}
+          # Recibimos lo que manda Gemini
           IMAGE_URL: ${{ github.event.client_payload.image_url }}
-        run: |
-          pip install requests
-          python -c "
-          import os, requests
-          r = requests.post(f'https://graph.facebook.com/v18.0/{os.getenv(\"INSTAGRAM_ACCOUNT_ID\")}/media', 
-              data={'image_url': os.getenv(\"IMAGE_URL\"), 'caption': os.getenv(\"CAPTION\"), 'access_token': os.getenv(\"IG_ACCESS_TOKEN\")}).json()
-          if 'id' in r:
-              requests.post(f'https://graph.facebook.com/v18.0/{os.getenv(\"INSTAGRAM_ACCOUNT_ID\")}/media_publish', 
-                  data={'creation_id': r['id'], 'access_token': os.getenv(\"IG_ACCESS_TOKEN\")})
-              print('¡PUBLICADO!')
-          else:
-              print(r)
-          "
+          CAPTION: ${{ github.event.client_payload.caption }}
+        run: python publish_to_ig.py

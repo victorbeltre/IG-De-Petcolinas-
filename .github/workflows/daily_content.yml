@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_PAT }}
 
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5

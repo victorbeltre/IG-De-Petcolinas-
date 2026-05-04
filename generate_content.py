@@ -3,17 +3,15 @@ Orquestador automatico de contenido para PetColinas.
 
 Flujo:
   1. Claude  -> Decide el tema del post del dia y genera el prompt para Gemini
-  2. Gemini  -> Genera la imagen 1080x1080 (Imagen 3) y el caption draft
+  2. Gemini  -> Genera la imagen 1080x1080 y el caption draft
   3. Claude  -> Revisa y refina el caption con voz dominicana autentica
   4. GitHub  -> Sube post_del_dia.jpg al repo (via gemini_trigger.py)
   5. GitHub Actions -> run_bot.yml publica en @petcolinas en Instagram
 
 Variables de entorno requeridas:
   ANTHROPIC_API_KEY   -> API key de Claude (Anthropic)
-  GEMINI_API_KEY      -> API key de Google Gemini / Imagen
+  GEMINI_API_KEY      -> API key de Google Gemini
   GITHUB_PAT          -> GitHub Personal Access Token (repo + workflow)
-  IG_ACCESS_TOKEN     -> (usada por run_bot.yml, no aqui)
-  INSTAGRAM_ACCOUNT_ID -> (usada por run_bot.yml, no aqui)
 """
 
 import os
@@ -21,9 +19,12 @@ import sys
 import json
 import re
 import datetime
+from io import BytesIO
+
 import anthropic
 from google import genai as google_genai
 from google.genai import types as google_types
+from PIL import Image
 
 from gemini_trigger import upload_image_and_publish
 
@@ -55,8 +56,8 @@ SERVICIOS Y PRECIOS:
 
 COLORES DE MARCA: Verde oscuro #1a6b3a | Verde medio #2d8f52 | Naranja #d45f1e | Dorado #c9a227
 
-ESTILO DE COMUNICACION: Caldo, dominicano, cercano. Usar frases como "peludito",
-  "nube de algodon", "bajo a perro", "tu peludo merece lo mejor". Nunca demasiado corporativo.
+ESTILO: Calido, dominicano, cercano. Frases como "peludito", "nube de algodon",
+  "bajo a perro", "tu peludo merece lo mejor". Nunca demasiado corporativo.
 
 HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
           #SantoDomingoOeste #BanoPerros #PeluqueriaCanina #MascotasFelices #CuidaTuMascota
@@ -72,6 +73,10 @@ CONTENT_TYPES = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# Paso 1 — Claude decide el tema del dia
+# ---------------------------------------------------------------------------
+
 def claude_decide_theme() -> dict:
     today = datetime.date.today()
     weekday = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"][today.weekday()]
@@ -81,7 +86,7 @@ def claude_decide_theme() -> dict:
         max_tokens=900,
         system=(
             "Eres el estratega de marketing digital de PetColinas. "
-            "Decisions estrategicas, creativo, conoces el mercado dominicano."
+            "Creativo, estrategico, conoces el mercado dominicano."
         ),
         messages=[{
             "role": "user",
@@ -91,13 +96,13 @@ def claude_decide_theme() -> dict:
 
 Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
 
-Elige el tipo de post mas efectivo para hoy y diseña el contenido.
+Elige el tipo de post mas efectivo para hoy y disena el contenido.
 Responde UNICAMENTE con un JSON valido con esta estructura exacta (sin markdown, sin texto extra):
 
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<descripcion del tema especifico, maximo 25 palabras>",
-  "prompt_imagen": "<prompt en INGLES para Imagen 3 de Google, descripcion visual detallada para una imagen cuadrada 1080x1080px de un perro feliz y bien arreglado en una peluqueria canina profesional y acogedora, con colores verde oscuro #1a6b3a y naranja #d45f1e prominentes, iluminacion calida, ambiente limpio y moderno. Maximo 200 palabras.>",
+  "prompt_imagen": "<prompt en INGLES para Gemini 2.0 Flash image generation. Pide una imagen cuadrada 1:1 de un perro feliz y bien arreglado en una peluqueria canina profesional, colores verde oscuro y naranja, iluminacion calida, ambiente limpio. Incluye en la imagen texto en espanol con el nombre PetColinas y el numero 809-752-6806. Maximo 150 palabras.>",
   "guia_caption": "<instrucciones para Gemini sobre tono, angulo y que incluir en el caption. Maximo 40 palabras.>"
 }}"""
         }],
@@ -110,18 +115,45 @@ Responde UNICAMENTE con un JSON valido con esta estructura exacta (sin markdown,
     return json.loads(match.group())
 
 
+# ---------------------------------------------------------------------------
+# Paso 2a — Gemini genera la imagen (Gemini 2.0 Flash, gratis con API key)
+# ---------------------------------------------------------------------------
+
 def gemini_generate_image(image_prompt: str) -> bytes:
-    response = gemini.models.generate_images(
-        model="imagen-3.0-generate-001",
-        prompt=image_prompt,
-        config=google_types.GenerateImagesConfig(
-            number_of_images=1,
-            aspect_ratio="1:1",
-            safety_filter_level="BLOCK_ONLY_HIGH",
+    full_prompt = (
+        "Generate a square 1:1 aspect ratio image optimized for Instagram (1080x1080 pixels). "
+        + image_prompt
+    )
+
+    response = gemini.models.generate_content(
+        model="gemini-2.0-flash-exp-image-generation",
+        contents=full_prompt,
+        config=google_types.GenerateContentConfig(
+            response_modalities=["TEXT", "IMAGE"]
         ),
     )
-    return response.generated_images[0].image.image_bytes
 
+    for part in response.candidates[0].content.parts:
+        if part.inline_data is not None:
+            img = Image.open(BytesIO(part.inline_data.data))
+            # Recortar al cuadrado central y redimensionar a 1080x1080
+            w, h = img.size
+            side = min(w, h)
+            left = (w - side) // 2
+            top = (h - side) // 2
+            img = img.crop((left, top, left + side, top + side))
+            img = img.resize((1080, 1080), Image.LANCZOS)
+
+            output = BytesIO()
+            img.convert("RGB").save(output, format="JPEG", quality=95)
+            return output.getvalue()
+
+    raise ValueError("Gemini no genero ninguna imagen en la respuesta")
+
+
+# ---------------------------------------------------------------------------
+# Paso 2b — Gemini genera el caption draft
+# ---------------------------------------------------------------------------
 
 def gemini_generate_caption(theme: dict) -> str:
     response = gemini.models.generate_content(
@@ -145,6 +177,10 @@ Responde SOLO con el caption completo, listo para pegar en Instagram.""",
     return response.text.strip()
 
 
+# ---------------------------------------------------------------------------
+# Paso 3 — Claude refina el caption
+# ---------------------------------------------------------------------------
+
 def claude_refine_caption(caption_draft: str, theme: dict) -> str:
     response = claude.messages.create(
         model="claude-sonnet-4-6",
@@ -162,21 +198,24 @@ Tema: {theme['tema']}
 Caption de Gemini:
 {caption_draft}
 
-Criterios de revision:
+Criterios:
 - Voz dominicana natural ("peludito", "bajo a perro", etc. si aplica)
-- Primera linea que realmente detiene el scroll
+- Primera linea que detiene el scroll
 - CTA claro con WhatsApp 809-752-6806
-- Emojis naturales, no exagerados (maximo 8-10 en total)
-- Maximo 2200 caracteres totales
-- Hashtags correctos de la marca al final
+- Emojis naturales, no exagerados (maximo 8-10)
+- Maximo 2200 caracteres
+- Hashtags de marca al final
 
-Si el caption ya esta excelente, returnalo sin cambios.
-Si necesita mejoras, returnalo mejorado.
-Responde SOLO con el caption final, sin explicaciones ni comentarios.""",
+Si esta excelente, returnalo sin cambios. Si necesita mejoras, returnalo mejorado.
+Responde SOLO con el caption final.""",
         }],
     )
     return response.content[0].text.strip()
 
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 def main():
     today = datetime.date.today()
@@ -189,7 +228,7 @@ def main():
     print(f"  Tipo  : {theme['tipo']}")
     print(f"  Tema  : {theme['tema']}")
 
-    print("\n[Gemini] Generando imagen 1080x1080...")
+    print("\n[Gemini 2.0 Flash] Generando imagen 1080x1080...")
     image_bytes = gemini_generate_image(theme["prompt_imagen"])
     image_path = "/tmp/post_del_dia.jpg"
     with open(image_path, "wb") as f:

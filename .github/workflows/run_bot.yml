@@ -2,6 +2,7 @@ name: Publicador PetColinas
 on:
   repository_dispatch:
     types: [publicar_post_gemini]
+    workflow_dispatch: #
 
 jobs:
   publicar:

@@ -5,10 +5,6 @@ Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
-El workflow de GitHub Actions (daily_content.yml) se encarga de:
-  - Hacer commit y push de la imagen
-  - Publicar en Instagram via publish_to_ig.py
-
 Variable de entorno requerida:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
 """
@@ -53,10 +49,19 @@ HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
 
 CONTENT_TYPES = ["grooming", "veterinaria", "membresia", "educativo", "urgencia", "antes_despues"]
 
+# Razas realistas que FLUX maneja bien (anatomia correcta)
+DOG_BREEDS = [
+    "Golden Retriever", "Labrador Retriever", "Poodle", "Shih Tzu",
+    "Maltese", "French Bulldog", "Bichon Frise", "Cocker Spaniel",
+    "Schnauzer", "Yorkshire Terrier", "Havanese", "Pomeranian"
+]
+
 
 def claude_generate_content() -> dict:
     today = datetime.date.today()
     weekday = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"][today.weekday()]
+    # Raza del dia (rotacion por dia del ano)
+    breed = DOG_BREEDS[today.timetuple().tm_yday % len(DOG_BREEDS)]
 
     response = claude.messages.create(
         model="claude-sonnet-4-6",
@@ -72,6 +77,7 @@ def claude_generate_content() -> dict:
 {PETCOLINAS}
 
 Tipos de post: {', '.join(CONTENT_TYPES)}
+Raza del dia para la imagen: {breed}
 
 Crea el contenido completo del post de Instagram de hoy.
 Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
@@ -79,7 +85,7 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<tema especifico, max 25 palabras>",
-  "prompt_imagen": "<prompt profesional en INGLES para generar foto realista de perro en peluqueria. Incluir: raza especifica (ej: Golden Retriever, Poodle, Shih Tzu), grooming profesional de alta calidad, salon limpio y moderno, iluminacion natural suave y profesional, colores de fondo en verde oscuro y naranja (marca), perro feliz y relajado, fotografia de revista profesional, ultra realista, sin errores, sin deformidades. Max 100 palabras.>",
+  "prompt_imagen": "<prompt HIPER REALISTA en INGLES para {breed}. Escena concreta y simple: el perro sentado quieto mirando a camara, recien baniado y arreglado, pelo limpio y brillante, salon de grooming con pared verde oscura, iluminacion de ventana lateral suave. Camara: Sony A7 85mm f2.0, bokeh suave. Especificar SOLO UN perro, 4 patas visibles, anatomia perfecta, foto de alta gama, sin texto en la imagen. Max 80 palabras.>",
   "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji, 2) cuerpo 2-3 oraciones tono dominicano calido, 3) CTA claro, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 caracteres.>"
 }}"""
         }],
@@ -93,25 +99,28 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 def generate_image(image_prompt: str) -> bytes:
-    """Genera imagen realista con FLUX + superpone logo de PetColinas."""
+    """Genera imagen hiper-realista con flux-realism + superpone logo."""
     seed = int(datetime.date.today().strftime("%Y%m%d"))
-    
-    # Prompt mejorado: énfasis en realismo y detalle
-    full_prompt = (
-        "ultra realistic professional photography, high quality, studio lighting, "
-        "perfect composition, sharp focus, no deformities, no anatomical errors, "
-        "magazine quality pet grooming photograph. "
-        + image_prompt
-    )[:600]
 
-    encoded = urllib.parse.quote(full_prompt)
-    url = (
-        f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width=1080&height=1080&model=flux&nologo=true&seed={seed}"
+    # Prefix tecnico de fotografia para maximo realismo
+    photo_prefix = (
+        "hyperrealistic DSLR photography, Sony A7III, 85mm portrait lens, f/2.0 aperture, "
+        "natural window light, shallow depth of field, photojournalism quality, "
+        "National Geographic style, skin and fur texture detail, no AI artifacts, "
+        "no plastic look, no over-smoothing, raw unedited feel. "
     )
 
-    print("  Generando con FLUX (Pollinations.ai)...")
-    resp = requests.get(url, timeout=120)
+    full_prompt = (photo_prefix + image_prompt)[:700]
+    encoded = urllib.parse.quote(full_prompt)
+
+    # flux-realism: modelo especifico para fotorrealismo en Pollinations.ai
+    url = (
+        f"https://image.pollinations.ai/prompt/{encoded}"
+        f"?width=1080&height=1080&model=flux-realism&nologo=true&seed={seed}&enhance=true"
+    )
+
+    print("  Generando con FLUX-REALISM (Pollinations.ai)...")
+    resp = requests.get(url, timeout=180)
     resp.raise_for_status()
 
     img = Image.open(BytesIO(resp.content)).convert("RGB")
@@ -120,17 +129,25 @@ def generate_image(image_prompt: str) -> bytes:
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
 
-    # Agregar logo si existe
-    try:
-        if os.path.exists("assets/logo_petcolinas.png"):
-            logo = Image.open("assets/logo_petcolinas.png").convert("RGBA")
-            # Redimensionar logo a 120x120 (esquina superior derecha)
-            logo = logo.resize((120, 120), Image.LANCZOS)
-            # Pegar en esquina superior derecha con margen de 15px
-            img.paste(logo, (1080 - 120 - 15, 15), logo)
-            print("  Logo agregado a la imagen")
-    except Exception as e:
-        print(f"  Aviso: no se pudo agregar el logo ({e})")
+    # Superponer logo en esquina superior derecha
+    logo_path = "assets/logo_petcolinas.png"
+    if os.path.exists(logo_path):
+        try:
+            logo = Image.open(logo_path).convert("RGBA")
+            # Logo a 150px de ancho manteniendo proporciones
+            logo_w = 150
+            ratio = logo_w / logo.width
+            logo_h = int(logo.height * ratio)
+            logo = logo.resize((logo_w, logo_h), Image.LANCZOS)
+            # Esquina superior derecha con margen 20px
+            x = 1080 - logo_w - 20
+            y = 20
+            img.paste(logo, (x, y), logo)
+            print(f"  Logo superpuesto ({logo_w}x{logo_h}px) en esquina superior derecha")
+        except Exception as e:
+            print(f"  Aviso: no se pudo agregar el logo ({e})")
+    else:
+        print("  Aviso: assets/logo_petcolinas.png no encontrado, imagen sin logo")
 
     output = BytesIO()
     img.save(output, format="JPEG", quality=95)
@@ -149,7 +166,7 @@ def main():
     print(f"  Tema   : {content['tema']}")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[FLUX] Generando imagen realista 1080x1080...")
+    print("\n[FLUX-REALISM] Generando imagen hiper-realista 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

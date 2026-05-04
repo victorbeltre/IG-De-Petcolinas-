@@ -16,7 +16,6 @@ def publish():
 
     print(f"Creando contenedor para imagen: {img_url[:60]}...")
 
-    # Paso 1: Crear contenedor de media
     r = requests.post(
         f"https://graph.facebook.com/v19.0/{acc_id}/media",
         data={"image_url": img_url, "caption": caption, "access_token": token},
@@ -33,7 +32,6 @@ def publish():
     creation_id = r["id"]
     print(f"Contenedor creado con ID: {creation_id}")
 
-    # Paso 2: Publicar el contenedor
     pub = requests.post(
         f"https://graph.facebook.com/v19.0/{acc_id}/media_publish",
         data={"creation_id": creation_id, "access_token": token},

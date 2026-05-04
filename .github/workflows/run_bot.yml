@@ -1,15 +1,13 @@
 name: Publicador PetColinas Instagram
 
 on:
-  # Activado por el script de Gemini via GitHub API
   repository_dispatch:
     types: [publicar_post_gemini]
 
-  # Activado manualmente desde GitHub para pruebas
   workflow_dispatch:
     inputs:
       image_url:
-        description: "URL publica de la imagen (dejar vacio para usar post_del_dia.jpg del repo)"
+        description: "URL publica de la imagen"
         required: false
       caption:
         description: "Caption del post"
@@ -34,14 +32,11 @@ jobs:
       - name: Resolver URL de imagen
         id: imagen
         run: |
-          # Si vino URL en el payload se usa directamente
-          PAYLOAD_URL="${{ github.event.client_payload.image_url || inputs.image_url }}"
-
+          PAYLOAD_URL="${{ github.event.client_payload.image_url }}${{ inputs.image_url }}"
           if [ -n "$PAYLOAD_URL" ]; then
             echo "url=$PAYLOAD_URL" >> $GITHUB_OUTPUT
             echo "Usando imagen del payload: $PAYLOAD_URL"
           else
-            # Fallback: usar post_del_dia.jpg del repo (subido por Gemini)
             RAW_URL="https://raw.githubusercontent.com/${{ github.repository }}/main/post_del_dia.jpg"
             echo "url=$RAW_URL" >> $GITHUB_OUTPUT
             echo "Usando imagen del repo: $RAW_URL"
@@ -50,27 +45,17 @@ jobs:
       - name: Verificar accesibilidad de la imagen
         run: |
           IMAGE_URL="${{ steps.imagen.outputs.url }}"
-          echo "Verificando imagen: $IMAGE_URL"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$IMAGE_URL")
           if [ "$STATUS" != "200" ]; then
-            echo "Error: la imagen no esta accesible (HTTP $STATUS). Abortando."
+            echo "Error: imagen no accesible (HTTP $STATUS)"
             exit 1
           fi
-          echo "Imagen accesible correctamente (HTTP 200)"
-
-      - name: Mostrar datos del post
-        run: |
-          echo "==============================="
-          echo " POST DE PETCOLINAS"
-          echo "==============================="
-          echo "Imagen : ${{ steps.imagen.outputs.url }}"
-          CAPTION="${{ github.event.client_payload.caption || inputs.caption }}"
-          echo "Caption: ${CAPTION:0:100}..."
+          echo "Imagen OK (HTTP 200)"
 
       - name: Publicar en Instagram
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
           IMAGE_URL: ${{ steps.imagen.outputs.url }}
-          CAPTION: ${{ github.event.client_payload.caption || inputs.caption }}
+          CAPTION: ${{ github.event.client_payload.caption }}${{ inputs.caption }}
         run: python publish_to_ig.py

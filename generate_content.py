@@ -62,20 +62,15 @@ HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
           #SantoDomingoOeste #BanoPerros #PeluqueriaCanina #MascotasFelices #CuidaTuMascota
 """
 
-# Tipos de post con sus pesos (probabilidad relativa de seleccion)
 CONTENT_TYPES = [
-    "grooming",       # Promocion de banos y cortes
-    "veterinaria",    # Vacunas, consultas, salud
-    "membresia",      # Planes mensuales
-    "educativo",      # Tips de cuidado
-    "urgencia",       # Turnos disponibles hoy
-    "antes_despues",  # Transformacion de mascota
+    "grooming",
+    "veterinaria",
+    "membresia",
+    "educativo",
+    "urgencia",
+    "antes_despues",
 ]
 
-
-# ---------------------------------------------------------------------------
-# Paso 1 — Claude decide el tema del dia
-# ---------------------------------------------------------------------------
 
 def claude_decide_theme() -> dict:
     today = datetime.date.today()
@@ -115,10 +110,6 @@ Responde UNICAMENTE con un JSON valido con esta estructura exacta (sin markdown,
     return json.loads(match.group())
 
 
-# ---------------------------------------------------------------------------
-# Paso 2a — Gemini genera la imagen
-# ---------------------------------------------------------------------------
-
 def gemini_generate_image(image_prompt: str) -> bytes:
     response = gemini.models.generate_images(
         model="imagen-3.0-generate-001",
@@ -131,10 +122,6 @@ def gemini_generate_image(image_prompt: str) -> bytes:
     )
     return response.generated_images[0].image.image_bytes
 
-
-# ---------------------------------------------------------------------------
-# Paso 2b — Gemini genera el caption draft
-# ---------------------------------------------------------------------------
 
 def gemini_generate_caption(theme: dict) -> str:
     response = gemini.models.generate_content(
@@ -157,10 +144,6 @@ Responde SOLO con el caption completo, listo para pegar en Instagram.""",
     )
     return response.text.strip()
 
-
-# ---------------------------------------------------------------------------
-# Paso 3 — Claude refina el caption
-# ---------------------------------------------------------------------------
 
 def claude_refine_caption(caption_draft: str, theme: dict) -> str:
     response = claude.messages.create(
@@ -195,23 +178,17 @@ Responde SOLO con el caption final, sin explicaciones ni comentarios.""",
     return response.content[0].text.strip()
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 def main():
     today = datetime.date.today()
     print(f"\n{'='*50}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
     print(f"{'='*50}\n")
 
-    # Paso 1
     print("[Claude] Decidiendo tema del post del dia...")
     theme = claude_decide_theme()
     print(f"  Tipo  : {theme['tipo']}")
     print(f"  Tema  : {theme['tema']}")
 
-    # Paso 2a
     print("\n[Gemini] Generando imagen 1080x1080...")
     image_bytes = gemini_generate_image(theme["prompt_imagen"])
     image_path = "/tmp/post_del_dia.jpg"
@@ -219,17 +196,14 @@ def main():
         f.write(image_bytes)
     print(f"  Imagen generada: {len(image_bytes):,} bytes")
 
-    # Paso 2b
     print("\n[Gemini] Generando caption draft...")
     caption_draft = gemini_generate_caption(theme)
     print(f"  Draft: {caption_draft[:80]}...")
 
-    # Paso 3
     print("\n[Claude] Refinando caption...")
     caption_final = claude_refine_caption(caption_draft, theme)
     print(f"  Final: {caption_final[:80]}...")
 
-    # Paso 4 + 5
     print("\n[GitHub] Subiendo imagen al repo y disparando workflow...")
     success = upload_image_and_publish(image_path=image_path, caption=caption_final)
 

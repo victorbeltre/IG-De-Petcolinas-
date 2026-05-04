@@ -3,11 +3,9 @@ name: PetColinas — Contenido Diario Automatico
 on:
   schedule:
     # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
-    # Se ejecuta todos los dias EXCEPTO martes (PetColinas esta cerrado)
-    # Cron: minuto hora * * dias (0=dom, 1=lun, 2=mar, 3=mie, 4=jue, 5=vie, 6=sab)
+    # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
     - cron: '0 13 * * 0,1,3,4,5,6'
 
-  # Permite ejecutar manualmente desde GitHub Actions para pruebas
   workflow_dispatch:
 
 jobs:
@@ -19,8 +17,6 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_PAT }}
 
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
@@ -35,6 +31,4 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
-          # IG_ACCESS_TOKEN e INSTAGRAM_ACCOUNT_ID los usa run_bot.yml
-          # que se dispara automaticamente desde generate_content.py
         run: python generate_content.py

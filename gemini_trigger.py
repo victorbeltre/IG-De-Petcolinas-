@@ -4,13 +4,6 @@ Flujo completo de publicacion automatica PetColinas:
   2. Espera a que el CDN de GitHub propague la imagen
   3. Dispara el workflow de GitHub Actions para publicar en Instagram
 
-Uso desde linea de comandos:
-    python gemini_trigger.py <ruta_imagen.jpg> "<caption>"
-
-Uso como modulo (desde tu script de Gemini):
-    from gemini_trigger import upload_image_and_publish
-    upload_image_and_publish("imagen.jpg", "Caption del post...")
-
 Variable de entorno requerida:
     GITHUB_PAT -> Personal Access Token con permisos: repo, workflow
 """
@@ -49,7 +42,6 @@ def upload_image_to_github(image_path: str) -> str:
     api_url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{IMAGE_FILENAME}"
     headers = _auth_headers()
 
-    # Si el archivo ya existe necesitamos su SHA para poder actualizarlo
     existing = requests.get(api_url, headers=headers).json()
     sha = existing.get("sha")
 
@@ -98,23 +90,15 @@ def trigger_instagram_post(image_url: str, caption: str) -> bool:
 
 
 def upload_image_and_publish(image_path: str, caption: str, cdn_wait: int = 20) -> bool:
-    """
-    Flujo completo:
-      1. Sube la imagen a GitHub
-      2. Espera propagacion del CDN
-      3. Dispara el workflow de Instagram
-    """
     raw_url = upload_image_to_github(image_path)
-
     print(f"[2/3] Esperando {cdn_wait}s para que el CDN de GitHub propague la imagen...")
     time.sleep(cdn_wait)
-
     return trigger_instagram_post(raw_url, caption)
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Uso: python gemini_trigger.py <ruta_imagen.jpg> \"<caption>\"")
+        print('Uso: python gemini_trigger.py <ruta_imagen.jpg> "<caption>"')
         sys.exit(1)
 
     image_path_arg = sys.argv[1]

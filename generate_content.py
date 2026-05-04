@@ -2,7 +2,7 @@
 Orquestador automatico de contenido para PetColinas.
 
 Genera dos archivos en el directorio actual:
-  post_del_dia.jpg  -> imagen 1080x1080 JPEG generada con FLUX
+  post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
 El workflow de GitHub Actions (daily_content.yml) se encarga de:
@@ -79,7 +79,7 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<tema especifico, max 25 palabras>",
-  "prompt_imagen": "<prompt en INGLES para FLUX. Escena: perro feliz y bien arreglado, peluqueria canina profesional, colores verde oscuro y naranja, iluminacion calida, fondo limpio, fotografia alta calidad. Max 80 palabras.>",
+  "prompt_imagen": "<prompt profesional en INGLES para generar foto realista de perro en peluqueria. Incluir: raza especifica (ej: Golden Retriever, Poodle, Shih Tzu), grooming profesional de alta calidad, salon limpio y moderno, iluminacion natural suave y profesional, colores de fondo en verde oscuro y naranja (marca), perro feliz y relajado, fotografia de revista profesional, ultra realista, sin errores, sin deformidades. Max 100 palabras.>",
   "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji, 2) cuerpo 2-3 oraciones tono dominicano calido, 3) CTA claro, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 caracteres.>"
 }}"""
         }],
@@ -93,13 +93,16 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 def generate_image(image_prompt: str) -> bytes:
+    """Genera imagen realista con FLUX + superpone logo de PetColinas."""
     seed = int(datetime.date.today().strftime("%Y%m%d"))
+    
+    # Prompt mejorado: énfasis en realismo y detalle
     full_prompt = (
-        "professional pet grooming salon, happy well-groomed dog, "
-        "dark green and warm orange brand colors, soft warm lighting, "
-        "clean modern interior, high quality photography, Instagram post. "
+        "ultra realistic professional photography, high quality, studio lighting, "
+        "perfect composition, sharp focus, no deformities, no anatomical errors, "
+        "magazine quality pet grooming photograph. "
         + image_prompt
-    )[:500]
+    )[:600]
 
     encoded = urllib.parse.quote(full_prompt)
     url = (
@@ -111,14 +114,26 @@ def generate_image(image_prompt: str) -> bytes:
     resp = requests.get(url, timeout=120)
     resp.raise_for_status()
 
-    img = Image.open(BytesIO(resp.content))
+    img = Image.open(BytesIO(resp.content)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
 
+    # Agregar logo si existe
+    try:
+        if os.path.exists("assets/logo_petcolinas.png"):
+            logo = Image.open("assets/logo_petcolinas.png").convert("RGBA")
+            # Redimensionar logo a 120x120 (esquina superior derecha)
+            logo = logo.resize((120, 120), Image.LANCZOS)
+            # Pegar en esquina superior derecha con margen de 15px
+            img.paste(logo, (1080 - 120 - 15, 15), logo)
+            print("  Logo agregado a la imagen")
+    except Exception as e:
+        print(f"  Aviso: no se pudo agregar el logo ({e})")
+
     output = BytesIO()
-    img.convert("RGB").save(output, format="JPEG", quality=95)
+    img.save(output, format="JPEG", quality=95)
     return output.getvalue()
 
 
@@ -134,15 +149,13 @@ def main():
     print(f"  Tema   : {content['tema']}")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[FLUX] Generando imagen 1080x1080...")
+    print("\n[FLUX] Generando imagen realista 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
-    # Guardar imagen en el directorio del repo (el workflow hace git commit)
     with open("post_del_dia.jpg", "wb") as f:
         f.write(image_bytes)
     print(f"  Imagen guardada: post_del_dia.jpg ({len(image_bytes):,} bytes)")
 
-    # Guardar caption en archivo para que el workflow lo lea
     with open("caption.txt", "w", encoding="utf-8") as f:
         f.write(content["caption"])
     print("  Caption guardado: caption.txt")

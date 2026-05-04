@@ -8,6 +8,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generar-y-publicar:
     name: Claude + FLUX → Instagram
@@ -15,7 +18,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: Checkout del repositorio
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Configurar Python 3.11
@@ -26,8 +29,32 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Ejecutar orquestador (Claude + FLUX → Instagram)
+      - name: Generar imagen y caption con Claude + FLUX
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
         run: python generate_content.py
+
+      - name: Commit imagen al repositorio
+        run: |
+          git config user.name "PetColinas Bot"
+          git config user.email "petcolinas-bot@users.noreply.github.com"
+          git add post_del_dia.jpg
+          if git diff --staged --quiet; then
+            echo "Sin cambios en la imagen"
+          else
+            git commit -m "Post automatico PetColinas $(date +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Esperar propagacion CDN de GitHub (15s)
+        run: sleep 15
+
+      - name: Publicar en Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          IMAGE_URL: "https://raw.githubusercontent.com/${{ github.repository }}/main/post_del_dia.jpg"
+          CAPTION_FILE: caption.txt
+        run: |
+          export CAPTION=$(cat caption.txt)
+          python publish_to_ig.py

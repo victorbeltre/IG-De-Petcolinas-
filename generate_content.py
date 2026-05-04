@@ -1,16 +1,16 @@
 """
 Orquestador automatico de contenido para PetColinas.
 
-Flujo:
-  1. Claude          -> Decide el tema del post y genera el prompt de imagen
-  2. Pollinations.ai -> Genera imagen 1080x1080 con FLUX (gratis, sin API key)
-  3. Claude          -> Genera el caption en voz dominicana
-  4. GitHub          -> Sube post_del_dia.jpg al repo
-  5. GitHub Actions  -> run_bot.yml publica en @petcolinas
+Genera dos archivos en el directorio actual:
+  post_del_dia.jpg  -> imagen 1080x1080 JPEG generada con FLUX
+  caption.txt       -> caption listo para Instagram
 
-Variables de entorno requeridas:
+El workflow de GitHub Actions (daily_content.yml) se encarga de:
+  - Hacer commit y push de la imagen
+  - Publicar en Instagram via publish_to_ig.py
+
+Variable de entorno requerida:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  GITHUB_PAT         -> GitHub Personal Access Token (repo + workflow)
 """
 
 import os
@@ -25,17 +25,7 @@ import anthropic
 import requests
 from PIL import Image
 
-from gemini_trigger import upload_image_and_publish
-
-# ---------------------------------------------------------------------------
-# Cliente Claude
-# ---------------------------------------------------------------------------
-
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
-# ---------------------------------------------------------------------------
-# Contexto de marca PetColinas
-# ---------------------------------------------------------------------------
 
 PETCOLINAS = """
 EMPRESA: PetColinas — Veterinaria y Peluqueria Canina
@@ -61,19 +51,8 @@ HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
           #SantoDomingoOeste #BanoPerros #PeluqueriaCanina #MascotasFelices #CuidaTuMascota
 """
 
-CONTENT_TYPES = [
-    "grooming",
-    "veterinaria",
-    "membresia",
-    "educativo",
-    "urgencia",
-    "antes_despues",
-]
+CONTENT_TYPES = ["grooming", "veterinaria", "membresia", "educativo", "urgencia", "antes_despues"]
 
-
-# ---------------------------------------------------------------------------
-# Paso 1 — Claude decide el tema y genera todo el contenido de texto
-# ---------------------------------------------------------------------------
 
 def claude_generate_content() -> dict:
     today = datetime.date.today()
@@ -84,7 +63,7 @@ def claude_generate_content() -> dict:
         max_tokens=1500,
         system=(
             "Eres el estratega y creador de contenido oficial de PetColinas en Instagram. "
-            "Creativo, conoces el mercado dominicano, generas contenido que convierte seguidores en clientes."
+            "Creativo, conoces el mercado dominicano, generas contenido que convierte."
         ),
         messages=[{
             "role": "user",
@@ -94,14 +73,14 @@ def claude_generate_content() -> dict:
 
 Tipos de post: {', '.join(CONTENT_TYPES)}
 
-Crea el contenido completo para el post de Instagram de hoy.
-Responde UNICAMENTE con JSON valido (sin markdown, sin texto extra):
+Crea el contenido completo del post de Instagram de hoy.
+Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 {{
   "tipo": "<uno de los tipos listados>",
-  "tema": "<descripcion especifica del tema, max 25 palabras>",
-  "prompt_imagen": "<prompt en INGLES para generar imagen con IA FLUX. Describe escena: perro feliz y bien arreglado, ambiente de peluqueria canina profesional, colores verde oscuro y naranja, iluminacion calida, fondo limpio, fotografia de alta calidad. Max 80 palabras.>",
-  "caption": "<caption completo listo para Instagram. Estructura: 1) linea gancho con emoji que detiene el scroll, 2) cuerpo 2-3 oraciones con beneficio principal en tono dominicano calido, 3) CTA claro, 4) contacto con emoji 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags al final. Max 2200 caracteres.>"
+  "tema": "<tema especifico, max 25 palabras>",
+  "prompt_imagen": "<prompt en INGLES para FLUX. Escena: perro feliz y bien arreglado, peluqueria canina profesional, colores verde oscuro y naranja, iluminacion calida, fondo limpio, fotografia alta calidad. Max 80 palabras.>",
+  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji, 2) cuerpo 2-3 oraciones tono dominicano calido, 3) CTA claro, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 caracteres.>"
 }}"""
         }],
     )
@@ -113,13 +92,8 @@ Responde UNICAMENTE con JSON valido (sin markdown, sin texto extra):
     return json.loads(match.group())
 
 
-# ---------------------------------------------------------------------------
-# Paso 2 — Pollinations.ai genera la imagen (FLUX, gratis, sin API key)
-# ---------------------------------------------------------------------------
-
 def generate_image(image_prompt: str) -> bytes:
     seed = int(datetime.date.today().strftime("%Y%m%d"))
-
     full_prompt = (
         "professional pet grooming salon, happy well-groomed dog, "
         "dark green and warm orange brand colors, soft warm lighting, "
@@ -148,17 +122,13 @@ def generate_image(image_prompt: str) -> bytes:
     return output.getvalue()
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 def main():
     today = datetime.date.today()
     print(f"\n{'='*50}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
     print(f"{'='*50}\n")
 
-    print("[Claude] Generando estrategia, tema y caption del dia...")
+    print("[Claude] Generando estrategia, tema y caption...")
     content = claude_generate_content()
     print(f"  Tipo   : {content['tipo']}")
     print(f"  Tema   : {content['tema']}")
@@ -166,20 +136,18 @@ def main():
 
     print("\n[FLUX] Generando imagen 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
-    image_path = "/tmp/post_del_dia.jpg"
-    with open(image_path, "wb") as f:
+
+    # Guardar imagen en el directorio del repo (el workflow hace git commit)
+    with open("post_del_dia.jpg", "wb") as f:
         f.write(image_bytes)
-    print(f"  Imagen lista: {len(image_bytes):,} bytes")
+    print(f"  Imagen guardada: post_del_dia.jpg ({len(image_bytes):,} bytes)")
 
-    print("\n[GitHub] Subiendo imagen y disparando workflow de Instagram...")
-    success = upload_image_and_publish(image_path=image_path, caption=content["caption"])
+    # Guardar caption en archivo para que el workflow lo lea
+    with open("caption.txt", "w", encoding="utf-8") as f:
+        f.write(content["caption"])
+    print("  Caption guardado: caption.txt")
 
-    print()
-    if success:
-        print("POST PUBLICADO EN @petcolinas CON EXITO")
-    else:
-        print("ERROR: Revisar logs de GitHub Actions")
-        sys.exit(1)
+    print("\nContenido listo. El workflow publicara en Instagram.")
 
 
 if __name__ == "__main__":

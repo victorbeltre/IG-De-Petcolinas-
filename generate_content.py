@@ -1,6 +1,6 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Claude + formula Portrait claude-banana + Stable Diffusion 3.5 (Hugging Face, gratis).
+Claude + formula Portrait claude-banana + Stable Diffusion via Hugging Face (gratis).
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
@@ -91,10 +91,13 @@ REGLAS ABSOLUTAS:
 === FIN DE FORMULA ===
 """
 
+# Modelos en orden de preferencia — endpoint nuevo de HF Inference Providers
 HF_MODELS = [
-    "stabilityai/stable-diffusion-3.5-large",
-    "stabilityai/stable-diffusion-xl-base-1.0",
+    "black-forest-labs/FLUX.1-dev",
+    "Lykon/dreamshaper-8",
+    "runwayml/stable-diffusion-v1-5",
 ]
+HF_BASE = "https://router.huggingface.co/hf-inference/models"
 
 
 # ---------------------------------------------------------------------------
@@ -145,23 +148,33 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Paso 2 — Stable Diffusion 3.5 via Hugging Face (gratis)
+# Paso 2 — Generacion de imagen via HF Inference Providers
 # ---------------------------------------------------------------------------
 
 def _call_hf(model: str, prompt: str, token: str) -> bytes | None:
-    headers = {"Authorization": f"Bearer {token}"}
-    payload = {
-        "inputs": prompt,
-        "parameters": {"height": 1024, "width": 1024, "num_inference_steps": 40, "guidance_scale": 7.5},
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
     }
+    payload = {"inputs": prompt}
+
     for attempt in range(3):
         print(f"  [{model.split('/')[-1]}] intento {attempt + 1}/3...")
-        resp = requests.post(
-            f"https://api-inference.huggingface.co/models/{model}",
-            headers=headers, json=payload, timeout=300,
-        )
-        if resp.status_code == 200 and "image" in resp.headers.get("Content-Type", ""):
+        try:
+            resp = requests.post(
+                f"{HF_BASE}/{model}",
+                headers=headers,
+                json=payload,
+                timeout=300,
+            )
+        except requests.exceptions.RequestException as e:
+            print(f"  Error de red: {e}")
+            return None
+
+        content_type = resp.headers.get("Content-Type", "")
+        if resp.status_code == 200 and "image" in content_type:
             return resp.content
+
         if resp.status_code == 503:
             try:
                 wait = min(resp.json().get("estimated_time", 30), 60)
@@ -170,32 +183,39 @@ def _call_hf(model: str, prompt: str, token: str) -> bytes | None:
             print(f"  Modelo cargando, esperando {wait:.0f}s...")
             time.sleep(wait)
             continue
-        print(f"  HTTP {resp.status_code}: {resp.text[:150]}")
+
+        print(f"  HTTP {resp.status_code} ({content_type}): {resp.text[:200]}")
         return None
+
     return None
 
 
 def generate_image(image_prompt: str) -> bytes:
     token = os.environ.get("HF_TOKEN", "")
+    if not token:
+        raise Exception("Falta HF_TOKEN en las variables de entorno.")
+
     clean_prompt = " ".join(image_prompt.split())[:900]
 
     raw = None
+    used_model = None
     for model in HF_MODELS:
-        print(f"\n  Generando con {model.split('/')[-1]}...")
+        print(f"\n  Probando: {model}")
         raw = _call_hf(model, clean_prompt, token)
         if raw:
-            print(f"  Imagen recibida de {model.split('/')[-1]}")
+            used_model = model
             break
 
     if not raw:
-        raise Exception("No se pudo generar la imagen con ningun modelo de Hugging Face.")
+        raise Exception("Todos los modelos de HF fallaron. Revisa HF_TOKEN y disponibilidad.")
 
+    print(f"  Imagen generada con {used_model.split('/')[-1]}")
     img = Image.open(BytesIO(raw)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
-    print(f"  Imagen {w}x{h} → recortada a 1080x1080")
+    print(f"  Recortada de {w}x{h} a 1080x1080")
 
     logo_path = "assets/logo_petcolinas.png"
     if os.path.exists(logo_path):
@@ -208,8 +228,6 @@ def generate_image(image_prompt: str) -> bytes:
             print(f"  Logo superpuesto ({logo_w}x{logo_h}px)")
         except Exception as e:
             print(f"  Aviso: no se pudo agregar el logo ({e})")
-    else:
-        print("  Aviso: assets/logo_petcolinas.png no encontrado")
 
     output = BytesIO()
     img.save(output, format="JPEG", quality=95)
@@ -224,7 +242,7 @@ def main():
     today = datetime.date.today()
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"  Claude + claude-banana + Stable Diffusion 3.5")
+    print(f"  Claude + claude-banana + HF Inference")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")
@@ -234,7 +252,7 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[Hugging Face] Generando imagen con Stable Diffusion 3.5...")
+    print("\n[HF Inference] Generando imagen...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

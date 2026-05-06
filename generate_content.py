@@ -1,6 +1,6 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Usa la formula Portrait de claude-banana + Stable Diffusion 3.5 Large (HuggingFace).
+Claude + formula Portrait claude-banana + Nano Banana 2 (Gemini imagen 2K).
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
@@ -8,22 +8,22 @@ Genera dos archivos en el directorio actual:
 
 Variables de entorno requeridas:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  HF_TOKEN           -> Token de Hugging Face (cuenta gratuita en huggingface.co)
+  GEMINI_API_KEY     -> API key de Google AI Studio (para Nano Banana 2)
 """
 
 import os
 import sys
 import json
 import re
-import time
 import datetime
 from io import BytesIO
 
 import anthropic
-import requests
+import google.generativeai as genai
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -62,7 +62,7 @@ DOG_BREEDS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Formula Portrait de claude-banana (7 componentes, modo retrato)
+# Formula Portrait de claude-banana (7 componentes)
 # ---------------------------------------------------------------------------
 
 PORTRAIT_FORMULA = """
@@ -82,36 +82,18 @@ REGLAS ABSOLUTAS:
 - Objetivo: 150-200 palabras.
 - PROHIBIDO: masterpiece, best quality, highly detailed, ultra detailed,
   4K, 8K, hyperrealistic, ultra HD, trending on ArtStation, high resolution.
-- OBLIGATORIO terminar con authority anchor: "National Geographic wildlife portrait",
-  "Sony World Photography Awards", "Pulitzer Prize-winning photograph",
-  "shot for a Vogue Pets editorial".
+- OBLIGATORIO terminar con authority anchor de prestigio:
+  "National Geographic wildlife portrait", "Sony World Photography Awards",
+  "Pulitzer Prize-winning photograph", "shot for a Vogue Pets editorial".
 - UN SOLO perro, 4 patas completamente visibles, anatomia perfecta.
 - Sin texto, logotipos ni graficos dentro de la imagen.
 - El perro debe verse recien baniado, pelaje limpio y arreglado.
-
-TEMPLATE DE CONSTRUCCION:
-[descriptor de raza + edad + color de pelaje + expresion + rasgo unico],
-[detalle de grooming — pelaje limpio, cepillado, recortado],
-[verbo presente] in [salon de grooming con pared verde oscura #1a6b3a],
-[micro-detalle sobre textura del pelaje].
-Shot on [Sony A7III], [85mm f/2.0], [medium close-up con 4 patas visibles],
-[direccion de luz + calidad + temperatura de color].
-[Authority anchor].
 === FIN DE FORMULA ===
 """
 
-# ---------------------------------------------------------------------------
-# Modelos de imagen en orden de preferencia (Hugging Face Inference API)
-# ---------------------------------------------------------------------------
-
-HF_MODELS = [
-    "stabilityai/stable-diffusion-3.5-large",
-    "stabilityai/stable-diffusion-xl-base-1.0",
-]
-
 
 # ---------------------------------------------------------------------------
-# Generacion de contenido con Claude + formula claude-banana
+# Paso 1 — Claude genera estrategia, prompt y caption
 # ---------------------------------------------------------------------------
 
 def claude_generate_content() -> dict:
@@ -158,48 +140,44 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Generacion de imagen con Stable Diffusion via Hugging Face
+# Paso 2 — Nano Banana 2 genera la imagen (gemini-3.1-flash-image-preview)
 # ---------------------------------------------------------------------------
 
-def _call_hf_model(model: str, prompt: str, hf_token: str) -> bytes | None:
-    """Llama a un modelo de HuggingFace. Retorna bytes de imagen o None si falla."""
-    url = f"https://api-inference.huggingface.co/models/{model}"
-    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
-    payload = {
-        "inputs": prompt,
-        "parameters": {"height": 1024, "width": 1024, "num_inference_steps": 40, "guidance_scale": 7.5},
-    }
+def generate_image(image_prompt: str) -> bytes:
+    """Genera imagen 2K con Nano Banana 2 y superpone el logo de PetColinas."""
+    print("  Generando con Nano Banana 2 (gemini-3.1-flash-image-preview) @ 2K...")
 
-    for attempt in range(3):
-        print(f"  [{model.split('/')[-1]}] intento {attempt + 1}/3...")
-        resp = requests.post(url, headers=headers, json=payload, timeout=300)
+    model = genai.GenerativeModel("gemini-3.1-flash-image-preview")
+    response = model.generate_content(
+        image_prompt,
+        generation_config={
+            "response_modalities": ["IMAGE"],
+            "image_size": "2K",
+        },
+    )
 
-        if resp.status_code == 200 and "image" in resp.headers.get("Content-Type", ""):
-            return resp.content
+    # Extraer bytes de imagen de la respuesta
+    raw_bytes = None
+    for part in response.candidates[0].content.parts:
+        if hasattr(part, "inline_data") and part.inline_data.mime_type.startswith("image/"):
+            raw_bytes = part.inline_data.data
+            break
 
-        if resp.status_code == 503:
-            try:
-                wait = min(resp.json().get("estimated_time", 30), 60)
-            except Exception:
-                wait = 30
-            print(f"  Modelo cargando, esperando {wait:.0f}s...")
-            time.sleep(wait)
-            continue
+    if not raw_bytes:
+        raise Exception(
+            "Nano Banana 2 no retorno imagen. Respuesta: "
+            + str(response.candidates[0].content.parts)
+        )
 
-        print(f"  HTTP {resp.status_code} — {resp.text[:120]}")
-        return None
-
-    return None
-
-
-def _process_image_bytes(raw: bytes) -> bytes:
-    """Recorta a cuadrado 1080x1080 y superpone logo de PetColinas."""
-    img = Image.open(BytesIO(raw)).convert("RGB")
+    # Recortar a cuadrado y redimensionar a 1080x1080
+    img = Image.open(BytesIO(raw_bytes)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
+    print(f"  Imagen recortada y redimensionada a 1080x1080")
 
+    # Superponer logo en esquina superior derecha
     logo_path = "assets/logo_petcolinas.png"
     if os.path.exists(logo_path):
         try:
@@ -219,21 +197,6 @@ def _process_image_bytes(raw: bytes) -> bytes:
     return output.getvalue()
 
 
-def generate_image(image_prompt: str) -> bytes:
-    """Genera imagen con Stable Diffusion via Hugging Face. Prueba modelos en orden."""
-    hf_token = os.environ.get("HF_TOKEN", "")
-    clean_prompt = " ".join(image_prompt.split())[:900]
-
-    for model in HF_MODELS:
-        print(f"\n  Probando modelo: {model}")
-        raw = _call_hf_model(model, clean_prompt, hf_token)
-        if raw:
-            print(f"  Imagen generada con {model.split('/')[-1]}")
-            return _process_image_bytes(raw)
-
-    raise Exception("No se pudo generar la imagen con ningun modelo de Hugging Face.")
-
-
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -242,7 +205,7 @@ def main():
     today = datetime.date.today()
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"  Claude + claude-banana formula + Stable Diffusion")
+    print(f"  Claude + claude-banana + Nano Banana 2")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")
@@ -252,16 +215,16 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[Hugging Face] Generando imagen con Stable Diffusion...")
+    print("\n[Nano Banana 2] Generando imagen editorial...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:
         f.write(image_bytes)
-    print(f"  Imagen guardada: post_del_dia.jpg ({len(image_bytes):,} bytes)")
+    print(f"  Guardado: post_del_dia.jpg ({len(image_bytes):,} bytes)")
 
     with open("caption.txt", "w", encoding="utf-8") as f:
         f.write(content["caption"])
-    print("  Caption guardado: caption.txt")
+    print("  Guardado: caption.txt")
 
     print("\nContenido listo. El workflow publicara en Instagram.")
 

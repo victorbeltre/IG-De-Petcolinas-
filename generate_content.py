@@ -1,6 +1,6 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Claude + formula Portrait claude-banana + Nano Banana 2 (gemini-3.1-flash-image-preview).
+Claude + formula Portrait claude-banana + Stable Diffusion 3.5 (Hugging Face, gratis).
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
@@ -8,23 +8,22 @@ Genera dos archivos en el directorio actual:
 
 Variables de entorno requeridas:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  GEMINI_API_KEY     -> API key de Google AI Studio (Nano Banana 2)
+  HF_TOKEN           -> Token de Hugging Face (cuenta gratuita en huggingface.co)
 """
 
 import os
 import sys
 import json
 import re
+import time
 import datetime
 from io import BytesIO
 
 import anthropic
-from google import genai
-from google.genai import types
+import requests
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-gemini = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -92,6 +91,11 @@ REGLAS ABSOLUTAS:
 === FIN DE FORMULA ===
 """
 
+HF_MODELS = [
+    "stabilityai/stable-diffusion-3.5-large",
+    "stabilityai/stable-diffusion-xl-base-1.0",
+]
+
 
 # ---------------------------------------------------------------------------
 # Paso 1 — Claude genera estrategia, prompt y caption
@@ -141,43 +145,58 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Paso 2 — Nano Banana 2 genera la imagen
+# Paso 2 — Stable Diffusion 3.5 via Hugging Face (gratis)
 # ---------------------------------------------------------------------------
 
+def _call_hf(model: str, prompt: str, token: str) -> bytes | None:
+    headers = {"Authorization": f"Bearer {token}"}
+    payload = {
+        "inputs": prompt,
+        "parameters": {"height": 1024, "width": 1024, "num_inference_steps": 40, "guidance_scale": 7.5},
+    }
+    for attempt in range(3):
+        print(f"  [{model.split('/')[-1]}] intento {attempt + 1}/3...")
+        resp = requests.post(
+            f"https://api-inference.huggingface.co/models/{model}",
+            headers=headers, json=payload, timeout=300,
+        )
+        if resp.status_code == 200 and "image" in resp.headers.get("Content-Type", ""):
+            return resp.content
+        if resp.status_code == 503:
+            try:
+                wait = min(resp.json().get("estimated_time", 30), 60)
+            except Exception:
+                wait = 30
+            print(f"  Modelo cargando, esperando {wait:.0f}s...")
+            time.sleep(wait)
+            continue
+        print(f"  HTTP {resp.status_code}: {resp.text[:150]}")
+        return None
+    return None
+
+
 def generate_image(image_prompt: str) -> bytes:
-    """Genera imagen con Nano Banana 2 y superpone el logo de PetColinas."""
-    print("  Generando con Nano Banana 2 (gemini-3.1-flash-image-preview)...")
+    token = os.environ.get("HF_TOKEN", "")
+    clean_prompt = " ".join(image_prompt.split())[:900]
 
-    response = gemini.models.generate_content(
-        model="gemini-3.1-flash-image-preview",
-        contents=image_prompt,
-        config=types.GenerateContentConfig(
-            response_modalities=["IMAGE"],
-        ),
-    )
-
-    # Extraer bytes de imagen de la respuesta
-    raw_bytes = None
-    for part in response.candidates[0].content.parts:
-        if part.inline_data is not None and part.inline_data.mime_type.startswith("image/"):
-            raw_bytes = part.inline_data.data
+    raw = None
+    for model in HF_MODELS:
+        print(f"\n  Generando con {model.split('/')[-1]}...")
+        raw = _call_hf(model, clean_prompt, token)
+        if raw:
+            print(f"  Imagen recibida de {model.split('/')[-1]}")
             break
 
-    if not raw_bytes:
-        raise Exception(
-            "Nano Banana 2 no retorno imagen. Partes recibidas: "
-            + str([type(p).__name__ for p in response.candidates[0].content.parts])
-        )
+    if not raw:
+        raise Exception("No se pudo generar la imagen con ningun modelo de Hugging Face.")
 
-    # Recortar a cuadrado y redimensionar a 1080x1080
-    img = Image.open(BytesIO(raw_bytes)).convert("RGB")
+    img = Image.open(BytesIO(raw)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
-    print(f"  Imagen original {w}x{h} → recortada y redimensionada a 1080x1080")
+    print(f"  Imagen {w}x{h} → recortada a 1080x1080")
 
-    # Superponer logo en esquina superior derecha
     logo_path = "assets/logo_petcolinas.png"
     if os.path.exists(logo_path):
         try:
@@ -186,7 +205,7 @@ def generate_image(image_prompt: str) -> bytes:
             logo_h = int(logo.height * (logo_w / logo.width))
             logo = logo.resize((logo_w, logo_h), Image.LANCZOS)
             img.paste(logo, (1080 - logo_w - 20, 20), logo)
-            print(f"  Logo superpuesto ({logo_w}x{logo_h}px) en esquina superior derecha")
+            print(f"  Logo superpuesto ({logo_w}x{logo_h}px)")
         except Exception as e:
             print(f"  Aviso: no se pudo agregar el logo ({e})")
     else:
@@ -205,7 +224,7 @@ def main():
     today = datetime.date.today()
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"  Claude + claude-banana + Nano Banana 2")
+    print(f"  Claude + claude-banana + Stable Diffusion 3.5")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")
@@ -215,7 +234,7 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[Nano Banana 2] Generando imagen editorial...")
+    print("\n[Hugging Face] Generando imagen con Stable Diffusion 3.5...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

@@ -1,6 +1,6 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Claude + formula Portrait claude-banana + Nano Banana 2 (Gemini imagen 2K).
+Claude + formula Portrait claude-banana + Nano Banana 2 (gemini-3.1-flash-image-preview).
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
@@ -8,7 +8,7 @@ Genera dos archivos en el directorio actual:
 
 Variables de entorno requeridas:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  GEMINI_API_KEY     -> API key de Google AI Studio (para Nano Banana 2)
+  GEMINI_API_KEY     -> API key de Google AI Studio (Nano Banana 2)
 """
 
 import os
@@ -19,11 +19,12 @@ import datetime
 from io import BytesIO
 
 import anthropic
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+gemini = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -140,33 +141,32 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Paso 2 — Nano Banana 2 genera la imagen (gemini-3.1-flash-image-preview)
+# Paso 2 — Nano Banana 2 genera la imagen
 # ---------------------------------------------------------------------------
 
 def generate_image(image_prompt: str) -> bytes:
-    """Genera imagen 2K con Nano Banana 2 y superpone el logo de PetColinas."""
-    print("  Generando con Nano Banana 2 (gemini-3.1-flash-image-preview) @ 2K...")
+    """Genera imagen con Nano Banana 2 y superpone el logo de PetColinas."""
+    print("  Generando con Nano Banana 2 (gemini-3.1-flash-image-preview)...")
 
-    model = genai.GenerativeModel("gemini-3.1-flash-image-preview")
-    response = model.generate_content(
-        image_prompt,
-        generation_config={
-            "response_modalities": ["IMAGE"],
-            "image_size": "2K",
-        },
+    response = gemini.models.generate_content(
+        model="gemini-3.1-flash-image-preview",
+        contents=image_prompt,
+        config=types.GenerateContentConfig(
+            response_modalities=["IMAGE"],
+        ),
     )
 
     # Extraer bytes de imagen de la respuesta
     raw_bytes = None
     for part in response.candidates[0].content.parts:
-        if hasattr(part, "inline_data") and part.inline_data.mime_type.startswith("image/"):
+        if part.inline_data is not None and part.inline_data.mime_type.startswith("image/"):
             raw_bytes = part.inline_data.data
             break
 
     if not raw_bytes:
         raise Exception(
-            "Nano Banana 2 no retorno imagen. Respuesta: "
-            + str(response.candidates[0].content.parts)
+            "Nano Banana 2 no retorno imagen. Partes recibidas: "
+            + str([type(p).__name__ for p in response.candidates[0].content.parts])
         )
 
     # Recortar a cuadrado y redimensionar a 1080x1080
@@ -175,7 +175,7 @@ def generate_image(image_prompt: str) -> bytes:
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
-    print(f"  Imagen recortada y redimensionada a 1080x1080")
+    print(f"  Imagen original {w}x{h} → recortada y redimensionada a 1080x1080")
 
     # Superponer logo en esquina superior derecha
     logo_path = "assets/logo_petcolinas.png"

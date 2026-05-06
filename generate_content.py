@@ -6,16 +6,16 @@ Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
-Variable de entorno requerida:
+Variables de entorno requeridas:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
+  HF_TOKEN           -> Token de Hugging Face (tipo Read es suficiente)
 """
 
 import os
-import sys
 import json
 import re
+import time
 import datetime
-import urllib.parse
 from io import BytesIO
 
 import anthropic
@@ -23,6 +23,16 @@ import requests
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+# Endpoint clasico de HF Inference API — funciona con token tipo Read (gratis)
+HF_API_BASE = "https://api-inference.huggingface.co/models"
+
+# Modelos en orden de preferencia (todos publicos, sin costo)
+HF_MODELS = [
+    "stabilityai/stable-diffusion-xl-base-1.0",
+    "Lykon/dreamshaper-8",
+    "runwayml/stable-diffusion-v1-5",
+]
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -162,28 +172,71 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Generacion de imagen con FLUX-realism (Pollinations.ai)
-# El prompt ya viene completo desde claude-banana — no necesita prefijo
+# Generacion de imagen con Hugging Face Inference API (clasica, gratis)
+# Usa el endpoint api-inference.huggingface.co que funciona con token Read
 # ---------------------------------------------------------------------------
 
+def _hf_generate(model: str, prompt: str, token: str) -> bytes | None:
+    """Llama a un modelo en HF Inference API. Retorna bytes de imagen o None."""
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "inputs": prompt,
+        "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "num_inference_steps": 30,
+            "guidance_scale": 7.5,
+        },
+    }
+    url = f"{HF_API_BASE}/{model}"
+
+    for attempt in range(3):
+        print(f"    Intento {attempt + 1}/3 con {model}...")
+        resp = requests.post(url, headers=headers, json=payload, timeout=300)
+
+        if resp.status_code == 200:
+            ct = resp.headers.get("Content-Type", "")
+            if "image" in ct:
+                return resp.content
+            print(f"    Respuesta inesperada (Content-Type: {ct})")
+            return None
+
+        if resp.status_code == 503:
+            try:
+                wait = min(resp.json().get("estimated_time", 30), 60)
+            except Exception:
+                wait = 30
+            print(f"    Modelo cargando, esperando {wait}s...")
+            time.sleep(wait)
+            continue
+
+        print(f"    HTTP {resp.status_code}: {resp.text[:200]}")
+        return None
+
+    return None
+
+
 def generate_image(image_prompt: str) -> bytes:
-    seed = int(datetime.date.today().strftime("%Y%m%d"))
+    token = os.environ.get("HF_TOKEN", "")
+    if not token:
+        raise RuntimeError("Variable HF_TOKEN no esta definida")
 
-    # El prompt de claude-banana ya incluye todos los detalles tecnicos de camara y luz.
-    # Solo limitamos el largo para la URL y removemos saltos de linea.
-    clean_prompt = " ".join(image_prompt.split())[:1200]
-    encoded = urllib.parse.quote(clean_prompt)
+    # El prompt de claude-banana ya tiene todos los detalles — solo limpiamos espacios
+    clean_prompt = " ".join(image_prompt.split())[:900]
 
-    url = (
-        f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width=1080&height=1080&model=flux-realism&nologo=true&seed={seed}&enhance=true"
-    )
+    for model in HF_MODELS:
+        print(f"  [HF] Probando modelo: {model}")
+        img_bytes = _hf_generate(model, clean_prompt, token)
+        if img_bytes:
+            print(f"  Imagen generada con {model} ({len(img_bytes):,} bytes)")
+            break
+    else:
+        raise RuntimeError("Todos los modelos de HF fallaron. Verifica HF_TOKEN y disponibilidad.")
 
-    print("  Generando con FLUX-REALISM (Pollinations.ai)...")
-    resp = requests.get(url, timeout=180)
-    resp.raise_for_status()
-
-    img = Image.open(BytesIO(resp.content)).convert("RGB")
+    img = Image.open(BytesIO(img_bytes)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
@@ -198,7 +251,7 @@ def generate_image(image_prompt: str) -> bytes:
             logo_h = int(logo.height * (logo_w / logo.width))
             logo = logo.resize((logo_w, logo_h), Image.LANCZOS)
             img.paste(logo, (1080 - logo_w - 20, 20), logo)
-            print(f"  Logo superpuesto ({logo_w}x{logo_h}px) en esquina superior derecha")
+            print(f"  Logo superpuesto ({logo_w}x{logo_h}px)")
         except Exception as e:
             print(f"  Aviso: no se pudo agregar el logo ({e})")
     else:
@@ -227,7 +280,7 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[FLUX-REALISM] Generando imagen editorial 1080x1080...")
+    print("\n[HF Inference] Generando imagen editorial 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

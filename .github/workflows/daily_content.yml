@@ -10,11 +10,14 @@ on:
   # Permite ejecutar manualmente desde GitHub Actions para pruebas
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generar-y-publicar:
-    name: Claude + Gemini → Instagram
+    name: Claude + HF → Instagram
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout del repositorio
@@ -28,11 +31,80 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Ejecutar orquestador (Claude + Gemini → Instagram)
+      - name: Generar contenido (Claude + HF Stable Diffusion)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
-          # IG_ACCESS_TOKEN e INSTAGRAM_ACCOUNT_ID los usa run_bot.yml
-          # que se dispara automaticamente desde generate_content.py
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python generate_content.py
+
+      - name: Guardar imagen en el repositorio
+        run: |
+          git config user.name "PetColinas Bot"
+          git config user.email "bot@petcolinas.com"
+          git add post_del_dia.jpg caption.txt
+          git diff --cached --quiet || git commit -m "Post del dia $(date +'%Y-%m-%d')"
+          git push origin HEAD
+
+      - name: Esperar propagacion CDN de GitHub
+        run: sleep 20
+
+      - name: Publicar en Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+        run: |
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          IMAGE_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/post_del_dia.jpg"
+          CAPTION=$(cat caption.txt)
+
+          echo "Subiendo imagen a Instagram: $IMAGE_URL"
+
+          # Paso 1: Crear contenedor de media
+          CONTAINER=$(curl -s -X POST \
+            "https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media" \
+            -d "image_url=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1],safe=":/"))'  "$IMAGE_URL")" \
+            -d "caption=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))'  "$CAPTION")" \
+            -d "access_token=${IG_ACCESS_TOKEN}")
+
+          echo "Respuesta contenedor: $CONTAINER"
+          CONTAINER_ID=$(echo "$CONTAINER" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))")
+
+          if [ -z "$CONTAINER_ID" ]; then
+            echo "ERROR: No se pudo crear el contenedor de media"
+            exit 1
+          fi
+
+          echo "Container ID: $CONTAINER_ID"
+
+          # Paso 2: Esperar hasta que el contenedor este listo (max 90s)
+          for i in $(seq 1 18); do
+            sleep 5
+            STATUS=$(curl -s \
+              "https://graph.facebook.com/v19.0/${CONTAINER_ID}?fields=status_code&access_token=${IG_ACCESS_TOKEN}" \
+              | python3 -c "import sys,json; print(json.load(sys.stdin).get('status_code','UNKNOWN'))")
+            echo "  Estado: $STATUS (intento $i/18)"
+            if [ "$STATUS" = "FINISHED" ]; then
+              break
+            fi
+            if [ "$STATUS" = "ERROR" ]; then
+              echo "ERROR: El contenedor fallo durante el procesamiento"
+              exit 1
+            fi
+          done
+
+          # Paso 3: Publicar
+          PUBLISH=$(curl -s -X POST \
+            "https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media_publish" \
+            -d "creation_id=${CONTAINER_ID}" \
+            -d "access_token=${IG_ACCESS_TOKEN}")
+
+          echo "Respuesta publicacion: $PUBLISH"
+          POST_ID=$(echo "$PUBLISH" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))")
+
+          if [ -z "$POST_ID" ]; then
+            echo "ERROR: No se pudo publicar el post"
+            exit 1
+          fi
+
+          echo "Post publicado en Instagram! ID: $POST_ID"

@@ -1,19 +1,13 @@
 """
 Orquestador automatico de contenido para PetColinas.
+Integra la formula Portrait de claude-banana para prompts de imagen de alta calidad.
 
-Flujo:
-  1. Claude  -> Decide el tema del post del dia y genera el prompt para Gemini
-  2. Gemini  -> Genera la imagen 1080x1080 (Imagen 3) y el caption draft
-  3. Claude  -> Revisa y refina el caption con voz dominicana autentica
-  4. GitHub  -> Sube post_del_dia.jpg al repo (via gemini_trigger.py)
-  5. GitHub Actions -> run_bot.yml publica en @petcolinas en Instagram
+Genera dos archivos en el directorio actual:
+  post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
+  caption.txt       -> caption listo para Instagram
 
-Variables de entorno requeridas:
-  ANTHROPIC_API_KEY   -> API key de Claude (Anthropic)
-  GEMINI_API_KEY      -> API key de Google Gemini / Imagen
-  GITHUB_PAT          -> GitHub Personal Access Token (repo + workflow)
-  IG_ACCESS_TOKEN     -> (usada por run_bot.yml, no aqui)
-  INSTAGRAM_ACCOUNT_ID -> (usada por run_bot.yml, no aqui)
+Variable de entorno requerida:
+  ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
 """
 
 import os
@@ -21,21 +15,17 @@ import sys
 import json
 import re
 import datetime
+import urllib.parse
+from io import BytesIO
+
 import anthropic
-from google import genai as google_genai
-from google.genai import types as google_types
-
-from gemini_trigger import upload_image_and_publish
-
-# ---------------------------------------------------------------------------
-# Clientes
-# ---------------------------------------------------------------------------
+import requests
+from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-gemini = google_genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 # ---------------------------------------------------------------------------
-# Contexto de marca PetColinas
+# Contexto de marca
 # ---------------------------------------------------------------------------
 
 PETCOLINAS = """
@@ -53,40 +43,93 @@ SERVICIOS Y PRECIOS:
   Membresias -> Basica RD$2,800/mes: 4 banos + turno prioritario + 10% OFF farmacia
                 Plus RD$4,200/mes: 4 banos + 1 corte + turno VIP + 15% OFF + consulta gratis
 
-COLORES DE MARCA: Verde oscuro #1a6b3a | Verde medio #2d8f52 | Naranja #d45f1e | Dorado #c9a227
+COLORES DE MARCA: Verde oscuro #1a6b3a | Naranja #d45f1e | Dorado #c9a227
 
-ESTILO DE COMUNICACION: Caldo, dominicano, cercano. Usar frases como "peludito",
-  "nube de algodon", "bajo a perro", "tu peludo merece lo mejor". Nunca demasiado corporativo.
+ESTILO: Calido, dominicano, cercano. Frases como "peludito", "nube de algodon",
+  "bajo a perro", "tu peludo merece lo mejor". Nunca corporativo ni frio.
 
 HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
           #SantoDomingoOeste #BanoPerros #PeluqueriaCanina #MascotasFelices #CuidaTuMascota
 """
 
-# Tipos de post con sus pesos (probabilidad relativa de seleccion)
-CONTENT_TYPES = [
-    "grooming",       # Promocion de banos y cortes
-    "veterinaria",    # Vacunas, consultas, salud
-    "membresia",      # Planes mensuales
-    "educativo",      # Tips de cuidado
-    "urgencia",       # Turnos disponibles hoy
-    "antes_despues",  # Transformacion de mascota
+CONTENT_TYPES = ["grooming", "veterinaria", "membresia", "educativo", "urgencia", "antes_despues"]
+
+DOG_BREEDS = [
+    "Golden Retriever", "Labrador Retriever", "Poodle", "Shih Tzu",
+    "Maltese", "French Bulldog", "Bichon Frise", "Cocker Spaniel",
+    "Schnauzer", "Yorkshire Terrier", "Havanese", "Pomeranian",
 ]
 
+# ---------------------------------------------------------------------------
+# Formula Portrait de claude-banana (7 componentes, modo retrato)
+# ---------------------------------------------------------------------------
+
+PORTRAIT_FORMULA = """
+=== FORMULA DE IMAGEN — PORTRAIT MODE (claude-banana) ===
+
+Distribucion de componentes para fotografia de mascotas:
+  1. Sujeto      30% — raza, edad, color de pelaje, expresion, rasgos unicos
+  2. Estilo      20% — fotografia editorial documental, referencia de publicacion
+  3. Iluminacion 18% — fuente, direccion, calidad, temperatura de color, sombras
+  4. Accion      12% — verbo en presente, postura, energia del sujeto
+  5. Composicion 10% — camara Sony A7III, lente 85mm f/2.0, encuadre
+  6. Ambiente     7% — salon de grooming profesional, pared verde oscura
+  7. Material     3% — textura del pelaje, brillo, detalles taciles
+
+REGLAS ABSOLUTAS:
+- Prosa narrativa completa en INGLES. NUNCA lista de keywords separados por comas.
+- Objetivo: 150-200 palabras.
+- PROHIBIDO usar estas palabras: masterpiece, best quality, highly detailed,
+  ultra detailed, 4K, 8K, hyperrealistic, ultra HD, trending on ArtStation,
+  high resolution, photorealistic (usar en su lugar el authority anchor).
+- OBLIGATORIO terminar con un authority anchor de prestigio:
+  "National Geographic wildlife portrait", "Sony World Photography Awards",
+  "Pulitzer Prize-winning photograph", "shot for a Vogue Pets editorial".
+- UN SOLO perro, 4 patas completamente visibles, anatomia perfecta.
+- Sin texto, logotipos ni graficos dentro de la imagen.
+- El perro debe verse recien baniado, pelaje limpio, brillante y arreglado.
+
+TEMPLATE DE CONSTRUCCION:
+[descriptor de raza + edad/tamano + color de pelaje + expresion + rasgo unico],
+[detalle de grooming — pelaje limpio, cepillado, recortado],
+[verbo de accion en presente] in [salon de grooming con pared verde oscura #1a6b3a],
+[un micro-detalle sobre textura del pelaje o calidad del grooming].
+Shot on [Sony A7III], [85mm f/2.0], [tipo de encuadre — medium close-up / portrait],
+[direccion de luz + calidad + temperatura de color + comportamiento de sombras].
+[Authority anchor — referencia de publicacion o premio fotografico de prestigio].
+
+EJEMPLO DE PROMPT BIEN CONSTRUIDO:
+"A three-year-old Poodle with freshly scissor-cut silver-white curls and bright dark eyes
+catching the light sits perfectly still on a raised grooming table, gazing directly into
+the lens with quiet confidence. The coat has the layered density of professional breed
+trimming — each curl defined and springy, not a hair out of place. Sitting upright, chest
+forward, in a professional dog grooming salon with a deep forest-green back wall.
+The fur surface catches the light cleanly, revealing individual curl structure.
+Shot on a Sony A7III with an 85mm f/2.0 lens, medium close-up framing that keeps all
+four paws visible on the grooming table surface. Single large softbox positioned at
+45 degrees camera-left produces even, flattering light with soft wraparound shadows
+and a warm 5,000K color temperature that complements the salon's green tones.
+A portrait that could anchor the cover of a leading European pet care magazine."
+=== FIN DE FORMULA ===
+"""
+
 
 # ---------------------------------------------------------------------------
-# Paso 1 — Claude decide el tema del dia
+# Generacion de contenido con Claude + formula claude-banana
 # ---------------------------------------------------------------------------
 
-def claude_decide_theme() -> dict:
+def claude_generate_content() -> dict:
     today = datetime.date.today()
     weekday = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"][today.weekday()]
+    breed = DOG_BREEDS[today.timetuple().tm_yday % len(DOG_BREEDS)]
 
     response = claude.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=900,
+        max_tokens=2000,
         system=(
-            "Eres el estratega de marketing digital de PetColinas. "
-            "Decisions estrategicas, creativo, conoces el mercado dominicano."
+            "Eres el estratega y creador de contenido oficial de PetColinas en Instagram. "
+            "Dominas la formula Portrait de claude-banana para generar prompts de imagen "
+            "de calidad editorial. Produces contenido autentico dominicano que convierte."
         ),
         messages=[{
             "role": "user",
@@ -94,16 +137,19 @@ def claude_decide_theme() -> dict:
 
 {PETCOLINAS}
 
-Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
+{PORTRAIT_FORMULA}
 
-Elige el tipo de post mas efectivo para hoy y diseña el contenido.
-Responde UNICAMENTE con un JSON valido con esta estructura exacta (sin markdown, sin texto extra):
+Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
+Raza del dia: {breed}
+
+Crea el contenido completo del post de Instagram de hoy.
+Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 {{
   "tipo": "<uno de los tipos listados>",
-  "tema": "<descripcion del tema especifico, maximo 25 palabras>",
-  "prompt_imagen": "<prompt en INGLES para Imagen 3 de Google, descripcion visual detallada para una imagen cuadrada 1080x1080px de un perro feliz y bien arreglado en una peluqueria canina profesional y acogedora, con colores verde oscuro #1a6b3a y naranja #d45f1e prominentes, iluminacion calida, ambiente limpio y moderno. Maximo 200 palabras.>",
-  "guia_caption": "<instrucciones para Gemini sobre tono, angulo y que incluir en el caption. Maximo 40 palabras.>"
+  "tema": "<tema especifico, max 25 palabras>",
+  "prompt_imagen": "<prompt de imagen COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado y arreglado en PetColinas.>",
+  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll, 2) cuerpo 2-3 oraciones con tono dominicano calido y beneficio claro, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
 }}"""
         }],
     )
@@ -116,83 +162,51 @@ Responde UNICAMENTE con un JSON valido con esta estructura exacta (sin markdown,
 
 
 # ---------------------------------------------------------------------------
-# Paso 2a — Gemini genera la imagen
+# Generacion de imagen con FLUX-realism (Pollinations.ai)
+# El prompt ya viene completo desde claude-banana — no necesita prefijo
 # ---------------------------------------------------------------------------
 
-def gemini_generate_image(image_prompt: str) -> bytes:
-    response = gemini.models.generate_images(
-        model="imagen-3.0-generate-001",
-        prompt=image_prompt,
-        config=google_types.GenerateImagesConfig(
-            number_of_images=1,
-            aspect_ratio="1:1",
-            safety_filter_level="BLOCK_ONLY_HIGH",
-        ),
+def generate_image(image_prompt: str) -> bytes:
+    seed = int(datetime.date.today().strftime("%Y%m%d"))
+
+    # El prompt de claude-banana ya incluye todos los detalles tecnicos de camara y luz.
+    # Solo limitamos el largo para la URL y removemos saltos de linea.
+    clean_prompt = " ".join(image_prompt.split())[:1200]
+    encoded = urllib.parse.quote(clean_prompt)
+
+    url = (
+        f"https://image.pollinations.ai/prompt/{encoded}"
+        f"?width=1080&height=1080&model=flux-realism&nologo=true&seed={seed}&enhance=true"
     )
-    return response.generated_images[0].image.image_bytes
 
+    print("  Generando con FLUX-REALISM (Pollinations.ai)...")
+    resp = requests.get(url, timeout=180)
+    resp.raise_for_status()
 
-# ---------------------------------------------------------------------------
-# Paso 2b — Gemini genera el caption draft
-# ---------------------------------------------------------------------------
+    img = Image.open(BytesIO(resp.content)).convert("RGB")
+    w, h = img.size
+    side = min(w, h)
+    img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
+    img = img.resize((1080, 1080), Image.LANCZOS)
 
-def gemini_generate_caption(theme: dict) -> str:
-    response = gemini.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=f"""Eres el creador de contenido de PetColinas en Instagram.
+    # Superponer logo en esquina superior derecha
+    logo_path = "assets/logo_petcolinas.png"
+    if os.path.exists(logo_path):
+        try:
+            logo = Image.open(logo_path).convert("RGBA")
+            logo_w = 150
+            logo_h = int(logo.height * (logo_w / logo.width))
+            logo = logo.resize((logo_w, logo_h), Image.LANCZOS)
+            img.paste(logo, (1080 - logo_w - 20, 20), logo)
+            print(f"  Logo superpuesto ({logo_w}x{logo_h}px) en esquina superior derecha")
+        except Exception as e:
+            print(f"  Aviso: no se pudo agregar el logo ({e})")
+    else:
+        print("  Aviso: assets/logo_petcolinas.png no encontrado")
 
-{PETCOLINAS}
-
-Tema del post de hoy: {theme['tema']}
-Guia de contenido: {theme['guia_caption']}
-
-Genera un caption para Instagram con esta estructura:
-1. Primera linea gancho (detiene el scroll, maximo 10 palabras, usa emoji)
-2. Cuerpo (2-3 oraciones con el beneficio o informacion principal)
-3. Llamado a la accion claro
-4. Contacto: 📱 809-752-6806 | 📍 Plaza Las Colinas
-5. Hashtags relevantes (10-12 hashtags al final)
-
-Responde SOLO con el caption completo, listo para pegar en Instagram.""",
-    )
-    return response.text.strip()
-
-
-# ---------------------------------------------------------------------------
-# Paso 3 — Claude refina el caption
-# ---------------------------------------------------------------------------
-
-def claude_refine_caption(caption_draft: str, theme: dict) -> str:
-    response = claude.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=700,
-        system=(
-            "Eres el editor de contenido de PetColinas. "
-            "Refinas captions para Instagram con voz dominicana autentica y calida."
-        ),
-        messages=[{
-            "role": "user",
-            "content": f"""Revisa este caption de Instagram para PetColinas.
-
-Tema: {theme['tema']}
-
-Caption de Gemini:
-{caption_draft}
-
-Criterios de revision:
-- Voz dominicana natural ("peludito", "bajo a perro", etc. si aplica)
-- Primera linea que realmente detiene el scroll
-- CTA claro con WhatsApp 809-752-6806
-- Emojis naturales, no exagerados (maximo 8-10 en total)
-- Maximo 2200 caracteres totales
-- Hashtags correctos de la marca al final
-
-Si el caption ya esta excelente, returnalo sin cambios.
-Si necesita mejoras, returnalo mejorado.
-Responde SOLO con el caption final, sin explicaciones ni comentarios.""",
-        }],
-    )
-    return response.content[0].text.strip()
+    output = BytesIO()
+    img.save(output, format="JPEG", quality=95)
+    return output.getvalue()
 
 
 # ---------------------------------------------------------------------------
@@ -201,44 +215,30 @@ Responde SOLO con el caption final, sin explicaciones ni comentarios.""",
 
 def main():
     today = datetime.date.today()
-    print(f"\n{'='*50}")
+    print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"{'='*50}\n")
+    print(f"  Usando formula Portrait de claude-banana")
+    print(f"{'='*55}\n")
 
-    # Paso 1
-    print("[Claude] Decidiendo tema del post del dia...")
-    theme = claude_decide_theme()
-    print(f"  Tipo  : {theme['tipo']}")
-    print(f"  Tema  : {theme['tema']}")
+    print("[Claude + claude-banana] Generando contenido del dia...")
+    content = claude_generate_content()
+    print(f"  Tipo   : {content['tipo']}")
+    print(f"  Tema   : {content['tema']}")
+    print(f"  Prompt : {content['prompt_imagen'][:120]}...")
+    print(f"  Caption: {content['caption'][:80]}...")
 
-    # Paso 2a
-    print("\n[Gemini] Generando imagen 1080x1080...")
-    image_bytes = gemini_generate_image(theme["prompt_imagen"])
-    image_path = "/tmp/post_del_dia.jpg"
-    with open(image_path, "wb") as f:
+    print("\n[FLUX-REALISM] Generando imagen editorial 1080x1080...")
+    image_bytes = generate_image(content["prompt_imagen"])
+
+    with open("post_del_dia.jpg", "wb") as f:
         f.write(image_bytes)
-    print(f"  Imagen generada: {len(image_bytes):,} bytes")
+    print(f"  Imagen guardada: post_del_dia.jpg ({len(image_bytes):,} bytes)")
 
-    # Paso 2b
-    print("\n[Gemini] Generando caption draft...")
-    caption_draft = gemini_generate_caption(theme)
-    print(f"  Draft: {caption_draft[:80]}...")
+    with open("caption.txt", "w", encoding="utf-8") as f:
+        f.write(content["caption"])
+    print("  Caption guardado: caption.txt")
 
-    # Paso 3
-    print("\n[Claude] Refinando caption...")
-    caption_final = claude_refine_caption(caption_draft, theme)
-    print(f"  Final: {caption_final[:80]}...")
-
-    # Paso 4 + 5
-    print("\n[GitHub] Subiendo imagen al repo y disparando workflow...")
-    success = upload_image_and_publish(image_path=image_path, caption=caption_final)
-
-    print()
-    if success:
-        print("POST PUBLICADO EN @petcolinas CON EXITO")
-    else:
-        print("ERROR: Revisar logs de GitHub Actions")
-        sys.exit(1)
+    print("\nContenido listo. El workflow publicara en Instagram.")
 
 
 if __name__ == "__main__":

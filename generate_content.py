@@ -1,21 +1,22 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Integra la formula Portrait de claude-banana para prompts de imagen de alta calidad.
+Usa la formula Portrait de claude-banana + Stable Diffusion 3.5 Large (HuggingFace).
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
-Variable de entorno requerida:
+Variables de entorno requeridas:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
+  HF_TOKEN           -> Token de Hugging Face (cuenta gratuita en huggingface.co)
 """
 
 import os
 import sys
 import json
 import re
+import time
 import datetime
-import urllib.parse
 from io import BytesIO
 
 import anthropic
@@ -79,39 +80,34 @@ Distribucion de componentes para fotografia de mascotas:
 REGLAS ABSOLUTAS:
 - Prosa narrativa completa en INGLES. NUNCA lista de keywords separados por comas.
 - Objetivo: 150-200 palabras.
-- PROHIBIDO usar estas palabras: masterpiece, best quality, highly detailed,
-  ultra detailed, 4K, 8K, hyperrealistic, ultra HD, trending on ArtStation,
-  high resolution, photorealistic (usar en su lugar el authority anchor).
-- OBLIGATORIO terminar con un authority anchor de prestigio:
-  "National Geographic wildlife portrait", "Sony World Photography Awards",
-  "Pulitzer Prize-winning photograph", "shot for a Vogue Pets editorial".
+- PROHIBIDO: masterpiece, best quality, highly detailed, ultra detailed,
+  4K, 8K, hyperrealistic, ultra HD, trending on ArtStation, high resolution.
+- OBLIGATORIO terminar con authority anchor: "National Geographic wildlife portrait",
+  "Sony World Photography Awards", "Pulitzer Prize-winning photograph",
+  "shot for a Vogue Pets editorial".
 - UN SOLO perro, 4 patas completamente visibles, anatomia perfecta.
 - Sin texto, logotipos ni graficos dentro de la imagen.
-- El perro debe verse recien baniado, pelaje limpio, brillante y arreglado.
+- El perro debe verse recien baniado, pelaje limpio y arreglado.
 
 TEMPLATE DE CONSTRUCCION:
-[descriptor de raza + edad/tamano + color de pelaje + expresion + rasgo unico],
+[descriptor de raza + edad + color de pelaje + expresion + rasgo unico],
 [detalle de grooming — pelaje limpio, cepillado, recortado],
-[verbo de accion en presente] in [salon de grooming con pared verde oscura #1a6b3a],
-[un micro-detalle sobre textura del pelaje o calidad del grooming].
-Shot on [Sony A7III], [85mm f/2.0], [tipo de encuadre — medium close-up / portrait],
-[direccion de luz + calidad + temperatura de color + comportamiento de sombras].
-[Authority anchor — referencia de publicacion o premio fotografico de prestigio].
-
-EJEMPLO DE PROMPT BIEN CONSTRUIDO:
-"A three-year-old Poodle with freshly scissor-cut silver-white curls and bright dark eyes
-catching the light sits perfectly still on a raised grooming table, gazing directly into
-the lens with quiet confidence. The coat has the layered density of professional breed
-trimming — each curl defined and springy, not a hair out of place. Sitting upright, chest
-forward, in a professional dog grooming salon with a deep forest-green back wall.
-The fur surface catches the light cleanly, revealing individual curl structure.
-Shot on a Sony A7III with an 85mm f/2.0 lens, medium close-up framing that keeps all
-four paws visible on the grooming table surface. Single large softbox positioned at
-45 degrees camera-left produces even, flattering light with soft wraparound shadows
-and a warm 5,000K color temperature that complements the salon's green tones.
-A portrait that could anchor the cover of a leading European pet care magazine."
+[verbo presente] in [salon de grooming con pared verde oscura #1a6b3a],
+[micro-detalle sobre textura del pelaje].
+Shot on [Sony A7III], [85mm f/2.0], [medium close-up con 4 patas visibles],
+[direccion de luz + calidad + temperatura de color].
+[Authority anchor].
 === FIN DE FORMULA ===
 """
+
+# ---------------------------------------------------------------------------
+# Modelos de imagen en orden de preferencia (Hugging Face Inference API)
+# ---------------------------------------------------------------------------
+
+HF_MODELS = [
+    "stabilityai/stable-diffusion-3.5-large",
+    "stabilityai/stable-diffusion-xl-base-1.0",
+]
 
 
 # ---------------------------------------------------------------------------
@@ -148,8 +144,8 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<tema especifico, max 25 palabras>",
-  "prompt_imagen": "<prompt de imagen COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado y arreglado en PetColinas.>",
-  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll, 2) cuerpo 2-3 oraciones con tono dominicano calido y beneficio claro, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
+  "prompt_imagen": "<prompt COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado en PetColinas.>",
+  "caption": "<caption completo: 1) gancho con emoji, 2) cuerpo dominicano calido, 3) CTA directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 chars.>"
 }}"""
         }],
     )
@@ -162,34 +158,48 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Generacion de imagen con FLUX-realism (Pollinations.ai)
-# El prompt ya viene completo desde claude-banana — no necesita prefijo
+# Generacion de imagen con Stable Diffusion via Hugging Face
 # ---------------------------------------------------------------------------
 
-def generate_image(image_prompt: str) -> bytes:
-    seed = int(datetime.date.today().strftime("%Y%m%d"))
+def _call_hf_model(model: str, prompt: str, hf_token: str) -> bytes | None:
+    """Llama a un modelo de HuggingFace. Retorna bytes de imagen o None si falla."""
+    url = f"https://api-inference.huggingface.co/models/{model}"
+    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    payload = {
+        "inputs": prompt,
+        "parameters": {"height": 1024, "width": 1024, "num_inference_steps": 40, "guidance_scale": 7.5},
+    }
 
-    # El prompt de claude-banana ya incluye todos los detalles tecnicos de camara y luz.
-    # Solo limitamos el largo para la URL y removemos saltos de linea.
-    clean_prompt = " ".join(image_prompt.split())[:1200]
-    encoded = urllib.parse.quote(clean_prompt)
+    for attempt in range(3):
+        print(f"  [{model.split('/')[-1]}] intento {attempt + 1}/3...")
+        resp = requests.post(url, headers=headers, json=payload, timeout=300)
 
-    url = (
-        f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width=1080&height=1080&model=flux-realism&nologo=true&seed={seed}&enhance=true"
-    )
+        if resp.status_code == 200 and "image" in resp.headers.get("Content-Type", ""):
+            return resp.content
 
-    print("  Generando con FLUX-REALISM (Pollinations.ai)...")
-    resp = requests.get(url, timeout=180)
-    resp.raise_for_status()
+        if resp.status_code == 503:
+            try:
+                wait = min(resp.json().get("estimated_time", 30), 60)
+            except Exception:
+                wait = 30
+            print(f"  Modelo cargando, esperando {wait:.0f}s...")
+            time.sleep(wait)
+            continue
 
-    img = Image.open(BytesIO(resp.content)).convert("RGB")
+        print(f"  HTTP {resp.status_code} — {resp.text[:120]}")
+        return None
+
+    return None
+
+
+def _process_image_bytes(raw: bytes) -> bytes:
+    """Recorta a cuadrado 1080x1080 y superpone logo de PetColinas."""
+    img = Image.open(BytesIO(raw)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
 
-    # Superponer logo en esquina superior derecha
     logo_path = "assets/logo_petcolinas.png"
     if os.path.exists(logo_path):
         try:
@@ -209,6 +219,21 @@ def generate_image(image_prompt: str) -> bytes:
     return output.getvalue()
 
 
+def generate_image(image_prompt: str) -> bytes:
+    """Genera imagen con Stable Diffusion via Hugging Face. Prueba modelos en orden."""
+    hf_token = os.environ.get("HF_TOKEN", "")
+    clean_prompt = " ".join(image_prompt.split())[:900]
+
+    for model in HF_MODELS:
+        print(f"\n  Probando modelo: {model}")
+        raw = _call_hf_model(model, clean_prompt, hf_token)
+        if raw:
+            print(f"  Imagen generada con {model.split('/')[-1]}")
+            return _process_image_bytes(raw)
+
+    raise Exception("No se pudo generar la imagen con ningun modelo de Hugging Face.")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -217,7 +242,7 @@ def main():
     today = datetime.date.today()
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"  Usando formula Portrait de claude-banana")
+    print(f"  Claude + claude-banana formula + Stable Diffusion")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")
@@ -227,7 +252,7 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[FLUX-REALISM] Generando imagen editorial 1080x1080...")
+    print("\n[Hugging Face] Generando imagen con Stable Diffusion...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

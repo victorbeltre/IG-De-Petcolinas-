@@ -1,5 +1,6 @@
 """
 Orquestador automatico de contenido para PetColinas.
+Integra la formula Portrait de claude-banana para prompts de imagen de alta calidad.
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
@@ -22,6 +23,10 @@ import requests
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+# ---------------------------------------------------------------------------
+# Contexto de marca
+# ---------------------------------------------------------------------------
 
 PETCOLINAS = """
 EMPRESA: PetColinas — Veterinaria y Peluqueria Canina
@@ -49,26 +54,82 @@ HASHTAGS: #PetColinas #GroomingRD #VeterinariaRD #MascotasRD #PerrosRD
 
 CONTENT_TYPES = ["grooming", "veterinaria", "membresia", "educativo", "urgencia", "antes_despues"]
 
-# Razas realistas que FLUX maneja bien (anatomia correcta)
 DOG_BREEDS = [
     "Golden Retriever", "Labrador Retriever", "Poodle", "Shih Tzu",
     "Maltese", "French Bulldog", "Bichon Frise", "Cocker Spaniel",
-    "Schnauzer", "Yorkshire Terrier", "Havanese", "Pomeranian"
+    "Schnauzer", "Yorkshire Terrier", "Havanese", "Pomeranian",
 ]
 
+# ---------------------------------------------------------------------------
+# Formula Portrait de claude-banana (7 componentes, modo retrato)
+# ---------------------------------------------------------------------------
+
+PORTRAIT_FORMULA = """
+=== FORMULA DE IMAGEN — PORTRAIT MODE (claude-banana) ===
+
+Distribucion de componentes para fotografia de mascotas:
+  1. Sujeto      30% — raza, edad, color de pelaje, expresion, rasgos unicos
+  2. Estilo      20% — fotografia editorial documental, referencia de publicacion
+  3. Iluminacion 18% — fuente, direccion, calidad, temperatura de color, sombras
+  4. Accion      12% — verbo en presente, postura, energia del sujeto
+  5. Composicion 10% — camara Sony A7III, lente 85mm f/2.0, encuadre
+  6. Ambiente     7% — salon de grooming profesional, pared verde oscura
+  7. Material     3% — textura del pelaje, brillo, detalles taciles
+
+REGLAS ABSOLUTAS:
+- Prosa narrativa completa en INGLES. NUNCA lista de keywords separados por comas.
+- Objetivo: 150-200 palabras.
+- PROHIBIDO usar estas palabras: masterpiece, best quality, highly detailed,
+  ultra detailed, 4K, 8K, hyperrealistic, ultra HD, trending on ArtStation,
+  high resolution, photorealistic (usar en su lugar el authority anchor).
+- OBLIGATORIO terminar con un authority anchor de prestigio:
+  "National Geographic wildlife portrait", "Sony World Photography Awards",
+  "Pulitzer Prize-winning photograph", "shot for a Vogue Pets editorial".
+- UN SOLO perro, 4 patas completamente visibles, anatomia perfecta.
+- Sin texto, logotipos ni graficos dentro de la imagen.
+- El perro debe verse recien baniado, pelaje limpio, brillante y arreglado.
+
+TEMPLATE DE CONSTRUCCION:
+[descriptor de raza + edad/tamano + color de pelaje + expresion + rasgo unico],
+[detalle de grooming — pelaje limpio, cepillado, recortado],
+[verbo de accion en presente] in [salon de grooming con pared verde oscura #1a6b3a],
+[un micro-detalle sobre textura del pelaje o calidad del grooming].
+Shot on [Sony A7III], [85mm f/2.0], [tipo de encuadre — medium close-up / portrait],
+[direccion de luz + calidad + temperatura de color + comportamiento de sombras].
+[Authority anchor — referencia de publicacion o premio fotografico de prestigio].
+
+EJEMPLO DE PROMPT BIEN CONSTRUIDO:
+"A three-year-old Poodle with freshly scissor-cut silver-white curls and bright dark eyes
+catching the light sits perfectly still on a raised grooming table, gazing directly into
+the lens with quiet confidence. The coat has the layered density of professional breed
+trimming — each curl defined and springy, not a hair out of place. Sitting upright, chest
+forward, in a professional dog grooming salon with a deep forest-green back wall.
+The fur surface catches the light cleanly, revealing individual curl structure.
+Shot on a Sony A7III with an 85mm f/2.0 lens, medium close-up framing that keeps all
+four paws visible on the grooming table surface. Single large softbox positioned at
+45 degrees camera-left produces even, flattering light with soft wraparound shadows
+and a warm 5,000K color temperature that complements the salon's green tones.
+A portrait that could anchor the cover of a leading European pet care magazine."
+=== FIN DE FORMULA ===
+"""
+
+
+# ---------------------------------------------------------------------------
+# Generacion de contenido con Claude + formula claude-banana
+# ---------------------------------------------------------------------------
 
 def claude_generate_content() -> dict:
     today = datetime.date.today()
     weekday = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"][today.weekday()]
-    # Raza del dia (rotacion por dia del ano)
     breed = DOG_BREEDS[today.timetuple().tm_yday % len(DOG_BREEDS)]
 
     response = claude.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=1500,
+        max_tokens=2000,
         system=(
             "Eres el estratega y creador de contenido oficial de PetColinas en Instagram. "
-            "Creativo, conoces el mercado dominicano, generas contenido que convierte."
+            "Dominas la formula Portrait de claude-banana para generar prompts de imagen "
+            "de calidad editorial. Produces contenido autentico dominicano que convierte."
         ),
         messages=[{
             "role": "user",
@@ -76,8 +137,10 @@ def claude_generate_content() -> dict:
 
 {PETCOLINAS}
 
-Tipos de post: {', '.join(CONTENT_TYPES)}
-Raza del dia para la imagen: {breed}
+{PORTRAIT_FORMULA}
+
+Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
+Raza del dia: {breed}
 
 Crea el contenido completo del post de Instagram de hoy.
 Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
@@ -85,8 +148,8 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<tema especifico, max 25 palabras>",
-  "prompt_imagen": "<prompt HIPER REALISTA en INGLES para {breed}. Escena concreta y simple: el perro sentado quieto mirando a camara, recien baniado y arreglado, pelo limpio y brillante, salon de grooming con pared verde oscura, iluminacion de ventana lateral suave. Camara: Sony A7 85mm f2.0, bokeh suave. Especificar SOLO UN perro, 4 patas visibles, anatomia perfecta, foto de alta gama, sin texto en la imagen. Max 80 palabras.>",
-  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji, 2) cuerpo 2-3 oraciones tono dominicano calido, 3) CTA claro, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 caracteres.>"
+  "prompt_imagen": "<prompt de imagen COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado y arreglado en PetColinas.>",
+  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll, 2) cuerpo 2-3 oraciones con tono dominicano calido y beneficio claro, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
 }}"""
         }],
     )
@@ -98,22 +161,19 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
     return json.loads(match.group())
 
 
+# ---------------------------------------------------------------------------
+# Generacion de imagen con FLUX-realism (Pollinations.ai)
+# El prompt ya viene completo desde claude-banana — no necesita prefijo
+# ---------------------------------------------------------------------------
+
 def generate_image(image_prompt: str) -> bytes:
-    """Genera imagen hiper-realista con flux-realism + superpone logo."""
     seed = int(datetime.date.today().strftime("%Y%m%d"))
 
-    # Prefix tecnico de fotografia para maximo realismo
-    photo_prefix = (
-        "hyperrealistic DSLR photography, Sony A7III, 85mm portrait lens, f/2.0 aperture, "
-        "natural window light, shallow depth of field, photojournalism quality, "
-        "National Geographic style, skin and fur texture detail, no AI artifacts, "
-        "no plastic look, no over-smoothing, raw unedited feel. "
-    )
+    # El prompt de claude-banana ya incluye todos los detalles tecnicos de camara y luz.
+    # Solo limitamos el largo para la URL y removemos saltos de linea.
+    clean_prompt = " ".join(image_prompt.split())[:1200]
+    encoded = urllib.parse.quote(clean_prompt)
 
-    full_prompt = (photo_prefix + image_prompt)[:700]
-    encoded = urllib.parse.quote(full_prompt)
-
-    # flux-realism: modelo especifico para fotorrealismo en Pollinations.ai
     url = (
         f"https://image.pollinations.ai/prompt/{encoded}"
         f"?width=1080&height=1080&model=flux-realism&nologo=true&seed={seed}&enhance=true"
@@ -134,39 +194,40 @@ def generate_image(image_prompt: str) -> bytes:
     if os.path.exists(logo_path):
         try:
             logo = Image.open(logo_path).convert("RGBA")
-            # Logo a 150px de ancho manteniendo proporciones
             logo_w = 150
-            ratio = logo_w / logo.width
-            logo_h = int(logo.height * ratio)
+            logo_h = int(logo.height * (logo_w / logo.width))
             logo = logo.resize((logo_w, logo_h), Image.LANCZOS)
-            # Esquina superior derecha con margen 20px
-            x = 1080 - logo_w - 20
-            y = 20
-            img.paste(logo, (x, y), logo)
+            img.paste(logo, (1080 - logo_w - 20, 20), logo)
             print(f"  Logo superpuesto ({logo_w}x{logo_h}px) en esquina superior derecha")
         except Exception as e:
             print(f"  Aviso: no se pudo agregar el logo ({e})")
     else:
-        print("  Aviso: assets/logo_petcolinas.png no encontrado, imagen sin logo")
+        print("  Aviso: assets/logo_petcolinas.png no encontrado")
 
     output = BytesIO()
     img.save(output, format="JPEG", quality=95)
     return output.getvalue()
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main():
     today = datetime.date.today()
-    print(f"\n{'='*50}")
+    print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"{'='*50}\n")
+    print(f"  Usando formula Portrait de claude-banana")
+    print(f"{'='*55}\n")
 
-    print("[Claude] Generando estrategia, tema y caption...")
+    print("[Claude + claude-banana] Generando contenido del dia...")
     content = claude_generate_content()
     print(f"  Tipo   : {content['tipo']}")
     print(f"  Tema   : {content['tema']}")
+    print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[FLUX-REALISM] Generando imagen hiper-realista 1080x1080...")
+    print("\n[FLUX-REALISM] Generando imagen editorial 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

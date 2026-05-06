@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   generar-y-publicar:
-    name: Claude + SD35 → Instagram
+    name: Claude + Nano Banana 2 → Instagram
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -29,10 +29,10 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Generar imagen y caption (Claude + claude-banana + SD 3.5)
+      - name: Generar contenido (Claude + claude-banana + Nano Banana 2)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python generate_content.py
 
       - name: Commit imagen al repositorio

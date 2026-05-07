@@ -1,21 +1,24 @@
 """
 Orquestador automatico de contenido para PetColinas.
-Claude + formula Portrait claude-banana + Stable Diffusion via Hugging Face (gratis).
+Integra la formula Portrait de claude-banana para prompts de imagen de alta calidad.
 
 Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
-Variables de entorno requeridas:
+Variable de entorno requerida:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  HF_TOKEN           -> Token de Hugging Face (cuenta gratuita en huggingface.co)
+
+Opcional:
+  HORDE_KEY  -> API key de Stable Horde (gratis en stablehorde.net)
+               Si no se define, usa clave anonima (mas lenta pero funciona)
 """
 
 import os
-import sys
 import json
 import re
 import time
+import base64
 import datetime
 from io import BytesIO
 
@@ -24,6 +27,11 @@ import requests
 from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+# Stable Horde — red comunitaria de GPUs, 100% gratuita
+# Clave anonima "0000000000" funciona sin registro (menor prioridad en cola)
+HORDE_API = "https://stablehorde.net/api/v2"
+HORDE_MODELS = ["Realistic Vision V6.0 B1", "Deliberate", "Dreamshaper"]
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -62,7 +70,7 @@ DOG_BREEDS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Formula Portrait de claude-banana (7 componentes)
+# Formula Portrait de claude-banana (7 componentes, modo retrato)
 # ---------------------------------------------------------------------------
 
 PORTRAIT_FORMULA = """
@@ -80,28 +88,43 @@ Distribucion de componentes para fotografia de mascotas:
 REGLAS ABSOLUTAS:
 - Prosa narrativa completa en INGLES. NUNCA lista de keywords separados por comas.
 - Objetivo: 150-200 palabras.
-- PROHIBIDO: masterpiece, best quality, highly detailed, ultra detailed,
-  4K, 8K, hyperrealistic, ultra HD, trending on ArtStation, high resolution.
-- OBLIGATORIO terminar con authority anchor de prestigio:
+- PROHIBIDO usar estas palabras: masterpiece, best quality, highly detailed,
+  ultra detailed, 4K, 8K, hyperrealistic, ultra HD, trending on ArtStation,
+  high resolution, photorealistic (usar en su lugar el authority anchor).
+- OBLIGATORIO terminar con un authority anchor de prestigio:
   "National Geographic wildlife portrait", "Sony World Photography Awards",
   "Pulitzer Prize-winning photograph", "shot for a Vogue Pets editorial".
 - UN SOLO perro, 4 patas completamente visibles, anatomia perfecta.
 - Sin texto, logotipos ni graficos dentro de la imagen.
-- El perro debe verse recien baniado, pelaje limpio y arreglado.
+- El perro debe verse recien baniado, pelaje limpio, brillante y arreglado.
+
+TEMPLATE DE CONSTRUCCION:
+[descriptor de raza + edad/tamano + color de pelaje + expresion + rasgo unico],
+[detalle de grooming — pelaje limpio, cepillado, recortado],
+[verbo de accion en presente] in [salon de grooming con pared verde oscura #1a6b3a],
+[un micro-detalle sobre textura del pelaje o calidad del grooming].
+Shot on [Sony A7III], [85mm f/2.0], [tipo de encuadre — medium close-up / portrait],
+[direccion de luz + calidad + temperatura de color + comportamiento de sombras].
+[Authority anchor — referencia de publicacion o premio fotografico de prestigio].
+
+EJEMPLO DE PROMPT BIEN CONSTRUIDO:
+"A three-year-old Poodle with freshly scissor-cut silver-white curls and bright dark eyes
+catching the light sits perfectly still on a raised grooming table, gazing directly into
+the lens with quiet confidence. The coat has the layered density of professional breed
+trimming — each curl defined and springy, not a hair out of place. Sitting upright, chest
+forward, in a professional dog grooming salon with a deep forest-green back wall.
+The fur surface catches the light cleanly, revealing individual curl structure.
+Shot on a Sony A7III with an 85mm f/2.0 lens, medium close-up framing that keeps all
+four paws visible on the grooming table surface. Single large softbox positioned at
+45 degrees camera-left produces even, flattering light with soft wraparound shadows
+and a warm 5,000K color temperature that complements the salon's green tones.
+A portrait that could anchor the cover of a leading European pet care magazine."
 === FIN DE FORMULA ===
 """
 
-# Modelos en orden de preferencia — endpoint nuevo de HF Inference Providers
-HF_MODELS = [
-    "black-forest-labs/FLUX.1-dev",
-    "Lykon/dreamshaper-8",
-    "runwayml/stable-diffusion-v1-5",
-]
-HF_BASE = "https://router.huggingface.co/hf-inference/models"
-
 
 # ---------------------------------------------------------------------------
-# Paso 1 — Claude genera estrategia, prompt y caption
+# Generacion de contenido con Claude + formula claude-banana
 # ---------------------------------------------------------------------------
 
 def claude_generate_content() -> dict:
@@ -134,8 +157,8 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 {{
   "tipo": "<uno de los tipos listados>",
   "tema": "<tema especifico, max 25 palabras>",
-  "prompt_imagen": "<prompt COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado en PetColinas.>",
-  "caption": "<caption completo: 1) gancho con emoji, 2) cuerpo dominicano calido, 3) CTA directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags. Max 2200 chars.>"
+  "prompt_imagen": "<prompt de imagen COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado y arreglado en PetColinas.>",
+  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll, 2) cuerpo 2-3 oraciones con tono dominicano calido y beneficio claro, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
 }}"""
         }],
     )
@@ -148,74 +171,71 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Paso 2 — Generacion de imagen via HF Inference Providers
+# Generacion de imagen con Stable Horde (red comunitaria, 100% gratuita)
+# Sin necesidad de tarjeta de credito ni cuenta premium
 # ---------------------------------------------------------------------------
 
-def _call_hf(model: str, prompt: str, token: str) -> bytes | None:
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",
-    }
-    payload = {"inputs": prompt}
-
-    for attempt in range(3):
-        print(f"  [{model.split('/')[-1]}] intento {attempt + 1}/3...")
-        try:
-            resp = requests.post(
-                f"{HF_BASE}/{model}",
-                headers=headers,
-                json=payload,
-                timeout=300,
-            )
-        except requests.exceptions.RequestException as e:
-            print(f"  Error de red: {e}")
-            return None
-
-        content_type = resp.headers.get("Content-Type", "")
-        if resp.status_code == 200 and "image" in content_type:
-            return resp.content
-
-        if resp.status_code == 503:
-            try:
-                wait = min(resp.json().get("estimated_time", 30), 60)
-            except Exception:
-                wait = 30
-            print(f"  Modelo cargando, esperando {wait:.0f}s...")
-            time.sleep(wait)
-            continue
-
-        print(f"  HTTP {resp.status_code} ({content_type}): {resp.text[:200]}")
-        return None
-
-    return None
-
-
 def generate_image(image_prompt: str) -> bytes:
-    token = os.environ.get("HF_TOKEN", "")
-    if not token:
-        raise Exception("Falta HF_TOKEN en las variables de entorno.")
-
+    horde_key = os.environ.get("HORDE_KEY", "0000000000")
     clean_prompt = " ".join(image_prompt.split())[:900]
 
-    raw = None
-    used_model = None
-    for model in HF_MODELS:
-        print(f"\n  Probando: {model}")
-        raw = _call_hf(model, clean_prompt, token)
-        if raw:
-            used_model = model
+    headers = {
+        "apikey": horde_key,
+        "Content-Type": "application/json",
+        "Client-Agent": "petcolinas-bot:1.0:petcolinas@instagram",
+    }
+    payload = {
+        "prompt": clean_prompt,
+        "params": {
+            "sampler_name": "k_euler_a",
+            "cfg_scale": 7.5,
+            "steps": 28,
+            "width": 768,
+            "height": 768,
+            "n": 1,
+        },
+        "models": HORDE_MODELS,
+        "nsfw": False,
+        "r2": False,
+    }
+
+    print("  [Stable Horde] Enviando job a la red comunitaria...")
+    resp = requests.post(f"{HORDE_API}/generate/async", json=payload, headers=headers, timeout=30)
+    if resp.status_code != 202:
+        raise RuntimeError(f"Horde rechazo el job: HTTP {resp.status_code} — {resp.text[:300]}")
+
+    job_id = resp.json()["id"]
+    print(f"  Job ID: {job_id}")
+
+    for i in range(120):
+        time.sleep(5)
+        check = requests.get(f"{HORDE_API}/generate/check/{job_id}", timeout=15).json()
+        if check.get("faulted"):
+            raise RuntimeError("Stable Horde reporto un error en el job")
+        if check.get("done"):
+            print("  Imagen lista!")
             break
+        wait = check.get("wait_time", "?")
+        pos = check.get("queue_position", "?")
+        if i % 6 == 0:
+            print(f"  En cola: posicion {pos}, ETA {wait}s...")
+    else:
+        raise RuntimeError("Stable Horde timeout (10 min). Reintenta mas tarde.")
 
-    if not raw:
-        raise Exception("Todos los modelos de HF fallaron. Revisa HF_TOKEN y disponibilidad.")
+    status = requests.get(f"{HORDE_API}/generate/status/{job_id}", timeout=30).json()
+    generations = status.get("generations", [])
+    if not generations:
+        raise RuntimeError("Horde no retorno ninguna imagen")
 
-    print(f"  Imagen generada con {used_model.split('/')[-1]}")
-    img = Image.open(BytesIO(raw)).convert("RGB")
+    img_bytes = base64.b64decode(generations[0]["img"])
+    model_used = generations[0].get("model", "desconocido")
+    print(f"  Generado con: {model_used} ({len(img_bytes):,} bytes)")
+
+    img = Image.open(BytesIO(img_bytes)).convert("RGB")
     w, h = img.size
     side = min(w, h)
     img = img.crop(((w - side) // 2, (h - side) // 2, (w + side) // 2, (h + side) // 2))
     img = img.resize((1080, 1080), Image.LANCZOS)
-    print(f"  Recortada de {w}x{h} a 1080x1080")
 
     logo_path = "assets/logo_petcolinas.png"
     if os.path.exists(logo_path):
@@ -228,6 +248,8 @@ def generate_image(image_prompt: str) -> bytes:
             print(f"  Logo superpuesto ({logo_w}x{logo_h}px)")
         except Exception as e:
             print(f"  Aviso: no se pudo agregar el logo ({e})")
+    else:
+        print("  Aviso: assets/logo_petcolinas.png no encontrado")
 
     output = BytesIO()
     img.save(output, format="JPEG", quality=95)
@@ -242,7 +264,7 @@ def main():
     today = datetime.date.today()
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
-    print(f"  Claude + claude-banana + HF Inference")
+    print(f"  Usando formula Portrait de claude-banana")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")
@@ -252,16 +274,16 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[HF Inference] Generando imagen...")
+    print("\n[Stable Horde] Generando imagen editorial 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:
         f.write(image_bytes)
-    print(f"  Guardado: post_del_dia.jpg ({len(image_bytes):,} bytes)")
+    print(f"  Imagen guardada: post_del_dia.jpg ({len(image_bytes):,} bytes)")
 
     with open("caption.txt", "w", encoding="utf-8") as f:
         f.write(content["caption"])
-    print("  Guardado: caption.txt")
+    print("  Caption guardado: caption.txt")
 
     print("\nContenido listo. El workflow publicara en Instagram.")
 

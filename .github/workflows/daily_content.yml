@@ -17,7 +17,7 @@ jobs:
   generar-y-publicar:
     name: Claude + HF → Instagram
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout del repositorio
@@ -31,10 +31,11 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Generar contenido (Claude + HF Stable Diffusion)
+      - name: Generar contenido (Claude + Stable Horde)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # HORDE_KEY es opcional — si no existe usa clave anonima gratis
+          HORDE_KEY: ${{ secrets.HORDE_KEY }}
         run: python generate_content.py
 
       - name: Guardar imagen en el repositorio

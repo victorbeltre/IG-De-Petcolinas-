@@ -6,15 +6,19 @@ Genera dos archivos en el directorio actual:
   post_del_dia.jpg  -> imagen 1080x1080 JPEG con logo de PetColinas
   caption.txt       -> caption listo para Instagram
 
-Variables de entorno requeridas:
+Variable de entorno requerida:
   ANTHROPIC_API_KEY  -> API key de Claude (Anthropic)
-  HF_TOKEN           -> Token de Hugging Face (tipo Read es suficiente)
+
+Opcional:
+  HORDE_KEY  -> API key de Stable Horde (gratis en stablehorde.net)
+               Si no se define, usa clave anonima (mas lenta pero funciona)
 """
 
 import os
 import json
 import re
 import time
+import base64
 import datetime
 from io import BytesIO
 
@@ -24,15 +28,10 @@ from PIL import Image
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-# Endpoint clasico de HF Inference API — funciona con token tipo Read (gratis)
-HF_API_BASE = "https://api-inference.huggingface.co/models"
-
-# Modelos en orden de preferencia (todos publicos, sin costo)
-HF_MODELS = [
-    "stabilityai/stable-diffusion-xl-base-1.0",
-    "Lykon/dreamshaper-8",
-    "runwayml/stable-diffusion-v1-5",
-]
+# Stable Horde — red comunitaria de GPUs, 100% gratuita
+# Clave anonima "0000000000" funciona sin registro (menor prioridad en cola)
+HORDE_API = "https://stablehorde.net/api/v2"
+HORDE_MODELS = ["Realistic Vision V6.0 B1", "Deliberate", "Dreamshaper"]
 
 # ---------------------------------------------------------------------------
 # Contexto de marca
@@ -172,69 +171,67 @@ Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 
 # ---------------------------------------------------------------------------
-# Generacion de imagen con Hugging Face Inference API (clasica, gratis)
-# Usa el endpoint api-inference.huggingface.co que funciona con token Read
+# Generacion de imagen con Stable Horde (red comunitaria, 100% gratuita)
+# Sin necesidad de tarjeta de credito ni cuenta premium
 # ---------------------------------------------------------------------------
 
-def _hf_generate(model: str, prompt: str, token: str) -> bytes | None:
-    """Llama a un modelo en HF Inference API. Retorna bytes de imagen o None."""
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",
-    }
-    payload = {
-        "inputs": prompt,
-        "parameters": {
-            "width": 1024,
-            "height": 1024,
-            "num_inference_steps": 30,
-            "guidance_scale": 7.5,
-        },
-    }
-    url = f"{HF_API_BASE}/{model}"
-
-    for attempt in range(3):
-        print(f"    Intento {attempt + 1}/3 con {model}...")
-        resp = requests.post(url, headers=headers, json=payload, timeout=300)
-
-        if resp.status_code == 200:
-            ct = resp.headers.get("Content-Type", "")
-            if "image" in ct:
-                return resp.content
-            print(f"    Respuesta inesperada (Content-Type: {ct})")
-            return None
-
-        if resp.status_code == 503:
-            try:
-                wait = min(resp.json().get("estimated_time", 30), 60)
-            except Exception:
-                wait = 30
-            print(f"    Modelo cargando, esperando {wait}s...")
-            time.sleep(wait)
-            continue
-
-        print(f"    HTTP {resp.status_code}: {resp.text[:200]}")
-        return None
-
-    return None
-
-
 def generate_image(image_prompt: str) -> bytes:
-    token = os.environ.get("HF_TOKEN", "")
-    if not token:
-        raise RuntimeError("Variable HF_TOKEN no esta definida")
-
-    # El prompt de claude-banana ya tiene todos los detalles — solo limpiamos espacios
+    horde_key = os.environ.get("HORDE_KEY", "0000000000")
     clean_prompt = " ".join(image_prompt.split())[:900]
 
-    for model in HF_MODELS:
-        print(f"  [HF] Probando modelo: {model}")
-        img_bytes = _hf_generate(model, clean_prompt, token)
-        if img_bytes:
-            print(f"  Imagen generada con {model} ({len(img_bytes):,} bytes)")
+    headers = {
+        "apikey": horde_key,
+        "Content-Type": "application/json",
+        "Client-Agent": "petcolinas-bot:1.0:petcolinas@instagram",
+    }
+    payload = {
+        "prompt": clean_prompt,
+        "params": {
+            "sampler_name": "k_euler_a",
+            "cfg_scale": 7.5,
+            "steps": 28,
+            "width": 768,
+            "height": 768,
+            "n": 1,
+        },
+        "models": HORDE_MODELS,
+        "nsfw": False,
+        "r2": False,  # devuelve base64 directamente, sin URL externa
+    }
+
+    print("  [Stable Horde] Enviando job a la red comunitaria...")
+    resp = requests.post(f"{HORDE_API}/generate/async", json=payload, headers=headers, timeout=30)
+    if resp.status_code != 202:
+        raise RuntimeError(f"Horde rechazo el job: HTTP {resp.status_code} — {resp.text[:300]}")
+
+    job_id = resp.json()["id"]
+    print(f"  Job ID: {job_id}")
+
+    # Polling hasta que la imagen este lista (max 10 minutos)
+    for i in range(120):
+        time.sleep(5)
+        check = requests.get(f"{HORDE_API}/generate/check/{job_id}", timeout=15).json()
+        if check.get("faulted"):
+            raise RuntimeError("Stable Horde reporto un error en el job")
+        if check.get("done"):
+            print("  Imagen lista!")
             break
+        wait = check.get("wait_time", "?")
+        pos = check.get("queue_position", "?")
+        if i % 6 == 0:  # imprimir cada 30s para no llenar el log
+            print(f"  En cola: posicion {pos}, ETA {wait}s...")
     else:
-        raise RuntimeError("Todos los modelos de HF fallaron. Verifica HF_TOKEN y disponibilidad.")
+        raise RuntimeError("Stable Horde timeout (10 min). Reintenta mas tarde.")
+
+    # Obtener resultado con la imagen en base64
+    status = requests.get(f"{HORDE_API}/generate/status/{job_id}", timeout=30).json()
+    generations = status.get("generations", [])
+    if not generations:
+        raise RuntimeError("Horde no retorno ninguna imagen")
+
+    img_bytes = base64.b64decode(generations[0]["img"])
+    model_used = generations[0].get("model", "desconocido")
+    print(f"  Generado con: {model_used} ({len(img_bytes):,} bytes)")
 
     img = Image.open(BytesIO(img_bytes)).convert("RGB")
     w, h = img.size
@@ -280,7 +277,7 @@ def main():
     print(f"  Prompt : {content['prompt_imagen'][:120]}...")
     print(f"  Caption: {content['caption'][:80]}...")
 
-    print("\n[HF Inference] Generando imagen editorial 1080x1080...")
+    print("\n[Stable Horde] Generando imagen editorial 1080x1080...")
     image_bytes = generate_image(content["prompt_imagen"])
 
     with open("post_del_dia.jpg", "wb") as f:

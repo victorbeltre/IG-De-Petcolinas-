@@ -26,6 +26,8 @@ import anthropic
 import requests
 from PIL import Image
 
+from campaign_plan import format_campaign_context_for_prompt
+
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 # Stable Horde — red comunitaria de GPUs, 100% gratuita
@@ -131,6 +133,7 @@ def claude_generate_content() -> dict:
     today = datetime.date.today()
     weekday = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"][today.weekday()]
     breed = DOG_BREEDS[today.timetuple().tm_yday % len(DOG_BREEDS)]
+    campaign_context = format_campaign_context_for_prompt(today)
 
     response = claude.messages.create(
         model="claude-sonnet-4-6",
@@ -138,7 +141,8 @@ def claude_generate_content() -> dict:
         system=(
             "Eres el estratega y creador de contenido oficial de PetColinas en Instagram. "
             "Dominas la formula Portrait de claude-banana para generar prompts de imagen "
-            "de calidad editorial. Produces contenido autentico dominicano que convierte."
+            "de calidad editorial. Produces contenido autentico dominicano que convierte. "
+            "Siempre alineas el contenido con la campana de marketing activa del mes."
         ),
         messages=[{
             "role": "user",
@@ -146,19 +150,23 @@ def claude_generate_content() -> dict:
 
 {PETCOLINAS}
 
+{campaign_context}
+
 {PORTRAIT_FORMULA}
 
 Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
 Raza del dia: {breed}
 
 Crea el contenido completo del post de Instagram de hoy.
+El contenido DEBE estar alineado con el tema mensual y la campana trimestral activa.
+Si hay una fecha especial hoy, incorporala de forma natural en el post.
 Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 
 {{
-  "tipo": "<uno de los tipos listados>",
-  "tema": "<tema especifico, max 25 palabras>",
+  "tipo": "<uno de los tipos listados, preferir el servicio_estrella del mes>",
+  "tema": "<tema especifico alineado con la campana del mes, max 25 palabras>",
   "prompt_imagen": "<prompt de imagen COMPLETO en INGLES siguiendo la formula Portrait de claude-banana: prosa narrativa 150-200 palabras, 7 componentes ponderados, sin keywords prohibidas, con authority anchor al final. El perro es un {breed} recien baniado y arreglado en PetColinas.>",
-  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll, 2) cuerpo 2-3 oraciones con tono dominicano calido y beneficio claro, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
+  "caption": "<caption completo listo para Instagram: 1) linea gancho con emoji que detenga el scroll y refleje el tema del mes, 2) cuerpo 2-3 oraciones con tono dominicano calido, beneficio claro y la promocion del mes si aplica, 3) llamado a la accion directo, 4) contacto 809-752-6806 y Plaza Las Colinas, 5) 10-12 hashtags de la marca. Max 2200 caracteres.>"
 }}"""
         }],
     )
@@ -262,9 +270,14 @@ def generate_image(image_prompt: str) -> bytes:
 
 def main():
     today = datetime.date.today()
+    from campaign_plan import get_campaign_context
+    campaign = get_campaign_context(today)
     print(f"\n{'='*55}")
     print(f"  ORQUESTADOR PETCOLINAS — {today.strftime('%d/%m/%Y')}")
     print(f"  Usando formula Portrait de claude-banana")
+    print(f"  Campana: {campaign['tema_mensual']['nombre']} ({campaign['trimestre']})")
+    if campaign["es_fecha_especial"]:
+        print(f"  Fecha especial: {campaign['evento_especial']['evento']}")
     print(f"{'='*55}\n")
 
     print("[Claude + claude-banana] Generando contenido del dia...")

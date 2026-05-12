@@ -21,6 +21,7 @@ import time
 import base64
 import datetime
 from io import BytesIO
+from pathlib import Path
 
 import anthropic
 import requests
@@ -30,6 +31,37 @@ from campaign_plan import format_campaign_context_for_prompt, get_campaign_conte
 from content_log import format_history_for_prompt, suggest_content_type, append_post, get_recent_breeds
 
 claude = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+COMPETITOR_INSIGHTS_FILE = "competitor_insights.json"
+
+
+def _load_competitor_insights() -> str:
+    """Carga el ultimo reporte de inteligencia competitiva si existe y es reciente (< 30 dias)."""
+    path = Path(COMPETITOR_INSIGHTS_FILE)
+    if not path.exists():
+        return ""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        fecha = data.get("fecha_analisis", "")
+        if fecha:
+            age = (datetime.date.today() - datetime.date.fromisoformat(fecha)).days
+            if age > 30:
+                return ""
+        opps = data.get("oportunidades_diferenciacion", [])
+        recs = data.get("recomendaciones_contenido", [])
+        lines = ["=== INTELIGENCIA COMPETITIVA (usar para diferenciarse) ==="]
+        if opps:
+            lines.append("Oportunidades detectadas vs competencia:")
+            for o in opps[:3]:
+                lines.append(f"  - {o.get('oportunidad', '')}: {o.get('estrategia', '')}")
+        if recs:
+            lines.append("Ideas de contenido diferenciador:")
+            for r in recs[:3]:
+                lines.append(f"  - [{r.get('tipo', '')}] {r.get('tema', '')}: {r.get('caption_idea', '')[:80]}")
+        lines.append("=== FIN INTELIGENCIA COMPETITIVA ===")
+        return "\n".join(lines)
+    except Exception:
+        return ""
 
 # Stable Horde — red comunitaria de GPUs, 100% gratuita
 # Clave anonima "0000000000" funciona sin registro (menor prioridad en cola)
@@ -136,6 +168,7 @@ def claude_generate_content() -> dict:
     campaign = get_campaign_context(today)
     campaign_context = format_campaign_context_for_prompt(today)
     history_context = format_history_for_prompt()
+    competitor_context = _load_competitor_insights()
     servicio_estrella = campaign["tema_mensual"]["servicio_estrella"]
     tipo_sugerido = suggest_content_type(servicio_estrella)
 
@@ -164,6 +197,8 @@ def claude_generate_content() -> dict:
 
 {history_context}
 
+{competitor_context}
+
 {PORTRAIT_FORMULA}
 
 Tipos de post disponibles: {', '.join(CONTENT_TYPES)}
@@ -175,6 +210,7 @@ INSTRUCCIONES:
 - Usa el tipo sugerido segun rotacion SALVO que haya una fecha especial que justifique otro.
 - El contenido DEBE estar alineado con el tema mensual y la campana trimestral activa.
 - NO repitas razas marcadas como recientes en el historial.
+- Si hay inteligencia competitiva disponible, usa las oportunidades para diferenciarte.
 - Si hay una fecha especial hoy, incorporala de forma natural en el post.
 Responde UNICAMENTE con JSON valido (sin markdown ni texto extra):
 

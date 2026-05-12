@@ -1,0 +1,210 @@
+{
+  "fecha_analisis": "2026-05-12",
+  "competidores_analizados": [
+    {
+      "handle": "@andyvet.rd",
+      "nombre": "AndyVet Clínica Veterinaria",
+      "seguidores": 16000,
+      "posts": 198,
+      "zona": "Santo Domingo",
+      "web": "andyvet.com.do",
+      "diferenciadores": "Todo en un lugar: consulta, baño, comida, hotel. Usan hashtag #TuVetResponde para contenido educativo.",
+      "fortaleza": "Mayor base de seguidores, branding profesional, website dedicado",
+      "debilidad": "Pocos posts para 16K seguidores (198) — publican poco, baja frecuencia"
+    },
+    {
+      "handle": "@groomers.clinica.veterinaria",
+      "nombre": "Groomers | Clínica Veterinaria",
+      "seguidores": 13000,
+      "posts": 644,
+      "zona": "Santo Domingo",
+      "diferenciadores": "Nombre que fusiona grooming + vet. Presencia en TikTok además de Instagram.",
+      "fortaleza": "Alta frecuencia de contenido (644 posts), presencia en TikTok",
+      "debilidad": "No mencionan membresías ni planes de fidelización"
+    },
+    {
+      "handle": "@animalclinicrd",
+      "nombre": "Hospital Veterinario Animal Clinic",
+      "seguidores": 11000,
+      "posts": 983,
+      "zona": "Santo Domingo",
+      "diferenciadores": "Hospital completo: cirugía, laboratorio, rayos X, hotel cage-free",
+      "fortaleza": "Posicionamiento como hospital (más que clínica), máxima cantidad de posts",
+      "debilidad": "Enfoque muy médico/hospitalario, menos cálido y cercano. No grooming destacado."
+    },
+    {
+      "handle": "@vetmart_rd",
+      "nombre": "Vet Mart Clínica Veterinaria",
+      "seguidores": 2815,
+      "posts": 395,
+      "zona": "Santo Domingo",
+      "diferenciadores": "Emergencias 24h, lunes a sábado",
+      "fortaleza": "Único con emergencias 24h visible en Instagram",
+      "debilidad": "Pocos seguidores para la cantidad de posts. Contenido probablemente genérico."
+    },
+    {
+      "handle": "@petsupermarket.do",
+      "nombre": "Pet Super Market",
+      "seguidores": null,
+      "posts": null,
+      "zona": "Santo Domingo Este",
+      "diferenciadores": "Veterinaria + tienda de accesorios + grooming en un solo lugar",
+      "fortaleza": "Propuesta mixta (retail + servicios)",
+      "debilidad": "Horario limitado (cierra sábados a las 4pm, cerrado domingos)"
+    },
+    {
+      "handle": "petclinic.com.do",
+      "nombre": "Pet Clinic",
+      "seguidores": null,
+      "posts": null,
+      "zona": "Evaristo Morales, Distrito Nacional",
+      "diferenciadores": "Servicio de transporte: recogen y devuelven la mascota",
+      "fortaleza": "Diferenciador único de transporte a domicilio",
+      "debilidad": "Zona premium (Evaristo Morales) = precios probablemente altos"
+    },
+    {
+      "handle": "animed.do",
+      "nombre": "Animed Veterinaria",
+      "seguidores": null,
+      "posts": null,
+      "zona": "Múltiples ubicaciones RD",
+      "diferenciadores": "Hotel canino/felino de lujo, laboratorio en 10 min, dermatología, múltiples sedes",
+      "fortaleza": "La competencia más fuerte en servicios premium y diversificación",
+      "debilidad": "Múltiples sedes = menos personalización, más corporativo"
+    }
+  ],
+  "resumen_ejecutivo": "El mercado de veterinarias y grooming en Santo Domingo está dominado por 2-3 jugadores con +10K seguidores (AndyVet, Groomers Clínica, Animal Clinic). Ninguno tiene un sistema de membresías visible en su comunicación de Instagram, lo que representa la mayor oportunidad de diferenciación para PetColinas. La mayoría se posiciona de forma clínica/corporativa; el tono cálido dominicano es un gap real. PetColinas está en SDO (zona oeste) con competencia menos saturada que el Distrito Nacional.",
+  "patrones_detectados": {
+    "tipos_contenido_mas_usados": ["fotos de mascotas post-grooming", "contenido educativo veterinario", "promociones de servicios", "testimonios"],
+    "tono_predominante": "Clínico y profesional en la mayoría. Pocos usan lenguaje dominicano coloquial. Mayoría suena 'corporativo'.",
+    "hashtags_populares": ["#veterinaria", "#veterinariaRD", "#groomingRD", "#mascotas", "#perros", "#santodomingomascotas"],
+    "frecuencia_posting": "Variable: Groomers y Animal Clinic publican mucho (600-983 posts). AndyVet publica poco para sus seguidores (198 posts).",
+    "formatos_visuales": "Fotos de mascotas principalmente. Pocos usan video/Reels. Imágenes mayormente de smartphones, no editoriales.",
+    "horarios_pico": "No determinado con certeza, pero la mayoría publica en horario laboral."
+  },
+  "fortalezas_competencia": [
+    {"fortaleza": "AndyVet tiene 16K seguidores — la mayor audiencia del mercado", "ejemplo": "@andyvet.rd con #TuVetResponde genera contenido educativo que engancha"},
+    {"fortaleza": "Groomers Clínica tiene presencia en TikTok además de Instagram", "ejemplo": "@veterinariagroomers en TikTok captura audiencia más joven"},
+    {"fortaleza": "Animal Clinic se posiciona como 'Hospital' — mayor percepción de calidad médica", "ejemplo": "Cirugía, laboratorio, rayos X en la misma cuenta"},
+    {"fortaleza": "Pet Clinic tiene servicio de transporte único", "ejemplo": "Recogen y devuelven la mascota — elimina la fricción del traslado"}
+  ],
+  "debilidades_competencia": [
+    {
+      "debilidad": "Ninguno comunica membresías ni planes de fidelización en Instagram",
+      "oportunidad_petcolinas": "PetColinas debe hacer de sus membresías Básica y Plus el contenido más repetido — es un diferenciador que NADIE más tiene visible"
+    },
+    {
+      "debilidad": "Tono corporativo y frío en la mayoría — no hablan como dominicanos",
+      "oportunidad_petcolinas": "El tono cálido, el 'peludito', las frases dominicanas son una ventaja real. Amplificarlo vs la frialdad de la competencia."
+    },
+    {
+      "debilidad": "Fotos de smartphone sin calidad editorial. Imágenes genéricas.",
+      "oportunidad_petcolinas": "La fórmula Portrait de claude-banana ya da ventaja visual. Mantener ese estándar editorial constantemente."
+    },
+    {
+      "debilidad": "AndyVet tiene 16K seguidores pero solo 198 posts — no publican suficiente",
+      "oportunidad_petcolinas": "Consistencia de 6 posts/semana supera a cualquier competidor en presencia de feed"
+    },
+    {
+      "debilidad": "Ninguno menciona precios en Instagram — la competencia esconde sus precios",
+      "oportunidad_petcolinas": "PetColinas puede ganar confianza siendo TRANSPARENTE con precios en posts. 'Bañito desde RD$699' detiene el scroll."
+    },
+    {
+      "debilidad": "Ninguno tiene contenido para el Día de las Madres específico para mascotas",
+      "oportunidad_petcolinas": "Mayo = Mamá y su Peludo. Ser los primeros y más creativos en esta campaña este mes."
+    }
+  ],
+  "oportunidades_diferenciacion": [
+    {
+      "oportunidad": "Membresías: NADIE más lo comunica en Instagram",
+      "estrategia": "1 post semanal dedicado a membresías con beneficios concretos y comparativa de ahorro real en RD$",
+      "tipo_contenido": "membresia",
+      "prioridad": "alta"
+    },
+    {
+      "oportunidad": "Transparencia de precios — la competencia los esconde",
+      "estrategia": "Publicar precios en captions con confianza: 'Bañito desde RD$699 en Plaza Las Colinas'",
+      "tipo_contenido": "grooming",
+      "prioridad": "alta"
+    },
+    {
+      "oportunidad": "Día de las Madres enfocado en mascotas — gap total en el mercado",
+      "estrategia": "Campaña 'El peludito de mamá merece lucir espectacular'. Certificado de regalo digital para compartir.",
+      "tipo_contenido": "grooming",
+      "prioridad": "alta"
+    },
+    {
+      "oportunidad": "Calidad editorial de imágenes — nadie usa fotos profesionales consistentemente",
+      "estrategia": "Mantener fórmula Portrait en todos los posts. La diferencia visual es inmediata al comparar feeds.",
+      "tipo_contenido": "grooming",
+      "prioridad": "media"
+    },
+    {
+      "oportunidad": "Contenido educativo con tono dominicano (#TuVetResponde de AndyVet tiene engagement)",
+      "estrategia": "Crear serie propia: '#PetColinasResponde' o '#ElVetDeBarrio' con tips de cuidado en lenguaje coloquial RD",
+      "tipo_contenido": "educativo",
+      "prioridad": "media"
+    },
+    {
+      "oportunidad": "SDO (zona oeste) menos saturada que DN y SDE",
+      "estrategia": "Geo-targeting en captions: 'Los que vivimos en Santo Domingo Oeste sabemos...' Crear comunidad local.",
+      "tipo_contenido": "comunidad",
+      "prioridad": "media"
+    }
+  ],
+  "recomendaciones_contenido": [
+    {
+      "tema": "Membresía Plus vs ir suelto — ahorro real en RD$",
+      "por_que": "Ningún competidor muestra el ahorro matemático. Ver los números convence.",
+      "caption_idea": "💰 ¿Cuánto gastas en bañar a tu peludito al mes? Con la membresía Plus de PetColinas ahorras RD$X al mes. Mira los números...",
+      "tipo": "membresia"
+    },
+    {
+      "tema": "El peludito de mamá listo para el Día de las Madres",
+      "por_que": "Gap total en el mercado. Nadie más hace esto en SDO este mes.",
+      "caption_idea": "🌸 Mamá lo da todo por su familia peludita. Este domingo, dale el mejor regalo: trae su peludito a PetColinas y que llegue impecable a la mesa.",
+      "tipo": "grooming"
+    },
+    {
+      "tema": "Precio transparente: bañito desde RD$699",
+      "por_que": "La competencia esconde precios. La transparencia genera confianza y detiene el scroll.",
+      "caption_idea": "✅ Sin sorpresas. Bañito para tu peludito pequeño desde RD$799 en PetColinas. Precio final, sin cargos extra.",
+      "tipo": "grooming"
+    },
+    {
+      "tema": "Serie #PetColinasResponde — señales de golpe de calor en perros",
+      "por_que": "Mayo = calor en RD. AndyVet triunfa con #TuVetResponde. PetColinas puede tener su propia serie educativa.",
+      "caption_idea": "🌡️ #PetColinasResponde: ¿Cómo sé si mi perro tiene golpe de calor? 3 señales que nunca debes ignorar en estos calores dominicanos 👇",
+      "tipo": "educativo"
+    },
+    {
+      "tema": "Antes/después de grooming completo — calidad visual vs competencia",
+      "por_que": "Las fotos editoriales de PetColinas vs las fotos de smartphone de la competencia hablan solas.",
+      "caption_idea": "😮 De 'bajó a perro' a nube de algodón en 2 horas. Esto es lo que hacemos cada día en PetColinas. 📍 Plaza Las Colinas, SDO.",
+      "tipo": "antes_despues"
+    },
+    {
+      "tema": "Comunidad SDO — 'los de la zona oeste nos entendemos'",
+      "por_que": "Crear identidad local que la competencia del DN no puede replicar.",
+      "caption_idea": "📍 Los que vivimos en Santo Domingo Oeste sabemos que Plaza Las Colinas es punto de encuentro. Y los peluditos de la zona ya tienen su lugar: PetColinas.",
+      "tipo": "comunidad"
+    },
+    {
+      "tema": "Certificado de regalo digital para el peludito de mamá",
+      "por_que": "Innovación que nadie más ofrece. Comprable por WhatsApp, fácil de regalar.",
+      "caption_idea": "🎁 ¿No sabes qué regalarle a mamá? Regálale UN BAÑITO para su peludito. Escríbenos al 809-752-6806 y te enviamos el certificado digital hoy.",
+      "tipo": "grooming"
+    }
+  ],
+  "hashtags_recomendados": {
+    "adoptar": ["#TuVetResponde", "#SantoDomingoPets", "#MascotasSD", "#GroomingDominicano", "#VeterinariaSDO"],
+    "evitar": ["#PetLovers", "#DogOfTheDay", "#InstaPerro"],
+    "propios_unicos": ["#PetColinasResponde", "#PlazaLasColinas", "#ElPeludoDeBarrio", "#MembresíaPetColinas"]
+  },
+  "score_competencia": {
+    "contenido_visual": "AndyVet 7/10, Groomers 6/10, Animal Clinic 5/10 — PetColinas con fórmula Portrait: 9/10",
+    "engagement_estimado": "AndyVet lidera pero publica poco. Groomers más consistente.",
+    "consistencia": "Groomers y Animal Clinic ganan en volumen. PetColinas necesita mantener 6 posts/semana.",
+    "diferenciacion_petcolinas": "8/10 — membresías, tono dominicano y calidad editorial son ventajas reales no explotadas al máximo"
+  }
+}

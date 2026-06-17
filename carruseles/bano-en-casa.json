@@ -1,0 +1,74 @@
+{
+  "folder": "bano-en-casa",
+  "fast_model": true,
+  "caption": "🛁 ¿Bañas a tu perro en casa? Aquí te decimos cómo hacerlo bien\n\nY si prefieres dejarlo en manos de profesionales, en PetColinas estamos para ti 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #BañoCanino #CuidadoPerros #TipsPerros #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Fluffy wet dog in bathtub looking adorable, warm bathroom setting, no people, no text",
+      "titulo": "Cómo bañar a tu perro en casa",
+      "subtitulo": "Guía paso a paso 🛁"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog shampoo bottles, towels, brush and rubber mat on clean white surface, flat lay, no text",
+      "titulo": "Lo que necesitas",
+      "puntos": [
+        "Shampoo especial para perros (nunca humano)",
+        "Toalla absorbente grande",
+        "Cepillo para el pelo",
+        "Algodón para los oídos",
+        "Secador a temperatura baja",
+        "Agua tibia (no caliente ni fría)"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Fluffy clean dog wrapped in white towel, happy expression, bright background, no people, no text",
+      "titulo": "Paso a paso",
+      "puntos": [
+        "Cepilla antes del baño para quitar nudos",
+        "Moja todo el cuerpo con agua tibia",
+        "Aplica shampoo de cuello a cola",
+        "Enjuaga bien hasta que el agua salga limpia",
+        "Seca con toalla y luego con secador",
+        "Cepilla mientras secas para evitar nudos"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog shaking water off, playful outdoor scene, no people, no text",
+      "titulo": "Errores comunes",
+      "puntos": [
+        "Mojar las orejas por dentro (causa infecciones)",
+        "Usar agua muy caliente o muy fría",
+        "Dejar shampoo sin enjuagar",
+        "No secar bien (causa hongos y mal olor)",
+        "Bañar con mucha frecuencia (quita aceites naturales)"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Professional dog grooming salon interior, clean and bright, grooming table, no people, no text",
+      "titulo": "¿Cuándo ir al groomer?",
+      "puntos": [
+        "Baño profesional desde RD$799",
+        "Cada 3-4 semanas para razas con pelo largo",
+        "Corte incluido según el estilo que elijas",
+        "Secado y cepillado profesional incluido",
+        "Limpieza de oídos y corte de uñas"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy clean fluffy dog after professional grooming, wearing bow, bright background, no people, no text",
+      "titulo": "¡Reserva su baño!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "folder": "calor-mascotas",
+  "fast_model": true,
+  "caption": "☀️ ¡Cuidado con el calor! Tu mascota también sufre el verano\n\nAquí te decimos cómo proteger a tu perro en los días más calurosos 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #CalorMascotas #GolpeDeCalore #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog panting in heat, sunny day, out of breath expression, warm golden tones, no people, no text",
+      "titulo": "Protege a tu mascota del calor",
+      "subtitulo": "Guía para el verano dominicano ☀️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog showing signs of heat exhaustion, tongue out, heavy breathing, warm environment, no people, no text",
+      "titulo": "Señales de golpe de calor",
+      "puntos": [
+        "Jadeo excesivo e incesante",
+        "Babeo más de lo normal",
+        "Encías y lengua de color rojo intenso",
+        "Vómitos y diarrea repentinos",
+        "Tambaleo o pérdida de coordinación",
+        "Pérdida de conciencia — emergencia"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog drinking fresh water from bowl, refreshing, bright outdoor setting, no people, no text",
+      "titulo": "Qué hacer si sospecha golpe de calor",
+      "puntos": [
+        "Llévalo a un lugar fresco de inmediato",
+        "Ponle agua fresca sobre el cuello y patas",
+        "NO uses agua helada — el choque es peligroso",
+        "Ofrécele agua para tomar en pequeños sorbos",
+        "Ventílalo con un abanico o aire acondicionado",
+        "Lleva al veterinario de INMEDIATO"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog resting in shade under tree, cool comfortable environment, no people, no text",
+      "titulo": "Cómo prevenir el golpe de calor",
+      "puntos": [
+        "Agua fresca disponible siempre las 24 horas",
+        "Evita paseos entre 11am y 4pm (máximo calor)",
+        "Nunca dejes a tu perro en un carro cerrado",
+        "Asegúrate de que tenga sombra y ventilación",
+        "Razas de hocico corto (bulldog, pug) son más vulnerables",
+        "El pelo largo protege del sol — no lo rapes"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Clean grooming salon with cooling fan and fresh water setup, bright and airy, no people, no text",
+      "nombre_plan": "Baño refrescante",
+      "precio": "Desde RD$799",
+      "incluye": [
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Baño grande: RD$1,149",
+        "Shampoo profesional",
+        "Secado completo"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy cool refreshed dog after bath, fluffy and bright, no people, no text",
+      "titulo": "¡Dale un baño refrescante!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

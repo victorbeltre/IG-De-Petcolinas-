@@ -1,0 +1,72 @@
+{
+  "folder": "vacunas-precios",
+  "fast_model": true,
+  "caption": "💉 Estos son nuestros precios de vacunas en PetColinas\n\nMantén a tu perrito protegido con el esquema completo de vacunación 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #VacunasPerros #SaludAnimal #VeterinariaDominicana #MascotasRD #SantoDomingo",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Cute puppy looking healthy and happy at veterinary clinic, bright clean environment, no people, no text",
+      "titulo": "Nuestros precios de vacunas",
+      "subtitulo": "Protege a tu perrito 💉"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Veterinary vaccine vials and syringes on clean white surface, professional medical setting, no people, no text",
+      "titulo": "¿Por qué vacunar?",
+      "puntos": [
+        "Previene enfermedades mortales",
+        "Protege a toda la familia",
+        "Requerido para parques y guarderías",
+        "Refuerzos anuales obligatorios",
+        "Un perro vacunado es un perro feliz"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Healthy happy dog portrait, clean bright background, no people, no text",
+      "titulo": "Vacunas disponibles",
+      "puntos": [
+        "Quíntuple  — RD$1,200",
+        "Séxtuple   — RD$1,470",
+        "Triple     — RD$1,300",
+        "Rabia      — RD$1,500",
+        "Bordetella — RD$1,400",
+        "Giardia    — RD$1,450"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Puppy at first veterinary visit, clean clinic, no people, no text",
+      "nombre_plan": "Combo Primera Vacuna",
+      "precio": "RD$3,500",
+      "incluye": [
+        "Consulta inicial incluida",
+        "Vacuna quíntuple",
+        "Desparasitante interno",
+        "Asesoría de calendario vacunal"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog health record and vaccination card, stethoscope, clean white background, no text",
+      "titulo": "Consulta veterinaria",
+      "puntos": [
+        "Consulta general — RD$1,500",
+        "Diagnóstico y toma de muestra disponible",
+        "Test Parvo/Corona/Giardia — RD$1,200",
+        "Atención personalizada para tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy happy vaccinated dog wearing bandana, bright cheerful background, no people, no text",
+      "titulo": "¡Vacuna a tu perrito!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

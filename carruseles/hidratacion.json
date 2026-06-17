@@ -1,0 +1,76 @@
+{
+  "folder": "hidratacion",
+  "fast_model": true,
+  "caption": "💧 ¿Toma suficiente agua tu perro?\n\nEn el calor dominicano, la hidratación de tu mascota es crítica 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #HidratacionMascotas #SaludCanina #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog drinking fresh water from clean bowl, thirsty and satisfied, bright light, no people, no text",
+      "titulo": "La hidratación de tu mascota",
+      "subtitulo": "Vital en el calor dominicano 💧"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Multiple water bowls and dog water fountain, clean and fresh, white background, no text",
+      "titulo": "¿Cuánta agua necesita?",
+      "puntos": [
+        "Regla básica: 40-60ml por kg de peso al día",
+        "Un perro de 5kg necesita aprox. 250ml diarios",
+        "En calor o ejercicio: puede triplicarse",
+        "Perros que comen comida seca beben más",
+        "Perros con comida húmeda beben menos",
+        "Siempre disponible — nunca raciones de agua"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dehydrated looking dog with dry nose, dull fur, tired expression, no people, no text",
+      "titulo": "Señales de deshidratación",
+      "puntos": [
+        "Encías secas y pegajosas (no húmedas)",
+        "Ojos hundidos o sin brillo",
+        "Pellizca la piel y tarda en volver (prueba del pliegue)",
+        "Orina oscura o en poca cantidad",
+        "Letargo y falta de energía",
+        "Vómitos o diarrea hacen que se deshidrate rápido"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog water fountain, multiple water bowls in home, tricks to encourage drinking, no people, no text",
+      "titulo": "Trucos para que tome más agua",
+      "puntos": [
+        "Pon varios recipientes de agua en la casa",
+        "Prueba con fuente de agua en movimiento",
+        "Agrega un poco de caldo de pollo sin sal al agua",
+        "Hielos de agua natural como premio en verano",
+        "Cambia el agua mínimo 2 veces al día",
+        "Limpia el recipiente diario para evitar bacterias"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Ice cubes in dog bowl, summer cooling concept, bright refreshing colors, no people, no text",
+      "titulo": "Hidratación en el calor",
+      "puntos": [
+        "El calor dominicano puede ser extremo — actúa antes",
+        "Hielos de agua natural son seguros y refrescantes",
+        "Evita ejercicio en las horas de más calor",
+        "Un baño también ayuda a regular la temperatura",
+        "Nunca dejes tu perro en un carro cerrado",
+        "Perros viejos y cachorros se deshidratan más rápido"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy hydrated happy dog, shiny coat, energetic pose, bright background, no people, no text",
+      "titulo": "Un perro hidratado es un perro feliz",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

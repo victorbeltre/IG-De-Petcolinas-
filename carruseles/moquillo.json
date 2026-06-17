@@ -1,0 +1,77 @@
+{
+  "folder": "moquillo",
+  "fast_model": true,
+  "caption": "⚠️ Moquillo canino: una de las enfermedades más mortales para tu perro\n\nPero tiene prevención: la vacuna séxtuple 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Moquillo #Distemper #VacunaCanina #SaludAnimal #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Worried looking dog, sad eyes, soft dramatic lighting, no people, no text",
+      "titulo": "Moquillo canino",
+      "subtitulo": "Infórmate y vacuna a tu perro ⚠️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Abstract virus concept, dark blue background, scientific visualization, no text",
+      "titulo": "¿Qué es el moquillo?",
+      "puntos": [
+        "Enfermedad viral altamente contagiosa y mortal",
+        "Ataca el sistema respiratorio, digestivo y nervioso",
+        "No tiene tratamiento específico — solo soporte",
+        "Alta tasa de mortalidad en perros no vacunados",
+        "Los cachorros y perros sin vacunas son los más vulnerables",
+        "LA VACUNA es la única protección efectiva"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with respiratory symptoms, runny nose, tired expression, soft light, no people, no text",
+      "titulo": "Síntomas por etapas",
+      "puntos": [
+        "Fase 1 (respiratoria): fiebre, secreción nasal y ocular",
+        "Fase 2 (digestiva): vómitos, diarrea, pérdida de apetito",
+        "Fase 3 (nerviosa): convulsiones, espasmos musculares",
+        "Endurecimiento de los cojinetes plantares",
+        "Almohadillas y trufa se secan y se endurecen",
+        "Si llega a la fase nerviosa, las secuelas son permanentes"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog sniffing infected area, park with other dogs, contagion concept, no people, no text",
+      "titulo": "¿Cómo se contagia?",
+      "puntos": [
+        "Por contacto directo con perros infectados",
+        "Por secreciones (estornudos, ojos, nariz, orina)",
+        "En parques, guarderías o exposiciones",
+        "El virus puede sobrevivir horas en el ambiente",
+        "Un perro infectado puede parecer sano al inicio",
+        "Por eso la vacuna antes de salir a la calle"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Vaccine vials arranged professionally on clean surface, sterile medical background, no people, no text",
+      "nombre_plan": "Vacuna séxtuple",
+      "precio": "RD$1,470",
+      "incluye": [
+        "Protege contra Moquillo (Distemper)",
+        "Protege contra Parvovirus",
+        "Protege contra Hepatitis",
+        "Protege contra Parainfluenza",
+        "Protege contra Coronavirus",
+        "Consulta veterinaria: RD$1,500"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy happy vaccinated dog playing in park, energetic and protected, no people, no text",
+      "titulo": "¡Protege a tu perro hoy!",
+      "subtitulo": "Un refuerzo al año es todo lo que necesita",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

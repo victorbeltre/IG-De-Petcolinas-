@@ -1,0 +1,76 @@
+{
+  "folder": "mascotas-ninos",
+  "fast_model": true,
+  "caption": "👶🐶 Mascotas y niños: la combinación perfecta cuando se hace bien\n\nTe contamos cómo lograr una convivencia segura y feliz 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #MascotasYNiños #PerrosFamiliares #ConvivenciaSegura #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Small dog and children's toys together in playroom, friendly and colorful, safe environment, no people, no text",
+      "titulo": "Mascotas y niños",
+      "subtitulo": "Convivencia segura y feliz 👶🐶"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Child's bedroom with dog bed nearby, toys, safe and cozy family environment, no people, no text",
+      "titulo": "Razas recomendadas para familias",
+      "puntos": [
+        "Golden Retriever — paciente y muy gentil",
+        "Labrador — energético y muy tolerante",
+        "Beagle — curioso y amigable",
+        "Poodle — inteligente y muy cariñoso",
+        "Bichón Frisé — pequeño y sociable",
+        "Shih Tzu — tranquilo y muy apegado"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog and plush toy sitting together, first meeting concept, neutral calm environment, no people, no text",
+      "titulo": "Cómo presentarlos",
+      "puntos": [
+        "Primero deja que el perro olfatee objetos del niño",
+        "Presentación gradual en terreno neutro",
+        "El adulto siempre presente en el primer encuentro",
+        "Nunca fuerces el contacto — deja que se acerquen solos",
+        "Enséñale al niño a acercarse de costado, no de frente",
+        "Mucho elogio y premios cuando la interacción es buena"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Rules and safety concept, shield and paw print icons, protective family values, clean design, no text",
+      "titulo": "Reglas de convivencia",
+      "puntos": [
+        "Enséñale al niño a no molestar mientras come o duerme",
+        "El perro siempre debe poder retirarse si lo necesita",
+        "Nunca jalear de la cola o las orejas",
+        "Supervisión constante menores de 6 años con mascotas",
+        "El perro también necesita su espacio de tranquilidad",
+        "Vacunas y desparasitación al día — protege a todos"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Child's drawing of dog, crayon art concept, colorful and innocent, family warmth theme, no text",
+      "titulo": "Beneficios para los niños",
+      "puntos": [
+        "Desarrollan responsabilidad y empatía",
+        "Aprenden a respetar a otros seres vivos",
+        "Reducen el estrés y la ansiedad",
+        "Mejoran su sistema inmune (estudios lo comprueban)",
+        "Compañía y amor incondicional siempre",
+        "Los niños con mascotas son más sociables"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with family toys around, warm home, welcoming atmosphere, no people, no text",
+      "titulo": "¡Visítanos con tu familia!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

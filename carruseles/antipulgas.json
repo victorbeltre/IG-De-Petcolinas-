@@ -1,0 +1,77 @@
+{
+  "folder": "antipulgas",
+  "fast_model": true,
+  "caption": "🦟 ¿Tu perro tiene pulgas o garrapatas?\n\nNexGard Spectra y Bravecto los eliminan y previenen por semanas 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Pulgas #Garrapatas #NexGard #Bravecto #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog scratching itself in garden, uncomfortable with fleas or ticks, natural outdoor setting, no people, no text",
+      "titulo": "Pulgas y garrapatas",
+      "subtitulo": "Protege a tu perro y a tu hogar 🦟"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Flea and tick concept illustration, abstract parasites on dog fur, educational style, close-up macro, no text",
+      "titulo": "El problema real",
+      "puntos": [
+        "Una pulga puede poner 50 huevos al día en tu casa",
+        "Las garrapatas transmiten enfermedades graves al perro y al humano",
+        "El 95% de las pulgas viven en el ambiente, no en el perro",
+        "Si ves una garrapata, hay más que no ves",
+        "Limpiar la casa no es suficiente sin tratar al perro",
+        "La prevención mensual es la única solución real"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog fur being examined for parasites, close-up view, no people, no text",
+      "titulo": "Señales de infestación",
+      "puntos": [
+        "Se rasca o muerde sin parar, especialmente la base de la cola",
+        "Alopecia o caída de pelo en zonas específicas",
+        "Pequeños puntos negros en el pelaje (heces de pulgas)",
+        "Piel roja e irritada",
+        "Ves garrapatas adheridas a la piel",
+        "Anemia en cachorros (palidez en las encías)"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "NexGard and Bravecto style product concept, orange pill and chewable treat on white background, no text",
+      "titulo": "Nuestras soluciones",
+      "puntos": [
+        "NexGard Spectra: elimina pulgas, garrapatas, lombrices y ácaros",
+        "Bravecto: protección por 12 semanas en un solo comprimido",
+        "Frontline: pipeta de aplicación en la nuca",
+        "Spray garrapaticida para el ambiente",
+        "Todos disponibles en nuestra farmacia",
+        "Con asesoría del equipo de PetColinas"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Pet medication display, various antiparasitic products on clean white shelf, no text",
+      "nombre_plan": "NexGard Spectra",
+      "precio": "Desde RD$1,416",
+      "incluye": [
+        "2-3.5 kg — RD$1,416",
+        "3-7 kg — RD$1,462",
+        "7-15 kg — RD$1,775",
+        "15-30 kg — RD$1,775",
+        "Bravecto (12 semanas) — RD$2,595",
+        "Pregunta por el tamaño de tu perro"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy scratch-free dog relaxing comfortably, peaceful expression, bright home setting, no people, no text",
+      "titulo": "¡Dile adiós a las pulgas!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

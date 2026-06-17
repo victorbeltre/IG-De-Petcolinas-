@@ -1,0 +1,76 @@
+{
+  "folder": "bano-medicado",
+  "fast_model": true,
+  "caption": "🧴 ¿Sabes cuándo tu perro necesita un baño medicado?\n\nNo es lo mismo que un baño normal — tiene beneficios terapéuticos 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #BañoMedicado #DermatologiaCanina #MascotasRD #SaludPiel",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog with sensitive skin being carefully bathed, therapeutic spa-like setting, gentle lighting, no people, no text",
+      "titulo": "Baño medicado",
+      "subtitulo": "¿Cuándo lo necesita tu perro? 🧴"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog scratching itchy skin, uncomfortable expression, natural setting, no people, no text",
+      "titulo": "¿Qué es el baño medicado?",
+      "puntos": [
+        "Usa shampoos terapéuticos con activos específicos",
+        "Trata condiciones de piel que el baño normal no resuelve",
+        "Está formulado para uso veterinario",
+        "Requiere un tiempo de contacto mayor",
+        "Alivia el picor, la inflamación y los hongos",
+        "Siempre recomendado por el veterinario"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with skin condition, redness or flakiness concept, medical educational style, no people, no text",
+      "titulo": "¿Cuándo lo necesita?",
+      "puntos": [
+        "Dermatitis atópica o alergias de piel",
+        "Seborrea (piel muy grasa o muy seca)",
+        "Infecciones bacterianas o por hongos",
+        "Sarna o infestación de ácaros",
+        "Piel sensible o irritada frecuentemente",
+        "Por indicación veterinaria siempre"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Therapeutic shampoo bottle, clean white background, medical aesthetic, professional product shot, no text",
+      "titulo": "Tipos de shampoo medicado",
+      "puntos": [
+        "Antibacterial: para infecciones de piel",
+        "Antifúngico: para hongos y levaduras",
+        "Antiseborreico: controla grasa y descamación",
+        "Antiprurítico: calma el picor intenso",
+        "Hidratante: para piel muy seca y sensible",
+        "Solo tu veterinario sabe cuál necesita tu perro"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Clean grooming salon, medicinal spa atmosphere, professional equipment, bright and sterile, no people, no text",
+      "nombre_plan": "Baño medicado en PetColinas",
+      "precio": "RD$1,000",
+      "incluye": [
+        "Shampoo medicado terapéutico",
+        "Tiempo de contacto adecuado",
+        "Enjuague y acondicionador especial",
+        "Secado profesional completo",
+        "Vendemos shampoos medicados en tienda"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Dog with healthy glowing skin and shiny coat after treatment, relief expression, bright background, no people, no text",
+      "titulo": "¡Tu perro merece alivio!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

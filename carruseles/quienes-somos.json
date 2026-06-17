@@ -1,0 +1,76 @@
+{
+  "folder": "quienes-somos",
+  "fast_model": true,
+  "caption": "🐾 Conoce PetColinas — tu veterinaria y peluquería canina de confianza\n\nEstamos ubicados en Plaza Las Colinas, SDO Oeste, y atendemos a tus mascotas con todo el amor del mundo 💚\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #VeterinariaDominicana #PeluqueriaCanina #SantoDomingoOeste #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Modern veterinary and grooming clinic exterior, green and white colors, professional signage, clean and welcoming, no people, no text",
+      "titulo": "Conoce PetColinas",
+      "subtitulo": "Tu aliado en el cuidado de tu mascota 💚"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Professional grooming salon interior, clean green and white decor, grooming tools, warm lighting, no people, no text",
+      "titulo": "Nuestros servicios",
+      "puntos": [
+        "🛁 Grooming profesional — baño y corte",
+        "🩺 Atención veterinaria completa",
+        "💊 Farmacia y tienda de mascotas",
+        "🧴 Baño medicado y tratamientos de piel",
+        "✂️ Corte de uñas y limpieza de oídos",
+        "💉 Vacunación y desparasitación"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Veterinary clinic examination room, modern equipment, bright and clean, professional atmosphere, no people, no text",
+      "titulo": "Veterinaria",
+      "puntos": [
+        "Consulta general: RD$1,500",
+        "Vacuna quíntuple: RD$1,200",
+        "Vacuna séxtuple: RD$1,470",
+        "Vacuna rabia: RD$1,500",
+        "Test Parvo/Corona/Giardia: RD$1,200",
+        "Combo Primera Vacuna: RD$3,500"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog grooming salon with professional equipment, scissors, brushes on display, clean organized space, no people, no text",
+      "titulo": "Grooming",
+      "puntos": [
+        "Baño cachorro: RD$699",
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Baño grande: RD$1,149",
+        "Corte higiénico: +RD$490",
+        "Corte completo: +RD$749"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Pet store shelves with products, clean organized pharmacy section, no people, no text",
+      "titulo": "Farmacia y tienda",
+      "puntos": [
+        "NexGard Spectra y Bravecto antiparasitarios",
+        "Shampoos profesionales y medicados",
+        "Alimentos premium para perros y gatos",
+        "Accesorios: collares, correas, juguetes",
+        "Pasta dental y productos de higiene",
+        "Asesoría personalizada en cada compra"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Welcoming pet clinic entrance, green plants, clean modern exterior, inviting atmosphere, no people, no text",
+      "titulo": "¡Visítanos!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "📱 Escríbenos por WhatsApp",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

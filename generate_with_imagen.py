@@ -356,17 +356,25 @@ RENDERERS = {
 
 # ── Orquestador principal ─────────────────────────────────────────────────────
 def main():
-    config_path = Path("carrusel_config.json")
+    # Acepta nombre del carrusel como argumento: python generate_with_imagen.py grooming-precios
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if args:
+        folder_name = args[0]
+        config_path = Path("carruseles") / f"{folder_name}.json"
+    else:
+        config_path = Path("carrusel_config.json")
+
     if not config_path.exists():
-        print("ERROR: No existe carrusel_config.json")
-        print("Crea ese archivo con la definición del carrusel. Ver README o ejemplos.")
+        print(f"ERROR: No existe {config_path}")
+        print("Uso: python generate_with_imagen.py <nombre-carrusel>")
+        print("     Los configs van en carruseles/<nombre>.json")
         sys.exit(1)
 
-    config = json.loads(config_path.read_text(encoding="utf-8"))
+    config  = json.loads(config_path.read_text(encoding="utf-8"))
     folder  = config["folder"]
     slides  = config["slides"]
     caption = config.get("caption", "")
-    fast    = config.get("fast_model", False)
+    fast    = config.get("fast_model", True)
 
     out_dir = Path("posts") / folder
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -390,16 +398,13 @@ def main():
         result.save(str(out_path), "PNG")
         print(f"    ✓ {out_path}")
 
-        # Respeta rate limit del tier gratuito (~2 req/min)
         if i < len(slides) and not _DRY_RUN:
-            wait = 35 if not fast else 15
-            print(f"    ⏳ Esperando {wait}s (rate limit)...")
+            wait = 12 if fast else 35
+            print(f"    ⏳ {wait}s...")
             time.sleep(wait)
 
-    # caption.txt
     (out_dir / "caption.txt").write_text(caption, encoding="utf-8")
     print(f"  ✓ caption.txt")
-
     print()
     print(f"✅  Listo → posts/{folder}/  ({len(slides)} imágenes)")
     if not _DRY_RUN:

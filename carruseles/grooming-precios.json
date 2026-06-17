@@ -1,0 +1,71 @@
+{
+  "folder": "grooming-precios",
+  "fast_model": true,
+  "caption": "✂️ ¿Cuánto cuesta el grooming en PetColinas?\n\nTe lo contamos todo: qué incluye, qué no y por qué vale cada peso 🐶💚\n\n📍 Plaza Las Colinas, SDO Oeste\n📱 Escríbenos por WhatsApp para reservar tu turno\n\n#PetColinas #Grooming #PerrosRD #PeluqueriaCanina #SantoDomingo #MascotasRD #GroomingDominicano",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Modern professional dog grooming salon interior, clean white and green decor, grooming table with fluffy dog, warm lighting, no text, no people",
+      "titulo": "Precios de Grooming",
+      "subtitulo": "Todo lo que necesitas saber 🐾"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Professional dog grooming tools flatlay, scissors, brushes, combs, clippers on clean white surface, spa aesthetic, no text",
+      "titulo": "¿Qué incluye?",
+      "puntos": [
+        "Baño con shampoo profesional",
+        "Secado y cepillado completo",
+        "Corte de pelo según raza y estilo",
+        "Limpieza de oídos",
+        "Corte de uñas",
+        "Perfume y moño de regalo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Adorable small fluffy dogs, Shih Tzu, Poodle, Yorkshire Terrier, freshly groomed, white studio background, professional pet photography, no text",
+      "titulo": "Razas Pequeñas",
+      "puntos": [
+        "Shih Tzu / Maltés / Bichón — desde RD$900",
+        "Poodle Toy / Yorkshire — desde RD$950",
+        "Chihuahua / Pinscher — desde RD$800",
+        "Pomerania / Spitz — desde RD$1,000"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Medium sized fluffy dogs, Cocker Spaniel, Schnauzer, Beagle, freshly groomed and happy, professional studio photography, no text",
+      "titulo": "Razas Medianas",
+      "puntos": [
+        "Cocker Spaniel — desde RD$1,200",
+        "Schnauzer / Beagle — desde RD$1,100",
+        "French Bulldog — desde RD$1,000",
+        "Chow Chow / Samoyedo — desde RD$1,500"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Beautiful freshly groomed golden retriever dog, professional salon background, clean and elegant, no text",
+      "nombre_plan": "Baño + Corte Completo",
+      "precio": "Desde RD$800",
+      "incluye": [
+        "Baño con shampoo premium",
+        "Secado profesional",
+        "Corte según raza",
+        "Uñas + oídos + perfume"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy fluffy dog looking at camera after grooming session, bow tie, clean and cute, warm background, no text",
+      "titulo": "¡Reserva tu turno!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

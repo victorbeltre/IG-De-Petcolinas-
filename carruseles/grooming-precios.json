@@ -1,22 +1,22 @@
 {
   "folder": "grooming-precios",
   "fast_model": true,
-  "caption": "✂️ ¿Cuánto cuesta el grooming en PetColinas?\n\nTe lo contamos todo: qué incluye, qué no y por qué vale cada peso 🐶💚\n\n📍 Plaza Las Colinas, SDO Oeste\n📱 Escríbenos por WhatsApp para reservar tu turno\n\n#PetColinas #Grooming #PerrosRD #PeluqueriaCanina #SantoDomingo #MascotasRD #GroomingDominicano",
+  "caption": "✂️ ¿Cuánto cuesta el grooming en PetColinas?\n\nAquí tienes todos los precios según el tamaño de tu perro 🐶💚\n\n📍 Plaza Las Colinas, SDO Oeste\n📱 Escríbenos por WhatsApp para reservar tu turno\n⏰ Lun a Sáb · 8am – 6pm\n\n#PetColinas #Grooming #PerrosRD #PeluqueriaCanina #SantoDomingo #MascotasRD",
   "slides": [
     {
       "tipo": "portada",
-      "bg_prompt": "Modern professional dog grooming salon interior, clean white and green decor, grooming table with fluffy dog, warm lighting, no text, no people",
+      "bg_prompt": "Modern professional dog grooming salon interior, clean white and green decor, fluffy dog on grooming table, warm natural lighting, no text, no people",
       "titulo": "Precios de Grooming",
-      "subtitulo": "Todo lo que necesitas saber 🐾"
+      "subtitulo": "Por tamaño de tu perro 🐾"
     },
     {
       "tipo": "contenido",
-      "bg_prompt": "Professional dog grooming tools flatlay, scissors, brushes, combs, clippers on clean white surface, spa aesthetic, no text",
+      "bg_prompt": "Professional dog grooming tools flatlay, scissors, brushes, combs, clippers on clean white surface, elegant spa aesthetic, no text",
       "titulo": "¿Qué incluye?",
       "puntos": [
         "Baño con shampoo profesional",
         "Secado y cepillado completo",
-        "Corte de pelo según raza y estilo",
+        "Corte de pelo a tu elección",
         "Limpieza de oídos",
         "Corte de uñas",
         "Perfume y moño de regalo"
@@ -24,41 +24,43 @@
     },
     {
       "tipo": "contenido",
-      "bg_prompt": "Adorable small fluffy dogs, Shih Tzu, Poodle, Yorkshire Terrier, freshly groomed, white studio background, professional pet photography, no text",
-      "titulo": "Razas Pequeñas",
+      "bg_prompt": "Small fluffy dogs, Shih Tzu, Maltese, Poodle, freshly groomed and happy, clean white studio, soft lighting, no text",
+      "titulo": "Baño solo · por tamaño",
       "puntos": [
-        "Shih Tzu / Maltés / Bichón — desde RD$900",
-        "Poodle Toy / Yorkshire — desde RD$950",
-        "Chihuahua / Pinscher — desde RD$800",
-        "Pomerania / Spitz — desde RD$1,000"
+        "🐶 Cachorro  —  RD$699",
+        "🐶 Pequeño   —  RD$799",
+        "🐶 Mediano   —  RD$949",
+        "🐶 Grande    —  RD$1,149",
+        "🐶 Medicado  —  RD$1,000"
       ]
     },
     {
       "tipo": "contenido",
-      "bg_prompt": "Medium sized fluffy dogs, Cocker Spaniel, Schnauzer, Beagle, freshly groomed and happy, professional studio photography, no text",
-      "titulo": "Razas Medianas",
+      "bg_prompt": "Freshly groomed fluffy dog with perfectly trimmed fur, dog scissors and comb beside it, clean professional salon background, warm tones, no text",
+      "titulo": "Baño + Corte · combos",
       "puntos": [
-        "Cocker Spaniel — desde RD$1,200",
-        "Schnauzer / Beagle — desde RD$1,100",
-        "French Bulldog — desde RD$1,000",
-        "Chow Chow / Samoyedo — desde RD$1,500"
+        "Pequeño + Corte higiénico  →  RD$1,289",
+        "Pequeño + Corte completo   →  RD$1,548",
+        "Mediano + Corte higiénico  →  RD$1,439",
+        "Mediano + Corte completo   →  RD$1,698",
+        "Grande  + Corte completo   →  RD$1,700"
       ]
     },
     {
-      "tipo": "precio",
-      "bg_prompt": "Beautiful freshly groomed golden retriever dog, professional salon background, clean and elegant, no text",
-      "nombre_plan": "Baño + Corte Completo",
-      "precio": "Desde RD$800",
-      "incluye": [
-        "Baño con shampoo premium",
-        "Secado profesional",
-        "Corte según raza",
-        "Uñas + oídos + perfume"
+      "tipo": "contenido",
+      "bg_prompt": "Dog paw close-up with nail clippers beside it, clean white background, soft studio lighting, no text",
+      "titulo": "Servicios adicionales",
+      "puntos": [
+        "Corte de uñas solo     —  RD$300",
+        "Desenrede              —  +RD$690",
+        "Deslanado              —  +RD$890",
+        "Baño con línea         —  +RD$200",
+        "Baño medicado          —  desde RD$950"
       ]
     },
     {
       "tipo": "cta",
-      "bg_prompt": "Happy fluffy dog looking at camera after grooming session, bow tie, clean and cute, warm background, no text",
+      "bg_prompt": "Happy fluffy small dog smiling after grooming session, wearing a small bow, warm cozy background, no text",
       "titulo": "¡Reserva tu turno!",
       "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
       "lineas": [

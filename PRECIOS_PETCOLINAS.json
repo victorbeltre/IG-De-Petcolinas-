@@ -1,0 +1,62 @@
+{
+  "_nota": "Fuente oficial de precios PetColinas. Actualizar aqui antes de cualquier cambio. Extraido de ESPEJO_APP con 962 transacciones reales (jun 2026).",
+
+  "grooming": {
+    "_politica": "Se cobra por TAMAÑO del perro, nunca por raza",
+    "bano_base": {
+      "cachorro":  699,
+      "pequeño":   799,
+      "mediano":   949,
+      "grande":   1149,
+      "medicado": 1000
+    },
+    "adicionales": {
+      "corte_higienico":  490,
+      "corte_completo":   749,
+      "corte_unas":       300,
+      "desenrede":        690,
+      "deslanado":        890,
+      "con_linea":        200
+    },
+    "combos_mas_vendidos": {
+      "baño pequeño + corte higiénico":  1289,
+      "baño pequeño + corte completo":   1548,
+      "baño mediano + corte higiénico":  1439,
+      "baño mediano + corte completo":   1698,
+      "baño grande + corte completo":    1700,
+      "baño cachorro + corte higiénico": 1189,
+      "baño cachorro + corte completo":  1448
+    }
+  },
+
+  "veterinaria": {
+    "consulta":              1500,
+    "vacuna_quintuple":      1200,
+    "vacuna_sextuple":       1470,
+    "vacuna_triple":         1300,
+    "vacuna_rabia":          1500,
+    "vacuna_bordetella":     1400,
+    "vacuna_giardia":        1450,
+    "combo_primera_vacuna":  3500,
+    "test_parvo_corona_giardia": 1200,
+    "muestra_diagnostico":   1200,
+    "aplicacion_panacob":     450,
+    "aplicacion_albendazol":  300
+  },
+
+  "farmacia": {
+    "_nota": "Precios variables según producto y proveedor. No publicar precios fijos en carruseles.",
+    "ejemplos_mas_vendidos": {
+      "NexGard Spectra 3-7kg":    1462,
+      "NexGard Spectra 7-15kg":   1775,
+      "NexGard Spectra 2-3.5kg":  1416,
+      "Bravecto":                 2595,
+      "corte_unas_farmacia":       300,
+      "pasta_dental":              200
+    }
+  },
+
+  "horario": "Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+  "ubicacion": "Plaza Las Colinas, SDO Oeste",
+  "instagram": "@petcolinasrd"
+}

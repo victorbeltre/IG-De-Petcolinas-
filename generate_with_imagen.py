@@ -68,17 +68,12 @@ def _dry_background(prompt: str) -> Image.Image:
     return img
 
 def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
-    """Genera un fondo 1080x1080 con Google Imagen."""
+    """Genera un fondo 1080x1080 con Google Imagen via REST API."""
     if _DRY_RUN:
         print("    [dry-run] Saltando llamada a Imagen API")
         return _dry_background(prompt)
 
-    try:
-        from google import genai
-        from google.genai import types
-    except ImportError:
-        print("ERROR: Instala google-genai  →  pip install google-genai")
-        sys.exit(1)
+    import requests as _req
 
     api_key = os.environ.get("GOOGLE_AI_KEY")
     if not api_key:
@@ -86,8 +81,11 @@ def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
         print("       export GOOGLE_AI_KEY='AIza...'")
         sys.exit(1)
 
-    client = genai.Client(api_key=api_key)
     model = "imagen-3.0-fast-generate-001" if fast else "imagen-3.0-generate-001"
+    url = (
+        f"https://generativelanguage.googleapis.com/v1beta/models/"
+        f"{model}:predict?key={api_key}"
+    )
 
     full_prompt = (
         f"{prompt}. "
@@ -95,19 +93,24 @@ def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
         "no text, no watermarks, no overlaid captions, high quality."
     )
 
+    payload = {
+        "instances": [{"prompt": full_prompt}],
+        "parameters": {
+            "sampleCount": 1,
+            "aspectRatio": "1:1",
+            "safetyFilterLevel": "block_only_high",
+            "personGeneration": "dont_allow",
+        },
+    }
+
     for attempt in range(3):
         try:
-            response = client.models.generate_images(
-                model=model,
-                prompt=full_prompt,
-                config=types.GenerateImagesConfig(
-                    number_of_images=1,
-                    aspect_ratio="1:1",
-                    safety_filter_level="BLOCK_ONLY_HIGH",
-                    person_generation="DONT_ALLOW",
-                ),
-            )
-            img_bytes = response.generated_images[0].image.image_bytes
+            resp = _req.post(url, json=payload, timeout=90)
+            resp.raise_for_status()
+            data = resp.json()
+            b64 = data["predictions"][0]["bytesBase64Encoded"]
+            import base64
+            img_bytes = base64.b64decode(b64)
             img = Image.open(BytesIO(img_bytes)).convert("RGBA")
             return img.resize((W, H), Image.LANCZOS)
         except Exception as e:

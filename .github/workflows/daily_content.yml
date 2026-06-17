@@ -1,6 +1,7 @@
 name: PetColinas — Publicar Carrusel
 
 on:
+  # Disparo manual desde GitHub Actions UI
   workflow_dispatch:
     inputs:
       post_dir:
@@ -8,9 +9,15 @@ on:
         required: true
         type: string
 
-  # Descomenta el bloque schedule para publicacion automatica programada.
-  # Cuando el schedule este activo, el bot publicara la carpeta posts/scheduled/
-  # (cambia el contenido de esa carpeta antes de cada publicacion).
+  # Disparo automatico: Claude actualiza publish.json y hace push
+  push:
+    branches:
+      - main
+    paths:
+      - 'publish.json'
+
+  # Disparo programado — descomenta para activar publicacion automatica.
+  # Cuando este activo, publica la carpeta posts/scheduled/.
   # schedule:
   #   # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
   #   # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
@@ -37,12 +44,24 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
+      - name: Resolver carpeta del post
+        id: resolver
+        run: |
+          EVENT="${{ github.event_name }}"
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            echo "post_dir=${{ inputs.post_dir }}" >> $GITHUB_OUTPUT
+          elif [ "$EVENT" = "push" ]; then
+            POST_DIR=$(python3 -c "import json; d=json.load(open('publish.json')); print(d['post_dir'])")
+            echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
+          else
+            echo "post_dir=scheduled" >> $GITHUB_OUTPUT
+          fi
+
       - name: Publicar carrusel en Instagram
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-          # workflow_dispatch usa el input; schedule usa "scheduled" como carpeta fija.
-          POST_DIR: ${{ inputs.post_dir || 'scheduled' }}
+          POST_DIR: ${{ steps.resolver.outputs.post_dir }}
           REPO: ${{ github.repository }}
           BRANCH: ${{ github.ref_name }}
         run: python publish_carousel.py

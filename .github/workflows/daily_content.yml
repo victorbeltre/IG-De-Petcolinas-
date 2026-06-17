@@ -1,23 +1,29 @@
-name: PetColinas — Contenido Diario Automatico
+name: PetColinas — Publicar Carrusel
 
 on:
-  schedule:
-    # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
-    # Se ejecuta todos los dias EXCEPTO martes (PetColinas esta cerrado)
-    # Cron: minuto hora * * dias (0=dom, 1=lun, 2=mar, 3=mie, 4=jue, 5=vie, 6=sab)
-    - cron: '0 13 * * 0,1,3,4,5,6'
-
-  # Permite ejecutar manualmente desde GitHub Actions para pruebas
   workflow_dispatch:
+    inputs:
+      post_dir:
+        description: "Carpeta del carrusel en posts/ (ej: semana-01)"
+        required: true
+        type: string
+
+  # Descomenta el bloque schedule para publicacion automatica programada.
+  # Cuando el schedule este activo, el bot publicara la carpeta posts/scheduled/
+  # (cambia el contenido de esa carpeta antes de cada publicacion).
+  # schedule:
+  #   # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
+  #   # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
+  #   - cron: '0 13 * * 0,1,3,4,5,6'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  generar-y-publicar:
-    name: Claude + Stable Horde → Instagram
+  publicar-carrusel:
+    name: Carrusel → Instagram
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
 
     steps:
       - name: Checkout del repositorio
@@ -31,78 +37,12 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Generar contenido (Claude + Stable Horde)
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # HORDE_KEY es opcional — si no existe usa clave anonima gratis
-          HORDE_KEY: ${{ secrets.HORDE_KEY }}
-        run: python generate_content.py
-
-      - name: Guardar imagen en el repositorio
-        run: |
-          git config user.name "PetColinas Bot"
-          git config user.email "bot@petcolinas.com"
-          git add post_del_dia.jpg caption.txt
-          git diff --cached --quiet || git commit -m "Post del dia $(date +'%Y-%m-%d')"
-          git push origin HEAD
-
-      - name: Esperar propagacion CDN de GitHub
-        run: sleep 20
-
-      - name: Publicar en Instagram
+      - name: Publicar carrusel en Instagram
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-        run: |
-          REPO="${{ github.repository }}"
-          BRANCH="${{ github.ref_name }}"
-          IMAGE_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/post_del_dia.jpg"
-          CAPTION=$(cat caption.txt)
-
-          echo "Subiendo imagen a Instagram: $IMAGE_URL"
-
-          CONTAINER=$(curl -s -X POST \
-            "https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media" \
-            -d "image_url=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1],safe=":/"))'  "$IMAGE_URL")" \
-            -d "caption=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))'  "$CAPTION")" \
-            -d "access_token=${IG_ACCESS_TOKEN}")
-
-          echo "Respuesta contenedor: $CONTAINER"
-          CONTAINER_ID=$(echo "$CONTAINER" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))")
-
-          if [ -z "$CONTAINER_ID" ]; then
-            echo "ERROR: No se pudo crear el contenedor de media"
-            exit 1
-          fi
-
-          echo "Container ID: $CONTAINER_ID"
-
-          for i in $(seq 1 18); do
-            sleep 5
-            STATUS=$(curl -s \
-              "https://graph.facebook.com/v19.0/${CONTAINER_ID}?fields=status_code&access_token=${IG_ACCESS_TOKEN}" \
-              | python3 -c "import sys,json; print(json.load(sys.stdin).get('status_code','UNKNOWN'))")
-            echo "  Estado: $STATUS (intento $i/18)"
-            if [ "$STATUS" = "FINISHED" ]; then
-              break
-            fi
-            if [ "$STATUS" = "ERROR" ]; then
-              echo "ERROR: El contenedor fallo durante el procesamiento"
-              exit 1
-            fi
-          done
-
-          PUBLISH=$(curl -s -X POST \
-            "https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media_publish" \
-            -d "creation_id=${CONTAINER_ID}" \
-            -d "access_token=${IG_ACCESS_TOKEN}")
-
-          echo "Respuesta publicacion: $PUBLISH"
-          POST_ID=$(echo "$PUBLISH" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))")
-
-          if [ -z "$POST_ID" ]; then
-            echo "ERROR: No se pudo publicar el post"
-            exit 1
-          fi
-
-          echo "Post publicado en Instagram! ID: $POST_ID"
+          # workflow_dispatch usa el input; schedule usa "scheduled" como carpeta fija.
+          POST_DIR: ${{ inputs.post_dir || 'scheduled' }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+        run: python publish_carousel.py

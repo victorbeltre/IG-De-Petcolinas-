@@ -81,7 +81,7 @@ def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
         print("       export GOOGLE_AI_KEY='AIza...'")
         sys.exit(1)
 
-    model = "imagen-3.0-fast-generate-001" if fast else "imagen-3.0-generate-001"
+    model = "imagen-4.0-fast-generate-001" if fast else "imagen-4.0-generate-001"
     url = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
         f"{model}:predict?key={api_key}"

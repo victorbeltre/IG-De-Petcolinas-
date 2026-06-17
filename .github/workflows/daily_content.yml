@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       post_dir:
-        description: "Carpeta del carrusel en posts/ (ej: semana-01)"
+        description: "Carpeta del carrusel en posts/ (ej: vacunas)"
         required: true
         type: string
 
@@ -16,12 +16,10 @@ on:
     paths:
       - 'publish.json'
 
-  # Disparo programado — descomenta para activar publicacion automatica.
-  # Cuando este activo, publica la carpeta posts/scheduled/.
-  # schedule:
-  #   # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
-  #   # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
-  #   - cron: '0 13 * * 0,1,3,4,5,6'
+  # Publicacion programada diaria — 9:00 AM hora RD (UTC-4) = 13:00 UTC
+  # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
+  schedule:
+    - cron: '0 13 * * 0,1,3,4,5,6'
 
 permissions:
   contents: read
@@ -50,11 +48,23 @@ jobs:
           EVENT="${{ github.event_name }}"
           if [ "$EVENT" = "workflow_dispatch" ]; then
             echo "post_dir=${{ inputs.post_dir }}" >> $GITHUB_OUTPUT
+
           elif [ "$EVENT" = "push" ]; then
-            POST_DIR=$(python3 -c "import json; d=json.load(open('publish.json')); print(d['post_dir'])")
+            POST_DIR=$(python3 -c "import json; print(json.load(open('publish.json'))['post_dir'])")
             echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
-          else
-            echo "post_dir=scheduled" >> $GITHUB_OUTPUT
+
+          elif [ "$EVENT" = "schedule" ]; then
+            TODAY=$(date -u '+%Y-%m-%d')
+            POST_DIR=$(python3 -c "
+import json, sys
+sched = json.load(open('schedule.json'))
+d = sched.get('$TODAY')
+if not d:
+    print('ERROR: no hay post programado para $TODAY', file=sys.stderr)
+    sys.exit(1)
+print(d)
+")
+            echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
           fi
 
       - name: Publicar carrusel en Instagram

@@ -1,0 +1,69 @@
+{
+  "folder": "ejemplo-imagen",
+  "fast_model": false,
+  "caption": "🐾 ¿Sabías que tu perrito necesita atención dental regular?\n\nEn PetColinas cuidamos la salud de tu mascota de punta a punta 🦷✨\n\nAgenda tu cita hoy 👇\n📍 Plaza Las Colinas, SDO Oeste\n\n#PetColinas #SaludMascota #CuidadoDental #PerrosFelices #VeterinariaDominicana",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Happy healthy dog smiling with clean teeth, professional pet photography, bright background, no text",
+      "titulo": "Salud Dental para tu Perro",
+      "subtitulo": "Lo que debes saber 🦷"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Close-up of dog mouth being examined by vet, clean clinic, professional lighting, no text",
+      "titulo": "¿Por qué importa?",
+      "puntos": [
+        "El 80% de los perros tienen problemas dentales a los 3 años",
+        "El sarro causa mal aliento y dolor",
+        "Las bacterias bucales pueden afectar el corazón y riñones",
+        "La limpieza regular previene enfermedades costosas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog dental care products, toothbrush for pets, clean white background, no text",
+      "titulo": "Señales de alerta",
+      "puntos": [
+        "Mal aliento persistente",
+        "Dificultad para masticar",
+        "Encías rojas o sangrantes",
+        "Pérdida de piezas dentales",
+        "Babeo excesivo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Veterinarian cleaning dog teeth professionally, clinic environment, no text",
+      "titulo": "En PetColinas hacemos",
+      "puntos": [
+        "Revisión dental en cada consulta",
+        "Limpieza dental profesional",
+        "Recomendaciones de higiene en casa",
+        "Productos dentales especializados"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional veterinary dental examination, clean bright clinic, no text",
+      "nombre_plan": "Limpieza Dental",
+      "precio": "Desde RD$1,200",
+      "incluye": [
+        "Revisión completa de la boca",
+        "Limpieza y remoción de sarro",
+        "Pulido dental",
+        "Instrucciones de cuidado en casa"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with owner at veterinary clinic, warm lighting, joyful atmosphere, no text",
+      "titulo": "¡Agenda su limpieza hoy!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "@petcolinasrd en Instagram"
+      ]
+    }
+  ]
+}

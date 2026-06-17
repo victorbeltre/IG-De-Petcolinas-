@@ -1,0 +1,11 @@
+Esta carpeta se usa para publicaciones automaticas programadas (schedule).
+
+Cuando el schedule este activado en el workflow, el bot publicara
+el contenido de esta carpeta automaticamente segun el cron configurado.
+
+Antes de cada publicacion programada:
+1. Reemplaza las imagenes (01.png, 02.png, etc.) con las del nuevo post
+2. Actualiza caption.txt con el caption del nuevo post
+3. Haz commit y push de los cambios
+
+El bot tomara el contenido de esta carpeta en el momento de ejecucion.

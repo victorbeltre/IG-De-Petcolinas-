@@ -1,0 +1,16 @@
+Esta carpeta es un ejemplo de la estructura de un post de carrusel.
+
+Para publicar un carrusel real:
+1. Crea una carpeta en posts/ con el nombre del post (ej: posts/semana-01/)
+2. Agrega las imagenes nombradas en orden: 01.png, 02.png, 03.png, ...
+   - Minimo 2 imagenes, maximo 10
+   - Formatos aceptados: .png, .jpg, .jpeg
+   - Resolucion recomendada: 1080x1080 px (cuadrado)
+3. Agrega el caption en caption.txt
+4. Haz commit y push de la carpeta al repositorio
+5. Ve a GitHub Actions → "PetColinas — Publicar Carrusel" → Run workflow
+   → Escribe el nombre de la carpeta (ej: semana-01) → Run
+
+Para reemplazar las imagenes de ejemplo por las tuyas,
+elimina este archivo LEEME.txt y los archivos 01.png, 02.png, etc.
+y agrega tus propias imagenes.

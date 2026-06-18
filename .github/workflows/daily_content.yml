@@ -55,15 +55,7 @@ jobs:
 
           elif [ "$EVENT" = "schedule" ]; then
             TODAY=$(date -u '+%Y-%m-%d')
-            POST_DIR=$(python3 -c "
-import json, sys
-sched = json.load(open('schedule.json'))
-d = sched.get('$TODAY')
-if not d:
-    print('ERROR: no hay post programado para $TODAY', file=sys.stderr)
-    sys.exit(1)
-print(d)
-")
+            POST_DIR=$(python3 -c "import json,sys; d=json.load(open('schedule.json')).get('$TODAY'); d or (print('ERROR: no hay post para $TODAY',file=sys.stderr) or sys.exit(1)); print(d)")
             echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
           fi
 

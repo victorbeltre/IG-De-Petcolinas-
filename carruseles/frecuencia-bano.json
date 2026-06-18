@@ -1,0 +1,76 @@
+{
+  "folder": "frecuencia-bano",
+  "fast_model": true,
+  "caption": "🛁 ¿Cada cuánto bañas a tu perro? La mayoría lo hace mal\n\nDemasiado frecuente o muy espaciado — los dos extremos dañan su piel 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #FrecuenciaDeBaño #BañoCanino #CuidadoPiel #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Fluffy dog looking fresh and clean after a professional bath, bright cheerful background, no people, no text",
+      "titulo": "¿Cada cuánto bañar a tu perro?",
+      "subtitulo": "La respuesta que cambia todo 🛁"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Different dog breeds side by side showing variety of coat types, clean studio background, no people, no text",
+      "titulo": "No hay una respuesta única",
+      "puntos": [
+        "Depende del tipo de pelaje y de la raza",
+        "Pelo corto (labrador, beagle): cada 6-8 semanas",
+        "Pelo largo y fino (maltés, yorkie): cada 3-4 semanas",
+        "Pelo rizado (poodle, bichón): cada 4-6 semanas",
+        "Piel grasa o alergias: cada 2-3 semanas con shampoo medicado",
+        "Tu veterinario te indica el intervalo ideal"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog shaking water droplets from fur, overly wet, bathroom scene, no people, no text",
+      "titulo": "Si lo bañas demasiado seguido...",
+      "puntos": [
+        "Eliminas el manto lipídico natural de la piel",
+        "La piel queda seca, irritada y con picazón",
+        "Mayor riesgo de hongos e infecciones bacterianas",
+        "El pelo pierde brillo y se vuelve quebradizo",
+        "Más baños no significa más limpieza real",
+        "Incluso con buen shampoo, el exceso hace daño"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with dull dirty fur looking unkempt, neglected coat concept, no people, no text",
+      "titulo": "Si lo bañas muy poco...",
+      "puntos": [
+        "Se acumula suciedad, grasa y bacterias",
+        "El mal olor no desaparece entre baños",
+        "Los parásitos se esconden mejor en el pelaje sucio",
+        "Los nudos se forman y jalan la piel (duele)",
+        "Infecciones de piel que se podrían prevenir",
+        "El perro se siente incómodo aunque no lo muestre"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional grooming salon with clean bright interior, tools on display, no people, no text",
+      "nombre_plan": "Baño profesional en PetColinas",
+      "precio": "Desde RD$799",
+      "incluye": [
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Baño grande: RD$1,149",
+        "Baño medicado: RD$1,000",
+        "Shampoo adecuado al tipo de piel de tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy clean dog after professional grooming session, sparkling coat, bright studio, no people, no text",
+      "titulo": "¡Agenda su baño ideal!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

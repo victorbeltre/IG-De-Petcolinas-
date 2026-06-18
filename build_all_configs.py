@@ -460,6 +460,46 @@ CONFIGS = {
   ]
 },
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+"frecuencia-bano": {
+  "caption": f"🛁 ¿Cada cuánto bañas a tu perro? La mayoría lo hace mal\n\nDemasiado frecuente o muy espaciado — los dos extremos dañan su piel 🐾{FOOTER_CAP}\n\n#PetColinas #FrecuenciaDeBaño #BañoCanino #CuidadoPiel #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Fluffy dog looking fresh and clean after a professional bath, bright cheerful background, no people, no text","titulo":"¿Cada cuánto bañar a tu perro?","subtitulo":"La respuesta que cambia todo 🛁"},
+    {"tipo":"contenido","bg_prompt":"Different dog breeds side by side showing variety of coat types, clean studio background, no people, no text","titulo":"No hay una respuesta única","puntos":["Depende del tipo de pelaje y de la raza","Pelo corto (labrador, beagle): cada 6-8 semanas","Pelo largo y fino (maltés, yorkie): cada 3-4 semanas","Pelo rizado (poodle, bichón): cada 4-6 semanas","Piel grasa o alergias: cada 2-3 semanas con shampoo medicado","Tu veterinario te indica el intervalo ideal"]},
+    {"tipo":"contenido","bg_prompt":"Dog shaking water droplets from fur, overly wet, bathroom scene, no people, no text","titulo":"Si lo bañas demasiado seguido...","puntos":["Eliminas el manto lipídico natural de la piel","La piel queda seca, irritada y con picazón","Mayor riesgo de hongos e infecciones bacterianas","El pelo pierde brillo y se vuelve quebradizo","Más baños no significa más limpieza real","Incluso con buen shampoo, el exceso hace daño"]},
+    {"tipo":"contenido","bg_prompt":"Dog with dull dirty fur looking unkempt, neglected coat concept, no people, no text","titulo":"Si lo bañas muy poco...","puntos":["Se acumula suciedad, grasa y bacterias","El mal olor no desaparece entre baños","Los parásitos se esconden mejor en el pelaje sucio","Los nudos se forman y jalan la piel (duele)","Infecciones de piel que se podrían prevenir","El perro se siente incómodo aunque no lo muestre"]},
+    {"tipo":"precio","bg_prompt":"Professional grooming salon with clean bright interior, tools on display, no people, no text","nombre_plan":"Baño profesional en PetColinas","precio":f"Desde RD${bano['pequeño']:,}","incluye":[f"Baño pequeño: RD${bano['pequeño']:,}",f"Baño mediano: RD${bano['mediano']:,}",f"Baño grande: RD${bano['grande']:,}",f"Baño medicado: RD${bano['medicado']:,}","Shampoo adecuado al tipo de piel de tu mascota"]},
+    {"tipo":"cta","bg_prompt":"Happy clean dog after professional grooming session, sparkling coat, bright studio, no people, no text","titulo":"¡Agenda su baño ideal!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"alimentos-toxicos": {
+  "caption": f"☠️ ¿Tienes alguno de estos en tu cocina? Pueden matar a tu perro\n\nGuarda este carrusel — puede salvar la vida de tu mascota 🚨{FOOTER_CAP}\n\n#PetColinas #AlimentosToxicos #PeligroPerros #EmergenciaVet #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Kitchen ingredients and food on counter with red warning concept, dangerous foods educational poster style, no people, no text","titulo":"Lo que NO debe comer tu perro","subtitulo":"Algunos los tienes en casa ahora mismo ☠️"},
+    {"tipo":"contenido","bg_prompt":"Grapes and raisins on white background with danger symbol concept, dog health warning, no text","titulo":"🍇 Uvas y pasas","puntos":["Causan fallo renal agudo — incluso en cantidades pequeñas","No importa la raza ni el tamaño del perro","Los síntomas: vómito, letargo, pérdida de apetito","El daño puede ser irreversible en pocas horas","Si las comió, ve al veterinario de INMEDIATO","No esperes a que aparezcan síntomas"]},
+    {"tipo":"contenido","bg_prompt":"Chocolate pieces and coffee on dark background with caution concept, toxic food warning, no text","titulo":"🍫 Chocolate y cafeína","puntos":["Contienen teobromina — muy tóxica para perros","El chocolate negro es el más peligroso","Causa vómitos, diarrea, convulsiones y arritmias","Puede ser fatal dependiendo de la cantidad","También: café, té, energizantes y gaseosas","Ni un pedacito — nunca — es seguro para tu perro"]},
+    {"tipo":"contenido","bg_prompt":"Onion garlic and leek on clean white surface with warning concept, toxic ingredients for dogs, no text","titulo":"🧅 Más alimentos del hogar","puntos":["Cebolla y ajo → destruyen glóbulos rojos (anemia fatal)","Xilitol (en chicles y edulcorantes) → hipoglucemia severa","Aguacate → vómitos, diarrea y daño cardíaco","Nueces de macadamia → temblores y fiebre alta","Huesos cocidos → se astillan y perforan el intestino","Alcohol → daño neurológico y hepático severo"]},
+    {"tipo":"contenido","bg_prompt":"Dog looking worried beside forbidden human food concept, warning educational style, no people, no text","titulo":"Lo que muchos no saben","puntos":["Muchos alimentos humanos tienen estas sustancias ocultas","Cebolla y ajo están en salsas, guisos y embutidos","El xilitol está en chicles, Nutella y productos 'sin azúcar'","El daño puede ser acumulativo con pequeñas dosis repetidas","Un perro 'bien' hoy puede estar gravemente mal mañana","La prevención es más barata que la emergencia"]},
+    {"tipo":"cta","bg_prompt":"Veterinary emergency room concept, urgent care for pets, bright clean clinic, no people, no text","titulo":"Si comió algo peligroso...","subtitulo":f"No esperes. Consulta veterinaria RD${v['consulta']:,}","lineas":[f"📍 {ub}","📱 Contáctanos de inmediato",ig]},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"club-petcolinas": {
+  "caption": f"🎁 ¿Sabías que tu baño #10 en PetColinas es completamente GRATIS?\n\nAsí funciona el Club PetColinas — la lealtad tiene recompensa 🐾{FOOTER_CAP}\n\n#PetColinas #ClubPetColinas #BañoGratis #ClientesFieles #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Gift box with dog paw print ribbon concept, loyalty reward program, celebration bright colors, no people, no text","titulo":"El baño #10 es GRATIS","subtitulo":"Así funciona el Club PetColinas 🎁"},
+    {"tipo":"contenido","bg_prompt":"Loyalty stamp card concept with paw prints, reward card design, clean white and green colors, no text","titulo":"¿Cómo funciona?","puntos":["Acumula 9 baños en PetColinas","El décimo baño es completamente GRATIS","Sin vencimiento — tómate el tiempo que necesites","Sin letra pequeña ni condiciones ocultas","Cada baño que das cuenta, sin excepción","Pregunta por tu progreso en recepción"]},
+    {"tipo":"contenido","bg_prompt":"Happy well-groomed dog at salon, regular grooming schedule concept, warm professional atmosphere, no people, no text","titulo":"¿Por qué vale la pena?","puntos":["El equipo conoce la piel y el pelaje de tu mascota","Detectamos cambios de salud antes de que empeoren","Tu perro se acostumbra a su groomer y se estresa menos","Historial de baños y observaciones por visita","Atención personalizada en cada cita","Y el 10mo baño siempre sale GRATIS"]},
+    {"tipo":"contenido","bg_prompt":"Healthy dog with shiny coat receiving grooming care, professional salon, clean bright space, no people, no text","titulo":"Constancia = salud real","puntos":["El grooming regular no es lujo — es medicina preventiva","Previene nudos dolorosos, otitis e infecciones de piel","Detecta parásitos y tumores a tiempo","Mantiene uñas y oídos en perfecto estado","Con el Club, mantener la rutina tiene premio","Un perro bien cuidado vive más y mejor"]},
+    {"tipo":"precio","bg_prompt":"Professional dog grooming salon interior, clean green and white decor, organized tools, no people, no text","nombre_plan":"Nuestros baños","precio":f"Cachorro: RD${bano['cachorro']:,}","incluye":[f"Baño cachorro: RD${bano['cachorro']:,}",f"Baño pequeño: RD${bano['pequeño']:,}",f"Baño mediano: RD${bano['mediano']:,}",f"Baño grande: RD${bano['grande']:,}","El #10 siempre es GRATIS en el Club"]},
+    {"tipo":"cta","bg_prompt":"Dog looking happy and excited at grooming salon, cheerful atmosphere, bright colors, no people, no text","titulo":"¡Empieza a acumular hoy!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
 } # fin CONFIGS
 
 if __name__ == "__main__":

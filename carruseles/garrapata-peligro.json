@@ -1,0 +1,75 @@
+{
+  "folder": "garrapata-peligro",
+  "fast_model": true,
+  "caption": "🚨 Una sola garrapata puede enfermar gravemente a tu perro\n\nTransmiten enfermedades mortales como la ehrlichia. No las subestimes 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Garrapatas #Ehrlichia #PrevencionCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog in tall grass outdoor environment, alert expression, natural warm light, no people, no text",
+      "titulo": "El peligro de las garrapatas",
+      "subtitulo": "Más grave de lo que imaginas 🚨"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Tick parasite concept illustration on dog fur, educational macro style, no text",
+      "titulo": "Enfermedades que transmiten",
+      "puntos": [
+        "Ehrlichiosis — ataca la sangre y la médula",
+        "Babesiosis — destruye los glóbulos rojos",
+        "Anaplasmosis — causa fiebre y dolor articular",
+        "Hepatozoonosis — afecta órganos internos",
+        "Algunas pueden ser mortales si no se tratan",
+        "Los síntomas pueden tardar semanas en aparecer"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Tired lethargic dog lying down, unwell expression, soft indoor light, no people, no text",
+      "titulo": "Señales de alerta",
+      "puntos": [
+        "Fiebre y decaimiento repentino",
+        "Pérdida de apetito y de peso",
+        "Encías pálidas (anemia)",
+        "Sangrado de nariz o moretones en la piel",
+        "Cojera o dolor en las articulaciones",
+        "Si encontraste una garrapata, vigílalo de cerca"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Antiparasitic medication and tick prevention products on white background, no text",
+      "titulo": "Cómo proteger a tu perro",
+      "puntos": [
+        "Antiparasitario mensual SIN falta",
+        "Revisa su cuerpo después de cada paseo",
+        "Quita las garrapatas correctamente (no a la fuerza)",
+        "Trata también el ambiente (patio, cama)",
+        "Ante cualquier síntoma, ve al veterinario",
+        "La prevención es la única defensa real"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Pet pharmacy display with antiparasitic products, clean shelf, no people, no text",
+      "nombre_plan": "Protección antiparasitaria",
+      "precio": "Desde RD$1,416",
+      "incluye": [
+        "NexGard Spectra desde RD$1,416",
+        "Bravecto (12 semanas): RD$2,595",
+        "Consulta veterinaria: RD$1,500",
+        "Asesoría según el peso de tu perro"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy protected dog playing outdoors safely, energetic and happy, no people, no text",
+      "titulo": "¡Protégelo a tiempo!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

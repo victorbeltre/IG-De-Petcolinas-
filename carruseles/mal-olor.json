@@ -1,0 +1,75 @@
+{
+  "folder": "mal-olor",
+  "fast_model": true,
+  "caption": "👃 Si tu perro huele mal, algo está pasando\n\nEl mal olor no se quita con perfume — se quita encontrando la causa 🛁\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #PerroHuelMal #Grooming #BañoCanino #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Fluffy dog looking up with cute expression, clean bright background, no people, no text",
+      "titulo": "Si tu perro huele mal...",
+      "subtitulo": "No es normal, es una señal 👃"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog being inspected, fur and skin check concept, soft natural light, no people, no text",
+      "titulo": "De dónde viene el mal olor",
+      "puntos": [
+        "Piel grasa o infecciones cutáneas",
+        "Oídos sucios o con infección (otitis)",
+        "Problemas dentales y mal aliento",
+        "Glándulas anales llenas",
+        "Pelaje sucio o con humedad atrapada",
+        "Pliegues de piel sin limpiar (en algunas razas)"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog wrapped in clean towel after bath, fresh and fluffy, bright background, no people, no text",
+      "titulo": "Lo que el baño profesional resuelve",
+      "puntos": [
+        "Limpieza profunda con shampoo adecuado",
+        "Secado completo (la humedad causa hongos)",
+        "Limpieza de oídos incluida",
+        "Revisión de piel durante el baño",
+        "Pelaje desenredado y libre de suciedad",
+        "Tu perro huele rico y se siente cómodo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog shampoo bottles and grooming tools flat lay on white surface, no text",
+      "titulo": "Cada cuánto bañarlo",
+      "puntos": [
+        "Razas de pelo corto: cada 4-6 semanas",
+        "Razas de pelo largo: cada 3-4 semanas",
+        "Piel sensible: según indicación veterinaria",
+        "Bañarlo de más también daña su piel",
+        "Si huele mal a los pocos días, hay un problema de salud"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional grooming salon interior, clean bright space with tools, no people, no text",
+      "nombre_plan": "Baño profesional",
+      "precio": "Desde RD$799",
+      "incluye": [
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Baño grande: RD$1,149",
+        "Baño medicado: RD$1,000",
+        "Limpieza de oídos y secado incluidos"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Fresh clean fluffy dog smelling like flowers, happy expression, bright background, no people, no text",
+      "titulo": "¡Que huela increíble!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

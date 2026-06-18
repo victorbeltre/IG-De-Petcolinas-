@@ -16,10 +16,12 @@ on:
     paths:
       - 'publish.json'
 
-  # Publicacion programada diaria — 9:00 AM hora RD (UTC-4) = 13:00 UTC
-  # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
+  # Publicacion programada — hora RD (UTC-4). Todos los dias EXCEPTO martes.
+  #   13:00 UTC = 9:00 AM RD  -> schedule.json
+  #   16:00 UTC = 12:00 PM RD -> schedule_mediodia.json
   schedule:
     - cron: '0 13 * * 0,1,3,4,5,6'
+    - cron: '0 16 * * 0,1,3,4,5,6'
 
 permissions:
   contents: read
@@ -55,7 +57,9 @@ jobs:
 
           elif [ "$EVENT" = "schedule" ]; then
             TODAY=$(date -u '+%Y-%m-%d')
-            POST_DIR=$(python3 -c "import json,sys; d=json.load(open('schedule.json')).get('$TODAY'); d or (print('ERROR: no hay post para $TODAY',file=sys.stderr) or sys.exit(1)); print(d)")
+            HOUR=$(date -u '+%H')
+            if [ "$HOUR" = "16" ]; then SCHED=schedule_mediodia.json; else SCHED=schedule.json; fi
+            POST_DIR=$(python3 -c "import json,sys; d=json.load(open('$SCHED')).get('$TODAY'); d or (print('ERROR: no hay post en $SCHED para $TODAY',file=sys.stderr) or sys.exit(1)); print(d)")
             echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
           fi
 

@@ -1,0 +1,73 @@
+{
+  "folder": "esterilizacion",
+  "fast_model": true,
+  "caption": "❤️ Esterilizar a tu mascota: mitos y verdades\n\nEs uno de los actos de amor más grandes por la salud de tu perro 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Esterilizacion #Castracion #TenenciaResponsable #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Calm content dog resting comfortably, peaceful expression, soft warm background, no people, no text",
+      "titulo": "Esterilización",
+      "subtitulo": "Mitos y verdades 🐾"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Healthy dog portrait looking calm and well, bright clean background, no people, no text",
+      "titulo": "Beneficios reales",
+      "puntos": [
+        "Previene tumores mamarios y de próstata",
+        "Elimina el riesgo de infecciones uterinas (piometra)",
+        "Reduce el deseo de escapar y pelear",
+        "Disminuye el marcaje y la ansiedad",
+        "Ayuda a controlar la población de animales",
+        "Mascotas más tranquilas y hogareñas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Question marks and myth versus fact concept, clean educational design, no people, no text",
+      "titulo": "Mitos que debes olvidar",
+      "puntos": [
+        "❌ 'Engorda' — engorda la sobrealimentación, no la cirugía",
+        "❌ 'Lo vuelve triste' — su personalidad no cambia",
+        "❌ 'Debe tener una camada antes' — falso y sin beneficio",
+        "❌ 'Es muy arriesgado' — es una cirugía de rutina segura",
+        "✅ La verdad: vive más sano y por más tiempo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Veterinary surgery room clean and modern, professional equipment, no people, no text",
+      "titulo": "¿Cuándo hacerlo?",
+      "puntos": [
+        "Generalmente entre los 6 y 8 meses de edad",
+        "Antes del primer celo en las hembras (ideal)",
+        "Requiere evaluación previa con el veterinario",
+        "Exámenes para asegurar que está apto",
+        "Recuperación rápida con los cuidados correctos"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary consultation room, calm and professional environment, no people, no text",
+      "nombre_plan": "Evaluación pre-quirúrgica",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Examen físico completo",
+        "Asesoría sobre el momento ideal",
+        "Plan de cuidados pre y post operatorio",
+        "Pregúntanos por la evaluación de tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy healthy dog relaxing at home, content and peaceful, bright setting, no people, no text",
+      "titulo": "Pregúntanos hoy",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

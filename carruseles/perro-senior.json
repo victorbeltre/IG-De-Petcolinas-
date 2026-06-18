@@ -1,0 +1,75 @@
+{
+  "folder": "perro-senior",
+  "fast_model": true,
+  "caption": "🐕‍🦺 Tu perro está envejeciendo — sus necesidades cambian\n\nLos cuidados correctos le dan años de calidad de vida 💚\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #PerroSenior #PerroMayor #CuidadoIntegral #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Senior dog with grey muzzle resting peacefully, wise gentle expression, warm soft light, no people, no text",
+      "titulo": "Cuidados del perro mayor",
+      "subtitulo": "Su etapa más necesitada de ti 🐕‍🦺"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Older dog with grey fur lying comfortably, calm mood, soft warm light, no people, no text",
+      "titulo": "¿Cuándo es 'senior'?",
+      "puntos": [
+        "Razas pequeñas: a partir de los 10-12 años",
+        "Razas medianas: a partir de los 8-9 años",
+        "Razas grandes: a partir de los 6-7 años",
+        "Empieza a moverse más lento",
+        "Duerme más y juega menos",
+        "Es momento de redoblar los cuidados"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Senior dog being gently cared for, comfortable home setting, warm light, no people, no text",
+      "titulo": "Cambios que vas a notar",
+      "puntos": [
+        "Canas alrededor del hocico y los ojos",
+        "Menos energía y más horas de sueño",
+        "Posible aumento o pérdida de peso",
+        "Ojos más opacos (visión reducida)",
+        "Le cuesta subir, bajar o saltar",
+        "Puede oír o ver menos que antes"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Comfortable orthopedic dog bed in cozy home, senior pet care concept, warm light, no people, no text",
+      "titulo": "Cómo cuidarlo mejor",
+      "puntos": [
+        "Cama cómoda y acolchada para sus articulaciones",
+        "Alimento específico para perros senior",
+        "Paseos suaves y más cortos",
+        "Chequeos veterinarios cada 6 meses",
+        "Mantén sus dientes y uñas al día",
+        "Mucho amor, paciencia y compañía"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary care for senior dog concept, gentle clinic setting, no people, no text",
+      "nombre_plan": "Control del perro senior",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Chequeo geriátrico completo",
+        "Evaluación de movilidad y dolor",
+        "Asesoría de nutrición senior",
+        "Recomendamos control cada 6 meses"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy senior dog enjoying calm comfortable life, content expression, warm bright setting, no people, no text",
+      "titulo": "Dale la mejor vejez",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

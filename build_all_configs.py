@@ -20,6 +20,7 @@ hr = P["horario"]
 bano   = g["bano_base"]
 combos = g["combos_mas_vendidos"]
 add    = g["adicionales"]
+farm   = P["farmacia"]["ejemplos_mas_vendidos"]
 
 CTA_LINEAS = [f"📱 Escríbenos por WhatsApp", f"⏰ {hr}", ig]
 FOOTER_CAP = f"\n\n📍 {ub}\n{ig}"
@@ -270,6 +271,192 @@ CONFIGS = {
     {"tipo":"contenido","bg_prompt":"Dog grooming salon with professional equipment, scissors, brushes on display, clean organized space, no people, no text","titulo":"Grooming","puntos":[f"Baño cachorro: RD${bano['cachorro']:,}",f"Baño pequeño: RD${bano['pequeño']:,}",f"Baño mediano: RD${bano['mediano']:,}",f"Baño grande: RD${bano['grande']:,}",f"Corte higiénico: +RD${add['corte_higienico']:,}",f"Corte completo: +RD${add['corte_completo']:,}"]},
     {"tipo":"contenido","bg_prompt":"Pet store shelves with products, clean organized pharmacy section, no people, no text","titulo":"Farmacia y tienda","puntos":["NexGard Spectra y Bravecto antiparasitarios","Shampoos profesionales y medicados","Alimentos premium para perros y gatos","Accesorios: collares, correas, juguetes","Pasta dental y productos de higiene","Asesoría personalizada en cada compra"]},
     {"tipo":"cta","bg_prompt":"Welcoming pet clinic entrance, green plants, clean modern exterior, inviting atmosphere, no people, no text","titulo":"¡Visítanos!","subtitulo":f"📍 {ub}","lineas":[f"⏰ {hr}","📱 Escríbenos por WhatsApp",ig]},
+  ]
+},
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NUEVOS TEMAS DE CONCIENTIZACIÓN — slot de las 12pm
+# Crean necesidad en el cliente educándolo sobre la salud de su mascota.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"mal-aliento": {
+  "caption": f"😮‍💨 El mal aliento de tu perro NO es normal\n\nEs la señal #1 de enfermedad dental. Tu perro podría estar sufriendo en silencio 🦷{FOOTER_CAP}\n\n#PetColinas #MalAliento #SaludDental #PerrosRD #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog with mouth slightly open showing teeth, close-up portrait, clean bright background, no people, no text","titulo":"El mal aliento NO es normal","subtitulo":"Es una señal de alerta 😮‍💨"},
+    {"tipo":"contenido","bg_prompt":"Dog teeth with tartar buildup concept, dental health educational macro view, clean background, no people, no text","titulo":"¿Qué lo causa?","puntos":["Acumulación de sarro y placa bacteriana","Enfermedad periodontal (encías infectadas)","Restos de comida entre los dientes","Infecciones en boca o garganta","A veces: problemas digestivos o renales","NO se quita solo — empeora con el tiempo"]},
+    {"tipo":"contenido","bg_prompt":"Dog showing red inflamed gums concept, dental disease awareness, clean background, no people, no text","titulo":"Cuándo es serio","puntos":["Aliento fétido constante","Encías rojas, inflamadas o que sangran","Dientes amarillos o cafés con sarro","Babeo más de lo normal","Deja de comer alimentos duros","Se toca la boca con la pata"]},
+    {"tipo":"contenido","bg_prompt":"Pet toothbrush and dog dental chew on clean white background, prevention concept, no text","titulo":"Cómo prevenirlo","puntos":["Cepillado dental 2-3 veces por semana","Pasta dental SOLO para perros","Premios y juguetes dentales","Revisión dental en cada consulta","Limpieza profesional cuando el vet lo indique"]},
+    {"tipo":"precio","bg_prompt":"Veterinary dental examination concept, clean modern clinic, no people, no text","nombre_plan":"Evaluación dental","precio":f"Consulta RD${v['consulta']:,}","incluye":["Revisión completa de la boca","Evaluación de encías y sarro","Plan de tratamiento personalizado",f"Pasta dental en tienda: RD${farm['pasta_dental']:,}"]},
+    {"tipo":"cta","bg_prompt":"Happy dog with healthy clean teeth, cheerful bright background, no people, no text","titulo":"¡Revisa su salud dental!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"rascado-excesivo": {
+  "caption": f"🐾 ¿Por qué tu perro se rasca tanto?\n\nEl rascado constante NO es normal — casi siempre hay una causa que tratar 🔍{FOOTER_CAP}\n\n#PetColinas #PerroQueSeRasca #Alergias #Pulgas #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog scratching its neck with hind leg, uncomfortable expression, natural indoor setting, no people, no text","titulo":"¿Por qué se rasca tanto?","subtitulo":"El picor siempre tiene una causa 🐾"},
+    {"tipo":"contenido","bg_prompt":"Close-up of dog fur being parted to inspect skin, examination concept, soft light, no people, no text","titulo":"Causas más comunes","puntos":["Pulgas y garrapatas (la causa #1)","Alergias alimentarias o ambientales","Piel seca o dermatitis","Hongos o infecciones bacterianas","Ácaros (sarna)","Estrés o ansiedad"]},
+    {"tipo":"contenido","bg_prompt":"Dog with irritated red skin patch concept, skin health awareness, clean background, no people, no text","titulo":"Señales de que es grave","puntos":["Se rasca hasta hacerse heridas","Pérdida de pelo en parches","Piel roja, con costras o mal olor","Se muerde o lame una zona sin parar","Puntos negros en el pelo (pulgas)","Cambios de ánimo por la incomodidad"]},
+    {"tipo":"contenido","bg_prompt":"Antiparasitic chewable tablet and pipette on clean white background, treatment concept, no text","titulo":"Qué puedes hacer","puntos":["Revisa si tiene pulgas o garrapatas","Mantén el antipulgas mensual al día","No uses remedios humanos en su piel","Un baño medicado alivia el picor","Si persiste, necesita evaluación veterinaria"]},
+    {"tipo":"precio","bg_prompt":"Pet pharmacy shelf with antiparasitic products, clean organized display, no people, no text","nombre_plan":"Soluciones en PetColinas","precio":f"Consulta RD${v['consulta']:,}","incluye":[f"NexGard Spectra desde RD${farm['NexGard Spectra 2-3.5kg']:,}",f"Bravecto (12 semanas): RD${farm['Bravecto']:,}",f"Baño medicado: RD${bano['medicado']:,}","Evaluación veterinaria de la piel"]},
+    {"tipo":"cta","bg_prompt":"Relaxed comfortable dog resting peacefully, relief expression, bright home setting, no people, no text","titulo":"¡Dale alivio a tu perro!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"mal-olor": {
+  "caption": f"👃 Si tu perro huele mal, algo está pasando\n\nEl mal olor no se quita con perfume — se quita encontrando la causa 🛁{FOOTER_CAP}\n\n#PetColinas #PerroHuelMal #Grooming #BañoCanino #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Fluffy dog looking up with cute expression, clean bright background, no people, no text","titulo":"Si tu perro huele mal...","subtitulo":"No es normal, es una señal 👃"},
+    {"tipo":"contenido","bg_prompt":"Dog being inspected, fur and skin check concept, soft natural light, no people, no text","titulo":"De dónde viene el mal olor","puntos":["Piel grasa o infecciones cutáneas","Oídos sucios o con infección (otitis)","Problemas dentales y mal aliento","Glándulas anales llenas","Pelaje sucio o con humedad atrapada","Pliegues de piel sin limpiar (en algunas razas)"]},
+    {"tipo":"contenido","bg_prompt":"Dog wrapped in clean towel after bath, fresh and fluffy, bright background, no people, no text","titulo":"Lo que el baño profesional resuelve","puntos":["Limpieza profunda con shampoo adecuado","Secado completo (la humedad causa hongos)","Limpieza de oídos incluida","Revisión de piel durante el baño","Pelaje desenredado y libre de suciedad","Tu perro huele rico y se siente cómodo"]},
+    {"tipo":"contenido","bg_prompt":"Dog shampoo bottles and grooming tools flat lay on white surface, no text","titulo":"Cada cuánto bañarlo","puntos":["Razas de pelo corto: cada 4-6 semanas","Razas de pelo largo: cada 3-4 semanas","Piel sensible: según indicación veterinaria","Bañarlo de más también daña su piel","Si huele mal a los pocos días, hay un problema de salud"]},
+    {"tipo":"precio","bg_prompt":"Professional grooming salon interior, clean bright space with tools, no people, no text","nombre_plan":"Baño profesional","precio":f"Desde RD${bano['pequeño']:,}","incluye":[f"Baño pequeño: RD${bano['pequeño']:,}",f"Baño mediano: RD${bano['mediano']:,}",f"Baño grande: RD${bano['grande']:,}",f"Baño medicado: RD${bano['medicado']:,}","Limpieza de oídos y secado incluidos"]},
+    {"tipo":"cta","bg_prompt":"Fresh clean fluffy dog smelling like flowers, happy expression, bright background, no people, no text","titulo":"¡Que huela increíble!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"sobrepeso": {
+  "caption": f"⚖️ ¿Tu perro tiene sobrepeso? La mayoría de los dueños no lo nota\n\nEl exceso de peso le quita años de vida a tu mascota 🐶{FOOTER_CAP}\n\n#PetColinas #SobrepesoCanino #SaludAnimal #NutricionPerros #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Chubby happy dog sitting, cute round body, clean bright background, no people, no text","titulo":"¿Tu perro tiene sobrepeso?","subtitulo":"La mayoría no lo nota a tiempo ⚖️"},
+    {"tipo":"contenido","bg_prompt":"Dog body silhouette comparison concept, healthy weight illustration, clean educational style, no people, no text","titulo":"Cómo saber si está pasado de peso","puntos":["No le sientes las costillas al tocar los costados","Perdió la 'cintura' vista desde arriba","La barriga cuelga y no se marca","Se cansa rápido al caminar o jugar","Le cuesta subir escaleras o saltar","Ronca o respira pesado al descansar"]},
+    {"tipo":"contenido","bg_prompt":"Sad overweight dog lying down resting, low energy concept, soft light, no people, no text","titulo":"Por qué es peligroso","puntos":["Sobrecarga el corazón y las articulaciones","Aumenta el riesgo de diabetes","Provoca problemas respiratorios","Reduce su esperanza de vida hasta 2 años","Empeora la artritis y el dolor","Lo hace menos activo y más triste"]},
+    {"tipo":"contenido","bg_prompt":"Dog food bowl with measured portion and measuring cup, healthy diet concept, white background, no text","titulo":"Cómo ayudarlo","puntos":["Mide las porciones — no llenes el plato 'a ojo'","Reduce premios y elimina la comida humana","Alimento de calidad acorde a su edad y peso","Paseos diarios y juego activo","Pésalo cada mes para seguir el progreso","Plan de nutrición guiado por el veterinario"]},
+    {"tipo":"precio","bg_prompt":"Premium dog food bags on clean store shelf, nutrition concept, no people, no text","nombre_plan":"Evaluación de peso y nutrición","precio":f"Consulta RD${v['consulta']:,}","incluye":["Evaluación de condición corporal","Plan de alimentación personalizado","Alimentos de calidad en nuestra tienda","Seguimiento del progreso de tu mascota"]},
+    {"tipo":"cta","bg_prompt":"Fit energetic dog running happily outdoors, healthy and active, no people, no text","titulo":"¡Ayúdalo a vivir más y mejor!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"esterilizacion": {
+  "caption": f"❤️ Esterilizar a tu mascota: mitos y verdades\n\nEs uno de los actos de amor más grandes por la salud de tu perro 🐾{FOOTER_CAP}\n\n#PetColinas #Esterilizacion #Castracion #TenenciaResponsable #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Calm content dog resting comfortably, peaceful expression, soft warm background, no people, no text","titulo":"Esterilización","subtitulo":"Mitos y verdades 🐾"},
+    {"tipo":"contenido","bg_prompt":"Healthy dog portrait looking calm and well, bright clean background, no people, no text","titulo":"Beneficios reales","puntos":["Previene tumores mamarios y de próstata","Elimina el riesgo de infecciones uterinas (piometra)","Reduce el deseo de escapar y pelear","Disminuye el marcaje y la ansiedad","Ayuda a controlar la población de animales","Mascotas más tranquilas y hogareñas"]},
+    {"tipo":"contenido","bg_prompt":"Question marks and myth versus fact concept, clean educational design, no people, no text","titulo":"Mitos que debes olvidar","puntos":["❌ 'Engorda' — engorda la sobrealimentación, no la cirugía","❌ 'Lo vuelve triste' — su personalidad no cambia","❌ 'Debe tener una camada antes' — falso y sin beneficio","❌ 'Es muy arriesgado' — es una cirugía de rutina segura","✅ La verdad: vive más sano y por más tiempo"]},
+    {"tipo":"contenido","bg_prompt":"Veterinary surgery room clean and modern, professional equipment, no people, no text","titulo":"¿Cuándo hacerlo?","puntos":["Generalmente entre los 6 y 8 meses de edad","Antes del primer celo en las hembras (ideal)","Requiere evaluación previa con el veterinario","Exámenes para asegurar que está apto","Recuperación rápida con los cuidados correctos"]},
+    {"tipo":"precio","bg_prompt":"Veterinary consultation room, calm and professional environment, no people, no text","nombre_plan":"Evaluación pre-quirúrgica","precio":f"Consulta RD${v['consulta']:,}","incluye":["Examen físico completo","Asesoría sobre el momento ideal","Plan de cuidados pre y post operatorio","Pregúntanos por la evaluación de tu mascota"]},
+    {"tipo":"cta","bg_prompt":"Happy healthy dog relaxing at home, content and peaceful, bright setting, no people, no text","titulo":"Pregúntanos hoy","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"otitis": {
+  "caption": f"👂 Los oídos de tu perro hablan más de lo que crees\n\nLa otitis es una de las infecciones más comunes y dolorosas — y se previene 🐾{FOOTER_CAP}\n\n#PetColinas #Otitis #OidosLimpios #SaludCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog with floppy ears tilting head, cute curious expression, clean bright background, no people, no text","titulo":"Cuida los oídos de tu perro","subtitulo":"La otitis es más común de lo que crees 👂"},
+    {"tipo":"contenido","bg_prompt":"Dog ear close-up examination concept, clean macro, soft light, no people, no text","titulo":"Señales de otitis","puntos":["Sacude la cabeza con frecuencia","Se rasca las orejas insistentemente","Mal olor proveniente del oído","Secreción cerosa, oscura o con pus","Enrojecimiento e inflamación interna","Dolor al tocarle la oreja"]},
+    {"tipo":"contenido","bg_prompt":"Dog with long ears in grass, outdoor natural setting, no people, no text","titulo":"Por qué se produce","puntos":["Humedad atrapada después del baño o nado","Exceso de pelo dentro del canal auditivo","Acumulación de cera y suciedad","Alergias y ácaros del oído","Razas de orejas caídas son más propensas","Limpieza inadecuada o con hisopos"]},
+    {"tipo":"contenido","bg_prompt":"Ear cleaning solution bottle and cotton on clean white surface, hygiene concept, no text","titulo":"Cómo prevenirla","puntos":["Limpieza regular con producto específico","Secar bien los oídos después del baño","Recortar el pelo del canal (en el groomer)","Nunca uses hisopos en el canal profundo","Revisión de oídos en cada grooming","Si hay infección, necesita tratamiento veterinario"]},
+    {"tipo":"precio","bg_prompt":"Professional grooming station, clean and organized, bright lighting, no people, no text","nombre_plan":"Grooming con limpieza de oídos","precio":f"Baño desde RD${bano['pequeño']:,}","incluye":["Limpieza de oídos incluida en todo baño","Revisión del canal auditivo","Recorte de pelo del oído",f"Consulta veterinaria si hay infección: RD${v['consulta']:,}"]},
+    {"tipo":"cta","bg_prompt":"Happy dog with clean healthy ears, cheerful expression, bright background, no people, no text","titulo":"¡Revisemos sus oídos!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"garrapata-peligro": {
+  "caption": f"🚨 Una sola garrapata puede enfermar gravemente a tu perro\n\nTransmiten enfermedades mortales como la ehrlichia. No las subestimes 🐾{FOOTER_CAP}\n\n#PetColinas #Garrapatas #Ehrlichia #PrevencionCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog in tall grass outdoor environment, alert expression, natural warm light, no people, no text","titulo":"El peligro de las garrapatas","subtitulo":"Más grave de lo que imaginas 🚨"},
+    {"tipo":"contenido","bg_prompt":"Tick parasite concept illustration on dog fur, educational macro style, no text","titulo":"Enfermedades que transmiten","puntos":["Ehrlichiosis — ataca la sangre y la médula","Babesiosis — destruye los glóbulos rojos","Anaplasmosis — causa fiebre y dolor articular","Hepatozoonosis — afecta órganos internos","Algunas pueden ser mortales si no se tratan","Los síntomas pueden tardar semanas en aparecer"]},
+    {"tipo":"contenido","bg_prompt":"Tired lethargic dog lying down, unwell expression, soft indoor light, no people, no text","titulo":"Señales de alerta","puntos":["Fiebre y decaimiento repentino","Pérdida de apetito y de peso","Encías pálidas (anemia)","Sangrado de nariz o moretones en la piel","Cojera o dolor en las articulaciones","Si encontraste una garrapata, vigílalo de cerca"]},
+    {"tipo":"contenido","bg_prompt":"Antiparasitic medication and tick prevention products on white background, no text","titulo":"Cómo proteger a tu perro","puntos":["Antiparasitario mensual SIN falta","Revisa su cuerpo después de cada paseo","Quita las garrapatas correctamente (no a la fuerza)","Trata también el ambiente (patio, cama)","Ante cualquier síntoma, ve al veterinario","La prevención es la única defensa real"]},
+    {"tipo":"precio","bg_prompt":"Pet pharmacy display with antiparasitic products, clean shelf, no people, no text","nombre_plan":"Protección antiparasitaria","precio":f"Desde RD${farm['NexGard Spectra 2-3.5kg']:,}","incluye":[f"NexGard Spectra desde RD${farm['NexGard Spectra 2-3.5kg']:,}",f"Bravecto (12 semanas): RD${farm['Bravecto']:,}",f"Consulta veterinaria: RD${v['consulta']:,}","Asesoría según el peso de tu perro"]},
+    {"tipo":"cta","bg_prompt":"Healthy protected dog playing outdoors safely, energetic and happy, no people, no text","titulo":"¡Protégelo a tiempo!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"nudos-pelaje": {
+  "caption": f"🪢 Los nudos en el pelo de tu perro DUELEN\n\nNo son solo estética — tiran de la piel y causan heridas. Así se previenen 🐾{FOOTER_CAP}\n\n#PetColinas #NudosEnElPelo #Grooming #DesenredeCanino #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Fluffy long-haired dog with tangled fur concept, cute expression, clean background, no people, no text","titulo":"Los nudos en el pelo duelen","subtitulo":"No son solo cuestión de estética 🪢"},
+    {"tipo":"contenido","bg_prompt":"Close-up of matted tangled dog fur concept, texture detail, soft light, no people, no text","titulo":"Por qué son un problema","puntos":["Tiran de la piel y causan dolor constante","Atrapan humedad y provocan hongos","Esconden parásitos y heridas","Reducen la circulación de aire en la piel","En casos graves causan llagas y dermatitis","Mientras más esperas, más difícil es quitarlos"]},
+    {"tipo":"contenido","bg_prompt":"Dog brush and comb with fur on clean white surface, grooming tools flat lay, no text","titulo":"Cómo prevenirlos","puntos":["Cepilla a tu perro varias veces por semana","Usa el cepillo adecuado para su tipo de pelo","Presta atención a axilas, orejas y patas","Nunca cortes un nudo con tijera en casa (riesgo de herida)","Cepilla siempre antes y después del baño","Grooming regular evita que se acumulen"]},
+    {"tipo":"contenido","bg_prompt":"Well groomed dog with silky smooth fur, beautiful coat, bright studio, no people, no text","titulo":"Razas que más lo necesitan","puntos":["Shih Tzu, Maltés, Yorkshire","Poodle y Bichón Frisé","Schnauzer y Cocker Spaniel","Cualquier perro de pelo largo o rizado","Doble capa después de cada muda","Grooming cada 3-4 semanas es lo ideal"]},
+    {"tipo":"precio","bg_prompt":"Professional grooming salon with detangling tools, clean organized space, no people, no text","nombre_plan":"Desenrede y deslanado","precio":f"Baño desde RD${bano['pequeño']:,}","incluye":[f"Desenrede: +RD${add['desenrede']:,}",f"Deslanado: +RD${add['deslanado']:,}",f"Baño + corte completo desde RD${combos['baño pequeño + corte completo']:,}","Cepillado profesional incluido"]},
+    {"tipo":"cta","bg_prompt":"Happy dog with smooth shiny tangle-free coat, content expression, bright background, no people, no text","titulo":"¡Libéralo de los nudos!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"dolor-oculto": {
+  "caption": f"😣 Tu perro esconde el dolor por instinto\n\nAprende a leer las señales que casi nadie nota a tiempo 🐾{FOOTER_CAP}\n\n#PetColinas #DolorEnPerros #SaludCanina #BienestarAnimal #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog with subtle worried expression resting, soft dramatic light, clean background, no people, no text","titulo":"El dolor que tu perro esconde","subtitulo":"Aprende a leer las señales 😣"},
+    {"tipo":"contenido","bg_prompt":"Dog lying down quietly observing, calm but subdued mood, soft light, no people, no text","titulo":"Por qué lo esconden","puntos":["Por instinto de supervivencia ancestral","Mostrar debilidad los hacía vulnerables","Por eso aguantan el dolor en silencio","Cuando lo notas, suele llevar tiempo","Tú eres su única voz — obsérvalo bien","Detectar a tiempo evita que empeore"]},
+    {"tipo":"contenido","bg_prompt":"Dog showing subtle body language, resting in unusual position, soft indoor light, no people, no text","titulo":"Señales sutiles de dolor","puntos":["Duerme o se esconde más de lo normal","Cambios de apetito o deja de comer","Jadea sin haber hecho ejercicio","Camina raro, cojea o se levanta con dificultad","Gruñe o se queja al tocarlo","Lame insistentemente una zona del cuerpo"]},
+    {"tipo":"contenido","bg_prompt":"Dog being gently observed and cared for, attentive care concept, warm light, no people, no text","titulo":"Cambios de comportamiento","puntos":["Más irritable o agresivo que de costumbre","Menos juguetón y más aislado","Tiembla o se mantiene tenso","Postura encorvada o cabeza baja","Evita subir, bajar o saltar","Cualquier cambio repentino merece atención"]},
+    {"tipo":"precio","bg_prompt":"Veterinary examination room, calm professional setting, modern equipment, no people, no text","nombre_plan":"Consulta veterinaria","precio":f"RD${v['consulta']:,}","incluye":["Examen físico completo","Evaluación de dolor y movilidad","Diagnóstico profesional",f"Toma de muestra si se requiere: RD${v['muestra_diagnostico']:,}"]},
+    {"tipo":"cta","bg_prompt":"Comfortable relieved dog resting peacefully after care, content, bright setting, no people, no text","titulo":"Ante la duda, revísalo","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"chequeo-anual": {
+  "caption": f"🩺 Tu perro se ve sano... pero ¿cuándo fue su último chequeo?\n\nLas enfermedades silenciosas se detectan antes de que sea tarde 🐾{FOOTER_CAP}\n\n#PetColinas #ChequeoAnual #MedicinaPreventiva #SaludCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Healthy looking dog at clean veterinary clinic, calm on exam table, bright modern office, no people, no text","titulo":"El chequeo anual que no falla","subtitulo":"Aunque se vea perfectamente sano 🩺"},
+    {"tipo":"contenido","bg_prompt":"Veterinary checkup tools, stethoscope and clipboard on clean surface, no text","titulo":"Por qué hacerlo cada año","puntos":["Muchas enfermedades no dan síntomas al inicio","Un perro 'sano' puede tener problemas ocultos","1 año de tu perro equivale a 5-7 tuyos","Detectar temprano = tratar más fácil y barato","Es el pilar de la medicina preventiva","Tranquilidad para ti y salud para él"]},
+    {"tipo":"contenido","bg_prompt":"Modern veterinary examination room with equipment, clean and bright, no people, no text","titulo":"Qué incluye un buen chequeo","puntos":["Examen físico completo de cabeza a cola","Control de peso y condición corporal","Revisión dental y de encías","Evaluación de piel, oídos y ojos","Refuerzo de vacunas si corresponde","Asesoría de nutrición y desparasitación"]},
+    {"tipo":"contenido","bg_prompt":"Senior and young dog together concept, life stages, warm bright background, no people, no text","titulo":"Frecuencia según la edad","puntos":["Cachorros: varias visitas el primer año","Adultos (1-7 años): 1 vez al año","Perros senior (7+): cada 6 meses","Razas grandes envejecen más rápido","Antes de cualquier cirugía o viaje","La constancia es la mejor medicina"]},
+    {"tipo":"precio","bg_prompt":"Professional veterinary consultation setup, clean and welcoming, no people, no text","nombre_plan":"Chequeo veterinario","precio":f"Consulta RD${v['consulta']:,}","incluye":["Examen físico completo","Revisión de vacunas y desparasitación",f"Vacuna quíntuple si aplica: RD${v['vacuna_quintuple']:,}","Plan de salud personalizado"]},
+    {"tipo":"cta","bg_prompt":"Happy healthy dog leaving the vet, well cared for, bright outdoor light, no people, no text","titulo":"¡Agenda su chequeo!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"perro-senior": {
+  "caption": f"🐕‍🦺 Tu perro está envejeciendo — sus necesidades cambian\n\nLos cuidados correctos le dan años de calidad de vida 💚{FOOTER_CAP}\n\n#PetColinas #PerroSenior #PerroMayor #CuidadoIntegral #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Senior dog with grey muzzle resting peacefully, wise gentle expression, warm soft light, no people, no text","titulo":"Cuidados del perro mayor","subtitulo":"Su etapa más necesitada de ti 🐕‍🦺"},
+    {"tipo":"contenido","bg_prompt":"Older dog with grey fur lying comfortably, calm mood, soft warm light, no people, no text","titulo":"¿Cuándo es 'senior'?","puntos":["Razas pequeñas: a partir de los 10-12 años","Razas medianas: a partir de los 8-9 años","Razas grandes: a partir de los 6-7 años","Empieza a moverse más lento","Duerme más y juega menos","Es momento de redoblar los cuidados"]},
+    {"tipo":"contenido","bg_prompt":"Senior dog being gently cared for, comfortable home setting, warm light, no people, no text","titulo":"Cambios que vas a notar","puntos":["Canas alrededor del hocico y los ojos","Menos energía y más horas de sueño","Posible aumento o pérdida de peso","Ojos más opacos (visión reducida)","Le cuesta subir, bajar o saltar","Puede oír o ver menos que antes"]},
+    {"tipo":"contenido","bg_prompt":"Comfortable orthopedic dog bed in cozy home, senior pet care concept, warm light, no people, no text","titulo":"Cómo cuidarlo mejor","puntos":["Cama cómoda y acolchada para sus articulaciones","Alimento específico para perros senior","Paseos suaves y más cortos","Chequeos veterinarios cada 6 meses","Mantén sus dientes y uñas al día","Mucho amor, paciencia y compañía"]},
+    {"tipo":"precio","bg_prompt":"Veterinary care for senior dog concept, gentle clinic setting, no people, no text","nombre_plan":"Control del perro senior","precio":f"Consulta RD${v['consulta']:,}","incluye":["Chequeo geriátrico completo","Evaluación de movilidad y dolor","Asesoría de nutrición senior","Recomendamos control cada 6 meses"]},
+    {"tipo":"cta","bg_prompt":"Happy senior dog enjoying calm comfortable life, content expression, warm bright setting, no people, no text","titulo":"Dale la mejor vejez","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"almohadillas": {
+  "caption": f"🐾 El pavimento caliente quema las patas de tu perro\n\nEn el calor dominicano, sus almohadillas sufren. Aprende a protegerlas 🔥{FOOTER_CAP}\n\n#PetColinas #AlmohadillasCaninas #CuidadoPatas #CalorRD #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Close-up of dog paw pads, clean detailed view, soft light, no people, no text","titulo":"Cuida las patas de tu perro","subtitulo":"El pavimento caliente las quema 🔥"},
+    {"tipo":"contenido","bg_prompt":"Hot sunny pavement concept, heat waves on asphalt, warm tones, no people, no text","titulo":"El peligro del piso caliente","puntos":["A 31°C de aire, el asfalto llega a 52°C","A esa temperatura quema las almohadillas","Regla: si no aguantas tu mano 7 segundos en el piso, él tampoco","Las quemaduras son dolorosas y tardan en sanar","El daño puede pasar desapercibido al inicio","Evita pasear en las horas de más calor"]},
+    {"tipo":"contenido","bg_prompt":"Dog paw being inspected gently, paw care concept, soft light, no people, no text","titulo":"Señales de patas dañadas","puntos":["Cojea o evita caminar","Se lame o muerde las patas sin parar","Almohadillas rojas, agrietadas o con ampollas","Partes más oscuras o desprendidas","No quiere salir a caminar","Se detiene de golpe en pleno paseo"]},
+    {"tipo":"contenido","bg_prompt":"Dog walking on grass in shade, cool comfortable surface, natural setting, no people, no text","titulo":"Cómo protegerlas","puntos":["Pasea temprano en la mañana o al atardecer","Camina por la grama o la sombra","Revisa y limpia sus patas al volver a casa","Hidrata las almohadillas si están secas","Considera botitas protectoras si es necesario","Mantén las uñas y el pelo entre dedos recortados"]},
+    {"tipo":"precio","bg_prompt":"Grooming station with paw care tools, clean professional setup, no people, no text","nombre_plan":"Cuidado de patas y uñas","precio":f"Corte de uñas RD${add['corte_unas']:,}","incluye":[f"Corte de uñas: RD${add['corte_unas']:,}","Recorte de pelo entre los dedos","Revisión de las almohadillas","Incluido también con cualquier baño"]},
+    {"tipo":"cta","bg_prompt":"Happy dog walking comfortably on cool grass, healthy paws, bright natural setting, no people, no text","titulo":"¡Protege cada paso!","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"vomito-diarrea": {
+  "caption": f"⚠️ Vómito y diarrea: ¿cuándo es una emergencia?\n\nNo todo se cura solo en casa. Aprende a reconocer las señales de alarma 🐾{FOOTER_CAP}\n\n#PetColinas #VomitoEnPerros #Diarrea #EmergenciaVet #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog lying down looking unwell, subdued expression, soft indoor light, no people, no text","titulo":"Vómito y diarrea","subtitulo":"¿Cuándo preocuparse de verdad? ⚠️"},
+    {"tipo":"contenido","bg_prompt":"Dog resting on the floor looking tired and weak, soft natural light, no people, no text","titulo":"Señales de EMERGENCIA","puntos":["Sangre en el vómito o en las heces","Vómitos repetidos por más de 24 horas","Decaimiento extremo y debilidad","Barriga hinchada y dura","Encías pálidas o muy secas","No retiene ni el agua"]},
+    {"tipo":"contenido","bg_prompt":"Bowl of water beside resting dog, recovery care concept, soft light, no people, no text","titulo":"Qué hacer mientras tanto","puntos":["Retira la comida por unas horas (NO el agua)","Ofrece agua fresca en pequeñas cantidades","Observa la frecuencia y el aspecto","NO le des medicamentos humanos","Anota cuándo empezó y qué comió","Si empeora, ve al veterinario de inmediato"]},
+    {"tipo":"contenido","bg_prompt":"Various causes concept, dog sniffing unknown object outdoors, no people, no text","titulo":"Causas frecuentes","puntos":["Comió algo en mal estado o basura","Cambio brusco de alimento","Parásitos intestinales","Infecciones virales (parvo, moquillo)","Intoxicación por plantas o productos","Estrés o cuerpos extraños tragados"]},
+    {"tipo":"precio","bg_prompt":"Veterinary clinic examination setup, clean and professional, no people, no text","nombre_plan":"Atención veterinaria","precio":f"Consulta RD${v['consulta']:,}","incluye":["Evaluación del cuadro digestivo",f"Test Parvo/Corona/Giardia: RD${v['test_parvo_corona_giardia']:,}",f"Toma de muestra: RD${v['muestra_diagnostico']:,}","Tratamiento según el diagnóstico"]},
+    {"tipo":"cta","bg_prompt":"Recovered healthy dog feeling better, content expression, bright setting, no people, no text","titulo":"Ante la duda, consúltanos","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"ansiedad-separacion": {
+  "caption": f"🏠 ¿Tu perro destroza todo cuando te vas?\n\nNo es maldad ni venganza — es ansiedad por separación, y tiene solución 🐾{FOOTER_CAP}\n\n#PetColinas #AnsiedadPorSeparacion #ComportamientoCanino #BienestarAnimal #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog looking out window waiting, longing expression, soft natural light, no people, no text","titulo":"Ansiedad por separación","subtitulo":"No es maldad, es angustia 🏠"},
+    {"tipo":"contenido","bg_prompt":"Dog resting alone in empty room, quiet mood, soft light, no people, no text","titulo":"Señales típicas","puntos":["Destroza muebles, puertas o zapatos al quedarse solo","Ladra o aúlla sin parar cuando te vas","Orina o defeca dentro de casa (estando educado)","Te sigue a todos lados sin despegarse","Se altera cuando agarras las llaves","Saliva o jadea de nervios antes de que salgas"]},
+    {"tipo":"contenido","bg_prompt":"Cozy dog space with toys in calm home environment, comfort concept, warm light, no people, no text","titulo":"Cómo ayudarlo","puntos":["Salidas y llegadas tranquilas, sin dramatismo","Déjale juguetes interactivos y entretenidos","Acostúmbralo a quedarse solo de a poco","Ejercítalo antes de salir (cansado = tranquilo)","Crea un espacio seguro y cómodo para él","Nunca lo castigues por el destrozo — empeora todo"]},
+    {"tipo":"contenido","bg_prompt":"Calm relaxed dog lying comfortably at home, peaceful mood, bright setting, no people, no text","titulo":"Cuándo buscar ayuda","puntos":["Si se autolesiona al quedarse solo","Si el problema no mejora con el tiempo","Si afecta su salud (no come, baja de peso)","Puede haber un componente médico de fondo","Un veterinario evalúa y orienta el manejo","Cada perro necesita un enfoque distinto"]},
+    {"tipo":"precio","bg_prompt":"Veterinary consultation room calm and welcoming, clean modern space, no people, no text","nombre_plan":"Evaluación de comportamiento","precio":f"Consulta RD${v['consulta']:,}","incluye":["Evaluación integral de tu mascota","Descarte de causas médicas","Orientación de manejo en casa","Pregúntanos cómo ayudar a tu perro"]},
+    {"tipo":"cta","bg_prompt":"Happy calm dog relaxing peacefully at home, content and secure, bright setting, no people, no text","titulo":"Ayúdalo a estar tranquilo","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
   ]
 },
 

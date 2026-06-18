@@ -1,0 +1,75 @@
+{
+  "folder": "vomito-diarrea",
+  "fast_model": true,
+  "caption": "⚠️ Vómito y diarrea: ¿cuándo es una emergencia?\n\nNo todo se cura solo en casa. Aprende a reconocer las señales de alarma 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #VomitoEnPerros #Diarrea #EmergenciaVet #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog lying down looking unwell, subdued expression, soft indoor light, no people, no text",
+      "titulo": "Vómito y diarrea",
+      "subtitulo": "¿Cuándo preocuparse de verdad? ⚠️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog resting on the floor looking tired and weak, soft natural light, no people, no text",
+      "titulo": "Señales de EMERGENCIA",
+      "puntos": [
+        "Sangre en el vómito o en las heces",
+        "Vómitos repetidos por más de 24 horas",
+        "Decaimiento extremo y debilidad",
+        "Barriga hinchada y dura",
+        "Encías pálidas o muy secas",
+        "No retiene ni el agua"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Bowl of water beside resting dog, recovery care concept, soft light, no people, no text",
+      "titulo": "Qué hacer mientras tanto",
+      "puntos": [
+        "Retira la comida por unas horas (NO el agua)",
+        "Ofrece agua fresca en pequeñas cantidades",
+        "Observa la frecuencia y el aspecto",
+        "NO le des medicamentos humanos",
+        "Anota cuándo empezó y qué comió",
+        "Si empeora, ve al veterinario de inmediato"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Various causes concept, dog sniffing unknown object outdoors, no people, no text",
+      "titulo": "Causas frecuentes",
+      "puntos": [
+        "Comió algo en mal estado o basura",
+        "Cambio brusco de alimento",
+        "Parásitos intestinales",
+        "Infecciones virales (parvo, moquillo)",
+        "Intoxicación por plantas o productos",
+        "Estrés o cuerpos extraños tragados"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary clinic examination setup, clean and professional, no people, no text",
+      "nombre_plan": "Atención veterinaria",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Evaluación del cuadro digestivo",
+        "Test Parvo/Corona/Giardia: RD$1,200",
+        "Toma de muestra: RD$1,200",
+        "Tratamiento según el diagnóstico"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Recovered healthy dog feeling better, content expression, bright setting, no people, no text",
+      "titulo": "Ante la duda, consúltanos",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

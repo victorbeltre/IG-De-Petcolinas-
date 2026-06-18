@@ -82,10 +82,10 @@ def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
         sys.exit(1)
 
     model = "imagen-4.0-fast-generate-001" if fast else "imagen-4.0-generate-001"
-    url = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{model}:predict?key={api_key}"
-    )
+    # El key va en un header, NUNCA en la URL, para que ningun error de requests
+    # (que suele incluir la URL) lo filtre a los logs.
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:predict"
+    headers = {"x-goog-api-key": api_key, "Content-Type": "application/json"}
 
     full_prompt = (
         f"{prompt}. "
@@ -105,7 +105,7 @@ def generate_bg(prompt: str, fast: bool = False) -> Image.Image:
 
     for attempt in range(3):
         try:
-            resp = _req.post(url, json=payload, timeout=90)
+            resp = _req.post(url, headers=headers, json=payload, timeout=90)
             resp.raise_for_status()
             data = resp.json()
             b64 = data["predictions"][0]["bytesBase64Encoded"]

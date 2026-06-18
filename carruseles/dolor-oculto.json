@@ -1,0 +1,75 @@
+{
+  "folder": "dolor-oculto",
+  "fast_model": true,
+  "caption": "😣 Tu perro esconde el dolor por instinto\n\nAprende a leer las señales que casi nadie nota a tiempo 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #DolorEnPerros #SaludCanina #BienestarAnimal #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog with subtle worried expression resting, soft dramatic light, clean background, no people, no text",
+      "titulo": "El dolor que tu perro esconde",
+      "subtitulo": "Aprende a leer las señales 😣"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog lying down quietly observing, calm but subdued mood, soft light, no people, no text",
+      "titulo": "Por qué lo esconden",
+      "puntos": [
+        "Por instinto de supervivencia ancestral",
+        "Mostrar debilidad los hacía vulnerables",
+        "Por eso aguantan el dolor en silencio",
+        "Cuando lo notas, suele llevar tiempo",
+        "Tú eres su única voz — obsérvalo bien",
+        "Detectar a tiempo evita que empeore"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog showing subtle body language, resting in unusual position, soft indoor light, no people, no text",
+      "titulo": "Señales sutiles de dolor",
+      "puntos": [
+        "Duerme o se esconde más de lo normal",
+        "Cambios de apetito o deja de comer",
+        "Jadea sin haber hecho ejercicio",
+        "Camina raro, cojea o se levanta con dificultad",
+        "Gruñe o se queja al tocarlo",
+        "Lame insistentemente una zona del cuerpo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog being gently observed and cared for, attentive care concept, warm light, no people, no text",
+      "titulo": "Cambios de comportamiento",
+      "puntos": [
+        "Más irritable o agresivo que de costumbre",
+        "Menos juguetón y más aislado",
+        "Tiembla o se mantiene tenso",
+        "Postura encorvada o cabeza baja",
+        "Evita subir, bajar o saltar",
+        "Cualquier cambio repentino merece atención"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary examination room, calm professional setting, modern equipment, no people, no text",
+      "nombre_plan": "Consulta veterinaria",
+      "precio": "RD$1,500",
+      "incluye": [
+        "Examen físico completo",
+        "Evaluación de dolor y movilidad",
+        "Diagnóstico profesional",
+        "Toma de muestra si se requiere: RD$1,200"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Comfortable relieved dog resting peacefully after care, content, bright setting, no people, no text",
+      "titulo": "Ante la duda, revísalo",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

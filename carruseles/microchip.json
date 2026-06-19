@@ -1,0 +1,76 @@
+{
+  "folder": "microchip",
+  "fast_model": true,
+  "caption": "📡 Si tu perro se pierde hoy, ¿cómo lo recuperas?\n\nEl microchip es la única identificación permanente que no se puede perder ni quitar 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #MicrochipPerro #MascotasPerdidas #IdentificacionAnimal #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Lost dog poster on lamppost with sad dog face, emotional urgency concept, no people, no text",
+      "titulo": "¿Tu perro tiene microchip?",
+      "subtitulo": "Si se pierde, esto es lo que lo trae de vuelta 🔍"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Tiny microchip next to grain of rice for size comparison, veterinary concept, clean white background, no text",
+      "titulo": "¿Qué es el microchip?",
+      "puntos": [
+        "Un chip RFID del tamaño de un grano de arroz",
+        "Se coloca bajo la piel en segundos, sin cirugía",
+        "Tiene un número único vinculado a tu información",
+        "Cualquier veterinario o rescatista lo puede escanear",
+        "Dura toda la vida de tu mascota sin batería",
+        "Es indoloro — como ponerle una vacuna"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog running away in park, lost concept, worried owner in background blurred, no text",
+      "titulo": "Por qué es urgente",
+      "puntos": [
+        "En RD, miles de perros se pierden cada año",
+        "Los collares y plaquitas se caen o se quitan",
+        "Sin chip, las probabilidades de recuperarlo bajan drásticamente",
+        "Perros perdidos terminan en la calle o en sacrificio",
+        "Con microchip registrado, la reunificación es posible",
+        "No esperes a que pase — actúa antes de necesitarlo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Owner happily reunited with their dog, emotional joyful moment, park setting, no text",
+      "titulo": "Mitos que te frenan",
+      "puntos": [
+        "\"Mi perro nunca sale solo\" → un descuido basta",
+        "\"Tiene collar con su nombre\" → los collares se pierden",
+        "\"Es caro y doloroso\" → es rápido, asequible e indoloro",
+        "\"Solo para razas de valor\" → todo perro merece volver a casa",
+        "\"Ya está viejo para hacerlo\" → nunca es tarde para microchiparlo",
+        "\"Aquí no lo usan\" → cada vez más rescatistas y clínicas lo escanean"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary clinic consultation room, calm professional setting, caring atmosphere, no people, no text",
+      "nombre_plan": "Microchip en PetColinas",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Procedimiento rápido e indoloro",
+        "Realizado por veterinario certificado",
+        "Registro del número único de tu mascota",
+        "Orientación completa sobre el proceso",
+        "Pregúntanos por disponibilidad y precio del chip"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with owner, safe and protected concept, warm outdoor light, no text",
+      "titulo": "Protege a tu mascota hoy",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

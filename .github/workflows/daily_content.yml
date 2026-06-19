@@ -49,6 +49,8 @@ jobs:
         id: resolver
         run: |
           EVENT="${{ github.event_name }}"
+          echo "Disparado por: $EVENT"
+
           if [ "$EVENT" = "workflow_dispatch" ]; then
             echo "post_dir=${{ inputs.post_dir }}" >> $GITHUB_OUTPUT
 
@@ -61,7 +63,15 @@ jobs:
             HOUR=$(date -u '+%H')
             if [ "$HOUR" = "16" ]; then SCHED=schedule_mediodia.json; else SCHED=schedule.json; fi
             POST_DIR=$(python3 -c "import json; print(json.load(open('$SCHED')).get('$TODAY',''))")
-            if [ -z "$POST_DIR" ]; then echo "Sin post programado en $SCHED para $TODAY — nada que publicar."; fi
+            echo "Fecha=$TODAY  Hora=${HOUR}UTC  Schedule=$SCHED  Post='$POST_DIR'"
+            if [ -z "$POST_DIR" ]; then
+              echo "Sin post programado en $SCHED para $TODAY — nada que publicar."
+            else
+              if [ ! -f "posts/$POST_DIR/slide_01.png" ]; then
+                echo "ERROR: Slides no encontradas en posts/$POST_DIR/ — ejecuta generar_carruseles primero"
+                exit 1
+              fi
+            fi
             echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
           fi
 

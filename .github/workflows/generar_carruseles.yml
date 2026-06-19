@@ -55,11 +55,15 @@ jobs:
           set -e
           for F in "${{ steps.temas.outputs.am }}" "${{ steps.temas.outputs.pm }}"; do
             if [ -z "$F" ]; then continue; fi
-            if [ -f "posts/$F/slide_01.png" ]; then
-              echo "OK posts/$F ya existe, se omite"
+            if [ -f "posts/$F/slide_01.png" ] && [ ! -f "posts/$F/.dry_run" ]; then
+              echo "OK posts/$F ya existe con imagenes reales, se omite"
               continue
             fi
-            echo "Generando $F ..."
+            if [ -f "posts/$F/.dry_run" ]; then
+              echo "posts/$F tiene slides dry-run — regenerando con Imagen 4..."
+            else
+              echo "Generando $F ..."
+            fi
             python generate_with_imagen.py "$F"
           done
 

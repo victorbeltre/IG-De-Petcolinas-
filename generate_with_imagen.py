@@ -405,6 +405,15 @@ def main():
 
     (out_dir / "caption.txt").write_text(caption, encoding="utf-8")
     print(f"  ✓ caption.txt")
+
+    # Marker para saber si las slides son dry-run (fondos de color) o Imagen real.
+    # El generador nocturno (generar_carruseles.yml) lo usa para decidir si regenerar.
+    marker = out_dir / ".dry_run"
+    if _DRY_RUN:
+        marker.touch()
+    elif marker.exists():
+        marker.unlink()
+
     print()
     print(f"✅  Listo → posts/{folder}/  ({len(slides)} imágenes)")
     if not _DRY_RUN:

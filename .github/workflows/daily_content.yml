@@ -60,10 +60,20 @@ jobs:
 
           elif [ "$EVENT" = "schedule" ]; then
             TODAY=$(date -u '+%Y-%m-%d')
-            HOUR=$(date -u '+%H')
-            if [ "$HOUR" = "16" ]; then SCHED=schedule_mediodia.json; else SCHED=schedule.json; fi
+            # Usamos la expresion cron EXACTA que disparo el run (no la hora de
+            # ejecucion), porque GitHub suele retrasar los workflows programados.
+            # Si dependieramos de la hora real, un run de las 16:00 que corre
+            # tarde (17:xx) publicaria el post de la manana por error.
+            CRON="${{ github.event.schedule }}"
+            if [ "$CRON" = "0 16 * * *" ]; then
+              SCHED=schedule_mediodia.json
+              SLOT="12pm (tarde)"
+            else
+              SCHED=schedule.json
+              SLOT="9am (manana)"
+            fi
             POST_DIR=$(python3 -c "import json; print(json.load(open('$SCHED')).get('$TODAY',''))")
-            echo "Fecha=$TODAY  Hora=${HOUR}UTC  Schedule=$SCHED  Post='$POST_DIR'"
+            echo "Fecha=$TODAY  Cron='$CRON'  Slot=$SLOT  Schedule=$SCHED  Post='$POST_DIR'"
             if [ -z "$POST_DIR" ]; then
               echo "Sin post programado en $SCHED para $TODAY — nada que publicar."
             else

@@ -1,0 +1,73 @@
+{
+  "folder": "corte-verano",
+  "fast_model": true,
+  "caption": "☀️ ¿Rapas a tu perro en verano para que pase menos calor?\n\n¡ALTO! Podrías estar haciéndole daño. Te explicamos por qué 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #GroomingVerano #CuidadoPerros #BañoCanino #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Fluffy double-coated dog in summer sun, healthy coat, bright outdoor setting, no people, no text",
+      "titulo": "El mito de rapar en verano",
+      "subtitulo": "Lo que de verdad le ayuda con el calor ☀️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Husky or golden retriever with thick double coat, detail of fur layers, natural light, no people, no text",
+      "titulo": "Por qué NO debes raparlo",
+      "puntos": [
+        "El doble manto AÍSLA del calor, no lo atrapa",
+        "Rapar expone la piel a quemaduras solares",
+        "El pelo puede crecer dañado o con calvas",
+        "Pierde su protección natural contra insectos",
+        "En razas de doble manto, rapar es contraproducente"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog being brushed and deshedded, grooming session, clean salon, no people, no text",
+      "titulo": "Qué SÍ ayuda con el calor",
+      "puntos": [
+        "Deslanado: retira el pelo muerto sin rapar",
+        "Cepillado frecuente mejora la ventilación del manto",
+        "Baños refrescantes regulares",
+        "Recorte higiénico en zonas específicas",
+        "Agua fresca y sombra siempre disponibles"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Professional groomer tools, brushes and deshedding equipment, clean white surface, no text",
+      "titulo": "¿Rapar nunca?",
+      "puntos": [
+        "Razas de pelo que crece continuo (poodle, schnauzer) sí se cortan",
+        "Por nudos severos a veces es necesario",
+        "Por indicación médica (cirugía, parásitos)",
+        "Siempre con criterio profesional",
+        "En la duda, pregúntale a tu groomer"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Clean bright grooming salon, cooling and fresh atmosphere, no people, no text",
+      "nombre_plan": "Deslanado + baño",
+      "precio": "Desde RD$799",
+      "incluye": [
+        "Deslanado profesional: RD$890",
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Cepillado y secado completo",
+        "Asesoría según el tipo de manto"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy fresh fluffy dog after grooming, cool and comfortable, no people, no text",
+      "titulo": "Refresca a tu perro sin rapar",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

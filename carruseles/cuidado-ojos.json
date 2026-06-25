@@ -1,0 +1,73 @@
+{
+  "folder": "cuidado-ojos",
+  "fast_model": true,
+  "caption": "👀 Los ojos de tu perro dicen mucho de su salud\n\nLagañas, enrojecimiento o lagrimeo no son normales. Aprende a detectarlo a tiempo 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #SaludOcular #CuidadoPerros #VeterinariaDominicana #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Close-up of dog's bright clear eyes, healthy and alert, soft background, no people, no text",
+      "titulo": "Cuida los ojos de tu perro",
+      "subtitulo": "Una ventana a su salud 👀"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog face with healthy clear eyes, gentle natural lighting, clean background, no people, no text",
+      "titulo": "¿Por qué importa?",
+      "puntos": [
+        "Los ojos reflejan problemas de salud general",
+        "Una infección no tratada puede causar ceguera",
+        "El dolor ocular afecta su ánimo y apetito",
+        "Algunas razas son más propensas (braquicéfalas)",
+        "La prevención evita tratamientos costosos"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with watery eyes resting, soft focus, natural light, no people, no text",
+      "titulo": "Señales de alerta",
+      "puntos": [
+        "🔴 Enrojecimiento o hinchazón",
+        "💧 Lagrimeo o secreción excesiva",
+        "😣 Se rasca o frota los ojos",
+        "🌫️ Aspecto opaco o nublado",
+        "🟡 Lagañas verdes o amarillas",
+        "👁️ Ojo entrecerrado o sensible a la luz"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog being gently cleaned with cotton, caring grooming moment, bright background, no people, no text",
+      "titulo": "Cómo cuidarlos en casa",
+      "puntos": [
+        "Limpia las lagañas con gasa húmeda y agua tibia",
+        "Usa una gasa distinta para cada ojo",
+        "Mantén el pelo alrededor recortado",
+        "Nunca apliques gotas humanas sin indicación",
+        "Revisa sus ojos cada semana"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary consultation room, calm professional setting, no people, no text",
+      "nombre_plan": "Consulta veterinaria",
+      "precio": "RD$1,500",
+      "incluye": [
+        "Evaluación oftalmológica básica",
+        "Diagnóstico de infecciones o irritación",
+        "Indicación de tratamiento adecuado",
+        "Asesoría personalizada para tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy healthy dog with bright eyes, cheerful expression, light background, no people, no text",
+      "titulo": "¿Notas algo raro en sus ojos?",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

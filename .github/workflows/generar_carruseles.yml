@@ -53,6 +53,15 @@ jobs:
           GOOGLE_AI_KEY: ${{ secrets.GOOGLE_AI_KEY }}
         run: |
           set -e
+          # Si no hay API key configurada, NO fallamos: conservamos las slides
+          # dry-run (fondo verde de marca) que ya estan en el repo. Asi el post
+          # del dia igual se publica y el workflow queda en verde (sin acumular
+          # fallos que harian que GitHub pause el schedule programado).
+          if [ -z "$GOOGLE_AI_KEY" ]; then
+            echo "::warning::GOOGLE_AI_KEY no esta configurado en los Secrets del repo."
+            echo "Se omite la generacion con Imagen 4 — se usan las slides dry-run ya existentes."
+            exit 0
+          fi
           for F in "${{ steps.temas.outputs.am }}" "${{ steps.temas.outputs.pm }}"; do
             if [ -z "$F" ]; then continue; fi
             if [ -f "posts/$F/slide_01.png" ] && [ ! -f "posts/$F/.dry_run" ]; then

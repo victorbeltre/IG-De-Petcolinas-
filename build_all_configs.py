@@ -500,6 +500,84 @@ CONFIGS = {
   ]
 },
 
+# ─────────────────────────────────────────────────────────────────────────────
+"cuidado-ojos": {
+  "caption": f"👀 Los ojos de tu perro dicen mucho de su salud\n\nLagañas, enrojecimiento o lagrimeo no son normales. Aprende a detectarlo a tiempo 🐾{FOOTER_CAP}\n\n#PetColinas #SaludOcular #CuidadoPerros #VeterinariaDominicana #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Close-up of dog's bright clear eyes, healthy and alert, soft background, no people, no text","titulo":"Cuida los ojos de tu perro","subtitulo":"Una ventana a su salud 👀"},
+    {"tipo":"contenido","bg_prompt":"Dog face with healthy clear eyes, gentle natural lighting, clean background, no people, no text","titulo":"¿Por qué importa?","puntos":["Los ojos reflejan problemas de salud general","Una infección no tratada puede causar ceguera","El dolor ocular afecta su ánimo y apetito","Algunas razas son más propensas (braquicéfalas)","La prevención evita tratamientos costosos"]},
+    {"tipo":"contenido","bg_prompt":"Dog with watery eyes resting, soft focus, natural light, no people, no text","titulo":"Señales de alerta","puntos":["🔴 Enrojecimiento o hinchazón","💧 Lagrimeo o secreción excesiva","😣 Se rasca o frota los ojos","🌫️ Aspecto opaco o nublado","🟡 Lagañas verdes o amarillas","👁️ Ojo entrecerrado o sensible a la luz"]},
+    {"tipo":"contenido","bg_prompt":"Dog being gently cleaned with cotton, caring grooming moment, bright background, no people, no text","titulo":"Cómo cuidarlos en casa","puntos":["Limpia las lagañas con gasa húmeda y agua tibia","Usa una gasa distinta para cada ojo","Mantén el pelo alrededor recortado","Nunca apliques gotas humanas sin indicación","Revisa sus ojos cada semana"]},
+    {"tipo":"precio","bg_prompt":"Veterinary consultation room, calm professional setting, no people, no text","nombre_plan":"Consulta veterinaria","precio":f"RD${v['consulta']:,}","incluye":["Evaluación oftalmológica básica","Diagnóstico de infecciones o irritación","Indicación de tratamiento adecuado","Asesoría personalizada para tu mascota"]},
+    {"tipo":"cta","bg_prompt":"Happy healthy dog with bright eyes, cheerful expression, light background, no people, no text","titulo":"¿Notas algo raro en sus ojos?","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"displasia": {
+  "caption": f"🦴 ¿Tu perro grande cojea o le cuesta levantarse?\n\nLa displasia de cadera es más común de lo que crees. Detectarla temprano cambia todo 🐾{FOOTER_CAP}\n\n#PetColinas #DisplasiaCadera #PerrosGrandes #SaludCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Large breed dog lying down resting, German shepherd or labrador, soft warm light, no people, no text","titulo":"Displasia de cadera","subtitulo":"Lo que todo dueño de perro grande debe saber 🦴"},
+    {"tipo":"contenido","bg_prompt":"Anatomical illustration concept of dog hip joint, educational medical style, clean background, no text","titulo":"¿Qué es la displasia?","puntos":["Es un mal desarrollo de la articulación de la cadera","El hueso no encaja bien y se desgasta","Causa dolor crónico y artritis con el tiempo","Es hereditaria y empeora si no se atiende","Frecuente en razas grandes y de rápido crecimiento"]},
+    {"tipo":"contenido","bg_prompt":"Large dog struggling to stand up, slow careful movement, natural lighting, no people, no text","titulo":"Señales de alerta","puntos":["Le cuesta levantarse, sobre todo en las mañanas","Cojea o balancea las caderas al caminar","Evita subir escaleras o saltar","Corre 'como conejo' con las dos patas juntas","Menos ganas de jugar o caminar","Dolor al tocarle la zona de la cadera"]},
+    {"tipo":"contenido","bg_prompt":"Healthy large dog walking on grass, good posture, sunny park, no people, no text","titulo":"Cómo ayudarlo","puntos":["Mantén su peso ideal — el sobrepeso empeora todo","Ejercicio moderado y regular (nadar es ideal)","Cama ortopédica y superficies no resbaladizas","Suplementos de articulación con guía veterinaria","Diagnóstico temprano con radiografía","Nunca le des analgésicos humanos"]},
+    {"tipo":"precio","bg_prompt":"Veterinary clinic examination room, professional caring environment, no people, no text","nombre_plan":"Consulta veterinaria","precio":f"RD${v['consulta']:,}","incluye":["Evaluación de movilidad y articulaciones","Orientación sobre manejo del dolor","Plan de cuidado a largo plazo","Referencia para estudios si se requieren"]},
+    {"tipo":"cta","bg_prompt":"Happy large dog enjoying life outdoors, comfortable and active, no people, no text","titulo":"No ignores las señales","subtitulo":"Mientras antes se detecta, mejor su calidad de vida","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"pulgas-hogar": {
+  "caption": f"🚨 Si ves UNA pulga en tu perro, hay cientos más en tu casa\n\nSolo el 5% de las pulgas están sobre tu mascota. El resto invade tu hogar 🏠🐾{FOOTER_CAP}\n\n#PetColinas #Pulgas #ControlDePlagas #SaludCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Dog scratching intensely, uncomfortable, indoor home setting, no people, no text","titulo":"Pulgas: el problema está en tu casa","subtitulo":"No solo en tu perro 🏠"},
+    {"tipo":"contenido","bg_prompt":"Magnified flea illustration, educational scientific style, dark background, no text","titulo":"El dato que pocos saben","puntos":["Solo el 5% de las pulgas viven sobre tu perro","El otro 95% está en alfombras, camas y pisos","Una pulga pone hasta 50 huevos al día","Los huevos caen por toda tu casa","Por eso bañar al perro no basta","Hay que tratar al perro Y al ambiente"]},
+    {"tipo":"contenido","bg_prompt":"Dog with irritated skin scratching, close-up of fur, natural light, no people, no text","titulo":"Por qué son peligrosas","puntos":["Causan picazón intensa y alergias","Transmiten parásitos internos (tenia)","Pueden provocar anemia en cachorros","Generan heridas e infecciones por rascado","También pican a los humanos de la casa","Una infestación crece muy rápido"]},
+    {"tipo":"contenido","bg_prompt":"Clean fresh home interior, vacuumed floor and washed pet bed, bright tidy room, no people, no text","titulo":"Cómo eliminarlas","puntos":["Trata al perro con antipulgas de calidad","Lava su cama y mantas con agua caliente","Aspira pisos, alfombras y sofás a fondo","Repite la aspiración varios días seguidos","Trata a TODAS las mascotas de la casa","Mantén el tratamiento mensual de prevención"]},
+    {"tipo":"contenido","bg_prompt":"Pet pharmacy shelf with antiparasitic products, clean professional display, no people, no text","titulo":"Productos que sí funcionan","puntos":["NexGard Spectra — pulgas y parásitos internos","Bravecto — protección de larga duración","Aplicación mensual según el peso del perro","Disponibles en nuestra tienda","Pregúntanos cuál le conviene a tu mascota"]},
+    {"tipo":"cta","bg_prompt":"Happy comfortable dog relaxing at home, no scratching, peaceful, no people, no text","titulo":"Protégelo de las pulgas","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"corte-verano": {
+  "caption": f"☀️ ¿Rapas a tu perro en verano para que pase menos calor?\n\n¡ALTO! Podrías estar haciéndole daño. Te explicamos por qué 🐾{FOOTER_CAP}\n\n#PetColinas #GroomingVerano #CuidadoPerros #BañoCanino #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Fluffy double-coated dog in summer sun, healthy coat, bright outdoor setting, no people, no text","titulo":"El mito de rapar en verano","subtitulo":"Lo que de verdad le ayuda con el calor ☀️"},
+    {"tipo":"contenido","bg_prompt":"Husky or golden retriever with thick double coat, detail of fur layers, natural light, no people, no text","titulo":"Por qué NO debes raparlo","puntos":["El doble manto AÍSLA del calor, no lo atrapa","Rapar expone la piel a quemaduras solares","El pelo puede crecer dañado o con calvas","Pierde su protección natural contra insectos","En razas de doble manto, rapar es contraproducente"]},
+    {"tipo":"contenido","bg_prompt":"Dog being brushed and deshedded, grooming session, clean salon, no people, no text","titulo":"Qué SÍ ayuda con el calor","puntos":["Deslanado: retira el pelo muerto sin rapar","Cepillado frecuente mejora la ventilación del manto","Baños refrescantes regulares","Recorte higiénico en zonas específicas","Agua fresca y sombra siempre disponibles"]},
+    {"tipo":"contenido","bg_prompt":"Professional groomer tools, brushes and deshedding equipment, clean white surface, no text","titulo":"¿Rapar nunca?","puntos":["Razas de pelo que crece continuo (poodle, schnauzer) sí se cortan","Por nudos severos a veces es necesario","Por indicación médica (cirugía, parásitos)","Siempre con criterio profesional","En la duda, pregúntale a tu groomer"]},
+    {"tipo":"precio","bg_prompt":"Clean bright grooming salon, cooling and fresh atmosphere, no people, no text","nombre_plan":"Deslanado + baño","precio":f"Desde RD${bano['pequeño']:,}","incluye":[f"Deslanado profesional: RD${add['deslanado']:,}",f"Baño pequeño: RD${bano['pequeño']:,}",f"Baño mediano: RD${bano['mediano']:,}","Cepillado y secado completo","Asesoría según el tipo de manto"]},
+    {"tipo":"cta","bg_prompt":"Happy fresh fluffy dog after grooming, cool and comfortable, no people, no text","titulo":"Refresca a tu perro sin rapar","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"socializacion": {
+  "caption": f"🐶 Las primeras semanas de tu cachorro definen su carácter de adulto\n\nHay una ventana que no vuelve. Aprovéchala bien 🐾{FOOTER_CAP}\n\n#PetColinas #SocializacionCanina #Cachorros #EducacionCanina #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Adorable curious puppy exploring, bright cheerful setting, no people, no text","titulo":"Socialización del cachorro","subtitulo":"La ventana que define su carácter 🐶"},
+    {"tipo":"contenido","bg_prompt":"Young puppy looking curious and alert, soft warm background, no people, no text","titulo":"La ventana crítica","puntos":["Va de las 3 a las 14 semanas de vida","Es cuando aprende qué es 'normal' y seguro","Lo que no conoce ahora, de adulto le dará miedo","Un cachorro bien socializado es un adulto equilibrado","Esta etapa NO se repite — aprovéchala"]},
+    {"tipo":"contenido","bg_prompt":"Puppy meeting new gentle experiences, positive friendly scene, bright light, no people, no text","titulo":"A qué exponerlo (con cuidado)","puntos":["Diferentes personas, tamaños y edades","Sonidos del hogar: aspiradora, timbre, tráfico","Otras mascotas SANAS y vacunadas","Distintas superficies y texturas","Manipulación de patas, orejas y boca","Siempre con experiencias positivas y premios"]},
+    {"tipo":"contenido","bg_prompt":"Puppy looking slightly scared, gentle reassuring environment, soft focus, no people, no text","titulo":"Errores que debes evitar","puntos":["Forzarlo si tiene miedo (empeora el trauma)","Aislarlo hasta completar vacunas (pierde la ventana)","Exponerlo a perros sin vacunar (riesgo de parvo)","Regañarlo por asustarse","Saltarte esta etapa por falta de tiempo"]},
+    {"tipo":"precio","bg_prompt":"Healthy vaccinated puppy ready to explore safely, bright joyful, no people, no text","nombre_plan":"Combo Primera Vacuna","precio":f"RD${v['combo_primera_vacuna']:,}","incluye":["Vacuna quíntuple incluida","Desparasitación interna","Consulta inicial incluida","Para que socialice de forma SEGURA","Asesoría de calendario vacunal"]},
+    {"tipo":"cta","bg_prompt":"Happy confident well-socialized dog, friendly and calm, bright background, no people, no text","titulo":"Empieza con el pie derecho","subtitulo":f"📍 {ub}","lineas":CTA_LINEAS},
+  ]
+},
+
+# ─────────────────────────────────────────────────────────────────────────────
+"vacuna-rabia": {
+  "caption": f"🚨 La rabia mata, no tiene cura y se contagia a humanos\n\nUna sola vacuna al año protege a tu perro y a tu familia. ¿Está al día? 🐾{FOOTER_CAP}\n\n#PetColinas #VacunaRabia #SaludPublica #VeterinariaDominicana #MascotasRD",
+  "slides": [
+    {"tipo":"portada","bg_prompt":"Alert healthy dog portrait, serious protective mood, clean background, no people, no text","titulo":"Vacuna antirrábica","subtitulo":"No es opcional — es vital 🚨"},
+    {"tipo":"contenido","bg_prompt":"Virus concept illustration, scientific educational style, dark dramatic tones, no text","titulo":"¿Qué es la rabia?","puntos":["Enfermedad viral que ataca el sistema nervioso","Es MORTAL una vez aparecen los síntomas","No tiene cura ni en animales ni en humanos","Se transmite por mordeduras y saliva","Es una zoonosis: pasa de animales a personas","La vacuna es la ÚNICA forma de prevenirla"]},
+    {"tipo":"contenido","bg_prompt":"Dog interacting outdoors near other animals, natural park setting, no people, no text","titulo":"Por qué tu perro la necesita","puntos":["En RD aún existen casos de rabia animal","Un encuentro con un animal callejero basta","Protege a tu perro Y a tu familia","Muchos lugares la exigen por ley","El refuerzo es ANUAL — no se vence sin riesgo","Es una de las vacunas más económicas y vitales"]},
+    {"tipo":"contenido","bg_prompt":"Calendar marked with reminder, organized clean desk, no text","titulo":"¿Cuándo aplicarla?","puntos":["Primera dosis: desde los 3 meses de edad","Refuerzo cada año, sin falta","Mantén su carnet de vacunación al día","No la suspendas aunque tu perro 'no salga'","Un descuido de un año ya es un riesgo"]},
+    {"tipo":"precio","bg_prompt":"Vaccine vial on clean sterile medical surface, professional environment, no people, no text","nombre_plan":"Vacuna antirrábica","precio":f"RD${v['vacuna_rabia']:,}","incluye":["Aplicada por veterinario","Registro en carnet de vacunación","Recordatorio de refuerzo anual",f"Consulta veterinaria disponible: RD${v['consulta']:,}"]},
+    {"tipo":"cta","bg_prompt":"Healthy happy protected dog with family concept, warm safe atmosphere, no people, no text","titulo":"¿Tu perro está al día?","subtitulo":"No esperes — la rabia no perdona","lineas":CTA_LINEAS},
+  ]
+},
+
 } # fin CONFIGS
 
 if __name__ == "__main__":

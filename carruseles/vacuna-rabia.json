@@ -1,0 +1,74 @@
+{
+  "folder": "vacuna-rabia",
+  "fast_model": true,
+  "caption": "🚨 La rabia mata, no tiene cura y se contagia a humanos\n\nUna sola vacuna al año protege a tu perro y a tu familia. ¿Está al día? 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #VacunaRabia #SaludPublica #VeterinariaDominicana #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Alert healthy dog portrait, serious protective mood, clean background, no people, no text",
+      "titulo": "Vacuna antirrábica",
+      "subtitulo": "No es opcional — es vital 🚨"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Virus concept illustration, scientific educational style, dark dramatic tones, no text",
+      "titulo": "¿Qué es la rabia?",
+      "puntos": [
+        "Enfermedad viral que ataca el sistema nervioso",
+        "Es MORTAL una vez aparecen los síntomas",
+        "No tiene cura ni en animales ni en humanos",
+        "Se transmite por mordeduras y saliva",
+        "Es una zoonosis: pasa de animales a personas",
+        "La vacuna es la ÚNICA forma de prevenirla"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog interacting outdoors near other animals, natural park setting, no people, no text",
+      "titulo": "Por qué tu perro la necesita",
+      "puntos": [
+        "En RD aún existen casos de rabia animal",
+        "Un encuentro con un animal callejero basta",
+        "Protege a tu perro Y a tu familia",
+        "Muchos lugares la exigen por ley",
+        "El refuerzo es ANUAL — no se vence sin riesgo",
+        "Es una de las vacunas más económicas y vitales"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Calendar marked with reminder, organized clean desk, no text",
+      "titulo": "¿Cuándo aplicarla?",
+      "puntos": [
+        "Primera dosis: desde los 3 meses de edad",
+        "Refuerzo cada año, sin falta",
+        "Mantén su carnet de vacunación al día",
+        "No la suspendas aunque tu perro 'no salga'",
+        "Un descuido de un año ya es un riesgo"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Vaccine vial on clean sterile medical surface, professional environment, no people, no text",
+      "nombre_plan": "Vacuna antirrábica",
+      "precio": "RD$1,500",
+      "incluye": [
+        "Aplicada por veterinario",
+        "Registro en carnet de vacunación",
+        "Recordatorio de refuerzo anual",
+        "Consulta veterinaria disponible: RD$1,500"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy happy protected dog with family concept, warm safe atmosphere, no people, no text",
+      "titulo": "¿Tu perro está al día?",
+      "subtitulo": "No esperes — la rabia no perdona",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

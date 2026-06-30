@@ -1,0 +1,74 @@
+{
+  "folder": "displasia",
+  "fast_model": true,
+  "caption": "🦴 ¿Tu perro grande cojea o le cuesta levantarse?\n\nLa displasia de cadera es más común de lo que crees. Detectarla temprano cambia todo 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #DisplasiaCadera #PerrosGrandes #SaludCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Large breed dog lying down resting, German shepherd or labrador, soft warm light, no people, no text",
+      "titulo": "Displasia de cadera",
+      "subtitulo": "Lo que todo dueño de perro grande debe saber 🦴"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Anatomical illustration concept of dog hip joint, educational medical style, clean background, no text",
+      "titulo": "¿Qué es la displasia?",
+      "puntos": [
+        "Es un mal desarrollo de la articulación de la cadera",
+        "El hueso no encaja bien y se desgasta",
+        "Causa dolor crónico y artritis con el tiempo",
+        "Es hereditaria y empeora si no se atiende",
+        "Frecuente en razas grandes y de rápido crecimiento"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Large dog struggling to stand up, slow careful movement, natural lighting, no people, no text",
+      "titulo": "Señales de alerta",
+      "puntos": [
+        "Le cuesta levantarse, sobre todo en las mañanas",
+        "Cojea o balancea las caderas al caminar",
+        "Evita subir escaleras o saltar",
+        "Corre 'como conejo' con las dos patas juntas",
+        "Menos ganas de jugar o caminar",
+        "Dolor al tocarle la zona de la cadera"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Healthy large dog walking on grass, good posture, sunny park, no people, no text",
+      "titulo": "Cómo ayudarlo",
+      "puntos": [
+        "Mantén su peso ideal — el sobrepeso empeora todo",
+        "Ejercicio moderado y regular (nadar es ideal)",
+        "Cama ortopédica y superficies no resbaladizas",
+        "Suplementos de articulación con guía veterinaria",
+        "Diagnóstico temprano con radiografía",
+        "Nunca le des analgésicos humanos"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary clinic examination room, professional caring environment, no people, no text",
+      "nombre_plan": "Consulta veterinaria",
+      "precio": "RD$1,500",
+      "incluye": [
+        "Evaluación de movilidad y articulaciones",
+        "Orientación sobre manejo del dolor",
+        "Plan de cuidado a largo plazo",
+        "Referencia para estudios si se requieren"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy large dog enjoying life outdoors, comfortable and active, no people, no text",
+      "titulo": "No ignores las señales",
+      "subtitulo": "Mientras antes se detecta, mejor su calidad de vida",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

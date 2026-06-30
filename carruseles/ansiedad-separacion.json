@@ -1,0 +1,75 @@
+{
+  "folder": "ansiedad-separacion",
+  "fast_model": true,
+  "caption": "🏠 ¿Tu perro destroza todo cuando te vas?\n\nNo es maldad ni venganza — es ansiedad por separación, y tiene solución 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #AnsiedadPorSeparacion #ComportamientoCanino #BienestarAnimal #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog looking out window waiting, longing expression, soft natural light, no people, no text",
+      "titulo": "Ansiedad por separación",
+      "subtitulo": "No es maldad, es angustia 🏠"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog resting alone in empty room, quiet mood, soft light, no people, no text",
+      "titulo": "Señales típicas",
+      "puntos": [
+        "Destroza muebles, puertas o zapatos al quedarse solo",
+        "Ladra o aúlla sin parar cuando te vas",
+        "Orina o defeca dentro de casa (estando educado)",
+        "Te sigue a todos lados sin despegarse",
+        "Se altera cuando agarras las llaves",
+        "Saliva o jadea de nervios antes de que salgas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Cozy dog space with toys in calm home environment, comfort concept, warm light, no people, no text",
+      "titulo": "Cómo ayudarlo",
+      "puntos": [
+        "Salidas y llegadas tranquilas, sin dramatismo",
+        "Déjale juguetes interactivos y entretenidos",
+        "Acostúmbralo a quedarse solo de a poco",
+        "Ejercítalo antes de salir (cansado = tranquilo)",
+        "Crea un espacio seguro y cómodo para él",
+        "Nunca lo castigues por el destrozo — empeora todo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Calm relaxed dog lying comfortably at home, peaceful mood, bright setting, no people, no text",
+      "titulo": "Cuándo buscar ayuda",
+      "puntos": [
+        "Si se autolesiona al quedarse solo",
+        "Si el problema no mejora con el tiempo",
+        "Si afecta su salud (no come, baja de peso)",
+        "Puede haber un componente médico de fondo",
+        "Un veterinario evalúa y orienta el manejo",
+        "Cada perro necesita un enfoque distinto"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary consultation room calm and welcoming, clean modern space, no people, no text",
+      "nombre_plan": "Evaluación de comportamiento",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Evaluación integral de tu mascota",
+        "Descarte de causas médicas",
+        "Orientación de manejo en casa",
+        "Pregúntanos cómo ayudar a tu perro"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy calm dog relaxing peacefully at home, content and secure, bright setting, no people, no text",
+      "titulo": "Ayúdalo a estar tranquilo",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

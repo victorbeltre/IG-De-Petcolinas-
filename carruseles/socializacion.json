@@ -1,0 +1,74 @@
+{
+  "folder": "socializacion",
+  "fast_model": true,
+  "caption": "🐶 Las primeras semanas de tu cachorro definen su carácter de adulto\n\nHay una ventana que no vuelve. Aprovéchala bien 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #SocializacionCanina #Cachorros #EducacionCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Adorable curious puppy exploring, bright cheerful setting, no people, no text",
+      "titulo": "Socialización del cachorro",
+      "subtitulo": "La ventana que define su carácter 🐶"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Young puppy looking curious and alert, soft warm background, no people, no text",
+      "titulo": "La ventana crítica",
+      "puntos": [
+        "Va de las 3 a las 14 semanas de vida",
+        "Es cuando aprende qué es 'normal' y seguro",
+        "Lo que no conoce ahora, de adulto le dará miedo",
+        "Un cachorro bien socializado es un adulto equilibrado",
+        "Esta etapa NO se repite — aprovéchala"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Puppy meeting new gentle experiences, positive friendly scene, bright light, no people, no text",
+      "titulo": "A qué exponerlo (con cuidado)",
+      "puntos": [
+        "Diferentes personas, tamaños y edades",
+        "Sonidos del hogar: aspiradora, timbre, tráfico",
+        "Otras mascotas SANAS y vacunadas",
+        "Distintas superficies y texturas",
+        "Manipulación de patas, orejas y boca",
+        "Siempre con experiencias positivas y premios"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Puppy looking slightly scared, gentle reassuring environment, soft focus, no people, no text",
+      "titulo": "Errores que debes evitar",
+      "puntos": [
+        "Forzarlo si tiene miedo (empeora el trauma)",
+        "Aislarlo hasta completar vacunas (pierde la ventana)",
+        "Exponerlo a perros sin vacunar (riesgo de parvo)",
+        "Regañarlo por asustarse",
+        "Saltarte esta etapa por falta de tiempo"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Healthy vaccinated puppy ready to explore safely, bright joyful, no people, no text",
+      "nombre_plan": "Combo Primera Vacuna",
+      "precio": "RD$3,500",
+      "incluye": [
+        "Vacuna quíntuple incluida",
+        "Desparasitación interna",
+        "Consulta inicial incluida",
+        "Para que socialice de forma SEGURA",
+        "Asesoría de calendario vacunal"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy confident well-socialized dog, friendly and calm, bright background, no people, no text",
+      "titulo": "Empieza con el pie derecho",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

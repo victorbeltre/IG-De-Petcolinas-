@@ -1,0 +1,75 @@
+{
+  "folder": "cachorro-primeros",
+  "fast_model": true,
+  "caption": "🐶 ¡Llegó tu cachorro! ¿Y ahora qué?\n\nTodo lo que necesitas saber para los primeros meses de vida 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #CachorroNuevo #PrimerDia #PerritosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Adorable tiny puppy looking at camera with curious eyes, warm cozy home setting, no people, no text",
+      "titulo": "¡Llegó tu cachorro!",
+      "subtitulo": "Guía de los primeros meses 🐶"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Cozy puppy bed, toys and food bowl arranged neatly, warm home atmosphere, no people, no text",
+      "titulo": "Los primeros días",
+      "puntos": [
+        "Dale un espacio propio tranquilo y cálido",
+        "No lo separes de su cama en los primeros días",
+        "Alimentación especial para cachorro — 3-4 veces al día",
+        "Agua fresca siempre disponible",
+        "Empieza a acostumbrarlo a su nombre desde el día 1",
+        "Cachorros lloran de noche — es normal, paciencia"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Puppy vaccination schedule card with syringe nearby, educational infographic, no people, no text",
+      "titulo": "Vacunas y desparasitación",
+      "puntos": [
+        "Combo Primera Vacuna: RD$3,500 (incluye consulta)",
+        "Vacuna quíntuple: RD$1,200",
+        "Desparasitante a las 2, 4, 6 semanas",
+        "Refuerzo de vacunas cada 3-4 semanas",
+        "Vacuna antirrábica a los 3 meses",
+        "Programa completo antes de salir a la calle"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Puppy eating from small bowl, first meal at home, warm kitchen light, no people, no text",
+      "titulo": "Alimentación del cachorro",
+      "puntos": [
+        "Alimento específico para cachorros (nunca de adultos)",
+        "3-4 comidas pequeñas al día",
+        "No cambies la comida bruscamente (causa diarrea)",
+        "Nada de comida humana en los primeros meses",
+        "Agua siempre fresca y disponible",
+        "Consulta el peso recomendado por edad con el vet"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Small puppy at first vet visit, curious and healthy looking, bright clinic, no people, no text",
+      "nombre_plan": "Primera visita al veterinario",
+      "precio": "Baño cachorro: RD$699",
+      "incluye": [
+        "Combo Primera Vacuna: RD$3,500",
+        "Consulta veterinaria: RD$1,500",
+        "Desparasitación: RD$300",
+        "Asesoría completa de cuidados"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Cute puppy sitting happily, bright colorful background, healthy and adorable, no people, no text",
+      "titulo": "¡Tu cachorro nos espera!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -30,11 +30,14 @@ VALID_EXTENSIONS = (".png", ".jpg", ".jpeg")
 
 
 def get_image_files(post_dir: str) -> list:
-    files = []
-    for ext in VALID_EXTENSIONS:
-        files.extend(glob.glob(os.path.join(post_dir, f"*{ext}")))
-        files.extend(glob.glob(os.path.join(post_dir, f"*{ext.upper()}")))
-    return sorted(set(files))
+    files = sorted(glob.glob(os.path.join(post_dir, "slide_*.png")))
+    if not files:
+        # fallback: any PNG/JPG in order, for backwards compatibility
+        for ext in VALID_EXTENSIONS:
+            files.extend(glob.glob(os.path.join(post_dir, f"*{ext}")))
+            files.extend(glob.glob(os.path.join(post_dir, f"*{ext.upper()}")))
+        files = sorted(set(files))
+    return files
 
 
 def build_raw_url(repo: str, branch: str, path: str) -> str:

@@ -1,0 +1,75 @@
+{
+  "folder": "chequeo-anual",
+  "fast_model": true,
+  "caption": "🩺 Tu perro se ve sano... pero ¿cuándo fue su último chequeo?\n\nLas enfermedades silenciosas se detectan antes de que sea tarde 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #ChequeoAnual #MedicinaPreventiva #SaludCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Healthy looking dog at clean veterinary clinic, calm on exam table, bright modern office, no people, no text",
+      "titulo": "El chequeo anual que no falla",
+      "subtitulo": "Aunque se vea perfectamente sano 🩺"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Veterinary checkup tools, stethoscope and clipboard on clean surface, no text",
+      "titulo": "Por qué hacerlo cada año",
+      "puntos": [
+        "Muchas enfermedades no dan síntomas al inicio",
+        "Un perro 'sano' puede tener problemas ocultos",
+        "1 año de tu perro equivale a 5-7 tuyos",
+        "Detectar temprano = tratar más fácil y barato",
+        "Es el pilar de la medicina preventiva",
+        "Tranquilidad para ti y salud para él"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Modern veterinary examination room with equipment, clean and bright, no people, no text",
+      "titulo": "Qué incluye un buen chequeo",
+      "puntos": [
+        "Examen físico completo de cabeza a cola",
+        "Control de peso y condición corporal",
+        "Revisión dental y de encías",
+        "Evaluación de piel, oídos y ojos",
+        "Refuerzo de vacunas si corresponde",
+        "Asesoría de nutrición y desparasitación"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Senior and young dog together concept, life stages, warm bright background, no people, no text",
+      "titulo": "Frecuencia según la edad",
+      "puntos": [
+        "Cachorros: varias visitas el primer año",
+        "Adultos (1-7 años): 1 vez al año",
+        "Perros senior (7+): cada 6 meses",
+        "Razas grandes envejecen más rápido",
+        "Antes de cualquier cirugía o viaje",
+        "La constancia es la mejor medicina"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional veterinary consultation setup, clean and welcoming, no people, no text",
+      "nombre_plan": "Chequeo veterinario",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Examen físico completo",
+        "Revisión de vacunas y desparasitación",
+        "Vacuna quíntuple si aplica: RD$1,200",
+        "Plan de salud personalizado"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy healthy dog leaving the vet, well cared for, bright outdoor light, no people, no text",
+      "titulo": "¡Agenda su chequeo!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "folder": "desparasitacion",
+  "fast_model": true,
+  "caption": "🐛 ¿Cuándo fue la última vez que desparasitaste a tu perro?\n\nLos parásitos son más peligrosos de lo que parecen 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Desparasitacion #SaludCanina #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Healthy happy dog scratching ear in sunny park, playful mood, no people, no text",
+      "titulo": "Desparasitación: por qué y cuándo",
+      "subtitulo": "Protege a tu perro y a tu familia 🐛"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Abstract illustration of parasites concept, worms and ticks, scientific educational style, no text",
+      "titulo": "Tipos de parásitos",
+      "puntos": [
+        "Internos: lombrices, tenias, giardia, coccidias",
+        "Externos: pulgas, garrapatas, ácaros, piojos",
+        "Los internos se transmiten por heces y tierra",
+        "Las pulgas y garrapatas viven en el ambiente",
+        "Algunos parásitos se transmiten a los humanos",
+        "Por eso desparasitar protege a TODA la familia"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog looking lethargic and uncomfortable, unwell expression, natural lighting, no people, no text",
+      "titulo": "Señales de parásitos",
+      "puntos": [
+        "Barriga hinchada (especialmente en cachorros)",
+        "Diarrea o vómitos frecuentes",
+        "Pérdida de peso sin razón aparente",
+        "Pelo opaco y sin brillo",
+        "Se rasca o muerde la base de la cola",
+        "Ves algo blanco en las heces (lombrices)"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Calendar with marked dates, reminder concept, clean organized desktop, no text",
+      "titulo": "¿Cada cuánto desparasitar?",
+      "puntos": [
+        "Cachorros: cada 2 semanas hasta los 3 meses",
+        "Cachorros 3-6 meses: mensual",
+        "Adultos: cada 3-6 meses (internos)",
+        "Externos (pulgas/garrapatas): mensual",
+        "Si tiene acceso a la calle: más frecuente",
+        "Siempre con supervisión veterinaria"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Medical veterinary supplies, clean bottles and equipment on white background, no people, no text",
+      "nombre_plan": "Desparasitación en PetColinas",
+      "precio": "Desde RD$300",
+      "incluye": [
+        "Aplicación de Albendazol: RD$300",
+        "Aplicación de Panacob: RD$450",
+        "NexGard Spectra (externo + interno) disponible",
+        "Asesoría veterinaria incluida"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy healthy dog running and playing, energetic and free, sunny outdoor, no people, no text",
+      "titulo": "¡Desparasita a tu perrito!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

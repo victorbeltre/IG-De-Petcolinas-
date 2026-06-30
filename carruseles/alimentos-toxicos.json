@@ -1,0 +1,76 @@
+{
+  "folder": "alimentos-toxicos",
+  "fast_model": true,
+  "caption": "☠️ ¿Tienes alguno de estos en tu cocina? Pueden matar a tu perro\n\nGuarda este carrusel — puede salvar la vida de tu mascota 🚨\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #AlimentosToxicos #PeligroPerros #EmergenciaVet #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Kitchen ingredients and food on counter with red warning concept, dangerous foods educational poster style, no people, no text",
+      "titulo": "Lo que NO debe comer tu perro",
+      "subtitulo": "Algunos los tienes en casa ahora mismo ☠️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Grapes and raisins on white background with danger symbol concept, dog health warning, no text",
+      "titulo": "🍇 Uvas y pasas",
+      "puntos": [
+        "Causan fallo renal agudo — incluso en cantidades pequeñas",
+        "No importa la raza ni el tamaño del perro",
+        "Los síntomas: vómito, letargo, pérdida de apetito",
+        "El daño puede ser irreversible en pocas horas",
+        "Si las comió, ve al veterinario de INMEDIATO",
+        "No esperes a que aparezcan síntomas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Chocolate pieces and coffee on dark background with caution concept, toxic food warning, no text",
+      "titulo": "🍫 Chocolate y cafeína",
+      "puntos": [
+        "Contienen teobromina — muy tóxica para perros",
+        "El chocolate negro es el más peligroso",
+        "Causa vómitos, diarrea, convulsiones y arritmias",
+        "Puede ser fatal dependiendo de la cantidad",
+        "También: café, té, energizantes y gaseosas",
+        "Ni un pedacito — nunca — es seguro para tu perro"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Onion garlic and leek on clean white surface with warning concept, toxic ingredients for dogs, no text",
+      "titulo": "🧅 Más alimentos del hogar",
+      "puntos": [
+        "Cebolla y ajo → destruyen glóbulos rojos (anemia fatal)",
+        "Xilitol (en chicles y edulcorantes) → hipoglucemia severa",
+        "Aguacate → vómitos, diarrea y daño cardíaco",
+        "Nueces de macadamia → temblores y fiebre alta",
+        "Huesos cocidos → se astillan y perforan el intestino",
+        "Alcohol → daño neurológico y hepático severo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog looking worried beside forbidden human food concept, warning educational style, no people, no text",
+      "titulo": "Lo que muchos no saben",
+      "puntos": [
+        "Muchos alimentos humanos tienen estas sustancias ocultas",
+        "Cebolla y ajo están en salsas, guisos y embutidos",
+        "El xilitol está en chicles, Nutella y productos 'sin azúcar'",
+        "El daño puede ser acumulativo con pequeñas dosis repetidas",
+        "Un perro 'bien' hoy puede estar gravemente mal mañana",
+        "La prevención es más barata que la emergencia"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Veterinary emergency room concept, urgent care for pets, bright clean clinic, no people, no text",
+      "titulo": "Si comió algo peligroso...",
+      "subtitulo": "No esperes. Consulta veterinaria RD$1,500",
+      "lineas": [
+        "📍 Plaza Las Colinas, SDO Oeste",
+        "📱 Contáctanos de inmediato",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

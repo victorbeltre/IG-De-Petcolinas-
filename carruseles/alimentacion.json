@@ -1,0 +1,74 @@
+{
+  "folder": "alimentacion",
+  "fast_model": true,
+  "caption": "🥣 ¿Sabes realmente qué está comiendo tu perro?\n\nUna buena alimentación es la base de su salud 🐶💚\n\nEn nuestra tienda encontrarás alimentos de calidad para tu mascota.\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #AlimentacionCanina #NutricionPerros #MascotasRD #SaludAnimal",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Happy dog eating from bowl, clean bright kitchen background, no people, no text",
+      "titulo": "Alimentación sana para tu perro",
+      "subtitulo": "La base de su salud 🥣"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Premium dry dog food in bowl, scattered kibble on white surface, professional food photography, no text",
+      "titulo": "Tipos de alimento",
+      "puntos": [
+        "Seco (croquetas): el más práctico y económico",
+        "Húmedo (latas): más palateable y rico en agua",
+        "Mixto: combina seco y húmedo",
+        "Elige siempre alimentos para la etapa de vida",
+        "Cachorro, adulto y senior tienen necesidades distintas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog food bowl portion size, measuring cup beside it, clean white background, no text",
+      "titulo": "¿Cuánto darle?",
+      "puntos": [
+        "Sigue las instrucciones del empaque según el peso",
+        "Divide en 2 comidas al día (adultos)",
+        "Cachorros: 3-4 comidas al día",
+        "No lo sobrealimentes — el sobrepeso es dañino",
+        "Siempre agua fresca disponible las 24 horas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Forbidden foods for dogs, grapes, chocolate, onion on red background, warning style, no people, no text",
+      "titulo": "Alimentos prohibidos",
+      "puntos": [
+        "🚫 Chocolate — tóxico para perros",
+        "🚫 Uvas y pasas — daño renal grave",
+        "🚫 Cebolla y ajo — destruyen glóbulos rojos",
+        "🚫 Aguacate — causa vómitos y diarrea",
+        "🚫 Xilitol (chicles, dulces) — muy peligroso",
+        "🚫 Huesos cocidos — pueden astillarse"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Healthy energetic dog running and playing, vibrant colors, no people, no text",
+      "titulo": "Señales de buena nutrición",
+      "puntos": [
+        "Pelo brillante y sin caída excesiva",
+        "Energía y ánimo para jugar",
+        "Deposiciones firmes y regulares",
+        "Peso estable y adecuado a su raza",
+        "Ojos brillantes y sin legañas",
+        "Dientes limpios y sin mal aliento"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Dog sitting beside full food bowl, happy and healthy, bright background, no people, no text",
+      "titulo": "Visítanos en PetColinas",
+      "subtitulo": "Tenemos alimentos de calidad para tu mascota",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

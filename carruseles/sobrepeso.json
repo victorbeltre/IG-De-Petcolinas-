@@ -1,0 +1,75 @@
+{
+  "folder": "sobrepeso",
+  "fast_model": true,
+  "caption": "⚖️ ¿Tu perro tiene sobrepeso? La mayoría de los dueños no lo nota\n\nEl exceso de peso le quita años de vida a tu mascota 🐶\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #SobrepesoCanino #SaludAnimal #NutricionPerros #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Chubby happy dog sitting, cute round body, clean bright background, no people, no text",
+      "titulo": "¿Tu perro tiene sobrepeso?",
+      "subtitulo": "La mayoría no lo nota a tiempo ⚖️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog body silhouette comparison concept, healthy weight illustration, clean educational style, no people, no text",
+      "titulo": "Cómo saber si está pasado de peso",
+      "puntos": [
+        "No le sientes las costillas al tocar los costados",
+        "Perdió la 'cintura' vista desde arriba",
+        "La barriga cuelga y no se marca",
+        "Se cansa rápido al caminar o jugar",
+        "Le cuesta subir escaleras o saltar",
+        "Ronca o respira pesado al descansar"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Sad overweight dog lying down resting, low energy concept, soft light, no people, no text",
+      "titulo": "Por qué es peligroso",
+      "puntos": [
+        "Sobrecarga el corazón y las articulaciones",
+        "Aumenta el riesgo de diabetes",
+        "Provoca problemas respiratorios",
+        "Reduce su esperanza de vida hasta 2 años",
+        "Empeora la artritis y el dolor",
+        "Lo hace menos activo y más triste"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog food bowl with measured portion and measuring cup, healthy diet concept, white background, no text",
+      "titulo": "Cómo ayudarlo",
+      "puntos": [
+        "Mide las porciones — no llenes el plato 'a ojo'",
+        "Reduce premios y elimina la comida humana",
+        "Alimento de calidad acorde a su edad y peso",
+        "Paseos diarios y juego activo",
+        "Pésalo cada mes para seguir el progreso",
+        "Plan de nutrición guiado por el veterinario"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Premium dog food bags on clean store shelf, nutrition concept, no people, no text",
+      "nombre_plan": "Evaluación de peso y nutrición",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Evaluación de condición corporal",
+        "Plan de alimentación personalizado",
+        "Alimentos de calidad en nuestra tienda",
+        "Seguimiento del progreso de tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Fit energetic dog running happily outdoors, healthy and active, no people, no text",
+      "titulo": "¡Ayúdalo a vivir más y mejor!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "folder": "almohadillas",
+  "fast_model": true,
+  "caption": "🐾 El pavimento caliente quema las patas de tu perro\n\nEn el calor dominicano, sus almohadillas sufren. Aprende a protegerlas 🔥\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #AlmohadillasCaninas #CuidadoPatas #CalorRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Close-up of dog paw pads, clean detailed view, soft light, no people, no text",
+      "titulo": "Cuida las patas de tu perro",
+      "subtitulo": "El pavimento caliente las quema 🔥"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Hot sunny pavement concept, heat waves on asphalt, warm tones, no people, no text",
+      "titulo": "El peligro del piso caliente",
+      "puntos": [
+        "A 31°C de aire, el asfalto llega a 52°C",
+        "A esa temperatura quema las almohadillas",
+        "Regla: si no aguantas tu mano 7 segundos en el piso, él tampoco",
+        "Las quemaduras son dolorosas y tardan en sanar",
+        "El daño puede pasar desapercibido al inicio",
+        "Evita pasear en las horas de más calor"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog paw being inspected gently, paw care concept, soft light, no people, no text",
+      "titulo": "Señales de patas dañadas",
+      "puntos": [
+        "Cojea o evita caminar",
+        "Se lame o muerde las patas sin parar",
+        "Almohadillas rojas, agrietadas o con ampollas",
+        "Partes más oscuras o desprendidas",
+        "No quiere salir a caminar",
+        "Se detiene de golpe en pleno paseo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog walking on grass in shade, cool comfortable surface, natural setting, no people, no text",
+      "titulo": "Cómo protegerlas",
+      "puntos": [
+        "Pasea temprano en la mañana o al atardecer",
+        "Camina por la grama o la sombra",
+        "Revisa y limpia sus patas al volver a casa",
+        "Hidrata las almohadillas si están secas",
+        "Considera botitas protectoras si es necesario",
+        "Mantén las uñas y el pelo entre dedos recortados"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Grooming station with paw care tools, clean professional setup, no people, no text",
+      "nombre_plan": "Cuidado de patas y uñas",
+      "precio": "Corte de uñas RD$300",
+      "incluye": [
+        "Corte de uñas: RD$300",
+        "Recorte de pelo entre los dedos",
+        "Revisión de las almohadillas",
+        "Incluido también con cualquier baño"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog walking comfortably on cool grass, healthy paws, bright natural setting, no people, no text",
+      "titulo": "¡Protege cada paso!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "folder": "pulgas-hogar",
+  "fast_model": true,
+  "caption": "🚨 Si ves UNA pulga en tu perro, hay cientos más en tu casa\n\nSolo el 5% de las pulgas están sobre tu mascota. El resto invade tu hogar 🏠🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Pulgas #ControlDePlagas #SaludCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog scratching intensely, uncomfortable, indoor home setting, no people, no text",
+      "titulo": "Pulgas: el problema está en tu casa",
+      "subtitulo": "No solo en tu perro 🏠"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Magnified flea illustration, educational scientific style, dark background, no text",
+      "titulo": "El dato que pocos saben",
+      "puntos": [
+        "Solo el 5% de las pulgas viven sobre tu perro",
+        "El otro 95% está en alfombras, camas y pisos",
+        "Una pulga pone hasta 50 huevos al día",
+        "Los huevos caen por toda tu casa",
+        "Por eso bañar al perro no basta",
+        "Hay que tratar al perro Y al ambiente"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with irritated skin scratching, close-up of fur, natural light, no people, no text",
+      "titulo": "Por qué son peligrosas",
+      "puntos": [
+        "Causan picazón intensa y alergias",
+        "Transmiten parásitos internos (tenia)",
+        "Pueden provocar anemia en cachorros",
+        "Generan heridas e infecciones por rascado",
+        "También pican a los humanos de la casa",
+        "Una infestación crece muy rápido"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Clean fresh home interior, vacuumed floor and washed pet bed, bright tidy room, no people, no text",
+      "titulo": "Cómo eliminarlas",
+      "puntos": [
+        "Trata al perro con antipulgas de calidad",
+        "Lava su cama y mantas con agua caliente",
+        "Aspira pisos, alfombras y sofás a fondo",
+        "Repite la aspiración varios días seguidos",
+        "Trata a TODAS las mascotas de la casa",
+        "Mantén el tratamiento mensual de prevención"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Pet pharmacy shelf with antiparasitic products, clean professional display, no people, no text",
+      "titulo": "Productos que sí funcionan",
+      "puntos": [
+        "NexGard Spectra — pulgas y parásitos internos",
+        "Bravecto — protección de larga duración",
+        "Aplicación mensual según el peso del perro",
+        "Disponibles en nuestra tienda",
+        "Pregúntanos cuál le conviene a tu mascota"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy comfortable dog relaxing at home, no scratching, peaceful, no people, no text",
+      "titulo": "Protégelo de las pulgas",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

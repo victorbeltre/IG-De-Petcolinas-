@@ -1,0 +1,75 @@
+{
+  "folder": "parvo",
+  "fast_model": true,
+  "caption": "⚠️ Parvovirus: la enfermedad más peligrosa para los cachorros\n\nSolo una vacuna puede prevenirlo. ¿Tu perro está protegido? 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Parvovirus #VacunaParvo #SaludCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Cute puppy looking vulnerable and small, soft warm background, no people, no text",
+      "titulo": "Parvovirus canino",
+      "subtitulo": "Infórmate y protege a tu cachorro ⚠️"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Virus microscopy illustration, abstract scientific background, dark blue and red tones, no text",
+      "titulo": "¿Qué es el parvovirus?",
+      "puntos": [
+        "Enfermedad viral muy contagiosa y mortal",
+        "Ataca principalmente el sistema digestivo",
+        "Los cachorros menores de 6 meses son los más vulnerables",
+        "El virus puede vivir en el ambiente por meses",
+        "No tiene tratamiento específico — solo soporte veterinario",
+        "LA VACUNA es la única protección real"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Sick looking puppy resting, sad expression, soft focus, no people, no text",
+      "titulo": "Síntomas del parvovirus",
+      "puntos": [
+        "Vómitos intensos y repetitivos",
+        "Diarrea con sangre y olor muy fuerte",
+        "Letargo extremo — el perro no quiere moverse",
+        "Pérdida total del apetito",
+        "Fiebre alta (sobre 40°C)",
+        "Deshidratación severa en pocas horas"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog sniffing grass, outdoor park, warm sunlight, no people, no text",
+      "titulo": "¿Cómo se contagia?",
+      "puntos": [
+        "Contacto con heces de perros infectados",
+        "Suelos, parques o superficies contaminadas",
+        "A través de ropa y zapatos de humanos",
+        "Perros que salen antes de completar su vacunación",
+        "Muy resistente: sobrevive calor, frío y cloro común"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Vaccine vials on clean medical surface, professional sterile environment, no people, no text",
+      "nombre_plan": "Vacuna quíntuple",
+      "precio": "RD$1,200",
+      "incluye": [
+        "Protege contra Parvovirus",
+        "Protege contra Distemper (Moquillo)",
+        "Protege contra Hepatitis y Parainfluenza",
+        "Protege contra Leptospirosis",
+        "Consulta veterinaria: RD$1,500"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy happy vaccinated puppy playing, energetic and joyful, no people, no text",
+      "titulo": "¡Vacuna a tu cachorro!",
+      "subtitulo": "No esperes — el parvovirus mata en días",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

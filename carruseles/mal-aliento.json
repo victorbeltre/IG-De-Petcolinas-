@@ -1,0 +1,74 @@
+{
+  "folder": "mal-aliento",
+  "fast_model": true,
+  "caption": "😮‍💨 El mal aliento de tu perro NO es normal\n\nEs la señal #1 de enfermedad dental. Tu perro podría estar sufriendo en silencio 🦷\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #MalAliento #SaludDental #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog with mouth slightly open showing teeth, close-up portrait, clean bright background, no people, no text",
+      "titulo": "El mal aliento NO es normal",
+      "subtitulo": "Es una señal de alerta 😮‍💨"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog teeth with tartar buildup concept, dental health educational macro view, clean background, no people, no text",
+      "titulo": "¿Qué lo causa?",
+      "puntos": [
+        "Acumulación de sarro y placa bacteriana",
+        "Enfermedad periodontal (encías infectadas)",
+        "Restos de comida entre los dientes",
+        "Infecciones en boca o garganta",
+        "A veces: problemas digestivos o renales",
+        "NO se quita solo — empeora con el tiempo"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog showing red inflamed gums concept, dental disease awareness, clean background, no people, no text",
+      "titulo": "Cuándo es serio",
+      "puntos": [
+        "Aliento fétido constante",
+        "Encías rojas, inflamadas o que sangran",
+        "Dientes amarillos o cafés con sarro",
+        "Babeo más de lo normal",
+        "Deja de comer alimentos duros",
+        "Se toca la boca con la pata"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Pet toothbrush and dog dental chew on clean white background, prevention concept, no text",
+      "titulo": "Cómo prevenirlo",
+      "puntos": [
+        "Cepillado dental 2-3 veces por semana",
+        "Pasta dental SOLO para perros",
+        "Premios y juguetes dentales",
+        "Revisión dental en cada consulta",
+        "Limpieza profesional cuando el vet lo indique"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Veterinary dental examination concept, clean modern clinic, no people, no text",
+      "nombre_plan": "Evaluación dental",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "Revisión completa de la boca",
+        "Evaluación de encías y sarro",
+        "Plan de tratamiento personalizado",
+        "Pasta dental en tienda: RD$200"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with healthy clean teeth, cheerful bright background, no people, no text",
+      "titulo": "¡Revisa su salud dental!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

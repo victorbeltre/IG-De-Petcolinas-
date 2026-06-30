@@ -1,0 +1,76 @@
+{
+  "folder": "grooming-regular",
+  "fast_model": true,
+  "caption": "✂️ ¿Cada cuánto llevas a tu perro al groomer?\n\nEl grooming regular no es un lujo — es parte de su salud 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #GroomingRegular #PeluqueriaCanina #MascotasRD #SaludCanina",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Beautiful well-groomed dog portrait, pristine fur, happy expression, elegant clean background, no people, no text",
+      "titulo": "¿Por qué el grooming regular?",
+      "subtitulo": "Más que estética — es salud 🐾"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog fur before and after grooming comparison concept, transformation, clean studio, no people, no text",
+      "titulo": "Beneficios del grooming regular",
+      "puntos": [
+        "Detecta problemas de piel a tiempo",
+        "Elimina parásitos escondidos en el pelo",
+        "Previene nudos y enredos dolorosos",
+        "Mantiene las uñas en longitud saludable",
+        "Limpieza de oídos previene infecciones",
+        "Tu perro se siente más cómodo y feliz"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Grooming schedule calendar, dog silhouette, organized planning concept, clean design, no text",
+      "titulo": "¿Cada cuánto ir al groomer?",
+      "puntos": [
+        "Pelo corto (Labrador, Beagle): cada 6-8 semanas",
+        "Pelo largo (Shih Tzu, Maltés): cada 3-4 semanas",
+        "Pelo rizado (Poodle, Bichón): cada 4-6 semanas",
+        "Doble capa (Husky, Pastor): cada 6-8 semanas",
+        "Corte de uñas: cada 3-4 semanas",
+        "Uñas solas en PetColinas: RD$300"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with overgrown matted fur versus well groomed dog, contrast concept, no people, no text",
+      "titulo": "Qué pasa si no lo haces",
+      "puntos": [
+        "Pelaje enredado que tira de la piel — duele",
+        "Uñas largas que desvían la marcha",
+        "Infecciones de piel bajo el pelo apelmazado",
+        "Otitis por acumulación de pelo en oídos",
+        "Parásitos que pasan desapercibidos",
+        "En casos graves: dermatitis y heridas abiertas"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional grooming salon with tools laid out, scissors, brush, professional setup, no people, no text",
+      "nombre_plan": "Nuestros servicios de grooming",
+      "precio": "Desde RD$799",
+      "incluye": [
+        "Baño pequeño: RD$799",
+        "Baño mediano: RD$949",
+        "Baño grande: RD$1,149",
+        "Corte higiénico: +RD$490",
+        "Corte completo: +RD$749"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Freshly groomed dog looking beautiful and happy, winning smile, bright studio, no people, no text",
+      "titulo": "¡Agenda el próximo baño!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

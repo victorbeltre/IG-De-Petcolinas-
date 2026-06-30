@@ -1,0 +1,75 @@
+{
+  "folder": "nudos-pelaje",
+  "fast_model": true,
+  "caption": "🪢 Los nudos en el pelo de tu perro DUELEN\n\nNo son solo estética — tiran de la piel y causan heridas. Así se previenen 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #NudosEnElPelo #Grooming #DesenredeCanino #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Fluffy long-haired dog with tangled fur concept, cute expression, clean background, no people, no text",
+      "titulo": "Los nudos en el pelo duelen",
+      "subtitulo": "No son solo cuestión de estética 🪢"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Close-up of matted tangled dog fur concept, texture detail, soft light, no people, no text",
+      "titulo": "Por qué son un problema",
+      "puntos": [
+        "Tiran de la piel y causan dolor constante",
+        "Atrapan humedad y provocan hongos",
+        "Esconden parásitos y heridas",
+        "Reducen la circulación de aire en la piel",
+        "En casos graves causan llagas y dermatitis",
+        "Mientras más esperas, más difícil es quitarlos"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog brush and comb with fur on clean white surface, grooming tools flat lay, no text",
+      "titulo": "Cómo prevenirlos",
+      "puntos": [
+        "Cepilla a tu perro varias veces por semana",
+        "Usa el cepillo adecuado para su tipo de pelo",
+        "Presta atención a axilas, orejas y patas",
+        "Nunca cortes un nudo con tijera en casa (riesgo de herida)",
+        "Cepilla siempre antes y después del baño",
+        "Grooming regular evita que se acumulen"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Well groomed dog with silky smooth fur, beautiful coat, bright studio, no people, no text",
+      "titulo": "Razas que más lo necesitan",
+      "puntos": [
+        "Shih Tzu, Maltés, Yorkshire",
+        "Poodle y Bichón Frisé",
+        "Schnauzer y Cocker Spaniel",
+        "Cualquier perro de pelo largo o rizado",
+        "Doble capa después de cada muda",
+        "Grooming cada 3-4 semanas es lo ideal"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional grooming salon with detangling tools, clean organized space, no people, no text",
+      "nombre_plan": "Desenrede y deslanado",
+      "precio": "Baño desde RD$799",
+      "incluye": [
+        "Desenrede: +RD$690",
+        "Deslanado: +RD$890",
+        "Baño + corte completo desde RD$1,548",
+        "Cepillado profesional incluido"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with smooth shiny tangle-free coat, content expression, bright background, no people, no text",
+      "titulo": "¡Libéralo de los nudos!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       post_dir:
-        description: "Carpeta del carrusel en posts/ (ej: semana-01)"
+        description: "Carpeta del carrusel en posts/ (ej: vacunas)"
         required: true
         type: string
 
@@ -16,12 +16,13 @@ on:
     paths:
       - 'publish.json'
 
-  # Disparo programado — descomenta para activar publicacion automatica.
-  # Cuando este activo, publica la carpeta posts/scheduled/.
-  # schedule:
-  #   # 9:00 AM hora Republica Dominicana (UTC-4) = 13:00 UTC
-  #   # Todos los dias EXCEPTO martes (PetColinas esta cerrado)
-  #   - cron: '0 13 * * 0,1,3,4,5,6'
+  # Publicacion programada — hora RD (UTC-4). Corre todos los dias; si no hay
+  # post programado para la fecha, el job termina sin publicar (no falla).
+  #   13:00 UTC = 9:00 AM RD  -> schedule.json
+  #   16:00 UTC = 12:00 PM RD -> schedule_mediodia.json
+  schedule:
+    - cron: '0 13 * * *'
+    - cron: '0 16 * * *'
 
 permissions:
   contents: read
@@ -48,16 +49,44 @@ jobs:
         id: resolver
         run: |
           EVENT="${{ github.event_name }}"
+          echo "Disparado por: $EVENT"
+
           if [ "$EVENT" = "workflow_dispatch" ]; then
             echo "post_dir=${{ inputs.post_dir }}" >> $GITHUB_OUTPUT
+
           elif [ "$EVENT" = "push" ]; then
-            POST_DIR=$(python3 -c "import json; d=json.load(open('publish.json')); print(d['post_dir'])")
+            POST_DIR=$(python3 -c "import json; print(json.load(open('publish.json'))['post_dir'])")
             echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
-          else
-            echo "post_dir=scheduled" >> $GITHUB_OUTPUT
+
+          elif [ "$EVENT" = "schedule" ]; then
+            TODAY=$(date -u '+%Y-%m-%d')
+            # Usamos la expresion cron EXACTA que disparo el run (no la hora de
+            # ejecucion), porque GitHub suele retrasar los workflows programados.
+            # Si dependieramos de la hora real, un run de las 16:00 que corre
+            # tarde (17:xx) publicaria el post de la manana por error.
+            CRON="${{ github.event.schedule }}"
+            if [ "$CRON" = "0 16 * * *" ]; then
+              SCHED=schedule_mediodia.json
+              SLOT="12pm (tarde)"
+            else
+              SCHED=schedule.json
+              SLOT="9am (manana)"
+            fi
+            POST_DIR=$(python3 -c "import json; print(json.load(open('$SCHED')).get('$TODAY',''))")
+            echo "Fecha=$TODAY  Cron='$CRON'  Slot=$SLOT  Schedule=$SCHED  Post='$POST_DIR'"
+            if [ -z "$POST_DIR" ]; then
+              echo "Sin post programado en $SCHED para $TODAY — nada que publicar."
+            else
+              if [ ! -f "posts/$POST_DIR/slide_01.png" ]; then
+                echo "ERROR: Slides no encontradas en posts/$POST_DIR/ — ejecuta generar_carruseles primero"
+                exit 1
+              fi
+            fi
+            echo "post_dir=$POST_DIR" >> $GITHUB_OUTPUT
           fi
 
       - name: Publicar carrusel en Instagram
+        if: steps.resolver.outputs.post_dir != ''
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}

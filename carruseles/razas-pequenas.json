@@ -1,0 +1,76 @@
+{
+  "folder": "razas-pequenas",
+  "fast_model": true,
+  "caption": "🐕 Razas pequeñas: cuidados especiales que debes conocer\n\nTienen sus propias necesidades — y en PetColinas las conocemos bien 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #RazasPequeñas #CuidadosEspeciales #PerrosPequeños #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Collection of small dog breeds, Shih Tzu, Maltese, Poodle, Chihuahua, adorable portrait, clean background, no people, no text",
+      "titulo": "Razas pequeñas",
+      "subtitulo": "Cuidados especiales que debes conocer 🐕"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Small dog showing teeth, dental care concept, clean white background, no people, no text",
+      "titulo": "Salud dental",
+      "puntos": [
+        "Las razas pequeñas son más propensas a problemas dentales",
+        "Los dientes se acumulan en un espacio muy pequeño",
+        "Cepilla sus dientes 2-3 veces por semana",
+        "Usa pasta dental específica para perros",
+        "Pasta dental en nuestra tienda: RD$200",
+        "Revisión dental en cada visita veterinaria"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Small dog's delicate paw and joint concept, gentle care, soft light, no people, no text",
+      "titulo": "Articulaciones y huesos",
+      "puntos": [
+        "Luxación de rótula es muy común en razas pequeñas",
+        "Evita que salten desde alturas (sofás, camas)",
+        "Usa escaleritas para que suban solos",
+        "No los fuercen a correr largas distancias",
+        "Revisión ortopédica regular con el veterinario",
+        "El sobrepeso agrava los problemas articulares"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Small dog shivering or cold, wrapped in tiny blanket, warm cozy environment, no people, no text",
+      "titulo": "Temperatura y clima",
+      "puntos": [
+        "Las razas pequeñas se enfrían con facilidad",
+        "En invierno necesitan ropita (especialmente sin pelo)",
+        "El calor dominicano también les afecta más",
+        "Nunca al sol directo en horas pico",
+        "Agua fresca siempre disponible",
+        "Cuidado con el piso caliente en pavimento"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Small dog being groomed on table, professional salon, careful hands with tools nearby, no faces, no text",
+      "nombre_plan": "Grooming para razas pequeñas",
+      "precio": "Baño desde RD$799",
+      "incluye": [
+        "Baño pequeño: RD$799",
+        "Baño + corte higiénico: RD$1,289",
+        "Baño + corte completo: RD$1,548",
+        "Corte de uñas: RD$300",
+        "Limpieza de oídos incluida"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy healthy small dog, perfectly groomed, bright eyes, cheerful expression, no people, no text",
+      "titulo": "Especialistas en razas pequeñas",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "folder": "primeros-auxilios",
+  "fast_model": true,
+  "caption": "🚨 Primeros auxilios para mascotas: lo que todo dueño debe saber\n\nEn caso de emergencia, en PetColinas estamos aquí para ti 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #PrimerosAuxilios #EmergenciaVeterinaria #MascotasRD #SaludAnimal",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Worried but alert dog portrait, close-up, serious mood, clean background, no people, no text",
+      "titulo": "Primeros auxilios para tu mascota",
+      "subtitulo": "Lo que todo dueño debe saber 🚨"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Red alert emergency symbols, paw print, urgent medical icons, dark dramatic background, no text",
+      "titulo": "Señales de emergencia",
+      "puntos": [
+        "Dificultad para respirar o jadeo excesivo",
+        "Convulsiones o pérdida de conciencia",
+        "Sangrado que no para",
+        "Vómitos o diarrea con sangre",
+        "Imposibilidad de pararse o caminar",
+        "Abdomen hinchado y duro"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog first aid kit, bandages, gauze, thermometer on white surface, no people, no text",
+      "titulo": "Kit de emergencia básico",
+      "puntos": [
+        "Gasa y vendas para heridas",
+        "Termómetro rectal (normal: 38-39.5°C)",
+        "Agua oxigenada para limpiar heridas",
+        "Suero fisiológico para ojos",
+        "Teléfono del veterinario siempre a mano",
+        "Transportín o cobija para movilizar"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog lying calm being observed, gentle care, soft indoor lighting, no people, no text",
+      "titulo": "Mientras llegas al veterinario",
+      "puntos": [
+        "Mantén la calma — tu perro siente tu ansiedad",
+        "No le des medicamentos humanos NUNCA",
+        "Si sangra: presiona con gasa limpia",
+        "Si se atraganta: no metas los dedos sin saber",
+        "Golpe de calor: ponlo a la sombra con agua fresca",
+        "Transporte seguro en brazos o en su caja"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Prohibited items for dogs, human medicines, pills, danger warning, red and white colors, no text",
+      "titulo": "Lo que NUNCA debes hacer",
+      "puntos": [
+        "🚫 Ibuprofeno, aspirina o acetaminofén — tóxicos",
+        "🚫 Hacerle vomitar sin indicación veterinaria",
+        "🚫 Dejar pasar síntomas esperando que mejore",
+        "🚫 Darle agua a un perro inconsciente",
+        "🚫 Aplicar alcohol en heridas abiertas"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Healthy happy dog after veterinary care, relieved expression, bright background, no people, no text",
+      "titulo": "¿Emergencia veterinaria?",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Contáctanos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

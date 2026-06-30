@@ -1,0 +1,76 @@
+{
+  "folder": "corte-unas",
+  "fast_model": true,
+  "caption": "🐾 ¿Cada cuánto le cortas las uñas a tu perro?\n\nLas uñas largas causan más problemas de los que imaginas 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #CorteDeUñas #CuidadoCanino #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog paw close-up with long nails on clean surface, clear focus, no people, no text",
+      "titulo": "La importancia del corte de uñas",
+      "subtitulo": "Más que estética, es bienestar 🐾"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog walking awkwardly due to long nails, comparison concept, no people, no text",
+      "titulo": "¿Por qué importa tanto?",
+      "puntos": [
+        "Las uñas largas desvían la postura al caminar",
+        "Causan dolor en articulaciones y columna",
+        "Pueden clavarse en la piel y causar infecciones",
+        "Se enganchan en alfombras y causan lesiones",
+        "En razas pequeñas el problema es aún mayor",
+        "Un perro con uñas largas sufre en silencio"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog paw nails that are too long versus properly trimmed, before after concept, clean white background, no text",
+      "titulo": "Señales de que es hora",
+      "puntos": [
+        "Escuchas el 'clic clic' al caminar en piso duro",
+        "Las uñas tocan el suelo al estar de pie",
+        "Tu perro evita apoyar bien las patas",
+        "Se lame las patas con frecuencia",
+        "Las uñas empiezan a curvarse hacia dentro",
+        "La última uña (del pulgar) nunca se desgasta sola"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog nail trimmer tool flatlay, clean white background, simple and clear, no people, no text",
+      "titulo": "¿En casa o con profesional?",
+      "puntos": [
+        "En casa: solo si tienes experiencia — hay venas que sangran",
+        "Si no sabes, ve con un profesional — no es riesgo",
+        "El profesional sabe hasta dónde cortar sin dañar",
+        "Los perros oscuros tienen las venas invisibles",
+        "Un corte mal hecho duele y sangra mucho",
+        "Costo profesional en PetColinas: solo RD$300"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Clean grooming station with nail clippers, professional setup, neat and organized, no people, no text",
+      "nombre_plan": "Corte de uñas",
+      "precio": "RD$300",
+      "incluye": [
+        "Corte seguro y preciso",
+        "Limado para bordes suaves",
+        "Sin estrés para tu mascota",
+        "También disponible con cualquier baño",
+        "Realizado por groomer profesional"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Dog with perfectly trimmed paws walking comfortably, happy stride, no people, no text",
+      "titulo": "¡RD$300 y listo!",
+      "subtitulo": "Sin cita previa · Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

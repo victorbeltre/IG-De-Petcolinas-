@@ -1,0 +1,73 @@
+{
+  "folder": "cuidado-dental",
+  "fast_model": true,
+  "caption": "🦷 ¿Le limpias los dientes a tu perro?\n\nEl 80% de los perros tienen problemas dentales a los 3 años. ¡Prevengámoslo! 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #SaludDental #CuidadoDental #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Cute dog showing teeth in big happy smile, clean bright background, no people, no text",
+      "titulo": "Salud dental para tu perro",
+      "subtitulo": "Más importante de lo que crees 🦷"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog mouth and teeth close-up, healthy pink gums and white teeth, clean macro photography, no people, no text",
+      "titulo": "¿Por qué importa?",
+      "puntos": [
+        "El 80% de perros tienen problemas dentales a los 3 años",
+        "El sarro acumulado causa dolor e infecciones",
+        "Las bacterias bucales pueden afectar corazón y riñones",
+        "El mal aliento es señal de un problema real",
+        "La prevención es mucho más económica que el tratamiento"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog dental hygiene products, pet toothbrush, toothpaste tube, dental chews on white background, no text",
+      "titulo": "Señales de alerta",
+      "puntos": [
+        "😷 Mal aliento persistente",
+        "🔴 Encías rojas, inflamadas o sangrantes",
+        "😬 Dientes amarillos o marrones con sarro",
+        "😓 Dificultad o dolor al masticar",
+        "💧 Babeo excesivo sin causa aparente",
+        "🦷 Pérdida de piezas dentales"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog chewing dental treat or toy, happy playful expression, bright background, no people, no text",
+      "titulo": "Cómo cuidar sus dientes",
+      "puntos": [
+        "Cepilla sus dientes 2-3 veces por semana",
+        "Usa SOLO pasta dental para perros (la humana es tóxica)",
+        "Ofrece juguetes y premios dentales",
+        "Dales huesos crudos aptos para perros",
+        "Revisión dental en cada consulta veterinaria"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Pet toothpaste and toothbrush on clean white surface, minimal style, no text",
+      "nombre_plan": "Pasta dental para mascotas",
+      "precio": "RD$200",
+      "incluye": [
+        "Disponible en nuestra tienda",
+        "Fórmula segura para perros",
+        "Sin flúor ni xilitol",
+        "Sabores que les encantan a las mascotas"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with bright clean teeth, cheerful expression, light background, no people, no text",
+      "titulo": "Cuida su sonrisa",
+      "subtitulo": "Pregúntanos sobre higiene dental",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

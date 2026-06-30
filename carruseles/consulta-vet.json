@@ -1,0 +1,76 @@
+{
+  "folder": "consulta-vet",
+  "fast_model": true,
+  "caption": "🩺 ¿Con qué frecuencia llevas a tu perro al veterinario?\n\nLa prevención es siempre más económica que el tratamiento 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #ConsultaVeterinaria #SaludPreventiva #PerrosRD #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog at clean bright veterinary clinic, calm and comfortable on examination table, no people, no text",
+      "titulo": "¿Con qué frecuencia ir al veterinario?",
+      "subtitulo": "La guía que necesitas 🩺"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Puppy getting examined at clinic, curious expression, bright modern vet office, no people, no text",
+      "titulo": "Cachorros (0-12 meses)",
+      "puntos": [
+        "Primera visita: a las 6-8 semanas de vida",
+        "Cada 3-4 semanas hasta completar vacunas",
+        "Primera desparasitación al mes de nacido",
+        "Revisión al mes, a los 4 y a los 12 meses",
+        "Esterilización recomendada a los 6-8 meses",
+        "Control de peso y desarrollo cada visita"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Adult dog looking healthy and strong, confident portrait, clean studio background, no people, no text",
+      "titulo": "Adultos (1-7 años)",
+      "puntos": [
+        "Mínimo 1 visita al año para chequeo general",
+        "Vacunas de refuerzo anuales",
+        "Desparasitación cada 3-6 meses",
+        "Revisión dental en cada visita",
+        "Control de peso y condición física",
+        "Antes de cualquier signo de enfermedad"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Warning signs concept, dog showing different health signs, educational infographic style, no people, no text",
+      "titulo": "Señales que no puedes ignorar",
+      "puntos": [
+        "Pérdida de apetito por más de 24 horas",
+        "Vómitos o diarrea repetitivos",
+        "Letargo extremo o cambios de comportamiento",
+        "Sed o micción excesiva",
+        "Cojera o dificultad para moverse",
+        "Cualquier bulto, herida o secreción inusual"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional veterinary examination room, modern equipment, clean and bright, no people, no text",
+      "nombre_plan": "Consulta veterinaria",
+      "precio": "RD$1,500",
+      "incluye": [
+        "Examen físico completo",
+        "Revisión de peso y temperatura",
+        "Evaluación dental y de piel",
+        "Toma de muestra / Diagnóstico: RD$1,200",
+        "Asesoría en nutrición y cuidados"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog leaving veterinary clinic, healthy and well cared for, bright outdoor, no people, no text",
+      "titulo": "¡Agenda su consulta hoy!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

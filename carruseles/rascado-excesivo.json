@@ -1,0 +1,74 @@
+{
+  "folder": "rascado-excesivo",
+  "fast_model": true,
+  "caption": "🐾 ¿Por qué tu perro se rasca tanto?\n\nEl rascado constante NO es normal — casi siempre hay una causa que tratar 🔍\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #PerroQueSeRasca #Alergias #Pulgas #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog scratching its neck with hind leg, uncomfortable expression, natural indoor setting, no people, no text",
+      "titulo": "¿Por qué se rasca tanto?",
+      "subtitulo": "El picor siempre tiene una causa 🐾"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Close-up of dog fur being parted to inspect skin, examination concept, soft light, no people, no text",
+      "titulo": "Causas más comunes",
+      "puntos": [
+        "Pulgas y garrapatas (la causa #1)",
+        "Alergias alimentarias o ambientales",
+        "Piel seca o dermatitis",
+        "Hongos o infecciones bacterianas",
+        "Ácaros (sarna)",
+        "Estrés o ansiedad"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with irritated red skin patch concept, skin health awareness, clean background, no people, no text",
+      "titulo": "Señales de que es grave",
+      "puntos": [
+        "Se rasca hasta hacerse heridas",
+        "Pérdida de pelo en parches",
+        "Piel roja, con costras o mal olor",
+        "Se muerde o lame una zona sin parar",
+        "Puntos negros en el pelo (pulgas)",
+        "Cambios de ánimo por la incomodidad"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Antiparasitic chewable tablet and pipette on clean white background, treatment concept, no text",
+      "titulo": "Qué puedes hacer",
+      "puntos": [
+        "Revisa si tiene pulgas o garrapatas",
+        "Mantén el antipulgas mensual al día",
+        "No uses remedios humanos en su piel",
+        "Un baño medicado alivia el picor",
+        "Si persiste, necesita evaluación veterinaria"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Pet pharmacy shelf with antiparasitic products, clean organized display, no people, no text",
+      "nombre_plan": "Soluciones en PetColinas",
+      "precio": "Consulta RD$1,500",
+      "incluye": [
+        "NexGard Spectra desde RD$1,416",
+        "Bravecto (12 semanas): RD$2,595",
+        "Baño medicado: RD$1,000",
+        "Evaluación veterinaria de la piel"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Relaxed comfortable dog resting peacefully, relief expression, bright home setting, no people, no text",
+      "titulo": "¡Dale alivio a tu perro!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

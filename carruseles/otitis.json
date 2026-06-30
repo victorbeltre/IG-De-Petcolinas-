@@ -1,0 +1,75 @@
+{
+  "folder": "otitis",
+  "fast_model": true,
+  "caption": "👂 Los oídos de tu perro hablan más de lo que crees\n\nLa otitis es una de las infecciones más comunes y dolorosas — y se previene 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #Otitis #OidosLimpios #SaludCanina #MascotasRD",
+  "slides": [
+    {
+      "tipo": "portada",
+      "bg_prompt": "Dog with floppy ears tilting head, cute curious expression, clean bright background, no people, no text",
+      "titulo": "Cuida los oídos de tu perro",
+      "subtitulo": "La otitis es más común de lo que crees 👂"
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog ear close-up examination concept, clean macro, soft light, no people, no text",
+      "titulo": "Señales de otitis",
+      "puntos": [
+        "Sacude la cabeza con frecuencia",
+        "Se rasca las orejas insistentemente",
+        "Mal olor proveniente del oído",
+        "Secreción cerosa, oscura o con pus",
+        "Enrojecimiento e inflamación interna",
+        "Dolor al tocarle la oreja"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Dog with long ears in grass, outdoor natural setting, no people, no text",
+      "titulo": "Por qué se produce",
+      "puntos": [
+        "Humedad atrapada después del baño o nado",
+        "Exceso de pelo dentro del canal auditivo",
+        "Acumulación de cera y suciedad",
+        "Alergias y ácaros del oído",
+        "Razas de orejas caídas son más propensas",
+        "Limpieza inadecuada o con hisopos"
+      ]
+    },
+    {
+      "tipo": "contenido",
+      "bg_prompt": "Ear cleaning solution bottle and cotton on clean white surface, hygiene concept, no text",
+      "titulo": "Cómo prevenirla",
+      "puntos": [
+        "Limpieza regular con producto específico",
+        "Secar bien los oídos después del baño",
+        "Recortar el pelo del canal (en el groomer)",
+        "Nunca uses hisopos en el canal profundo",
+        "Revisión de oídos en cada grooming",
+        "Si hay infección, necesita tratamiento veterinario"
+      ]
+    },
+    {
+      "tipo": "precio",
+      "bg_prompt": "Professional grooming station, clean and organized, bright lighting, no people, no text",
+      "nombre_plan": "Grooming con limpieza de oídos",
+      "precio": "Baño desde RD$799",
+      "incluye": [
+        "Limpieza de oídos incluida en todo baño",
+        "Revisión del canal auditivo",
+        "Recorte de pelo del oído",
+        "Consulta veterinaria si hay infección: RD$1,500"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "bg_prompt": "Happy dog with clean healthy ears, cheerful expression, bright background, no people, no text",
+      "titulo": "¡Revisemos sus oídos!",
+      "subtitulo": "📍 Plaza Las Colinas, SDO Oeste",
+      "lineas": [
+        "📱 Escríbenos por WhatsApp",
+        "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
+        "@petcolinasrd"
+      ]
+    }
+  ]
+}

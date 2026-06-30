@@ -1,0 +1,89 @@
+name: PetColinas - Generar Carruseles
+
+on:
+  # Disparo manual: permite generar una fecha especifica desde la UI
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha YYYY-MM-DD a generar (vacio = hoy UTC)"
+        required: false
+        type: string
+
+  # Generacion automatica de madrugada — 05:00 UTC = 1:00 AM hora RD.
+  # Corre todos los dias, antes de los horarios de publicacion (9am y 12pm RD).
+  # Si no hay tema programado para la fecha, no genera nada (no falla).
+  schedule:
+    - cron: '0 5 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    name: Generar slides con Imagen 4
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests Pillow
+
+      - name: Resolver temas del dia
+        id: temas
+        run: |
+          FECHA="${{ inputs.fecha }}"
+          if [ -z "$FECHA" ]; then FECHA=$(date -u '+%Y-%m-%d'); fi
+          AM=$(python3 -c "import json; print(json.load(open('schedule.json')).get('$FECHA',''))")
+          PM=$(python3 -c "import json; print(json.load(open('schedule_mediodia.json')).get('$FECHA',''))")
+          echo "fecha=$FECHA" >> $GITHUB_OUTPUT
+          echo "am=$AM" >> $GITHUB_OUTPUT
+          echo "pm=$PM" >> $GITHUB_OUTPUT
+          echo "Fecha $FECHA -> AM='$AM' PM='$PM'"
+
+      - name: Generar carruseles faltantes
+        env:
+          GOOGLE_AI_KEY: ${{ secrets.GOOGLE_AI_KEY }}
+        run: |
+          set -e
+          # Si no hay API key configurada, NO fallamos: conservamos las slides
+          # dry-run (fondo verde de marca) que ya estan en el repo. Asi el post
+          # del dia igual se publica y el workflow queda en verde (sin acumular
+          # fallos que harian que GitHub pause el schedule programado).
+          if [ -z "$GOOGLE_AI_KEY" ]; then
+            echo "::warning::GOOGLE_AI_KEY no esta configurado en los Secrets del repo."
+            echo "Se omite la generacion con Imagen 4 — se usan las slides dry-run ya existentes."
+            exit 0
+          fi
+          for F in "${{ steps.temas.outputs.am }}" "${{ steps.temas.outputs.pm }}"; do
+            if [ -z "$F" ]; then continue; fi
+            if [ -f "posts/$F/slide_01.png" ] && [ ! -f "posts/$F/.dry_run" ]; then
+              echo "OK posts/$F ya existe con imagenes reales, se omite"
+              continue
+            fi
+            if [ -f "posts/$F/.dry_run" ]; then
+              echo "posts/$F tiene slides dry-run — regenerando con Imagen 4..."
+            else
+              echo "Generando $F ..."
+            fi
+            python generate_with_imagen.py "$F"
+          done
+
+      - name: Commit y push de imagenes nuevas
+        run: |
+          git config user.name "PetColinas Bot"
+          git config user.email "petcolinasrd@gmail.com"
+          git add posts/
+          if git diff --cached --quiet; then
+            echo "No hay imagenes nuevas que commitear"
+          else
+            git commit -m "Generar carruseles del ${{ steps.temas.outputs.fecha }} con Imagen 4"
+            git push
+          fi

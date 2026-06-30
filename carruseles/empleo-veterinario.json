@@ -1,24 +1,24 @@
 {
   "folder": "empleo-veterinario",
   "fast_model": true,
-  "caption": "🐾 ¡ESTAMOS CONTRATANDO! Veterinario/a — PetColinas\n\n¿Te acabas de graduar de Medicina Veterinaria y buscas tu primera oportunidad? En PetColinas queremos conocerte. 🎓🩺\n\nAquí no solo trabajas: aprendes, creces y atiendes casos reales todos los días junto a un equipo que te apoya.\n\n✅ Ideal para recién graduados/as\n✅ Casos diarios de consulta, vacunación y diagnóstico\n✅ Ambiente joven y con mentoría\n✅ Estabilidad y crecimiento profesional\n\n🗓️ Horario: Lunes a Sábado, 9:00 am – 6:00 pm\n📍 A solo 3 minutos de la Plaza de la Bandera — Plaza Las Colinas, Santo Domingo Oeste\n\n📲 Aplica por WhatsApp: WHATSAPP_PLACEHOLDER\nEnvíanos tu nombre y tu CV. ¡Te esperamos! 🐶🐱\n\n#EmpleoRD #VeterinarioRD #MedicinaVeterinaria #EmpleosSantoDomingo #ReciénGraduados #PetColinas #TrabajoRD #VacanteRD",
+  "caption": "🐾 ¡ESTAMOS CONTRATANDO! Veterinario/a — PetColinas\n\n¿Te acabas de graduar de Medicina Veterinaria y buscas tu primera oportunidad? En PetColinas queremos conocerte. 🎓🩺\n\nAquí no solo trabajas: aprendes, creces y atiendes casos reales todos los días junto a un equipo que te apoya.\n\n✅ Ideal para recién graduados/as\n✅ Casos diarios de consulta, vacunación y diagnóstico\n✅ Ambiente joven y con mentoría\n✅ Estabilidad y crecimiento profesional\n\n🗓️ Horario: Lunes a Sábado, 9:00 am – 6:00 pm\n📍 A solo 3 minutos de la Plaza de la Bandera — Plaza Las Colinas, Santo Domingo Oeste\n\n📲 Aplica por WhatsApp: 809-752-6806\nEnvíanos tu nombre y tu CV. ¡Te esperamos! 🐶🐱\n\n#EmpleoRD #VeterinarioRD #MedicinaVeterinaria #EmpleosSantoDomingo #ReciénGraduados #PetColinas #TrabajoRD #VacanteRD",
   "slides": [
     {
       "tipo": "portada",
       "bg_prompt": "Bright modern veterinary clinic interior, clean and welcoming, friendly happy dog and cat, soft natural light, stethoscope on table, no people, no text",
       "titulo": "Estamos contratando",
-      "subtitulo": "Veterinario / Veterinaria 🩺"
+      "subtitulo": "Veterinario / Veterinaria"
     },
     {
       "tipo": "contenido",
       "bg_prompt": "Cute happy puppy looking up hopeful, warm bright background, clean composition, no people, no text",
       "titulo": "¿Acabas de graduarte?",
       "puntos": [
-        "🎓 Esta es tu primera gran oportunidad",
-        "🩺 Atiende casos reales desde el primer día",
-        "🤝 Equipo joven que te apoya y te enseña",
-        "📈 Crece y desarróllate como profesional",
-        "🐾 Si amas a los animales, este es tu lugar"
+        "Esta es tu primera gran oportunidad",
+        "Atiende casos reales desde el primer día",
+        "Equipo joven que te apoya y te enseña",
+        "Crece y desarróllate como profesional",
+        "Si amas a los animales, este es tu lugar"
       ]
     },
     {
@@ -38,20 +38,20 @@
       "bg_prompt": "Friendly small dog and cat together looking at camera, warm clinic background, cheerful, no people, no text",
       "titulo": "Horario y lugar",
       "puntos": [
-        "🗓️ Lunes a Sábado, 9:00 am – 6:00 pm",
-        "📍 Plaza Las Colinas, Santo Domingo Oeste",
-        "🚗 A solo 3 minutos de la Plaza de la Bandera",
-        "🏥 Clínica equipada y ambiente agradable",
-        "👥 Equipo que te recibe con los brazos abiertos"
+        "Lunes a Sábado, 9:00 am – 6:00 pm",
+        "Plaza Las Colinas, Santo Domingo Oeste",
+        "A solo 3 minutos de la Plaza de la Bandera",
+        "Clínica equipada y ambiente agradable",
+        "Te recibimos con los brazos abiertos"
       ]
     },
     {
       "tipo": "cta",
       "bg_prompt": "Happy healthy dog smiling, bright cheerful background, hopeful and warm, no people, no text",
       "titulo": "¡Aplica ahora!",
-      "subtitulo": "Tu carrera empieza aquí 🐾",
+      "subtitulo": "Tu carrera empieza aquí",
       "lineas": [
-        "📲 WhatsApp: WHATSAPP_PLACEHOLDER",
+        "WhatsApp: 809-752-6806",
         "Envíanos tu nombre y tu CV",
         "@petcolinasrd"
       ]

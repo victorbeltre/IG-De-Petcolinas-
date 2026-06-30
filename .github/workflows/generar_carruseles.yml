@@ -8,6 +8,10 @@ on:
         description: "Fecha YYYY-MM-DD a generar (vacio = hoy UTC)"
         required: false
         type: string
+      carrusel:
+        description: "Generar UN carrusel especifico por nombre (ej: empleo-veterinario). Vacio = usar el schedule del dia."
+        required: false
+        type: string
 
   # Generacion automatica de madrugada — 05:00 UTC = 1:00 AM hora RD.
   # Corre todos los dias, antes de los horarios de publicacion (9am y 12pm RD).
@@ -39,14 +43,24 @@ jobs:
       - name: Resolver temas del dia
         id: temas
         run: |
-          FECHA="${{ inputs.fecha }}"
-          if [ -z "$FECHA" ]; then FECHA=$(date -u '+%Y-%m-%d'); fi
-          AM=$(python3 -c "import json; print(json.load(open('schedule.json')).get('$FECHA',''))")
-          PM=$(python3 -c "import json; print(json.load(open('schedule_mediodia.json')).get('$FECHA',''))")
-          echo "fecha=$FECHA" >> $GITHUB_OUTPUT
-          echo "am=$AM" >> $GITHUB_OUTPUT
-          echo "pm=$PM" >> $GITHUB_OUTPUT
-          echo "Fecha $FECHA -> AM='$AM' PM='$PM'"
+          CARRUSEL="${{ inputs.carrusel }}"
+          if [ -n "$CARRUSEL" ]; then
+            # Generacion puntual de un solo carrusel (ej: un anuncio de empleo).
+            # No depende del schedule; util para piezas fuera del calendario diario.
+            echo "fecha=$CARRUSEL" >> $GITHUB_OUTPUT
+            echo "am=$CARRUSEL" >> $GITHUB_OUTPUT
+            echo "pm=" >> $GITHUB_OUTPUT
+            echo "Carrusel puntual -> '$CARRUSEL'"
+          else
+            FECHA="${{ inputs.fecha }}"
+            if [ -z "$FECHA" ]; then FECHA=$(date -u '+%Y-%m-%d'); fi
+            AM=$(python3 -c "import json; print(json.load(open('schedule.json')).get('$FECHA',''))")
+            PM=$(python3 -c "import json; print(json.load(open('schedule_mediodia.json')).get('$FECHA',''))")
+            echo "fecha=$FECHA" >> $GITHUB_OUTPUT
+            echo "am=$AM" >> $GITHUB_OUTPUT
+            echo "pm=$PM" >> $GITHUB_OUTPUT
+            echo "Fecha $FECHA -> AM='$AM' PM='$PM'"
+          fi
 
       - name: Generar carruseles faltantes
         env:

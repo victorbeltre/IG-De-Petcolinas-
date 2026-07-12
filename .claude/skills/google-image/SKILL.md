@@ -52,6 +52,38 @@ python request_image.py "logo huella de perro minimalista" --model ultra --out l
 - La primera vez clona el repo del puente en `~/.cache/imagen-bridge/` (solo
   archivos del repo, ningun secreto). Las siguientes veces reutiliza ese cache.
 
+## Modo AFICHE de marca PetColinas
+Para anuncios/afiches con la marca PetColinas automatica (logo real, colores
+verde/naranja/dorado, texto EXACTO sin errores de IA). El fondo lo genera
+Imagen 4 y la marca se compone encima.
+
+Cuando el usuario pida "un afiche/anuncio de PetColinas de X", TU (Claude)
+redactas los campos y llamas asi:
+
+```bash
+python request_image.py --afiche \
+  --titulo "Baño y corte con 20% de descuento" \
+  --subtitulo "Solo esta semana" \
+  --punto "Baño desde RD$799" \
+  --punto "Corte higiénico o completo" \
+  --punto "Deslanado profesional" \
+  --cta "WhatsApp: 809-752-6806" \
+  --bg "perro pequeño recién bañado y peinado, luz suave, fondo limpio" \
+  --out afiche.png
+```
+
+Campos del afiche:
+- `--titulo` (obligatorio) titular corto y fuerte.
+- `--subtitulo` (opcional) linea dorada de apoyo.
+- `--punto` (repetible) vinetas; usa 3-5, cortas.
+- `--cta` (opcional) barra naranja; para reclutar o vender pon el WhatsApp.
+- `--bg` (opcional) descripcion del fondo (foto). Si se omite, usa un fondo de marca.
+
+Guias:
+- Precios: usa SOLO precios reales de PRECIOS_PETCOLINAS.json; no inventes.
+- Manten el titulo a 2-4 palabras clave; el detalle va en las vinetas.
+- El logo, los colores y el footer (@petcolinasrd) se ponen solos.
+
 ## Modo alterno: directo con key local
 Si en algun entorno SI tienes la key (`GOOGLE_AI_KEY` en el entorno o
 `~/.google_ai_key`), puedes generar sin GitHub con:

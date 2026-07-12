@@ -38,9 +38,33 @@ def main() -> None:
         sys.exit(f"ERROR: pending.json invalido: {e}")
 
     req_id = str(req.get("id", "")).strip()
+    if not req_id:
+        sys.exit("ERROR: el pedido necesita 'id'.")
+
+    key_env = os.environ.get("GOOGLE_AI_KEY", "").strip()
+
+    # Modo AFICHE de marca PetColinas: fondo Imagen + composicion con Pillow.
+    if req.get("type") == "afiche":
+        out_dir = OUTPUT_ROOT / req_id
+        if out_dir.exists() and any(out_dir.glob("*.png")):
+            print(f"El pedido {req_id} ya tiene imagenes; se omite.")
+            return
+        if not key_env:
+            sys.exit("ERROR: falta GOOGLE_AI_KEY en el entorno.")
+        import bridge_afiche
+        bridge_afiche.render(req, out_dir, key_env)
+        meta = {
+            "id": req_id, "type": "afiche",
+            "titulo": req.get("titulo", ""), "files": ["image.png"], "status": "done",
+        }
+        (out_dir / "meta.json").write_text(
+            json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"OK: afiche listo en {out_dir}")
+        return
+
     prompt = str(req.get("prompt", "")).strip()
-    if not req_id or not prompt:
-        sys.exit("ERROR: el pedido necesita 'id' y 'prompt'.")
+    if not prompt:
+        sys.exit("ERROR: el pedido necesita 'prompt'.")
 
     n = max(1, min(4, int(req.get("n", 1))))
     aspect = req.get("aspect", "1:1")

@@ -111,22 +111,46 @@ def esperar_resultado(req_id: str) -> Path:
 
 def main() -> None:
     p = argparse.ArgumentParser(description="Genera imagenes via el puente de GitHub (Imagen 4).")
-    p.add_argument("prompt")
+    p.add_argument("prompt", nargs="?", help="Descripcion (imagen normal) o fondo (afiche).")
     p.add_argument("--out", default="image.png")
     p.add_argument("--n", type=int, default=1)
     p.add_argument("--aspect", default="1:1", choices=["1:1", "3:4", "4:3", "9:16", "16:9"])
     p.add_argument("--model", default="standard", choices=["fast", "standard", "ultra"])
     p.add_argument("--no-people", action="store_true")
+    # --- Modo AFICHE de marca PetColinas ---
+    p.add_argument("--afiche", action="store_true", help="Renderiza un afiche de marca PetColinas.")
+    p.add_argument("--titulo", help="Titular del afiche.")
+    p.add_argument("--subtitulo", help="Subtitulo dorado del afiche.")
+    p.add_argument("--punto", action="append", default=[], help="Vineta del afiche (repetible).")
+    p.add_argument("--cta", help="Texto de la barra naranja (ej 'WhatsApp: 809-...').")
+    p.add_argument("--bg", help="Descripcion del fondo del afiche.")
     args = p.parse_args()
 
-    req = {
-        "id": nuevo_id(),
-        "prompt": args.prompt,
-        "n": max(1, min(4, args.n)),
-        "aspect": args.aspect,
-        "model": args.model,
-        "no_people": bool(args.no_people),
-    }
+    es_afiche = args.afiche or bool(args.titulo)
+    if es_afiche:
+        if not args.titulo:
+            sys.exit("ERROR: para un afiche usa --titulo (y opcional --subtitulo/--punto/--cta/--bg).")
+        req = {
+            "id": nuevo_id(),
+            "type": "afiche",
+            "titulo": args.titulo,
+            "subtitulo": args.subtitulo or "",
+            "puntos": args.punto,
+            "cta": args.cta or "",
+            "bg_prompt": args.bg or args.prompt or "",
+        }
+    else:
+        if not args.prompt:
+            sys.exit("ERROR: falta el prompt. Ej: request_image.py \"un perro feliz\" --out perro.png")
+        req = {
+            "id": nuevo_id(),
+            "type": "imagen",
+            "prompt": args.prompt,
+            "n": max(1, min(4, args.n)),
+            "aspect": args.aspect,
+            "model": args.model,
+            "no_people": bool(args.no_people),
+        }
 
     preparar_repo()
     enviar_pedido(req)

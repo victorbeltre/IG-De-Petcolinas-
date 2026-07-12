@@ -1,0 +1,5 @@
+{
+  "repo_url": "https://github.com/victorbeltre/IG-De-Petcolinas-.git",
+  "branch": "main",
+  "_nota": "Rama donde vive el workflow generar_imagen.yml y donde se suben los pedidos. Debe ser una rama cuyo push dispare el workflow (idealmente main)."
+}

@@ -1,47 +1,49 @@
-# Instalar la skill `google-image` para usarla en cualquier lugar
+# Instalar la skill `google-image` (puente de GitHub)
 
-Esta skill funciona en 3 alcances. Elige segun donde la quieras usar.
+Esta skill genera imagenes con Imagen 4 **usando GitHub como puente**: la API
+key vive en los Secrets del repo, nunca en tu maquina.
 
-## 1. Solo en este proyecto (ya esta lista)
-Al vivir en `.claude/skills/google-image/` dentro del repo, Claude Code la
-detecta automaticamente cuando trabajas en esta carpeta. No hay que hacer nada.
+## Requisitos del repo (una sola vez)
+1. En el repo del puente debe existir el secret **`GOOGLE_AI_KEY`**
+   (Settings → Secrets and variables → Actions). Ya lo tienes configurado.
+2. Deben estar en la rama por defecto (`main`) estos archivos:
+   - `.github/workflows/generar_imagen.yml`
+   - `.github/scripts/bridge_generate.py`
+   Asi, cualquier push de un pedido dispara la generacion.
 
-## 2. En TODAS tus conversaciones de Claude Code (global, tu maquina)
-Copia la carpeta a tu directorio de skills del usuario:
+> El archivo `bridge.json` (junto a la skill) define `repo_url` y `branch`.
+> Apunta a la rama donde vive el workflow (idealmente `main`).
 
+## Alcance de la skill
+
+### En este proyecto (ya listo)
+Vive en `.claude/skills/google-image/`; Claude la detecta automaticamente aqui.
+
+### Global (todas tus conversaciones de Claude Code)
 ```bash
 mkdir -p ~/.claude/skills
 cp -r .claude/skills/google-image ~/.claude/skills/
 ```
 
-Desde ahi estara disponible en cualquier proyecto/carpeta.
+### En Claude Cowork
+Cowork lee `~/.claude/skills/`. Con el paso anterior queda disponible.
+Reinicia Cowork si estaba abierto.
 
-## 3. En Claude Cowork (app de escritorio)
-Cowork lee las skills del mismo directorio del usuario: `~/.claude/skills/`.
-Con el paso 2 ya queda disponible en Cowork. Reinicia Cowork si estaba abierto.
+## Lo unico que necesitas en la maquina
+- `git` con permiso de **push** al repo del puente (tu login normal de GitHub).
+- **Nada** de API keys locales.
 
----
+La primera vez, la skill clona el repo del puente en `~/.cache/imagen-bridge/`
+(solo archivos del repo, ningun secreto) y lo reutiliza despues.
 
-## Configurar la API key (una sola vez)
-La skill necesita tu key de Google AI Studio. Guardala UNA vez de forma
-persistente (no la pongas en el repo):
-
-**Opcion A — archivo local (recomendado para Cowork):**
+## Probar
 ```bash
-printf 'TU_API_KEY_AQUI' > ~/.google_ai_key
-chmod 600 ~/.google_ai_key
+python ~/.claude/skills/google-image/request_image.py "un cachorro feliz, foto realista" --out prueba.png
 ```
+Veras `Esperando a que GitHub genere la imagen...` y al terminar
+`OK: 1 imagen(es) generada(s) via GitHub` con el archivo `prueba.png`.
 
-**Opcion B — variable de entorno (agregala a tu ~/.zshrc o ~/.bashrc):**
-```bash
-export GOOGLE_AI_KEY='TU_API_KEY_AQUI'
-```
-
-> La key nunca se imprime ni se guarda en el repositorio. Si algun dia la
-> rotas, solo actualiza el archivo o la variable.
-
-## Probar que funciona
-```bash
-python ~/.claude/skills/google-image/generate_image.py "un cachorro feliz, foto realista" --out prueba.png
-```
-Si ves `OK: 1 imagen(es) generada(s)` y el archivo `prueba.png`, quedo lista.
+## Variables de entorno opcionales
+- `IMAGEN_BRIDGE_BRANCH` — usar otra rama distinta a la de `bridge.json`.
+- `IMAGEN_BRIDGE_REPO` — usar otra URL de repo.
+- `IMAGEN_BRIDGE_DIR` — carpeta del checkout cache (default `~/.cache/imagen-bridge/repo`).

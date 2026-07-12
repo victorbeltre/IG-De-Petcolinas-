@@ -1,0 +1,66 @@
+name: PetColinas - Puente de Imagenes (Imagen 4)
+
+# Puente para generar imagenes desde cualquier conversacion / Claude Cowork
+# SIN tener la API key en la maquina del usuario.
+#
+# Flujo:
+#   1. La skill 'google-image' hace push de image_requests/pending.json
+#   2. Ese push dispara este workflow (trigger por 'paths')
+#   3. Aqui se genera la imagen con Imagen 4 usando el secret GOOGLE_AI_KEY
+#   4. El resultado se commitea en image_requests/output/<id>/ y la skill lo baja
+#
+# Nota: el push que hace este workflow con GITHUB_TOKEN NO vuelve a disparar
+# el workflow (GitHub evita recursion), asi que no hay bucles.
+
+on:
+  push:
+    paths:
+      - "image_requests/pending.json"
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    name: Generar imagen solicitada
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Generar imagen desde el pedido
+        env:
+          GOOGLE_AI_KEY: ${{ secrets.GOOGLE_AI_KEY }}
+        run: |
+          set -e
+          if [ ! -f image_requests/pending.json ]; then
+            echo "No hay pending.json, nada que hacer."
+            exit 0
+          fi
+          if [ -z "$GOOGLE_AI_KEY" ]; then
+            echo "::error::GOOGLE_AI_KEY no esta configurado en los Secrets del repo."
+            exit 1
+          fi
+          python .github/scripts/bridge_generate.py
+
+      - name: Commit y push del resultado
+        run: |
+          git config user.name "PetColinas Bot"
+          git config user.email "petcolinasrd@gmail.com"
+          git add image_requests/output/
+          if git diff --cached --quiet; then
+            echo "No se genero ninguna imagen nueva."
+          else
+            git commit -m "Imagen generada por el puente Imagen 4"
+            git push
+          fi

@@ -1,0 +1,9 @@
+{
+  "name": "petcolinas-image",
+  "version": "1.0.0",
+  "description": "Genera imagenes y afiches de marca PetColinas con Google Imagen 4 usando GitHub como puente. La API key vive en los Secrets del repo, nunca en la maquina.",
+  "author": {
+    "name": "PetColinas",
+    "email": "petcolinasrd@gmail.com"
+  }
+}

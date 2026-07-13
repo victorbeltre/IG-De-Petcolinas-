@@ -1,0 +1,18 @@
+{
+  "name": "petcolinas",
+  "owner": {
+    "name": "PetColinas",
+    "email": "petcolinasrd@gmail.com"
+  },
+  "metadata": {
+    "description": "Plugins de PetColinas para Claude (generacion de imagenes con Imagen 4).",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "petcolinas-image",
+      "source": "./plugins/petcolinas-image",
+      "description": "Genera imagenes y afiches de marca PetColinas con Google Imagen 4 via GitHub (sin API key local). Incluye la skill google-image (modo imagen y modo afiche de marca)."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "20260919-220225-ttcv",
+  "type": "imagen",
+  "prompt": "prueba de conexion, un perro pequeno sonriente, alta calidad",
+  "n": 1,
+  "aspect": "1:1",
+  "model": "standard",
+  "no_people": false
+}

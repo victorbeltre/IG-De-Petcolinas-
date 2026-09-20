@@ -1,13 +1,13 @@
 {
-  "id": "20260920-011833-b1ts",
+  "id": "20260920-011924-4lfn",
   "type": "afiche",
-  "titulo": "¿Tu Mascota Esta Protegida?",
-  "subtitulo": "Vacunas y consultas veterinarias en Petcolinas",
+  "titulo": "Consulta Veterinaria General",
+  "subtitulo": "Diagnostico y cuidado integral para tu mascota",
   "puntos": [
-    "Veterinarios certificados",
-    "Equipos y protocolos profesionales",
-    "Atencion en Plaza Las Colinas"
+    "Evaluacion completa por veterinario certificado",
+    "Desde RD$2,254",
+    "Agenda tu cita hoy mismo"
   ],
   "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "A veterinarian gently holding a stethoscope to a happy healthy golden retriever, bright modern veterinary clinic, warm natural light, professional photography"
+  "bg_prompt": "A caring veterinarian examining a calm small cat on an exam table, clean modern veterinary clinic, soft natural light, professional photography"
 }

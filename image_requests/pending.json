@@ -1,13 +1,15 @@
 {
-  "id": "20260920-012449-k02k",
+  "id": "20260920-160110-2lh1",
   "type": "afiche",
-  "titulo": "Agenda Su Sesion de Grooming",
-  "subtitulo": "Cupos disponibles esta semana",
+  "titulo": "Consulta Veterinaria General",
+  "subtitulo": "Diagnostico y cuidado integral para tu mascota",
   "puntos": [
-    "Resultados que enamoran",
-    "Atencion personalizada",
-    "Visitanos en Plaza Las Colinas"
+    "Evaluacion completa por veterinario certificado",
+    "Desde RD$2,254",
+    "Agenda tu cita hoy mismo"
   ],
-  "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "A joyful well-groomed dog sitting proudly next to a smiling groomer in a bright modern pet salon, natural light, professional photography"
+  "cta": "WhatsApp: 809-752-6806",
+  "bg_prompt": "A veterinarian gently examining a small dog on the exam table",
+  "ref_group": "vet_exam_room",
+  "ref_images": []
 }

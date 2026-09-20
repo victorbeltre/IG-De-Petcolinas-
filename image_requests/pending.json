@@ -1,13 +1,13 @@
 {
-  "id": "20260920-012147-vj8n",
+  "id": "20260920-012237-2168",
   "type": "afiche",
-  "titulo": "Grooming Profesional",
-  "subtitulo": "Tu mascota, siempre linda y feliz",
+  "titulo": "Banos Para Toda Talla",
+  "subtitulo": "Shampoo y acondicionador de calidad",
   "puntos": [
-    "Bano y corte con productos de calidad",
-    "Groomer profesional certificado",
-    "Plaza Las Colinas"
+    "Bano pequeno RD$1,121",
+    "Bano mediano RD$1,271",
+    "Bano grande RD$1,637"
   ],
   "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "A freshly groomed fluffy white dog with a bandana, happy expression, bright modern pet grooming salon, professional photography"
+  "bg_prompt": "A cute dog getting a bath with foam and bubbles in a professional grooming salon, playful happy expression, bright lighting"
 }

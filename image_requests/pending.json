@@ -1,13 +1,13 @@
 {
-  "id": "20260920-012237-2168",
+  "id": "20260920-012353-xpb0",
   "type": "afiche",
-  "titulo": "Banos Para Toda Talla",
-  "subtitulo": "Shampoo y acondicionador de calidad",
+  "titulo": "Cortes y Grooming Completo",
+  "subtitulo": "Estilo, higiene y cuidado en un solo lugar",
   "puntos": [
-    "Bano pequeno RD$1,121",
-    "Bano mediano RD$1,271",
-    "Bano grande RD$1,637"
+    "Corte completo desde RD$1,021",
+    "Grooming completo (bano+corte+colonia) RD$1,518",
+    "Corte de unas RD$287"
   ],
   "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "A cute dog getting a bath with foam and bubbles in a professional grooming salon, playful happy expression, bright lighting"
+  "bg_prompt": "A professional groomer carefully trimming the fur of a well-behaved poodle mix dog, modern salon, focused gentle care, professional photography"
 }

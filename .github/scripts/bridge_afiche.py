@@ -71,29 +71,44 @@ def wrap(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list:
 def generar_fondo(prompt: str, key: str) -> Image.Image:
     import requests
 
-    url = "https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict"
+    # Nota: esta cuenta no tiene acceso a Imagen 4 (:predict). Usamos
+    # Gemini 3 Pro Image (:generateContent), confirmado disponible.
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image:generateContent"
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
     full = (
         f"{prompt}. Professional photography, vibrant colors, clean composition, "
         "no text, no watermarks, no overlaid captions, high quality."
     )
     payload = {
-        "instances": [{"prompt": full}],
-        "parameters": {"sampleCount": 1, "aspectRatio": "1:1",
-                       "safetyFilterLevel": "block_only_high",
-                       "personGeneration": "allow_adult"},
+        "contents": [{"parts": [{"text": full}]}],
+        "generationConfig": {
+            "responseModalities": ["IMAGE"],
+            "imageConfig": {"aspectRatio": "1:1", "imageSize": "2K"},
+        },
     }
     ultimo = ""
     for intento in range(3):
         try:
             r = requests.post(url, headers=headers, json=payload, timeout=120)
             if r.status_code == 200:
-                b64 = r.json()["predictions"][0]["bytesBase64Encoded"]
-                img = Image.open(BytesIO(base64.b64decode(b64))).convert("RGBA")
-                return img.resize((W, H), Image.LANCZOS)
-            ultimo = f"HTTP {r.status_code}"
-            if r.status_code in (400, 403):
-                sys.exit(f"ERROR ({ultimo}): {r.text[:300]}")
+                data = r.json()
+                b64 = None
+                for cand in data.get("candidates", []):
+                    for part in cand.get("content", {}).get("parts", []):
+                        inline = part.get("inlineData")
+                        if inline and inline.get("data"):
+                            b64 = inline["data"]
+                            break
+                    if b64:
+                        break
+                if b64:
+                    img = Image.open(BytesIO(base64.b64decode(b64))).convert("RGBA")
+                    return img.resize((W, H), Image.LANCZOS)
+                ultimo = "respuesta sin imagen (posible bloqueo de seguridad)"
+            else:
+                ultimo = f"HTTP {r.status_code}"
+                if r.status_code in (400, 403):
+                    sys.exit(f"ERROR ({ultimo}): {r.text[:300]}")
         except requests.RequestException as e:
             ultimo = type(e).__name__
         if intento < 2:

@@ -1,13 +1,14 @@
 {
-  "id": "20260920-011924-4lfn",
+  "id": "20260920-012007-7up0",
   "type": "afiche",
-  "titulo": "Consulta Veterinaria General",
-  "subtitulo": "Diagnostico y cuidado integral para tu mascota",
+  "titulo": "Vacunacion Completa",
+  "subtitulo": "Protege a tu mascota contra enfermedades",
   "puntos": [
-    "Evaluacion completa por veterinario certificado",
-    "Desde RD$2,254",
-    "Agenda tu cita hoy mismo"
+    "Vacuna quintuple RD$1,658",
+    "Vacuna sextuple RD$1,977",
+    "Vacuna antirrabica RD$2,012",
+    "Vacuna triple RD$1,776"
   ],
   "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "A caring veterinarian examining a calm small cat on an exam table, clean modern veterinary clinic, soft natural light, professional photography"
+  "bg_prompt": "Close up of a veterinarian gently vaccinating a calm happy puppy, bright veterinary clinic, professional photography, caring expression"
 }

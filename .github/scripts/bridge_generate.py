@@ -19,10 +19,18 @@ from pathlib import Path
 PENDING = Path("image_requests/pending.json")
 OUTPUT_ROOT = Path("image_requests/output")
 
+# Nota: esta cuenta no tiene acceso a Imagen 4 (:predict, HTTP 404 en todos
+# los modelos imagen-4.x). Usamos los modelos Gemini de imagen (:generateContent),
+# confirmados disponibles para esta API key.
 MODELOS = {
-    "fast": "imagen-4.0-fast-generate-001",
-    "standard": "imagen-4.0-generate-001",
-    "ultra": "imagen-4.0-ultra-generate-001",
+    "fast": "gemini-3.1-flash-image",
+    "standard": "gemini-3-pro-image",
+    "ultra": "gemini-3-pro-image",
+}
+TAMANOS = {
+    "fast": "1K",
+    "standard": "2K",
+    "ultra": "4K",
 }
 ASPECTOS = {"1:1", "3:4", "4:3", "9:16", "16:9"}
 
@@ -72,7 +80,7 @@ def main() -> None:
         aspect = "1:1"
     model = req.get("model", "standard")
     model_id = MODELOS.get(model, MODELOS["standard"])
-    person = "dont_allow" if req.get("no_people") else "allow_adult"
+    image_size = TAMANOS.get(model, "2K")
 
     out_dir = OUTPUT_ROOT / req_id
     # Si ya existe una imagen para este id, no regeneramos (idempotente).
@@ -86,46 +94,52 @@ def main() -> None:
 
     import requests
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_id}:predict"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_id}:generateContent"
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
     payload = {
-        "instances": [{"prompt": prompt}],
-        "parameters": {"sampleCount": n, "aspectRatio": aspect, "personGeneration": person},
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "responseModalities": ["IMAGE"],
+            "imageConfig": {"aspectRatio": aspect, "imageSize": image_size},
+        },
     }
 
     print(f"Generando pedido {req_id}: n={n} aspect={aspect} model={model}")
 
-    data = None
-    ultimo = ""
-    for intento in range(3):
-        try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=120)
-            if resp.status_code == 200:
-                data = resp.json()
-                break
-            ultimo = f"HTTP {resp.status_code}"
-            # No imprimimos headers/URL para no filtrar la key.
-            if resp.status_code in (400, 403):
-                sys.exit(f"ERROR ({ultimo}): {resp.text[:400]}")
-        except requests.RequestException as e:
-            ultimo = type(e).__name__
-        if intento < 2:
-            time.sleep(6)
+    imagenes_b64 = []
+    for _ in range(n):
+        data = None
+        ultimo = ""
+        for intento in range(3):
+            try:
+                resp = requests.post(url, headers=headers, json=payload, timeout=120)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    break
+                ultimo = f"HTTP {resp.status_code}"
+                # No imprimimos headers/URL para no filtrar la key.
+                if resp.status_code in (400, 403):
+                    sys.exit(f"ERROR ({ultimo}): {resp.text[:400]}")
+            except requests.RequestException as e:
+                ultimo = type(e).__name__
+            if intento < 2:
+                time.sleep(6)
+        if data is None:
+            sys.exit(f"ERROR: no se pudo generar tras 3 intentos ({ultimo}).")
+        for cand in data.get("candidates", []):
+            for part in cand.get("content", {}).get("parts", []):
+                inline = part.get("inlineData")
+                if inline and inline.get("data"):
+                    imagenes_b64.append(inline["data"])
+                    break
 
-    if data is None:
-        sys.exit(f"ERROR: no se pudo generar tras 3 intentos ({ultimo}).")
-
-    preds = data.get("predictions", [])
-    if not preds:
+    if not imagenes_b64:
         sys.exit("ERROR: la API no devolvio imagenes (posible filtro de seguridad).")
 
     out_dir.mkdir(parents=True, exist_ok=True)
     guardadas = []
-    for i, pred in enumerate(preds, 1):
-        b64 = pred.get("bytesBase64Encoded")
-        if not b64:
-            continue
-        nombre = "image.png" if len(preds) == 1 else f"image_{i}.png"
+    for i, b64 in enumerate(imagenes_b64, 1):
+        nombre = "image.png" if len(imagenes_b64) == 1 else f"image_{i}.png"
         (out_dir / nombre).write_bytes(base64.b64decode(b64))
         guardadas.append(nombre)
 

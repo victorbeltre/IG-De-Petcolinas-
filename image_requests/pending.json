@@ -1,15 +1,15 @@
 {
-  "id": "20260920-160453-9qfc",
+  "id": "20260920-160550-1iet",
   "type": "afiche",
-  "titulo": "Refuerzo Anual Completo",
-  "subtitulo": "Quintuple + Giardia + Bordetella + Rabia",
+  "titulo": "Grooming Profesional",
+  "subtitulo": "Tu mascota, siempre linda y feliz",
   "puntos": [
-    "Todo en un solo paquete: RD$5,918",
-    "Ahorra tiempo y visitas",
-    "Cupos limitados por semana"
+    "Bano y corte con productos de calidad",
+    "Groomer profesional certificado",
+    "Plaza Las Colinas"
   ],
-  "cta": "Agenda por WhatsApp: 809-752-6806",
-  "bg_prompt": "The front entrance door of the pet shop, welcoming, open sign visible",
-  "ref_group": "storefront",
+  "cta": "WhatsApp: 809-752-6806",
+  "bg_prompt": "A freshly groomed fluffy dog, happy expression, just finished at the grooming salon",
+  "ref_group": "grooming",
   "ref_images": []
 }

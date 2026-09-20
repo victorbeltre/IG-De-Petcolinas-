@@ -1,9 +1,13 @@
 {
-  "id": "20260919-221257-sr10",
-  "type": "imagen",
-  "prompt": "un perro pequeno feliz recien banado, foto realista, luz natural, alta calidad, sin marcas de agua",
-  "n": 1,
-  "aspect": "1:1",
-  "model": "standard",
-  "no_people": false
+  "id": "20260920-011833-b1ts",
+  "type": "afiche",
+  "titulo": "¿Tu Mascota Esta Protegida?",
+  "subtitulo": "Vacunas y consultas veterinarias en Petcolinas",
+  "puntos": [
+    "Veterinarios certificados",
+    "Equipos y protocolos profesionales",
+    "Atencion en Plaza Las Colinas"
+  ],
+  "cta": "WhatsApp: 809-378-9533",
+  "bg_prompt": "A veterinarian gently holding a stethoscope to a happy healthy golden retriever, bright modern veterinary clinic, warm natural light, professional photography"
 }

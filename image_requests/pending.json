@@ -1,14 +1,13 @@
 {
-  "id": "20260920-012007-7up0",
+  "id": "20260920-012055-ut18",
   "type": "afiche",
-  "titulo": "Vacunacion Completa",
-  "subtitulo": "Protege a tu mascota contra enfermedades",
+  "titulo": "Refuerzo Anual Completo",
+  "subtitulo": "Quintuple + Giardia + Bordetella + Rabia",
   "puntos": [
-    "Vacuna quintuple RD$1,658",
-    "Vacuna sextuple RD$1,977",
-    "Vacuna antirrabica RD$2,012",
-    "Vacuna triple RD$1,776"
+    "Todo en un solo paquete: RD$5,918",
+    "Ahorra tiempo y visitas",
+    "Cupos limitados por semana"
   ],
-  "cta": "WhatsApp: 809-378-9533",
-  "bg_prompt": "Close up of a veterinarian gently vaccinating a calm happy puppy, bright veterinary clinic, professional photography, caring expression"
+  "cta": "Agenda por WhatsApp: 809-378-9533",
+  "bg_prompt": "A happy family with their dog outside a modern veterinary clinic entrance, sunny day, warm inviting atmosphere, professional photography"
 }

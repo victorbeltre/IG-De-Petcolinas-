@@ -1,0 +1,22 @@
+{
+  "_readme": "Fotos reales del local de PetColinas (Plaza Las Colinas, SDO Oeste). Usar estas fotos como imagenes de referencia (input) en generateContent de Gemini para que cualquier fondo generado por IA se parezca de verdad al local real: mismos pisos, paredes, mobiliario, iluminacion y personal. NUNCA usar estas fotos directamente como fondo final del anuncio (el dueno pidio explicitamente fotos generadas por IA, no las fotos reales) - se usan solo como referencia visual para el modelo.",
+  "groups": {
+    "storefront": {
+      "desc": "Fachada exterior del local, letrero PETCOLINAS, vitrinas.",
+      "files": ["storefront_wide.jpg", "storefront_pricing_window.jpg", "front_door_logo.jpg"]
+    },
+    "vet_exam_room": {
+      "desc": "Consultorio veterinario: mesa de acero inoxidable, gabinetes blancos, bata blanca, decoracion de animales, balanza.",
+      "files": ["vet_exam_1.jpg", "vet_exam_2.jpg", "vet_exam_3.jpg", "vet_counter_wallpaper.jpg"]
+    },
+    "grooming": {
+      "desc": "Area de grooming: mesa de peluqueria con brazo y correa, secadora amarilla, tina de bano, resultado de mascota recien peluqueada.",
+      "files": ["grooming_table.jpg", "grooming_bath_action.jpg", "grooming_result_dog.jpg"]
+    },
+    "retail_reception": {
+      "desc": "Recepcion/caja, pasillos de tienda con productos para mascotas, estantes.",
+      "files": ["reception_desk.jpg", "retail_shelves.jpg", "back_room.jpg"]
+    }
+  },
+  "estilo_general": "Piso de ceramica clara, paredes blancas/verde menta/azul turquesa segun el area, estanterias metalicas blancas con productos para mascotas, luz de tubos LED fria, ambiente pequeno-mediano de plaza comercial dominicana. NO es una clinica veterinaria estilo Estados Unidos (no fondos de madera oscura tipo spa, no iluminacion calida tipo revista); es un local real, sencillo, ordenado, de barrio."
+}

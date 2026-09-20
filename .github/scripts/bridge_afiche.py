@@ -68,19 +68,49 @@ def wrap(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list:
     return lineas
 
 
-def generar_fondo(prompt: str, key: str) -> Image.Image:
+REF_DIR = Path("assets/petcolinas_reference")
+
+
+def _cargar_referencias(nombres: list) -> list:
+    """Carga fotos reales de PetColinas como parts de imagen (input) para Gemini."""
+    import base64 as _b64
+    parts = []
+    for nombre in nombres or []:
+        p = REF_DIR / nombre
+        if not p.exists():
+            continue
+        data = _b64.b64encode(p.read_bytes()).decode("ascii")
+        mime = "image/png" if nombre.lower().endswith(".png") else "image/jpeg"
+        parts.append({"inline_data": {"mime_type": mime, "data": data}})
+    return parts
+
+
+def generar_fondo(prompt: str, key: str, ref_images: list = None) -> Image.Image:
     import requests
 
     # Nota: esta cuenta no tiene acceso a Imagen 4 (:predict). Usamos
     # Gemini 3 Pro Image (:generateContent), confirmado disponible.
     url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image:generateContent"
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
-    full = (
+
+    ref_parts = _cargar_referencias(ref_images)
+    instrucciones = (
+        f"{prompt}. "
+        "Usa las fotos adjuntas como referencia EXACTA del local real de PetColinas "
+        "(mismo piso, paredes, mobiliario, estanterias, iluminacion y personal): "
+        "el resultado debe parecerse en un 99% al escenario real mostrado, no a una "
+        "clinica generica de stock. Foto realista tomada con camara de telefono en un "
+        "local pequeno de plaza comercial dominicana: luz de tubos LED, texturas e "
+        "imperfecciones naturales, ligero grano, perspectiva casual (NO simetria perfecta "
+        "de render 3D, NO iluminacion de estudio profesional, NO aspecto de imagen generada "
+        "por IA). Sin texto superpuesto, sin marcas de agua, sin logos inventados."
+        if ref_parts else
         f"{prompt}. Professional photography, vibrant colors, clean composition, "
         "no text, no watermarks, no overlaid captions, high quality."
     )
+    parts = ref_parts + [{"text": instrucciones}]
     payload = {
-        "contents": [{"parts": [{"text": full}]}],
+        "contents": [{"parts": parts}],
         "generationConfig": {
             "responseModalities": ["IMAGE"],
             "imageConfig": {"aspectRatio": "1:1", "imageSize": "2K"},
@@ -150,7 +180,18 @@ def render(req: dict, out_dir: Path, key: str) -> None:
     bg_prompt = str(req.get("bg_prompt", "")).strip() or \
         "Bright modern veterinary clinic with a happy healthy dog and cat, warm natural light"
 
-    bg = generar_fondo(bg_prompt, key)
+    ref_images = req.get("ref_images")
+    if not ref_images:
+        grupo = str(req.get("ref_group", "")).strip()
+        if grupo:
+            try:
+                import json as _json
+                manifest = _json.loads((REF_DIR / "manifest.json").read_text(encoding="utf-8"))
+                ref_images = manifest.get("groups", {}).get(grupo, {}).get("files", [])
+            except Exception:
+                ref_images = []
+
+    bg = generar_fondo(bg_prompt, key, ref_images)
     img = overlay(bg, 150)
     logo_box(img)
     d = ImageDraw.Draw(img)

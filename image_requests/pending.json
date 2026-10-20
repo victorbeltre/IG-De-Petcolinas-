@@ -1,15 +1,13 @@
 {
-  "id": "20260920-160805-4b83",
+  "id": "20261020-185321-c1gr",
   "type": "afiche",
-  "titulo": "Agenda Su Sesion de Grooming",
-  "subtitulo": "Cupos disponibles esta semana",
+  "titulo": "¿Tu perro tiene nudos?",
+  "subtitulo": "Todavía se puede salvar el pelo",
   "puntos": [
-    "Resultados que enamoran",
-    "Atencion personalizada",
-    "Visitanos en Plaza Las Colinas"
+    "Deslanado profesional",
+    "Más de 3 horas por mascota",
+    "Nudo por nudo, sin rapar"
   ],
-  "cta": "WhatsApp: 809-752-6806",
-  "bg_prompt": "Exterior storefront of the pet shop during the day, inviting entrance",
-  "ref_group": "storefront",
-  "ref_images": []
+  "cta": "Escríbeme NUDOS por DM",
+  "bg_prompt": "peine y cepillo de grooming para perros sobre una toalla blanca, luz suave, fondo limpio, sin animales, sin texto"
 }

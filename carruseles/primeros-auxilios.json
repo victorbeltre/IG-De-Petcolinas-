@@ -1,7 +1,7 @@
 {
   "folder": "primeros-auxilios",
   "fast_model": true,
-  "caption": "🚨 Primeros auxilios para mascotas: lo que todo dueño debe saber\n\nEn caso de emergencia, en PetColinas estamos aquí para ti 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #PrimerosAuxilios #EmergenciaVeterinaria #MascotasRD #SaludAnimal",
+  "caption": "🚨 Primeros auxilios para mascotas: lo que todo dueño debe saber\n\nEn caso de emergencia, en PetColinas estamos aquí para ti 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinas\n\n#PetColinas #PrimerosAuxilios #EmergenciaVeterinaria #MascotasRD #SaludAnimal",
   "slides": [
     {
       "tipo": "portada",
@@ -68,7 +68,7 @@
       "lineas": [
         "📱 Contáctanos por WhatsApp",
         "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
-        "@petcolinasrd"
+        "@petcolinas"
       ]
     }
   ]

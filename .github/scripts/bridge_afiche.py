@@ -38,7 +38,7 @@ DORADO = "#c9a227"
 BLANCO = "#ffffff"
 
 LOGO_PATH = Path("assets/logo_petcolinas.png")
-FOOTER_DEFAULT = "PetColinas  ·  Plaza Las Colinas, SDO Oeste  ·  @petcolinasrd"
+FOOTER_DEFAULT = "PetColinas  ·  Plaza Las Colinas, SDO Oeste  ·  @petcolinas"
 
 _FONT_DIR = Path("/usr/share/fonts/truetype/dejavu")
 _BOLD = str(_FONT_DIR / "DejaVuSans-Bold.ttf")

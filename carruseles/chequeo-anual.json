@@ -1,7 +1,7 @@
 {
   "folder": "chequeo-anual",
   "fast_model": true,
-  "caption": "🩺 Tu perro se ve sano... pero ¿cuándo fue su último chequeo?\n\nLas enfermedades silenciosas se detectan antes de que sea tarde 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #ChequeoAnual #MedicinaPreventiva #SaludCanina #MascotasRD",
+  "caption": "🩺 Tu perro se ve sano... pero ¿cuándo fue su último chequeo?\n\nLas enfermedades silenciosas se detectan antes de que sea tarde 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinas\n\n#PetColinas #ChequeoAnual #MedicinaPreventiva #SaludCanina #MascotasRD",
   "slides": [
     {
       "tipo": "portada",
@@ -68,7 +68,7 @@
       "lineas": [
         "📱 Escríbenos por WhatsApp",
         "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
-        "@petcolinasrd"
+        "@petcolinas"
       ]
     }
   ]

@@ -82,7 +82,7 @@ Campos del afiche:
 Guias:
 - Precios: usa SOLO precios reales de PRECIOS_PETCOLINAS.json; no inventes.
 - Manten el titulo a 2-4 palabras clave; el detalle va en las vinetas.
-- El logo, los colores y el footer (@petcolinasrd) se ponen solos.
+- El logo, los colores y el footer (@petcolinas) se ponen solos.
 
 ## Modo alterno: directo con key local
 Si en algun entorno SI tienes la key (`GOOGLE_AI_KEY` en el entorno o

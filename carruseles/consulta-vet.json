@@ -1,7 +1,7 @@
 {
   "folder": "consulta-vet",
   "fast_model": true,
-  "caption": "🩺 ¿Con qué frecuencia llevas a tu perro al veterinario?\n\nLa prevención es siempre más económica que el tratamiento 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinasrd\n\n#PetColinas #ConsultaVeterinaria #SaludPreventiva #PerrosRD #MascotasRD",
+  "caption": "🩺 ¿Con qué frecuencia llevas a tu perro al veterinario?\n\nLa prevención es siempre más económica que el tratamiento 🐾\n\n📍 Plaza Las Colinas, SDO Oeste\n@petcolinas\n\n#PetColinas #ConsultaVeterinaria #SaludPreventiva #PerrosRD #MascotasRD",
   "slides": [
     {
       "tipo": "portada",
@@ -69,7 +69,7 @@
       "lineas": [
         "📱 Escríbenos por WhatsApp",
         "⏰ Lunes a Sábado · 8am – 6pm (cerrado los martes)",
-        "@petcolinasrd"
+        "@petcolinas"
       ]
     }
   ]

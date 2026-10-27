@@ -162,7 +162,7 @@ def footer_bar(img: Image.Image) -> Image.Image:
     draw = ImageDraw.Draw(img)
     draw.text(
         (W // 2, H - 36),
-        "🐾  PetColinas  ·  Plaza Las Colinas, SDO Oeste  ·  @petcolinasrd",
+        "🐾  PetColinas  ·  Plaza Las Colinas, SDO Oeste  ·  @petcolinas",
         font=fnt(24, bold=False),
         fill=rgb(BLANCO),
         anchor="mm",

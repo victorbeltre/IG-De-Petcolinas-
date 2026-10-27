@@ -1,13 +1,9 @@
 {
-  "id": "20261020-185321-c1gr",
-  "type": "afiche",
-  "titulo": "¿Tu perro tiene nudos?",
-  "subtitulo": "Todavía se puede salvar el pelo",
-  "puntos": [
-    "Deslanado profesional",
-    "Más de 3 horas por mascota",
-    "Nudo por nudo, sin rapar"
-  ],
-  "cta": "Escríbeme NUDOS por DM",
-  "bg_prompt": "peine y cepillo de grooming para perros sobre una toalla blanca, luz suave, fondo limpio, sin animales, sin texto"
+  "id": "20261027-201845-qrny",
+  "type": "imagen",
+  "prompt": "Flat vector cartoon illustration in the exact style of a friendly pet-clinic logo: bold dark navy outlines, flat colors with very soft cel shading, limited palette of teal (#12A4B9), warm orange (#F28C1E), deep navy (#0E2233), cream (#FBF7EF) and a touch of red. Main characters: NICKY, a happy, neatly groomed black long-haired dog with tan-orange markings on eyebrows, muzzle and chest, floppy ears, open smiling mouth with pink tongue, red collar with a small golden heart-shaped tag; and a smiling orange tabby cat with cream muzzle. Absolutely no text, no letters, no numbers, no logos, no watermark. Vertical 3:4 composition, clean uncluttered background, high quality. Scene: the front of a small, tidy pet clinic and pet shop in a sunny Dominican Republic shopping plaza: white facade with teal accents, big glass windows and a glass door, a blank orange sign above the door, two potted palms, blue sky. Nicky and the orange cat sit happily at the door welcoming the viewer.",
+  "n": 1,
+  "aspect": "3:4",
+  "model": "standard",
+  "no_people": false
 }

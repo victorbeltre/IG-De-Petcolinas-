@@ -1,0 +1,12 @@
+{
+  "id": "20261027-201845-qrny",
+  "prompt": "Flat vector cartoon illustration in the exact style of a friendly pet-clinic logo: bold dark navy outlines, flat colors with very soft cel shading, limited palette of teal (#12A4B9), warm orange (#F28C1E), deep navy (#0E2233), cream (#FBF7EF) and a touch of red. Main characters: NICKY, a happy, neatly groomed black long-haired dog with tan-orange markings on eyebrows, muzzle and chest, floppy ears, open smiling mouth with pink tongue, red collar with a small golden heart-shaped tag; and a smiling orange tabby cat with cream muzzle. Absolutely no text, no letters, no numbers, no logos, no watermark. Vertical 3:4 composition, clean uncluttered background, high quality. Scene: the front of a small, tidy pet clinic and pet shop in a sunny Dominican Republic shopping plaza: white facade with teal accents, big glass windows and a glass door, a blank orange sign above the door, two potted palms, blue sky. Nicky and the orange cat sit happily at the door welcoming the viewer.",
+  "n": 1,
+  "aspect": "3:4",
+  "model": "standard",
+  "no_people": false,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

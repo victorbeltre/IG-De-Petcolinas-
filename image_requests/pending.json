@@ -1,8 +1,8 @@
 {
-  "id": "20261101-120750-odzj",
+  "id": "20261101-120938-k2fv",
   "type": "imagen",
-  "prompt": "Logo minimalista de Ventilapp: símbolo de pulmones con una línea de electrocardiograma en verde menta #5ee0b0 sobre fondo verde oscuro #0b1512, estilo vector plano, sin texto, centrado, alta calidad, sin marcas de agua",
-  "n": 1,
+  "prompt": "Logo de empresa para Ventilapp, app de simulación de anestesia. Un símbolo circular: pulmones estilizados con una línea de electrocardiograma en verde menta #5ee0b0, con el texto exacto \"VENTILAPP\" debajo en letras sans-serif modernas, mayúsculas, color blanco, bien legible. Fondo verde oscuro #0b1512, diseño plano, centrado, alta calidad, sin marcas de agua",
+  "n": 2,
   "aspect": "1:1",
   "model": "standard",
   "no_people": false

@@ -1,9 +1,9 @@
 {
-  "id": "20261101-120938-k2fv",
+  "id": "20261102-214125-40va",
   "type": "imagen",
-  "prompt": "Logo de empresa para Ventilapp, app de simulación de anestesia. Un símbolo circular: pulmones estilizados con una línea de electrocardiograma en verde menta #5ee0b0, con el texto exacto \"VENTILAPP\" debajo en letras sans-serif modernas, mayúsculas, color blanco, bien legible. Fondo verde oscuro #0b1512, diseño plano, centrado, alta calidad, sin marcas de agua",
-  "n": 2,
-  "aspect": "1:1",
-  "model": "standard",
-  "no_people": false
+  "prompt": "Ilustración médica fotorrealista, corte transversal de pulmones humanos en un paciente con EPOC severa, tórax en barril, pulmón hiperinflado con aire atrapado, bullas grandes, fondo oscuro azul verdoso, iluminación clínica suave, textura de tejido detallada, sin texto, sin etiquetas, sin letras",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true
 }

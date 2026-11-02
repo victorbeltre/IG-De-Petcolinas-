@@ -1,0 +1,12 @@
+{
+  "id": "20261102-214125-40va",
+  "prompt": "Ilustración médica fotorrealista, corte transversal de pulmones humanos en un paciente con EPOC severa, tórax en barril, pulmón hiperinflado con aire atrapado, bullas grandes, fondo oscuro azul verdoso, iluminación clínica suave, textura de tejido detallada, sin texto, sin etiquetas, sin letras",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

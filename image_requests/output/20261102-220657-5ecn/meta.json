@@ -1,0 +1,12 @@
+{
+  "id": "20261102-220657-5ecn",
+  "prompt": "Fotografía realista en primer plano del panel de control de un ventilador mecánico de cuidados intensivos, perillas y botones plateados y negros, pantalla de control oscura con gráficas sin texto legible, iluminación clínica azul suave, fondo desenfocado de una unidad de cuidados intensivos, sin texto, sin letras, sin logotipos",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

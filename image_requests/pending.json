@@ -1,7 +1,7 @@
 {
-  "id": "20261102-214125-40va",
+  "id": "20261102-214243-sayl",
   "type": "imagen",
-  "prompt": "Ilustración médica fotorrealista, corte transversal de pulmones humanos en un paciente con EPOC severa, tórax en barril, pulmón hiperinflado con aire atrapado, bullas grandes, fondo oscuro azul verdoso, iluminación clínica suave, textura de tejido detallada, sin texto, sin etiquetas, sin letras",
+  "prompt": "Ilustración médica fotorrealista, corte de bronquiolo estrechado con pared colapsando sobre la luz de la vía aérea, alvéolos distendidos con aire atrapado, tejido húmedo con detalle, fondo azul verdoso oscuro, iluminación clínica, sin texto, sin etiquetas, sin letras",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

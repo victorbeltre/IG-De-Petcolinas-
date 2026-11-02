@@ -1,0 +1,12 @@
+{
+  "id": "20261102-214243-sayl",
+  "prompt": "Ilustración médica fotorrealista, corte de bronquiolo estrechado con pared colapsando sobre la luz de la vía aérea, alvéolos distendidos con aire atrapado, tejido húmedo con detalle, fondo azul verdoso oscuro, iluminación clínica, sin texto, sin etiquetas, sin letras",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

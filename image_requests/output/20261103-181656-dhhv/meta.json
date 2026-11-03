@@ -1,0 +1,12 @@
+{
+  "id": "20261103-181656-dhhv",
+  "prompt": "Hyperrealistic 3D render of a modern anesthesia ventilator monitor on a clean operating room table, dark screen showing a green capnography waveform, realistic plastic and metal textures, dramatic cinematic lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no readable text, no labels, no letters",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

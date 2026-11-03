@@ -1,7 +1,7 @@
 {
-  "id": "20261103-181308-0nye",
+  "id": "20261103-181656-dhhv",
   "type": "imagen",
-  "prompt": "Hyperrealistic 3D medical render, cross-section of human airway: trachea with an endotracheal tube correctly placed between the vocal cords, pink mucosa, cinematic studio lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no text, no labels, no letters",
+  "prompt": "Hyperrealistic 3D render of a modern anesthesia ventilator monitor on a clean operating room table, dark screen showing a green capnography waveform, realistic plastic and metal textures, dramatic cinematic lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no readable text, no labels, no letters",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

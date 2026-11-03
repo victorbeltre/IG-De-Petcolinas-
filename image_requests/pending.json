@@ -1,7 +1,7 @@
 {
-  "id": "20261102-220657-5ecn",
+  "id": "20261103-181308-0nye",
   "type": "imagen",
-  "prompt": "Fotografía realista en primer plano del panel de control de un ventilador mecánico de cuidados intensivos, perillas y botones plateados y negros, pantalla de control oscura con gráficas sin texto legible, iluminación clínica azul suave, fondo desenfocado de una unidad de cuidados intensivos, sin texto, sin letras, sin logotipos",
+  "prompt": "Hyperrealistic 3D medical render, cross-section of human airway: trachea with an endotracheal tube correctly placed between the vocal cords, pink mucosa, cinematic studio lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no text, no labels, no letters",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

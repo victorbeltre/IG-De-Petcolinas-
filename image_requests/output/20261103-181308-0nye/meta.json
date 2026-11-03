@@ -1,0 +1,12 @@
+{
+  "id": "20261103-181308-0nye",
+  "prompt": "Hyperrealistic 3D medical render, cross-section of human airway: trachea with an endotracheal tube correctly placed between the vocal cords, pink mucosa, cinematic studio lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no text, no labels, no letters",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

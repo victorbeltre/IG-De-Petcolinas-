@@ -1,7 +1,7 @@
 {
-  "id": "20261103-181656-dhhv",
+  "id": "20261104-203937-ypzi",
   "type": "imagen",
-  "prompt": "Hyperrealistic 3D render of a modern anesthesia ventilator monitor on a clean operating room table, dark screen showing a green capnography waveform, realistic plastic and metal textures, dramatic cinematic lighting, dark navy background with soft teal glow, ultra detailed, photoreal, no people, no readable text, no labels, no letters",
+  "prompt": "Hyperrealistic 3D medical illustration of a neuromuscular junction: a motor nerve axon terminal at the top branching onto a striated skeletal muscle fiber at the bottom, synaptic vesicles releasing glowing blue neurotransmitter molecules into the synaptic cleft, receptor proteins on the motor end plate surface, cinematic lighting, dark navy background, vertical composition, no text, no labels, no letters",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

@@ -1,7 +1,7 @@
 {
-  "id": "20261104-204052-0tv1",
+  "id": "20261104-204146-74g4",
   "type": "imagen",
-  "prompt": "Hyperrealistic 3D anatomical render of the human thorax, front view: translucent rib cage, pink lungs, and the dome-shaped diaphragm muscle highlighted in deep red beneath the lungs, dark background, cinematic studio lighting, vertical composition, no text, no labels, no letters",
+  "prompt": "Hyperrealistic 3D product render of a handheld peripheral nerve stimulator medical device used for train-of-four monitoring, with a blank dark display, two thin cables ending in round adhesive electrode pads, resting on a dark operating room surface, soft blue rim light, vertical composition, no text, no labels, no letters, no brand names",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

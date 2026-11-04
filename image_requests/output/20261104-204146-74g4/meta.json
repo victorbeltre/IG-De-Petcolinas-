@@ -1,0 +1,12 @@
+{
+  "id": "20261104-204146-74g4",
+  "prompt": "Hyperrealistic 3D product render of a handheld peripheral nerve stimulator medical device used for train-of-four monitoring, with a blank dark display, two thin cables ending in round adhesive electrode pads, resting on a dark operating room surface, soft blue rim light, vertical composition, no text, no labels, no letters, no brand names",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

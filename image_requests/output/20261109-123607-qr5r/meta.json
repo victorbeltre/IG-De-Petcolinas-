@@ -1,0 +1,12 @@
+{
+  "id": "20261109-123607-qr5r",
+  "prompt": "Ilustración pintada digital estilo editorial, quirófano oscuro y dramático, primer plano de un monitor de signos vitales que brilla en rojo, una mascarilla y tubo de oxígeno transparente con flujo azul brillante en primer plano, pulmones translúcidos rosados en un paciente al fondo desenfocado, iluminación cinematográfica teal y naranja, mucho espacio oscuro libre en la parte superior, sin texto, sin etiquetas, sin letras, sin números",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

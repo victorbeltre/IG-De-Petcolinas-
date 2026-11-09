@@ -1,0 +1,11 @@
+{
+  "id": "20261109-134445-kw2f",
+  "prompt": "Hyperrealistic 3D medical animation, slow camera travelling inside translucent human bronchi that are narrowed and inflamed, glowing air particles moving out very slowly and getting stuck, cyan and blue light on deep navy background, vertical. No text, no labels.",
+  "model": "gemini-omni-1.1-flash",
+  "aspect": "9:16",
+  "resolution": "720p",
+  "files": [
+    "video.mp4"
+  ],
+  "status": "done"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "20261109-134333-hfo0",
+  "prompt": "Translucent human chest, close view of the red heart compressed between two swollen glowing lungs, the large veins entering the heart look flattened and narrow, dramatic red and cyan rim light. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

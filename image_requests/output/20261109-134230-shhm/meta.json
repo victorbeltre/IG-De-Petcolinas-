@@ -1,0 +1,12 @@
+{
+  "id": "20261109-134230-shhm",
+  "prompt": "Modern ICU mechanical ventilator screen in a dark room, glowing pressure and flow waveforms on the display, tubing circuit in the foreground, shallow depth of field, moody cinematic teal light. No people. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

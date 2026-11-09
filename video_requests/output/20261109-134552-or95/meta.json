@@ -1,0 +1,11 @@
+{
+  "id": "20261109-134552-or95",
+  "prompt": "Hyperrealistic 3D medical animation, close-up of a cluster of translucent glowing pulmonary alveoli like grapes, with each breath they inflate a little more and never fully deflate, becoming tense and overstretched, cyan light, deep navy background, vertical. No text, no labels.",
+  "model": "gemini-omni-1.1-flash",
+  "aspect": "9:16",
+  "resolution": "720p",
+  "files": [
+    "video.mp4"
+  ],
+  "status": "done"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "20261109-125453-gaw2",
+  "prompt": "Render 3D hiperrealista macro de un racimo de alvéolos pulmonares translúcidos como burbujas de cristal rosado, envueltos por una red de capilares rojos con glóbulos rojos visibles dentro, fondo negro, iluminación cálida interna que brilla a través de las membranas, profundidad de campo cinematográfica, estilo visualización científica premium, sin texto, sin etiquetas, sin letras",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

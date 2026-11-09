@@ -1,0 +1,65 @@
+name: PetColinas - Puente de Video (Gemini Omni Flash)
+
+# Puente para generar videos cortos sin tener la API key en la maquina.
+#
+# Flujo:
+#   1. El cliente escribe video_requests/pending.json y lo hace push.
+#   2. Ese push dispara este workflow (trigger por 'paths').
+#   3. Se genera el video con gemini-omni-1.1-flash usando el secret GOOGLE_AI_KEY,
+#      respetando el tope mensual de bridge_video.py.
+#   4. El resultado se commitea en video_requests/output/<id>/ y el cliente lo baja.
+#
+# El push con GITHUB_TOKEN no vuelve a disparar el workflow, asi que no hay bucles.
+
+on:
+  push:
+    paths:
+      - "video_requests/pending.json"
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    name: Generar video solicitado
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Generar video desde el pedido
+        env:
+          GOOGLE_AI_KEY: ${{ secrets.GOOGLE_AI_KEY }}
+        run: |
+          set -e
+          if [ ! -f video_requests/pending.json ]; then
+            echo "No hay pending.json, nada que hacer."
+            exit 0
+          fi
+          if [ -z "$GOOGLE_AI_KEY" ]; then
+            echo "::error::GOOGLE_AI_KEY no esta configurado en los Secrets del repo."
+            exit 1
+          fi
+          python .github/scripts/bridge_video.py
+
+      - name: Commit y push del resultado
+        run: |
+          git config user.name "PetColinas Bot"
+          git config user.email "petcolinasrd@gmail.com"
+          git add video_requests/output/ video_requests/usage.json
+          if git diff --cached --quiet; then
+            echo "No hubo cambios que guardar."
+          else
+            git commit -m "Video generado por el puente Omni Flash"
+            git push
+          fi

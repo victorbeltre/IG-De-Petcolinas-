@@ -1,0 +1,12 @@
+{
+  "id": "20261109-134125-ptro",
+  "prompt": "Translucent human torso seen from the front, both lungs hugely over-inflated and glowing bright, pushing the ribs outward, trapped air shown as luminous haze inside the lungs, small red heart squeezed in the middle. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

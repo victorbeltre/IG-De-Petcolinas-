@@ -1,0 +1,12 @@
+{
+  "id": "20261110-185722-d77h",
+  "prompt": "Translucent human chest seen from the front, two glowing lungs with the pulmonary arteries branching in red and veins in blue, the heart pumping blood into the lungs, fine glowing particles flowing through the vessels. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

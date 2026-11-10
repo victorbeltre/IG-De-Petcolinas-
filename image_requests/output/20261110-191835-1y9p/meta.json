@@ -1,0 +1,12 @@
+{
+  "id": "20261110-191835-1y9p",
+  "prompt": "Translucent human chest seen from the front, two lungs: the upper parts glow bright cyan and full of air, but the lower bases of both lungs are dark, grey, shrunken and collapsed, clear contrast between bright top and dark bottom. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

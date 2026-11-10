@@ -1,0 +1,12 @@
+{
+  "id": "20261110-185611-a8oh",
+  "prompt": "Modern anesthesia patient monitor in a dark operating room, glowing waveforms on the screen, a yellow wave on the display suddenly dropping, red alarm light reflecting, operating lights blurred in background, cinematic moody teal and red light. No people. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

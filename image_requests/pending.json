@@ -1,7 +1,7 @@
 {
-  "id": "20261110-225007-o6px",
+  "id": "20261110-225131-80b9",
   "type": "imagen",
-  "prompt": "Translucent human torso seen from the front, two lungs: the upper parts glow bright cyan and full of air, the lower parts of both lungs are dark, grey, shrunken and collapsed, clear contrast between open and collapsed lung. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "prompt": "Translucent human torso in side view lying on its back, the dome of the diaphragm pushed up toward the chest by the abdominal organs, the lungs compressed and smaller, the back part of the lung darker and collapsed. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

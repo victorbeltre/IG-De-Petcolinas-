@@ -1,7 +1,7 @@
 {
-  "id": "20261110-225131-80b9",
+  "id": "20261112-223511-5hpc",
   "type": "imagen",
-  "prompt": "Translucent human torso in side view lying on its back, the dome of the diaphragm pushed up toward the chest by the abdominal organs, the lungs compressed and smaller, the back part of the lung darker and collapsed. Hyperrealistic 3D medical render, translucent glass-like human anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters.",
+  "prompt": "Close-up of a fingertip pulse oximeter clip on a translucent glass-like hand, the sensor glowing with intense red light shining through the finger, dark room. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

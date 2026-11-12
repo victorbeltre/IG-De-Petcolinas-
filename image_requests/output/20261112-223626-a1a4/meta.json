@@ -1,0 +1,12 @@
+{
+  "id": "20261112-223626-a1a4",
+  "prompt": "Macro view inside a blood vessel, many glossy red blood cells flowing toward the camera, some cells bright red and a few darker cherry red, glowing plasma. Hyperrealistic 3D medical render, cinematic lighting, dark background, vertical composition. No text, no labels, no letters.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

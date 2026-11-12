@@ -1,7 +1,7 @@
 {
-  "id": "20261112-223511-5hpc",
+  "id": "20261112-223626-a1a4",
   "type": "imagen",
-  "prompt": "Close-up of a fingertip pulse oximeter clip on a translucent glass-like hand, the sensor glowing with intense red light shining through the finger, dark room. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "prompt": "Macro view inside a blood vessel, many glossy red blood cells flowing toward the camera, some cells bright red and a few darker cherry red, glowing plasma. Hyperrealistic 3D medical render, cinematic lighting, dark background, vertical composition. No text, no labels, no letters.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

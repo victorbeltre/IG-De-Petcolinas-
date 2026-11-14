@@ -1,7 +1,7 @@
 {
-  "id": "20261112-223730-vy97",
+  "id": "20261114-121604-phe1",
   "type": "imagen",
-  "prompt": "Translucent human torso seen from the front with trachea and two lungs: the lung on the left side of the image is bright glowing cyan and fully inflated, the lung on the right side of the image is dark grey, dim and collapsed, strong contrast between the two lungs. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "prompt": "Translucent glass-like human head and chest in three-quarter view wearing a clear oxygen mask with glowing cyan gas flowing into it, inside the chest two lungs glowing warm amber orange as if overloaded. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition, main subject in the lower two thirds of the frame, empty dark space at the top. No text, no labels, no letters, no numbers.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

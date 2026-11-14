@@ -1,0 +1,12 @@
+{
+  "id": "20261114-121831-df40",
+  "prompt": "A modern intensive care mechanical ventilator machine with a glowing screen on the right, connected by a corrugated breathing tube to a translucent glass-like human chest with glowing cyan lungs on the left, dramatic red warning light on the machine. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition, main subject in the lower two thirds of the frame, empty dark space at the top. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

@@ -1,7 +1,7 @@
 {
-  "id": "20261114-121831-df40",
+  "id": "20261116-211916-xyap",
   "type": "imagen",
-  "prompt": "A modern intensive care mechanical ventilator machine with a glowing screen on the right, connected by a corrugated breathing tube to a translucent glass-like human chest with glowing cyan lungs on the left, dramatic red warning light on the machine. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition, main subject in the lower two thirds of the frame, empty dark space at the top. No text, no labels, no letters, no numbers.",
+  "prompt": "Close-up of a single glowing control knob on a modern anesthesia ventilator panel, the knob in the lower half of the image, behind it a translucent cluster of lung alveoli like glowing grape bunches, half of them inflated bright cyan and half collapsed dark grey. Top half of the image is dark empty space. Hyperrealistic 3D medical render, translucent glass-like objects glowing in cyan and soft blue, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

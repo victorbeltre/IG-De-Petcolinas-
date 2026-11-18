@@ -1,0 +1,12 @@
+{
+  "id": "20261118-134148-fsly",
+  "prompt": "A glowing translucent glass patient monitor showing a heartbeat line, with branching glowing decision paths splitting in different directions like a decision tree, one path glowing green and another red. Subject in the lower two thirds, top third dark empty space. Hyperrealistic 3D render, translucent glass-like objects glowing in cyan and soft violet, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

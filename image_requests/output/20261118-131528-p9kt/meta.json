@@ -1,0 +1,12 @@
+{
+  "id": "20261118-131528-p9kt",
+  "prompt": "A translucent glowing human brain floating, surrounded by glass drug vials, syringes and capsules orbiting around it, some of them fading and dissolving into particles as if being forgotten, others glowing bright and sharp. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D render, translucent glass-like objects glowing in cyan and soft violet, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

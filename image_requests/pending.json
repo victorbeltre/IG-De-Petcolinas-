@@ -1,7 +1,7 @@
 {
-  "id": "20261118-134148-fsly",
+  "id": "20261119-113223-w96b",
   "type": "imagen",
-  "prompt": "A glowing translucent glass patient monitor showing a heartbeat line, with branching glowing decision paths splitting in different directions like a decision tree, one path glowing green and another red. Subject in the lower two thirds, top third dark empty space. Hyperrealistic 3D render, translucent glass-like objects glowing in cyan and soft violet, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "prompt": "A sleek translucent glass anesthesia ventilator screen floating in the dark, with two glowing waveforms rising out of it into the air: one perfectly regular square cyan wave on the left and one irregular organic green wave on the right, a pair of translucent glowing lungs between them. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D render, translucent glass-like objects glowing in cyan and green, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

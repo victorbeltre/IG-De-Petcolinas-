@@ -1,0 +1,12 @@
+{
+  "id": "20261123-174051-k2ev",
+  "prompt": "Translucent glowing human torso and head of a patient lying on an operating table, the skin covered in glowing red blotches and hives, blood vessels glowing red and dilated, the airways in the chest glowing red and narrowed, a glass syringe glowing bright cyan floating beside the arm. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan with red alert highlights, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

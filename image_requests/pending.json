@@ -1,7 +1,7 @@
 {
-  "id": "20261122-193758-g57a",
+  "id": "20261123-174051-k2ev",
   "type": "imagen",
-  "prompt": "Translucent glowing human head and neck in profile, the larynx and vocal cords inside the throat glowing red and tightly clenched shut, a faint red alert glow around the throat, small oxygen particles blocked above the closed vocal cords. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan with red highlights, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "prompt": "Translucent glowing human torso and head of a patient lying on an operating table, the skin covered in glowing red blotches and hives, blood vessels glowing red and dilated, the airways in the chest glowing red and narrowed, a glass syringe glowing bright cyan floating beside the arm. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan with red alert highlights, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
   "n": 1,
   "aspect": "9:16",
   "model": "ultra",

@@ -1,0 +1,12 @@
+{
+  "id": "20261124-182718-gpwu",
+  "prompt": "A translucent glowing human chest with lungs straining, the diaphragm pulling hard, glowing red tension lines, and above it a large glowing ventilator waveform made of light with a sharp jagged dip and two peaks stacked together, tug-of-war feeling between the patient and the machine. Subject in the lower two thirds of the image, top third dark empty space. Hyperrealistic 3D medical render, translucent glass-like anatomy glowing in cyan with red highlights, cinematic volumetric lighting, deep navy black background, vertical composition. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

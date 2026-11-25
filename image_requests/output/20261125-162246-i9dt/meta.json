@@ -1,0 +1,12 @@
+{
+  "id": "20261125-162246-i9dt",
+  "prompt": "Hyperrealistic 3D render of a modern anesthesia workstation ventilator screen glowing in a dark operating room, the screen shows colorful flowing pressure and flow waveforms in orange and cyan, next to it a translucent glass-like pair of human lungs glowing cyan inflating, cinematic volumetric lighting, deep navy black background, vertical composition, lower half detailed, upper third dark empty space. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

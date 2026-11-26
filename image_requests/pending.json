@@ -1,9 +1,9 @@
 {
-  "id": "20261125-162246-i9dt",
+  "id": "20261126-203422-wgpp",
   "type": "imagen",
-  "prompt": "Hyperrealistic 3D render of a modern anesthesia workstation ventilator screen glowing in a dark operating room, the screen shows colorful flowing pressure and flow waveforms in orange and cyan, next to it a translucent glass-like pair of human lungs glowing cyan inflating, cinematic volumetric lighting, deep navy black background, vertical composition, lower half detailed, upper third dark empty space. No text, no labels, no letters, no numbers.",
+  "prompt": "Foto profesional y llamativa para anuncio de reclutamiento: una sonógrafa veterinaria revisando una ecografía abdominal de un perro en una clínica moderna y luminosa, monitor de ultrasonido visible, perro tranquilo sobre la mesa, luz cálida, colores verde y naranja, espacio libre arriba para texto, alta calidad, sin marcas de agua",
   "n": 1,
-  "aspect": "9:16",
-  "model": "ultra",
-  "no_people": true
+  "aspect": "1:1",
+  "model": "standard",
+  "no_people": false
 }

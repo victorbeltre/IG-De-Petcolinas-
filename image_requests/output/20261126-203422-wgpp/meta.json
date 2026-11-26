@@ -1,0 +1,12 @@
+{
+  "id": "20261126-203422-wgpp",
+  "prompt": "Foto profesional y llamativa para anuncio de reclutamiento: una sonógrafa veterinaria revisando una ecografía abdominal de un perro en una clínica moderna y luminosa, monitor de ultrasonido visible, perro tranquilo sobre la mesa, luz cálida, colores verde y naranja, espacio libre arriba para texto, alta calidad, sin marcas de agua",
+  "n": 1,
+  "aspect": "1:1",
+  "model": "standard",
+  "no_people": false,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

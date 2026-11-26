@@ -1,0 +1,12 @@
+{
+  "id": "20261126-205002-kw5s",
+  "prompt": "Hyperrealistic 3D medical render, side profile of a translucent glass-like human head lying on an operating room pillow, the brainstem glowing intense red with small glowing molecules clustered around it, the lungs below dim, an anesthesia syringe glowing cyan nearby, cinematic volumetric lighting, deep navy black background, vertical composition, subject in the lower two thirds, upper third dark empty space. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true,
+  "files": [
+    "image.png"
+  ],
+  "status": "done"
+}

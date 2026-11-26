@@ -1,9 +1,9 @@
 {
-  "id": "sono-plaza-bandera-cc-1",
-  "type": "afiche",
-  "titulo": "SE BUSCA SONOGRAFISTA VETERINARIO",
-  "subtitulo": "A 3 minutos de la Plaza de la Bandera",
-  "puntos": ["Pago por estudio", "Horarios flexibles", "Ecografía abdominal con informe"],
-  "cta": "Aplica en 2 minutos",
-  "bg_prompt": "sonógrafa veterinaria sonriente revisando una ecografía abdominal de un perro golden retriever en una clínica moderna, monitor de ultrasonido visible, luz cálida, colores verde y naranja, fondo llenando todo el encuadre sin bordes blancos, alta calidad, sin texto ni marcas de agua"
+  "id": "20261126-205002-kw5s",
+  "type": "imagen",
+  "prompt": "Hyperrealistic 3D medical render, side profile of a translucent glass-like human head lying on an operating room pillow, the brainstem glowing intense red with small glowing molecules clustered around it, the lungs below dim, an anesthesia syringe glowing cyan nearby, cinematic volumetric lighting, deep navy black background, vertical composition, subject in the lower two thirds, upper third dark empty space. No text, no labels, no letters, no numbers.",
+  "n": 1,
+  "aspect": "9:16",
+  "model": "ultra",
+  "no_people": true
 }

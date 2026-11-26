@@ -1,9 +1,9 @@
 {
-  "id": "20261126-203602-aq4u",
-  "type": "imagen",
-  "prompt": "Foto profesional y llamativa para anuncio de reclutamiento: una sonógrafa veterinaria revisando una ecografía abdominal de un perro en una clínica moderna y luminosa, monitor de ultrasonido visible, perro tranquilo sobre la mesa, luz cálida, colores verde y naranja, espacio libre arriba para texto, alta calidad, sin marcas de agua",
-  "n": 1,
-  "aspect": "1:1",
-  "model": "standard",
-  "no_people": false
+  "id": "sono-plaza-bandera-cc-1",
+  "type": "afiche",
+  "titulo": "SE BUSCA SONOGRAFISTA VETERINARIO",
+  "subtitulo": "A 3 minutos de la Plaza de la Bandera",
+  "puntos": ["Pago por estudio", "Horarios flexibles", "Ecografía abdominal con informe"],
+  "cta": "Aplica en 2 minutos",
+  "bg_prompt": "sonógrafa veterinaria sonriente revisando una ecografía abdominal de un perro golden retriever en una clínica moderna, monitor de ultrasonido visible, luz cálida, colores verde y naranja, fondo llenando todo el encuadre sin bordes blancos, alta calidad, sin texto ni marcas de agua"
 }
